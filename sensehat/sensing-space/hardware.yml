@@ -1,0 +1,4 @@
+- name: Sense HAT
+  img: sense-hat
+- name: USB Power Pack
+  img: usb-power-pack

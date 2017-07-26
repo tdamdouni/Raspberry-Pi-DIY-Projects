@@ -1,0 +1,4 @@
+- name: Raspberry Pi Sense HAT
+  img: sense-hat
+- name: HAB Supplies GPS board
+  img: gps-board

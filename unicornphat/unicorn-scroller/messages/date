@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+import time
+
+t = time.localtime()
+
+print 'colour:yellow'
+print 'text:%s' % (time.strftime('%a %d %b', t))

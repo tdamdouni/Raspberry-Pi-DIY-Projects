@@ -1,0 +1,17 @@
+[Unit]
+Description=Interface for Pirate Radio Hardware
+After=mopidy.service
+Requires=mopidy.service
+ 
+[Service]
+Type=idle
+Environment="PYTHONUNBUFFERED=true"
+# ExecStartPre=/usr/bin/mpc status
+ExecStart=/usr/local/bin/pirateradio
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=3
+ 
+[Install]
+WantedBy=multi-user.target
+Alias=pirateradio.service

@@ -1,0 +1,206 @@
+#!/usr/bin/env python
+
+from contextlib import contextmanager
+import time
+import os
+import subprocess
+import re
+import phatbeat
+from mpd import MPDClient
+
+MAX_VOLUME = 35
+DEFAULT_PLAYLIST = 'default'
+
+class SimpleClient:
+
+    @contextmanager
+    def client(self):
+        client = MPDClient()
+        client.timeout = 10
+        try:
+            client.connect("localhost", 6600)
+            yield client
+        finally:
+            client.close()
+            client.disconnect()
+
+    def status(self, property):
+        with self.client() as client:
+            return client.status()[property]
+
+    def next_track(self):
+        with self.client() as client:
+            client.repeat(1)
+            client.next()
+
+    def previous_track(self):
+        with self.client() as client:
+            client.repeat(1)
+            client.previous()
+
+    def volume(self, change=0):
+        with self.client() as client:
+            new_volume = max(0, min(MAX_VOLUME, int(client.status()['volume']) + change))
+            client.setvol(new_volume)
+            return new_volume
+
+    @property
+    def is_playing(self):
+        return self.status('state') == 'play'
+
+    def play_pause(self):
+        with self.client() as client:
+            if not client.playlist():
+                print('load playlist')
+                client.load(DEFAULT_PLAYLIST)
+
+            if self.is_playing:
+                print('stop')
+                client.stop()
+            else:
+                print('play')
+                client.play()
+
+class Pixel:
+    def __init__(self, id):
+        self.id = id
+        default = {
+            'r': 0,
+            'g': 0,
+            'b': 0,
+            'brightness': 0
+        }
+        self.default = default
+        self.state = default
+        self.velocity = default
+        self.clock = time.time()
+
+    def clear(self):
+        self.set(self.default, self.default)
+
+    def set(self, state, velocity=None):
+        self.state = state
+        if velocity == None:
+            velocity = self.default
+        self.velocity = velocity
+        self.clock = time.time()
+
+    def render(self):
+        state = self.state
+        phatbeat.set_pixel(self.id, state['r'], state['g'], state['b'], state['brightness'])
+
+    def loop(self):
+        delta = time.time() - self.clock
+        new_state = {
+            'r': min(255, max(0, self.state['r'] + self.velocity['r'] * delta)),
+            'g': min(255, max(0, self.state['g'] + self.velocity['g'] * delta)),
+            'b': min(255, max(0, self.state['b'] + self.velocity['b'] * delta)),
+            'brightness': min(1, max(0, self.state['brightness'] + self.velocity['brightness'] * delta))
+        }
+        self.state = new_state
+        self.clock = time.time()
+
+class VU:
+    def __init__(self):
+        self.pixels = list(map(lambda x: Pixel(x), range(0, 16)))
+
+    def loop(self):
+        for pixel in self.pixels:
+            pixel.loop()
+
+    def render(self):
+        for pixel in self.pixels:
+            pixel.render()
+
+    def indicate(self):
+        self.pixels[0].set({
+            'r': 200,
+            'g': 200,
+            'b': 200,
+            'brightness': 0.25
+        }, {
+            'r': 0,
+            'g': 0,
+            'b': 0,
+            'brightness': -0.5
+        })
+
+    def level(self, value, color, delta, left=False):
+        level = max(0, min(7, round(value * 8)))
+        for x in range(0, 8):
+            j = x + 8 if left else 7 - x
+            if(x <= level):
+                self.pixels[j].set(color, delta)
+            else:
+                self.pixels[j].clear()
+
+green = {
+    'r': 50,
+    'g': 200,
+    'b': 50,
+    'brightness': 0.25
+}
+
+fade_out = {
+    'r': 0,
+    'g': 0,
+    'b': 0,
+    'brightness': -0.25
+}
+
+def vu_volume(vu, volume):
+    level = volume/float(MAX_VOLUME)
+    vu.level(level, green, fade_out)
+    vu.level(level, green, fade_out, True)
+
+if __name__ == "__main__":
+    client = SimpleClient()
+    vu = VU()
+    vu.indicate()
+
+    @phatbeat.on(phatbeat.BTN_FASTFWD)
+    def next_track(pin):
+        vu.indicate()
+        print('next')
+        client.next_track()
+
+    @phatbeat.on(phatbeat.BTN_REWIND)
+    def previous_track(pin):
+        vu.indicate()
+        print('previous')
+        client.previous_track()
+
+    @phatbeat.on(phatbeat.BTN_VOLUP)
+    def volume_up(pin):
+        print('volume+')
+        print(client.volume(+3))
+        vu_volume(vu, client.volume())
+
+    @phatbeat.on(phatbeat.BTN_VOLDN)
+    def volume_down(pin):
+        print('volume-')
+        print(client.volume(-3))
+        vu_volume(vu, client.volume())
+
+    @phatbeat.on(phatbeat.BTN_PLAYPAUSE)
+    def play_pause(pin):
+        vu.indicate()
+        print('play/pause')
+        client.play_pause()
+
+    @phatbeat.on(phatbeat.BTN_ONOFF)
+    def hold_onoff(pin):
+        vu.indicate()
+        print('shutdown')
+        time.sleep(3)
+        os.system("shutdown now -h")
+
+    try:
+        while True:
+            vu.loop()
+            vu.render()
+            phatbeat.show()
+            time.sleep(1/24.0)
+
+    except KeyboardInterrupt:
+        pass

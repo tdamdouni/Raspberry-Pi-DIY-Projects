@@ -1,0 +1,56 @@
+2.1.3
+-----
+
+* Feature: Added set_all and shade_pixels which now drives set_pixels
+* Feature: Added PHAT_VERTICAL optional orientation
+* Bugfix: get_brightness now returns value
+* Bugfix: get_pixels now takes into account pHAT/HAT shape
+
+2.1.2
+-----
+
+* Added AUTO set_layout which attempts to detect uHAT via EEPROM
+* Added get_shape() which returns a tuple of width/height
+
+2.1.1
+-----
+
+* Initialized to 128 brightness (max)
+
+2.1.0
+-----
+
+* Added Unicorn pHAT support
+
+2.0.7
+-----
+
+* Added warning on low brightness
+
+2.0.6
+-----
+
+* Indent bugfix
+
+2.0.5
+-----
+
+* Max brightness capped at 50%
+* Added requirement for latest 1.0.0 rpi_ws281x ( dubbed 2.0.0 on pip )
+
+2.0.0
+-----
+
+* Major switch over to rpi_ws281x library
+* Raspberry Pi 2 compatibility
+
+1.0.1
+-----
+
+* Fix to rotation()
+
+1.0.0
+-----
+
+* Initial Release
+

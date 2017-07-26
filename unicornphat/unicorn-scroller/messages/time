@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import time
+
+t = time.localtime()
+
+print 'colour:white'
+print 'text:%s' % (time.strftime('%H', t))
+
+print 'colour:cyan'
+print 'text::'
+
+print 'colour:white'
+print 'text:%s' % (time.strftime('%M', t))

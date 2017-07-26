@@ -1,0 +1,77 @@
+@font-face {
+    font-family: ArtegraExtraBold;
+    src: url(ArtegraSansSC-ExtraBold.otf);
+}
+@font-face {
+    font-family: ArtegraBold;
+    src: url(ArtegraSansSC-Bold.otf);
+}
+.weatherHeaderText {
+    width: 1480px;
+    margin-left: auto;
+    margin-right: auto;    
+    font-family: Artegra Sans SC ExtraBold;
+    color: white; 
+    font-size: 100px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.weatherSubHeaderText {
+    text-align: center;   
+    font-family: Artegra Sans SC ExtraBold;
+    color: white;
+    font-size: 42px;
+    padding-left: 98px;
+    padding-right: 98px;
+    margin-right: 9%;
+    display:inline-block;
+}
+.weatherDataText {
+    font-family: Artegra Sans SC ExtraBold;
+    color: #F0F8FF;
+    font-size: 40px;
+    //text-align: center;
+    width: 500px;
+    display:inline-block;
+}
+.first {
+    
+    padding-left: 7%;
+    
+}
+#horizontal-list {
+    
+    margin-bottom: -80px;
+    display: inline-block;
+    padding-left: 140px;
+    
+}
+.weatherDiv {
+    
+    width: 500px;
+    text-align: center;
+    
+}
+.weatherDivMid {
+    
+    width: 500px;
+    text-align: center;
+    list-style: none;
+    
+}
+.table {
+    width: 1900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+body{
+    
+background-color: #293546;
+
+}
+ul {
+    display: inline-block;      
+}
+ul li {
+    display: table-cell;
+}

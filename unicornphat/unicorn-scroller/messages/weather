@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+
+import time, os, re
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+# Weather station ID (see BBC weather website)
+weather_id = '2653941'
+
+# Cache file (set to empty string to disable cacheing)
+cache = 'weather-%s.cache' % (weather_id)
+
+# Refresh time in seconds for cache
+refresh = 15 * 60
+
+
+def parse_weather(str):
+    weather = ''
+    m = re.match(r'^(.+)\: (.+), Maximum Temperature: (.+) \(.+\) Minimum Temperature: (.+) \(.+\)',str)
+    if (m):
+        weather += 'colour:yellow\n'
+        weather += 'text:%.3s\n' % (m.group(1))
+        weather += 'image:%s.png\n' % (m.group(2))
+        weather += 'colour:red\n'
+        weather += 'text:%s\n' % (m.group(3))
+        weather += 'colour:blue\n'
+        weather += 'text:%s\n' % (m.group(4))
+        return weather
+
+    m = re.match(r'^(.+)\: (.+), Minimum Temperature: (.+) \(.+\)',str)
+    if (m):
+        weather += 'colour:yellow\n'
+        weather += 'text:%.3s\n' % (m.group(1))
+        weather += 'image:%s.png\n' % (m.group(2))
+        weather += 'colour:blue\n'
+        weather += 'text:%s\n' % (m.group(3))
+        return weather
+
+    m = re.match(r'^.+\: (.*), (.*) \(',str)
+    weather += 'image:%s.png\n' % (m.group(1))
+    weather += 'colour:red\n'
+    weather += 'text:%s\n' % (m.group(2))
+    return weather
+
+def get_weather():
+    import feedparser
+    weather = ''
+    # Current weather conditions
+    url = "http://open.live.bbc.co.uk/weather/feeds/en/%s/observations.rss" % (weather_id)
+    feed = feedparser.parse(url)
+    fitems = feed["items"]
+    weather += parse_weather(fitems[0].title)
+
+    # 3-day forecast
+    url = "http://open.live.bbc.co.uk/weather/feeds/en/%s/3dayforecast.rss" % (weather_id)
+    feed = feedparser.parse(url)
+    fitems = feed["items"]
+    for fitem in fitems:
+        weather += 'color:grey\n'
+        weather += 'text:|\n'
+        weather += parse_weather(fitem.title)
+    return weather
+
+
+# Check if there is a cache file that has been updated within the
+# refresh time, if so use it.
+if (cache and
+    os.path.isfile(cache) and 
+    (time.time() - os.path.getmtime(cache) < refresh)):
+    print '# cached'
+    f = open(cache, 'r')
+    print f.read()
+    exit(0)
+
+# Otherwise update and cache the data if required
+
+weather = get_weather()
+if (cache):
+    f = open(cache, 'w+')
+    f.write(weather)
+    f.close()
+print '# updating'
+print weather

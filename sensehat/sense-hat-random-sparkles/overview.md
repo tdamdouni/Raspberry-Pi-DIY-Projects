@@ -1,0 +1,1 @@
+In this resource, you will use Python to control the Sense HAT's LED display, and learn how to set specific coloured pixels on it. You will learn how to generate random numbers to choose random positions and colour values, and place them on the display continuously to create an amazing effect called random sparkles.

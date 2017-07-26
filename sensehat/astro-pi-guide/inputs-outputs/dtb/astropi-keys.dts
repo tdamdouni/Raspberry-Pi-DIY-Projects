@@ -1,0 +1,60 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
+	
+	fragment@0 {
+		target-path = "/soc";
+		__overlay__ {
+			keypad: keypad {
+				compatible = "gpio-keys";
+				#address-cells = <1>;
+				#size-cells = <0>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&astropi_pins>;
+
+				button@13 {
+					label = "AstroPi BTN0";
+					linux,code = <32>;
+					gpios = <&gpio 13 1>;
+				};
+				button@16 {
+					label = "AstroPi BTN1";
+					linux,code = <30>;
+					gpios = <&gpio 16 1>;
+				};
+				button@19 {
+					label = "AstroPi BTN2";
+					linux,code = <19>;
+					gpios = <&gpio 19 1>;
+				};
+				button@20 {
+					label = "AstroPi BTN3";
+					linux,code = <38>;
+					gpios = <&gpio 20 1>;
+				};
+				button@21 {
+					label = "AstroPi BTN4";
+					linux,code = <48>;
+					gpios = <&gpio 21 1>;
+				};
+				button@26 {
+					label = "AstroPi BTN5";
+					linux,code = <22>;
+					gpios = <&gpio 26 1>;
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			astropi_pins: astropi_pins {
+				brcm,pins = <13 16 19 20 21 26>;
+				brcm,function = <0>; // in
+				brcm,pull = <2>; // up
+			};
+		};
+	};
+};

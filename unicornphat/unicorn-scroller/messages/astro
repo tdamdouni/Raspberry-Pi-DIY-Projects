@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+import ephem
+import time
+
+# Location
+
+# Can be set by city:
+#loc = ephem.city("London")
+
+# Or by lat/long, this is for Cambridge, UK:
+loc = ephem.Observer()
+loc.lat = '52.205'
+loc.lon = '0.119'
+loc.elevation = 6
+
+now = ephem.now()
+loc.date = now
+
+# Moon phase
+phases = [
+    ("NewMoon", ephem.next_new_moon(now)),
+    ("NewMoon", ephem.previous_new_moon(now)),
+    ("FirstQuarterMoon", ephem.next_first_quarter_moon(now)),
+    ("FirstQuarterMoon", ephem.previous_first_quarter_moon(now)),
+    ("FullMoon", ephem.next_full_moon(now)),
+    ("FullMoon", ephem.previous_full_moon(now)),
+    ("LastQuarterMoon", ephem.next_last_quarter_moon(now)),
+    ("LastQuarterMoon", ephem.previous_last_quarter_moon(now))]
+
+min_delta = 31
+phase_name = ""
+for phase in phases:
+    delta = now - phase[1]
+    if (abs(delta) < abs(min_delta)):
+        min_delta = delta
+        phase_name = phase[0]
+
+print 'image:%s.png' % (phase_name)
+if (int(min_delta) != 0):
+    print 'colour:white'
+    print 'text:%+d' % (min_delta)
+
+print 'color:grey'
+print 'text:|'
+
+# Sunrise/sunset
+# Also estimate the current brightness level from time of day
+
+next_sunrise = loc.next_rising(ephem.Sun())
+next_sunset = loc.next_setting(ephem.Sun())
+
+if next_sunset < next_sunrise:
+    prev_sunrise = loc.previous_rising(ephem.Sun())
+    l = next_sunset - prev_sunrise
+    p = now - prev_sunrise
+    brightness = 100 * (1 - abs((p / l) - 0.5))
+    tsunrise = ephem.localtime(prev_sunrise)
+    tsunset = ephem.localtime(next_sunset)
+
+else:
+    prev_sunset = loc.previous_setting(ephem.Sun())
+    l = next_sunrise - prev_sunset
+    p = now - prev_sunset
+    brightness = 100 * abs((p / l) - 0.5)
+    tsunrise = ephem.localtime(next_sunrise)
+    tsunset = ephem.localtime(prev_sunset)
+
+print 'estimated-brightness:%d' % (brightness)
+
+print 'image:Sunrise.png'
+print 'colour:yellow'
+print 'text:%02u:%02u' % (tsunrise.hour, tsunrise.minute)
+
+print 'color:grey'
+print 'text:|'
+
+print 'image:Sunset.png'
+print 'colour:red'
+print 'text:%02u:%02u' % (tsunset.hour, tsunset.minute)

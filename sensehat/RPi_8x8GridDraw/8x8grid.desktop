@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=8x8grid
+Exec=/usr/bin/python /home/pi/RPi_8x8GridDraw/8x8grid.py
+Terminal=false
+Categories=Application
+StartupNotify=true
+Icon=/home/pi/RPi_8x8GridDraw/eight.png

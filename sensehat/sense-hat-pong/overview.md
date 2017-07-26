@@ -1,0 +1,1 @@
+In this activity you will create a Pong game using your Raspberry Pi and a Sense HAT, along with some Python code. Pong is one of the oldest graphical games ever created, and was originally played on an oscilloscope.
