@@ -1,0 +1,5 @@
+if you only want soft shutdown try:
+
+curl get.pimoroni.com/cleanshutdown | bash
+the pin to use is bcm12 so when prompted, type '12'.
+

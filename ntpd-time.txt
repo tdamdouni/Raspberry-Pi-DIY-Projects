@@ -1,0 +1,18 @@
+Here are some suggestions.
+
+Use the raspi-config utility to reset the timezone even if already you used a different tool to set it.
+
+sudo raspi-config
+
+Manually set the time to be somewhat accurate. NTP sometimes won't update if the time/date is wildly wrong.
+
+sudo date -s "01/04/2017 11:00"
+
+Manually force time update:
+
+sudo systemctl stop ntp.service
+sudo ntpd -gqc /etc/ntpd.conf
+sudo systemctl start ntp.service
+
+Make sure you aren't blocking UDP port 123.
+Best of luck!
