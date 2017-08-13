@@ -1,6 +1,6 @@
 # Installing node.js on a Raspberry Pi Zero
 
-_Captured: 2017-08-08 at 17:38 from [blog.miniarray.com](https://blog.miniarray.com/installing-node-js-on-a-raspberry-pi-zero-21a1522db2bb)_
+_Captured: 2017-08-13 at 09:27 from [blog.miniarray.com](https://blog.miniarray.com/installing-node-js-on-a-raspberry-pi-zero-21a1522db2bb)_
 
 I recently switched one of my projects from a [Raspberry Pi 3](https://www.amazon.com/Raspberry-Pi-RASP-PI-3-Model-Motherboard/dp/B01CD5VC92?&_encoding=UTF8&tag=miniarray-20&linkCode=ur2&linkId=1afb51024aeabc438e832209aac70d23&camp=1789&creative=9325) over to a [Raspberry Pi Zero](https://www.amazon.com/Raspberry-Pi-RASP-PI-3-Model-Motherboard/dp/B01CD5VC92?&_encoding=UTF8&tag=miniarray-20&linkCode=ur2&linkId=1afb51024aeabc438e832209aac70d23&camp=1789&creative=9325). Since they both run _very_ similar hardware, I was able to just pop out the sdcard from the Rpi 3 and just insert it into the zero and _Voila_ everything just worked.. or so I thought.
 
