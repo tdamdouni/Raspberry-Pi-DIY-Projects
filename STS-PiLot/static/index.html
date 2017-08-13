@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="/static/stspilot.js"></script>
+<meta http-equiv="cache-control" content="max-age=0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="cache-control" content="no-store">
+<meta http-equiv="expires" content="-1">
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 11:00:00 GMT">
+<meta http-equiv="pragma" content="no-cache">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+</head>
+<body>
+<div id="mainscreen">
+<div id="leftbar">
+<div id="l100" class="controlpad speed_100" onclick="motor_l(100)">&nbsp;</div>
+<div id="l60" class="controlpad speed_60" onclick="motor_l(60)">&nbsp;</div>
+<div id="l30" class="controlpad speed_30" onclick="motor_l(30)">&nbsp;</div>
+<div id="l0" class="controlpad speed_0" onclick="motor_l(0)">&nbsp;</div>
+<div id="l-30" class="controlpad speed_30" onclick="motor_l(-30)">&nbsp;</div>
+<div id="l-60" class="controlpad speed_60" onclick="motor_l(-60)">&nbsp;</div>
+<div id="l-100" class="controlpad speed_100" onclick="motor_l(-100)">&nbsp;</div>
+</div>
+<div id="stop" onclick="brake()"><div class="label">Stop!</div></div>
+<div id="middle">
+<div id="videowrapper" onclick="brake()">
+<div id="video"></div>
+<div id="overlay">
+<div id="status"></div>
+<div id="sensors"></div>
+</div>
+</div>
+<div id="buttonbar">	
+<div id="blue" class="touchpad" onclick="touchpad(1)"><div class="label">1</div></div>
+<div id="yellow" class="touchpad" onclick="touchpad(2)"><div class="label">2</div></div>
+<div id="red" class="touchpad" onclick="touchpad(3)"><div class="label">3</div></div>
+<div id="green" class="touchpad" onclick="touchpad(4)"><div class="label">4</div></div>
+<div id="hud" class="touchpad" onclick="toggle_hud()"><div class="label">HUD</div></div>
+</div>	
+</div>
+<div id="rightbar">
+<div id="r100" class="controlpad speed_100" onclick="motor_r(100)">&nbsp;</div>
+<div id="r60" class="controlpad speed_60" onclick="motor_r(60)">&nbsp;</div>
+<div id="r30" class="controlpad speed_30" onclick="motor_r(30)">&nbsp;</div>
+<div id="r0" class="controlpad speed_0" onclick="motor_r(0)">&nbsp;</div>
+<div id="r-30" class="controlpad speed_30" onclick="motor_r(-30)">&nbsp;</div>
+<div id="r-60" class="controlpad speed_60" onclick="motor_r(-60)">&nbsp;</div>
+<div id="r-100" class="controlpad speed_100" onclick="motor_r(-100)">&nbsp;</div>
+</div>
+</div>
+</body>
+</html>

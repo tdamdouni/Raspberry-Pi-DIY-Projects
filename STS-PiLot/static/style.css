@@ -1,0 +1,184 @@
+html, body, #mainscreen {
+height: 100%;
+width: 100%;
+background-color: black;
+}
+
+body {    
+margin: 0 !important;
+padding: 0 !important;
+}
+
+#mainscreen {
+clear: both;
+}
+
+.label {
+position: relative;
+top: 50%;
+transform: translateY(-50%);
+}
+
+#leftbar, #rightbar {
+width: 10%;
+height: 100%;
+float: left;
+overflow: hidden;
+}
+
+#stop {
+display: none;
+}
+
+#middle {
+height: 100%;
+width: 80%;
+float: left;
+}
+
+.controlpad {
+width: 100%;
+height: 14.3%;
+}
+
+#videowrapper {
+position: relative;
+width: 100%;
+height: 90%;
+}
+
+#video {
+z-index:1;
+width: 100%;
+height: 100%;
+}
+
+#video img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+#overlay {
+position: absolute;
+z-index:100;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+color: #33ff33;
+text-align: center;
+text-shadow: 1px 1px black;
+}
+
+#status {
+top: 0;
+float: left;
+text-align: left;
+padding: 5px;
+width: 40%;
+}
+
+#sensors {
+top: 0;
+float: right;
+text-align: right;
+padding: 5px;
+width: 40%;
+}
+
+#buttonbar {
+height: 10%;
+width: 100%;
+}
+
+.touchpad {
+text-align: center;
+font-weight: bold;
+width: 20%;
+height: 100%;
+float: left;
+}
+
+.speed_0 {
+background-color: #33ff33;
+}
+
+.speed_30 {
+background-color: yellow;
+}
+
+.speed_60 {
+background-color: #ff9900;
+}
+
+.speed_100 {
+background-color: red;
+}
+
+#blue {
+background-color: blue;
+}
+
+#yellow {
+background-color: yellow;
+}
+
+#red {
+background-color: red;
+}
+
+#green {
+background-color: green;
+}
+
+#hud {
+background-color: orange;
+}
+
+#l0, #r0 {
+outline: 10px solid black;
+}
+
+@media screen and (orientation:portrait) {
+
+#middle {
+position: absolute;
+width: 100%;
+height: 50%;
+top: 0;
+float: left;
+}
+
+#leftbar {
+position: absolute;
+width: 20%;
+height: 50%;
+top: 50%;
+left: 0;
+overflow: hidden;
+}
+
+#stop {
+display: block;
+position: absolute;
+width: 60%;
+height: 50%;
+top: 50%;
+left: 20%;
+overflow: hidden;
+background-color: #a70000;
+text-align: center;
+font-weight: bold;
+font-size: 300%;
+}
+
+#rightbar {
+position: absolute;
+width: 20%;
+height: 50%;
+top: 50%;
+left: 80%;
+overflow: hidden;
+}
+}
