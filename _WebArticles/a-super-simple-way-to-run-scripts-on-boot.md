@@ -1,6 +1,6 @@
 # A super-simple way to run scripts on boot
 
-_Captured: 2017-05-11 at 22:53 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/running-scripts-at-boot)_
+_Captured: 2017-08-14 at 09:56 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/running-scripts-at-boot)_
 
 Here's a super-simple way to run scripts automatically on boot on your Raspberry Pi, using cron, that you can have up and running in literally a few seconds.
 
@@ -23,10 +23,10 @@ Open a terminal, and type `crontab -e`. If it's the first time that you've edite
 At the top of the crontab, you'll see a lot of blurb about how to use it, on lines that are commented out (they begin with #). Scroll all the way down past these lines to the bottom (using the down arrow key) and type, on the last line, the following:
     
     
-    @reboot sudo python /home/pi/Pimoroni/blinkt/examples/rainbow.py &
+    @reboot python /home/pi/Pimoroni/blinkt/examples/rainbow.py &
     
 
-We use `sudo` to use superuser privilege, since most of the scripts for our boards require it. We're also using the full path to the script, all the way from the root. Last, we add `&` to the end to run the script in the background, so that the Pi will boot as normal.
+We're using the full path to the script, all the way from the root. Last, we add `&` to the end to run the script in the background, so that the Pi will boot as normal.
 
 Once you've added that line, press `control-x`, `y` and `enter` to exit nano.
 
