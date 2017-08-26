@@ -1,0 +1,3 @@
+[submodule "SMBus"]
+	path = SMBus
+	url = https://github.com/Sephiroth87/SMBus-swift.git

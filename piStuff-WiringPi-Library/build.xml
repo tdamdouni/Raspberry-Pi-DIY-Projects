@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="temp" default="test">
+    <import file="../base.xml"/>
+    <target name="init" depends="-pre-init,set_paths">
+        <echo message="BuildTime=${BuildTime}" level="error"/>
+        <property name="user" value="pi"/>
+        <property name="ssh" location="${usrbin}/ssh"/>
+        <property name="scp" location="${usrbin}/scp"/>
+        <property name="pump_berry" value="192.168.178.40"/>
+        <property name="program" value="gettemp"/>
+        <property name="gpio" value="gpio"/>
+        <property name="wiringPiFolder" location="../../piglow/wiringPi/wiringPi"/>
+    </target>
+    <target name="objects" depends="init">
+        <exec executable="${compiler}" failonerror="true">
+            <arg value="-I."/>
+            <arg value="-I${wiringPiFolder}"/>
+            <arg value="-c"/>
+            <arg file="main.c"/>
+            <arg file="logger.c"/>
+            <arg file="temp.c"/>
+            <arg file="led.c"/>
+        </exec>
+    </target>
+    <target name="build" depends="objects">
+        <exec executable="${compiler}" failonerror="true">
+            <arg value="-L${wiringPiFolder}"/>
+            <arg file="main.o"/>
+            <arg file="logger.o"/>
+            <arg file="temp.o"/>
+            <arg file="led.o"/>
+            <arg value="-lwiringPi"/>
+            <arg value="-lpthread"/>
+            <arg value="-o"/>
+            <arg value="${program}"/>
+        </exec>
+    </target>
+    <target name="transfer" depends="build">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo rm -f ./${program}'"/>
+        </exec>
+        <exec executable="${scp}">
+            <arg file="${basedir}/${program}"/>
+            <arg line="${user}@${pump_berry}:${program}"/>
+        </exec>
+    </target>
+    <target name="suid_temp" depends="transfer">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo chown root:root ./${program}'"/>
+        </exec>
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo chmod 4755 ./${program}'"/>
+        </exec>
+    </target>
+    <target name="wl-gpio" depends="init">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo modprobe w1-gpio'"/>
+        </exec>
+    </target>
+    <target name="wl-therm" depends="init">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo modprobe w1-therm'"/>
+        </exec>
+    </target>
+    <target name="transfer_gpio" depends="init">
+        <property name="gpiopath" location="../../piglow/wiringPi/gpio/${gpio}"/>
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo rm -f ${gpio}'"/>
+        </exec>
+        <exec executable="${scp}">
+            <arg file="${gpiopath}"/>
+            <arg line="${user}@${pump_berry}:${gpio}"/>
+        </exec>
+    </target>
+    <target name="suid_gpio" depends="transfer_gpio">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo chown root:root ./${gpio}'"/>
+        </exec>
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo chmod 4755 ./${gpio}'"/>
+        </exec>
+    </target>
+    <target name="gpio_help" depends="suid_gpio">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} -v'"/>
+        </exec>
+    </target>
+    <target name="gpio_load_i2c" depends="suid_gpio">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} load i2c'"/>
+        </exec>
+    </target>
+    <target name="gpio_readall" depends="suid_gpio">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} readall'"/>
+        </exec>
+    </target>
+    <target name="gpio_pin_mode" depends="suid_gpio">
+        <input addproperty="gpiopin" defaultvalue="1" message="Select pin to activate"/>
+        <input addproperty="gpiopinstate" defaultvalue="OUT" message="set pin state"/>
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} mode ${gpiopin} ${gpiopinstate}'"/>
+        </exec>
+    </target>
+    <target name="gpio_pin_value" depends="gpio_pin_mode">
+        <input addproperty="gpiopinvalue" defaultvalue="1" validargs="0,1" message="set pin value"/>
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} write ${gpiopin} ${gpiopinvalue}'"/>
+        </exec>
+    </target>
+    <target name="gpio_unload_i2c" depends="suid_gpio">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} unload i2c'"/>
+        </exec>
+    </target>
+    <target name="gpio_i2cd" depends="gpio_load_i2c">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} i2cdetect'"/>
+        </exec>
+    </target>
+    <target name="pump_led_presets" depends="-pre-init">
+        <property name="gpiopin" value="1"/>
+        <property name="gpiopinstate" value="out"/>
+        <property name="gpiopinvalue" value="1"/>
+    </target>
+    <target name="pump_led_on" depends="pump_led_presets,gpio_pin_mode">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} write ${gpiopin} 1'"/>
+        </exec>
+    </target>
+    <target name="pump_led_off" depends="pump_led_presets,gpio_pin_mode">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${gpio} write ${gpiopin} off'"/>
+        </exec>
+    </target>
+    <target name="test_temp" depends="suid_temp,wl-gpio,wl-therm">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} './${program}'"/>
+        </exec>
+    </target>
+    <target name="pi_reboot" depends="init">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo reboot'"/>
+        </exec>
+    </target>
+    <target name="pi_off" depends="init">
+        <exec executable="${ssh}">
+            <arg line="${user}@${pump_berry} 'sudo poweroff'"/>
+        </exec>
+    </target>
+    <target name="test" depends="test_temp">
+        <property name="logfile" location="/tmp/gettemp.log"/>
+        <exec executable="${scp}">
+            <arg line="${user}@${pump_berry}:${logfile}"/>
+            <arg file="${logfile}"/>
+        </exec>
+        <exec executable="/bin/cat">
+            <arg file="${logfile}"/>
+        </exec>
+    </target>
+</project>

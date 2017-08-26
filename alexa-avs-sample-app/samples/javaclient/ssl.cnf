@@ -1,0 +1,19 @@
+[req]
+distinguished_name      = req_distinguished_name
+prompt                  = no
+
+[v3_req]
+subjectAltName          = @alt_names
+
+[alt_names]
+DNS.1                   = localhost
+IP.1                    = 127.0.0.1
+IP.2                    = 10.0.2.2
+
+[req_distinguished_name]
+commonName              = $ENV::COMMON_NAME                 # CN=
+countryName             = YOUR_COUNTRY_NAME                 # C=
+stateOrProvinceName     = YOUR_STATE_OR_PROVINCE            # ST=
+localityName            = YOUR_CITY                         # L=
+organizationName        = YOUR_ORGANIZATION                 # O=
+organizationalUnitName  = YOUR_ORGANIZATIONAL_UNIT          # OU=

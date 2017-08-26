@@ -1,0 +1,11 @@
+07/31/2015 - Initial Release. Includes Java reference implementation of device code, and a Node.js reference companion service for authenticating and provisioning the device code.
+10/02/2015 - Fixed a bug related to the enabling of TuneIn. Users can now listen to TuneIn radio streams from the reference implementation of device code.
+10/15/2015 - Added reference implementations for mobile app authentication and provisioning for iOS and Android phones. Also adds support for play/pause/previous/next buttons in the reference implementation of device code.
+03/22/2016 - Updated the reference client to use the new v20160207 APIs over HTTP2. Adds support for timers, alarms, button events, and control via the companion app.
+09/29/2016 - Added Wake Word detection for raspberry pi platform. Added support for cloud endpointing via the new NEAR_FIELD audio profile and StopCapture directive.
+12/06/2016 - Sample app is now officially certified for music. Added GPIO wake word trigger. Bug fixes around AudioPlayer, wake word agent, and down channel.
+01/13/2017 - Bug fixes, updated sound files, and more logging.
+01/30/2017 - Added support for SetEndpoint directive and SettingsUpdated event.
+04/20/2017 - Node.js service now persists auth state. Listen button updated with microphone icon. GUI code refactoring. Bug fixes for low volume and wake word agent.
+06/20/2017 - Logout support and headless capabilities added.
+07/06/2017 - Add support for notifications interface

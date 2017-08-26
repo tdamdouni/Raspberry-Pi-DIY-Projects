@@ -1,0 +1,7 @@
+{
+  "FORECAST_IO_KEY": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "ADAFRUIT_IO_KEY": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "LOG_SIZE": 10485760,
+  "BACKUP_COUNT": 100,
+  "REFRESH_RATE": 5,
+}

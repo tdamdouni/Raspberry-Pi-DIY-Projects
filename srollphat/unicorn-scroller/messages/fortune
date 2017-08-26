@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+import subprocess
+
+p = subprocess.Popen(['/usr/games/fortune','-s'], stdout=subprocess.PIPE)
+out = p.communicate()[0]
+
+print 'colour:#ff00ff'
+
+for line in out.splitlines(0):
+    print 'text:'+line

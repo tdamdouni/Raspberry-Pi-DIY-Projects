@@ -1,0 +1,6 @@
+the humidity and ambient temp sensor is HTU21D: http://www.mouser.co.uk/pdfdocs/HTU21DF.PDF
+
+air quality sensor is TGS2600: http://www.figarosensor.com/products/2600pdf.pdf
+
+pressure is a BMP180: https://www.rapidonline.com/pdf/35-1630_V1.pdf - returned in hectopascals - equivalent 1-1 to millibars
+temperature probe is a DS18B20: http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf

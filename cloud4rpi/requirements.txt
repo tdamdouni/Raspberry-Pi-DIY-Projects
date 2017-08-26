@@ -1,0 +1,7 @@
+paho-mqtt
+pep8
+pylint
+mock
+pyfakefs
+twine
+pypandoc

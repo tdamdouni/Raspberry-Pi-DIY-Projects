@@ -1,0 +1,25 @@
+version: "2.0"
+services:
+    influxdb:
+      image: influxdb
+      ports:
+       - "8086:8086"
+       - "8083:8083"
+      environment:
+#       - HTTP_PROXY=http://IP:3128
+#       - HTTPS_PROXY=http://IP:3128
+       - INFLUXDB_USER=root
+       - INFLUXDB_PASS=root
+       - INFLUXDB_NAME=stats
+    grafana:
+      image: grafana/grafana
+      environment:    
+#       - GF_INSTALL_PLUGINS=grafana-clock-panel
+#       - HTTP_PROXY=http://IP:3128
+#       - HTTPS_PROXY=http://IP:3128
+       - NO_PROXY="influxdb"
+      links:
+       - influxdb
+      ports:
+       - "3000:3000"
+

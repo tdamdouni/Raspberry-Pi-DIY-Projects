@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="base">
+    <target name="-pre-init">
+        <tstamp>
+            <format property="BuildTime" pattern="HH:mm:ss"/>
+        </tstamp>
+    </target>
+    <target name="set_paths">
+        <property name="usrbin" location="/usr/bin"/>
+        <property name="compiler" location="${usrbin}/arm-linux-gnueabi-gcc"/>
+        <!--        <property name="compiler" location="/usr/bin/gcc"/>-->
+    </target>
+</project>

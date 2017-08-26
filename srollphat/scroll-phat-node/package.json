@@ -1,0 +1,16 @@
+{
+  "name": "scroll-phat-node",
+  "version": "1.0.0",
+  "description": "drive the scoll-phat by pimoroni",
+  "main": "src/scroll.js",
+  "dependencies": {
+    "async": "^1.5.2",
+    "i2c-bus": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Ellis",
+  "license": "GPL"
+}

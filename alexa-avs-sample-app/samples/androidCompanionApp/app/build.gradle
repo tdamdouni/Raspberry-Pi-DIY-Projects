@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.4'
+}
+
+String apiKeyLocation = "./src/main/assets/api_key.txt"
+String caCertLocation = "./src/main/res/raw/ca.crt"
+
+task checkForRequiredFiles << {
+  if (!file(apiKeyLocation).exists()) {
+      throw new FileNotFoundException("The API Key file does not exist. Please make sure " + apiKeyLocation + " has been created and populated with the proper values from the Security Profile you created.")
+  }
+
+  if (!file(caCertLocation).exists()) {
+      throw new FileNotFoundException("The Certificate Authority public certificate file does not exist. Please make sure " + caCertLocation + " exists and contains the public certificate created during setup.")
+  }
+}
+preBuild.dependsOn checkForRequiredFiles
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.amazon.alexa.avs.companion"
+        minSdkVersion 8
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    // Sign both debug and release with a single key so that LWA always works
+    // In practice you would have separate keys for debug and release
+    signingConfigs {
+        lwa {
+            storeFile file('keystore.jks')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'IconMissingDensityFolder'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.lwa
+        }
+
+        debug {
+            signingConfig signingConfigs.lwa
+        }
+    }
+}

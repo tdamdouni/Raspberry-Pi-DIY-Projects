@@ -1,0 +1,19 @@
+{
+    "productId":"",
+    "dsn":"",
+    "provisioningMethod":"",
+    "wakeWordAgentEnabled":false,
+    "locale":"en-US",
+    "companionApp":{
+        "localPort":8443,
+        "sslKeyStore":"",
+        "sslKeyStorePassphrase":"",
+        "lwaUrl":"https://api.amazon.com"
+    },
+    "companionService":{
+        "serviceUrl":"https://localhost:3000",
+        "sslClientKeyStore":"",
+        "sslClientKeyStorePassphrase":"",
+        "sslCaCert":""
+    }
+}

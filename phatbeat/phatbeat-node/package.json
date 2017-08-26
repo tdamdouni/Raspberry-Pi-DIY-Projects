@@ -1,0 +1,44 @@
+{
+  "name": "phatbeat",
+  "version": "1.0.0",
+  "description": "Basic control for the Pimoroni pHAT BEAT from node",
+  "main": "build/phatbeat.js",
+  "scripts": {
+    "build": "babel src -d build",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eminentspoon/phatbeat-node.git"
+  },
+  "keywords": [
+    "phatbeat",
+    "pi",
+    "gpio",
+    "raspberry",
+    "raspberry pi",
+    "pimoroni"
+  ],
+  "author": "eminentspoon <contact@eminentspoon.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eminentspoon/phatbeat-node/issues"
+  },
+  "homepage": "https://github.com/eminentspoon/phatbeat-node#readme",
+  "dependencies": {
+    "rpio": "^0.9.16"
+  },
+  "devDependencies": {
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "babel-cli": "6.24.0",
+    "babel-preset-env": "1.2.2",
+    "jest": "19.0.2"
+  }
+}

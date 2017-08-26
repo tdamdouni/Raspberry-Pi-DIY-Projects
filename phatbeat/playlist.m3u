@@ -1,0 +1,74 @@
+http://bbcmedia.ic.llnwd.net/stream/bbcmedia_6music_mf_p  
+http://media-the.musicradio.com:80/SmoothNorthWestMP3
+
+http://relay4.slayradio.org:8200/
+http://allstream.rainwave.cc:8000/all.mp3
+http://tx.sharp-stream.com/icecast.php?i=planetrock.mp3
+http://s1.viastreaming.net:8000
+
+# Antenne Bayern
+http://mp3channels.webradio.antenne.de/antenne
+
+# egoFM Snow
+http://mp3ad.egofm.c.nmdn.net/egofmsnow_192/livestream.mp3?     ## 192 kbps/MP3-Format
+http://mp3ad.egofm.c.nmdn.net/egofmsnow_128/livestream.mp3?     ## 128 kbps/MP3-Format
+
+# für die "Gemütlichen": fertige m3u-Playlist mit allen egoFM Streams in bestmöglicher Qualität:
+# http://www.xup.in/dl,45297692/egoFM.m3u/
+
+# Energy
+http://energyradio.de/muenchen
+
+# Gong 96.3
+http://radigo01.nci.de:8000/high_q.m3u
+http://radigo01.nci.de:8000/low_q.m3u
+
+# M 94.5
+http://stream.m945.mwn.de/m945-hq.mp3.m3u        # Hohe Qualität
+
+# Charivari
+http://www.charivari.de/webradio/r8082.pls
+http://www.charivari.de/webradio/r8082.m3u
+
+# ByteFM
+http://www.byte.fm/stream/bytefm.m3u
+http://streamingserver01.byte.fm:8000/
+
+
+# Energy98 USA
+http://mp3tx.duplexfx.com:8800
+
+#Frequence 3
+
+http://streams.frequence3.net/mp3-192.m3u
+http://streams.frequence3.net/ogg-112.m3u
+http://streams.frequence3.net/mp3-192.ram
+
+#NRJ
+
+mms://vipnrj.yacast.net/encodernrj       # NRJ 
+mms://vipnrj.yacast.net/nrj_webradio01   # NRJ Hits
+mms://vipnrj.yacast.net/nrj_webradio02   # NRJ Groove
+mms://vipnrj.yacast.net/nrj_webradio03   # NRJ Pop Rock
+mms://vipnrj.yacast.net/nrj_webradio04   # NRJ Dance
+mms://vipnrj.yacast.net/nrj_webradio07   # NRJ Music Awards
+mms://vipnrj.yacast.net/nrj_webradio08   # NRJ Cléopâtre
+mms://vipnrj.yacast.net/nrj_webradio09   # NRJ Quentin Tarantino
+mms://vipnrj.yacast.net/nrj_webradio10   # NRJ Music Tour
+mms://vipnrj.yacast.net/nrj_webradio11   # NRJ Electro
+mms://vipnrj.yacast.net/nrj_webradio12   # NRJ Tech
+mms://vipnrj.yacast.net/nrj_webradio13   # NRJ All French
+mms://vipnrj.yacast.net/nrj_webradio14   # NRJ Nouveautés
+
+#Pulsradio
+
+http://stream.pulsradio.com:5000
+
+#Radio France
+
+http://direct.fipradio.fr/live/fip-midfi.mp3                  #FIP
+http://direct.franceculture.fr/live/franceculture-midfi.mp3   #France Culture
+http://direct.franceinfo.fr/live/franceinfo-midfi.mp3         #France Info
+http://direct.franceinter.fr/live/franceinter-midfi.mp3       #France Inter
+http://direct.francemusique.fr/live/francemusique-midfi.mp3   #France Musique
+http://direct.mouv.fr/live/mouv-midfi.mp3                     #Mouv'

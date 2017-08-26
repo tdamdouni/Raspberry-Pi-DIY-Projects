@@ -1,0 +1,23 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install: make init
+
+script: make ci
+
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
+    rooms:
+      secure: CihmRTrUE2UMZJoUa33P876+dYOAlP7qhdczqt+Bjikq+B/QmiWdQ5BDVqnlNfwc4nXE1kT5nyd31UEzltMTRqX6pOl8guuk3pkV/eTyPjKnZjkqyHlEQApMeYjslpnaCmmMt+4daRFnKA/4reEzGgmaRYUko7QDmHVQpEoHfl2l+yE1huCEtuyPbKhVUuA/ZDpv32R56jsB4ZwNi6GG0+FGSg0KKEDMaTnUGGtpUUzw1KbP+tVuuvjBtSIPRYKNWMw0xzHYPSesrdMhU+GyZ1LvGlhaJcXS4A/kd1aiZ62WRPmV2RezESk8ZAC6bIH8p61eJqk+xBibwFP5SFHGcK1tTqgF7FzNn+jujXidFcvMugzjxlenGoD+RSE9PAUNiiIq2/yr8d3sGPYJwNxfKKFdElMTB9a2CJRN7gB8ZclE+TfX5XEGkRXrl5DypaUo9/ub7DDFreDJpoPrniTF5o6gMuqYvkkCF28m/yg65d+eANpO1zcmNPD1xfWO0kvoayRwt4gLqPsWEQnftpXP8Ajnr2ZdCxTE0caOglKKB339duSgcPdpjWInt+hrI9F1wEYYDPk/0ar8YRjU/T0jcG9lRGaWrReOOzREzeLFi8D+Tvt7w2LDk68OziR80DKfgu/cMH7QZqXCHvH3qZLopGCV9hWUwbKuK9nkJGw0OVw=
+
+addons:
+  apt_packages:
+    - pandoc

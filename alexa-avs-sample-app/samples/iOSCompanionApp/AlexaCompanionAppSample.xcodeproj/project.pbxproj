@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		930D58F316DFB492006B7B39 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930D58F216DFB492006B7B39 /* Security.framework */; };
+		930D591416E0DCBB006B7B39 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930D591316E0DCBB006B7B39 /* QuartzCore.framework */; };
+		936C7CC51725234D0067524F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7CC41725234D0067524F /* Default-568h@2x.png */; };
+		936C7D4A17268E0F0067524F /* btnLWA_gold_157x36_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D4617268E0E0067524F /* btnLWA_gold_157x36_pressed.png */; };
+		936C7D4B17268E0F0067524F /* btnLWA_gold_157x36.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D4717268E0F0067524F /* btnLWA_gold_157x36.png */; };
+		936C7D4C17268E0F0067524F /* btnLWA_gold_314x72_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D4817268E0F0067524F /* btnLWA_gold_314x72_pressed.png */; };
+		936C7D4D17268E0F0067524F /* btnLWA_gold_314x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D4917268E0F0067524F /* btnLWA_gold_314x72.png */; };
+		936C7D5F172691600067524F /* btnLWA_gold_68x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D5E172691600067524F /* btnLWA_gold_68x72.png */; };
+		936C7D61172691FD0067524F /* btnLWA_Gold_94x96.png in Resources */ = {isa = PBXBuildFile; fileRef = 936C7D60172691FD0067524F /* btnLWA_Gold_94x96.png */; };
+		936DE02416DF69B400D586D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936DE02316DF69B400D586D0 /* UIKit.framework */; };
+		936DE02616DF69B400D586D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936DE02516DF69B400D586D0 /* Foundation.framework */; };
+		936DE02816DF69B400D586D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936DE02716DF69B400D586D0 /* CoreGraphics.framework */; };
+		936DE02E16DF69B400D586D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 936DE02C16DF69B400D586D0 /* InfoPlist.strings */; };
+		936DE03016DF69B400D586D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 936DE02F16DF69B400D586D0 /* main.m */; };
+		936DE03416DF69B400D586D0 /* AVSApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 936DE03316DF69B400D586D0 /* AVSApplicationDelegate.m */; };
+		936DE03716DF69B400D586D0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936DE03516DF69B400D586D0 /* MainStoryboard_iPhone.storyboard */; };
+		936DE03A16DF69B400D586D0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936DE03816DF69B400D586D0 /* MainStoryboard_iPad.storyboard */; };
+		93B545A61733EEBB00AADBA5 /* btnLWA_gold_209x48_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 93B545A41733EEBB00AADBA5 /* btnLWA_gold_209x48_pressed.png */; };
+		93B545A71733EEBB00AADBA5 /* btnLWA_gold_209x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 93B545A51733EEBB00AADBA5 /* btnLWA_gold_209x48.png */; };
+		93E3471217181CA800A9F478 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3471117181CA800A9F478 /* LoginController.m */; };
+		ED006C111BCDAADD00324C09 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED006C101BCDAADD00324C09 /* SafariServices.framework */; };
+		A9DFD0001BC73585000376DA /* ca.der in Resources */ = {isa = PBXBuildFile; fileRef = A9DFCFFF1BC73446000376DA /* ca.der */; };
+		ED2C56701B7D6CCE0081C72D /* ProvisioningClient.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2C566D1B7D6CCE0081C72D /* ProvisioningClient.m */; };
+		ED2C56711B7D6CCE0081C72D /* AVSDeviceResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2C566F1B7D6CCE0081C72D /* AVSDeviceResponse.m */; };
+		ED5090681BCDE1AE0002A4A4 /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED006C0C1BCDAA3400324C09 /* LoginWithAmazon.framework */; };
+		ED57E91E1B1816A400C2FA4A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED57E91D1B1816A400C2FA4A /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EDD8F6261B27D9EB00F24721 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		930D58F216DFB492006B7B39 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		930D591316E0DCBB006B7B39 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		93414D251704494100CDEFBB /* AlexaCompanionAppSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AlexaCompanionAppSample-Info.plist"; sourceTree = "<group>"; };
+		936C7CC41725234D0067524F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Resources/App/Default-568h@2x.png"; sourceTree = "<group>"; };
+		936C7D4617268E0E0067524F /* btnLWA_gold_157x36_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_gold_157x36_pressed.png; path = ../Resources/App/btnLWA_gold_157x36_pressed.png; sourceTree = "<group>"; };
+		936C7D4717268E0F0067524F /* btnLWA_gold_157x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_gold_157x36.png; path = ../Resources/App/btnLWA_gold_157x36.png; sourceTree = "<group>"; };
+		936C7D4817268E0F0067524F /* btnLWA_gold_314x72_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_gold_314x72_pressed.png; path = ../Resources/App/btnLWA_gold_314x72_pressed.png; sourceTree = "<group>"; };
+		936C7D4917268E0F0067524F /* btnLWA_gold_314x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_gold_314x72.png; path = ../Resources/App/btnLWA_gold_314x72.png; sourceTree = "<group>"; };
+		936C7D5E172691600067524F /* btnLWA_gold_68x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_gold_68x72.png; path = ../btnLWA_gold_68x72.png; sourceTree = "<group>"; };
+		936C7D60172691FD0067524F /* btnLWA_Gold_94x96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnLWA_Gold_94x96.png; path = ../btnLWA_Gold_94x96.png; sourceTree = "<group>"; };
+		936DE01F16DF69B400D586D0 /* AlexaCompanionAppSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlexaCompanionAppSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		936DE02316DF69B400D586D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		936DE02516DF69B400D586D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		936DE02716DF69B400D586D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		936DE02D16DF69B400D586D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		936DE02F16DF69B400D586D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		936DE03116DF69B400D586D0 /* AlexaCompanionAppSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlexaCompanionAppSample-Prefix.pch"; sourceTree = "<group>"; };
+		936DE03216DF69B400D586D0 /* AVSApplicationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVSApplicationDelegate.h; sourceTree = "<group>"; };
+		936DE03316DF69B400D586D0 /* AVSApplicationDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVSApplicationDelegate.m; sourceTree = "<group>"; };
+		936DE03616DF69B400D586D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		936DE03916DF69B400D586D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		93B545A41733EEBB00AADBA5 /* btnLWA_gold_209x48_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnLWA_gold_209x48_pressed.png; sourceTree = "<group>"; };
+		93B545A51733EEBB00AADBA5 /* btnLWA_gold_209x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnLWA_gold_209x48.png; sourceTree = "<group>"; };
+		93E3471017181CA800A9F478 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		93E3471117181CA800A9F478 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		ED006C0C1BCDAA3400324C09 /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoginWithAmazon.framework; sourceTree = "<group>"; };
+		ED006C101BCDAADD00324C09 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		A9DFCFFF1BC73446000376DA /* ca.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = ca.der; path = Resources/App/ca.der; sourceTree = SOURCE_ROOT; };
+		ED2C566C1B7D6CCE0081C72D /* ProvisioningClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvisioningClient.h; sourceTree = "<group>"; };
+		ED2C566D1B7D6CCE0081C72D /* ProvisioningClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvisioningClient.m; sourceTree = "<group>"; };
+		ED2C566E1B7D6CCE0081C72D /* AVSDeviceResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVSDeviceResponse.h; sourceTree = "<group>"; };
+		ED2C566F1B7D6CCE0081C72D /* AVSDeviceResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVSDeviceResponse.m; sourceTree = "<group>"; };
+		ED57E91D1B1816A400C2FA4A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EDE5A5B61B69634400297421 /* AlexaCompanionAppSample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AlexaCompanionAppSample.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		936DE01C16DF69B400D586D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED006C111BCDAADD00324C09 /* SafariServices.framework in Frameworks */,
+				ED57E91E1B1816A400C2FA4A /* AVFoundation.framework in Frameworks */,
+				930D591416E0DCBB006B7B39 /* QuartzCore.framework in Frameworks */,
+				930D58F316DFB492006B7B39 /* Security.framework in Frameworks */,
+				936DE02416DF69B400D586D0 /* UIKit.framework in Frameworks */,
+				936DE02616DF69B400D586D0 /* Foundation.framework in Frameworks */,
+				ED5090681BCDE1AE0002A4A4 /* LoginWithAmazon.framework in Frameworks */,
+				936DE02816DF69B400D586D0 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		936DE01416DF69B400D586D0 = {
+			isa = PBXGroup;
+			children = (
+				EDE5A5B61B69634400297421 /* AlexaCompanionAppSample.xcodeproj */,
+				936DE02916DF69B400D586D0 /* Application */,
+				936DE02216DF69B400D586D0 /* Frameworks */,
+				936DE02016DF69B400D586D0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		936DE02016DF69B400D586D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				936DE01F16DF69B400D586D0 /* AlexaCompanionAppSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		936DE02216DF69B400D586D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED006C101BCDAADD00324C09 /* SafariServices.framework */,
+				ED006C0C1BCDAA3400324C09 /* LoginWithAmazon.framework */,
+				ED57E91D1B1816A400C2FA4A /* AVFoundation.framework */,
+				930D591316E0DCBB006B7B39 /* QuartzCore.framework */,
+				930D58F216DFB492006B7B39 /* Security.framework */,
+				936DE02316DF69B400D586D0 /* UIKit.framework */,
+				936DE02516DF69B400D586D0 /* Foundation.framework */,
+				936DE02716DF69B400D586D0 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		936DE02916DF69B400D586D0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ED2C566C1B7D6CCE0081C72D /* ProvisioningClient.h */,
+				ED2C566D1B7D6CCE0081C72D /* ProvisioningClient.m */,
+				ED2C566E1B7D6CCE0081C72D /* AVSDeviceResponse.h */,
+				ED2C566F1B7D6CCE0081C72D /* AVSDeviceResponse.m */,
+				936DE03216DF69B400D586D0 /* AVSApplicationDelegate.h */,
+				936DE03316DF69B400D586D0 /* AVSApplicationDelegate.m */,
+				93E3471017181CA800A9F478 /* LoginController.h */,
+				93E3471117181CA800A9F478 /* LoginController.m */,
+				936DE02F16DF69B400D586D0 /* main.m */,
+				936DE03116DF69B400D586D0 /* AlexaCompanionAppSample-Prefix.pch */,
+				936DE03516DF69B400D586D0 /* MainStoryboard_iPhone.storyboard */,
+				936DE03816DF69B400D586D0 /* MainStoryboard_iPad.storyboard */,
+				936DE02A16DF69B400D586D0 /* Supporting Files */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		936DE02A16DF69B400D586D0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9DFCFFF1BC73446000376DA /* ca.der */,
+				93B545A41733EEBB00AADBA5 /* btnLWA_gold_209x48_pressed.png */,
+				93B545A51733EEBB00AADBA5 /* btnLWA_gold_209x48.png */,
+				936C7D60172691FD0067524F /* btnLWA_Gold_94x96.png */,
+				936C7D5E172691600067524F /* btnLWA_gold_68x72.png */,
+				936C7D4617268E0E0067524F /* btnLWA_gold_157x36_pressed.png */,
+				936C7D4717268E0F0067524F /* btnLWA_gold_157x36.png */,
+				936C7D4817268E0F0067524F /* btnLWA_gold_314x72_pressed.png */,
+				936C7D4917268E0F0067524F /* btnLWA_gold_314x72.png */,
+				936C7CC41725234D0067524F /* Default-568h@2x.png */,
+				93414D251704494100CDEFBB /* AlexaCompanionAppSample-Info.plist */,
+				936DE02C16DF69B400D586D0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED564B861B94EA4F00300D3F /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		936DE01E16DF69B400D586D0 /* AlexaCompanionAppSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 936DE04016DF69B400D586D0 /* Build configuration list for PBXNativeTarget "AlexaCompanionAppSample" */;
+			buildPhases = (
+				936DE01B16DF69B400D586D0 /* Sources */,
+				936DE01C16DF69B400D586D0 /* Frameworks */,
+				936DE01D16DF69B400D586D0 /* Resources */,
+				EDD8F6261B27D9EB00F24721 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlexaCompanionAppSample;
+			productName = LoginWithAmazonSample;
+			productReference = 936DE01F16DF69B400D586D0 /* AlexaCompanionAppSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		936DE01616DF69B400D586D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AMZN;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Amazon;
+			};
+			buildConfigurationList = 936DE01916DF69B400D586D0 /* Build configuration list for PBXProject "AlexaCompanionAppSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 936DE01416DF69B400D586D0;
+			productRefGroup = 936DE02016DF69B400D586D0 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ED564B861B94EA4F00300D3F /* Products */;
+					ProjectRef = EDE5A5B61B69634400297421 /* AlexaCompanionAppSample.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				936DE01E16DF69B400D586D0 /* AlexaCompanionAppSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		936DE01D16DF69B400D586D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DFD0001BC73585000376DA /* ca.der in Resources */,
+				936DE02E16DF69B400D586D0 /* InfoPlist.strings in Resources */,
+				936DE03716DF69B400D586D0 /* MainStoryboard_iPhone.storyboard in Resources */,
+				936DE03A16DF69B400D586D0 /* MainStoryboard_iPad.storyboard in Resources */,
+				936C7CC51725234D0067524F /* Default-568h@2x.png in Resources */,
+				936C7D4A17268E0F0067524F /* btnLWA_gold_157x36_pressed.png in Resources */,
+				936C7D4B17268E0F0067524F /* btnLWA_gold_157x36.png in Resources */,
+				936C7D4C17268E0F0067524F /* btnLWA_gold_314x72_pressed.png in Resources */,
+				936C7D4D17268E0F0067524F /* btnLWA_gold_314x72.png in Resources */,
+				936C7D5F172691600067524F /* btnLWA_gold_68x72.png in Resources */,
+				936C7D61172691FD0067524F /* btnLWA_Gold_94x96.png in Resources */,
+				93B545A61733EEBB00AADBA5 /* btnLWA_gold_209x48_pressed.png in Resources */,
+				93B545A71733EEBB00AADBA5 /* btnLWA_gold_209x48.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		936DE01B16DF69B400D586D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED2C56701B7D6CCE0081C72D /* ProvisioningClient.m in Sources */,
+				ED2C56711B7D6CCE0081C72D /* AVSDeviceResponse.m in Sources */,
+				936DE03016DF69B400D586D0 /* main.m in Sources */,
+				936DE03416DF69B400D586D0 /* AVSApplicationDelegate.m in Sources */,
+				93E3471217181CA800A9F478 /* LoginController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		936DE02C16DF69B400D586D0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				936DE02D16DF69B400D586D0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		936DE03516DF69B400D586D0 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				936DE03616DF69B400D586D0 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		936DE03816DF69B400D586D0 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				936DE03916DF69B400D586D0 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		936DE03E16DF69B400D586D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		936DE03F16DF69B400D586D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		936DE04116DF69B400D586D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+					"$(PROJECT_DIR)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Application/AlexaCompanionAppSample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"${PROJECT_DIR}/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+				);
+				INFOPLIST_FILE = "Application/AlexaCompanionAppSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/**";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amazon.$(PRODUCT_NAME)";
+				PRODUCT_NAME = AlexaCompanionAppSample;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+				"VALID_ARCHS[sdk=*]" = "i386 x86_64 armv7 armv7s arm64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		936DE04216DF69B400D586D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+					"$(PROJECT_DIR)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Application/AlexaCompanionAppSample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"${PROJECT_DIR}/**",
+					"${BUILT_PRODUCTS_DIR}/**",
+				);
+				INFOPLIST_FILE = "Application/AlexaCompanionAppSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/**";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amazon.$(PRODUCT_NAME)";
+				PRODUCT_NAME = AlexaCompanionAppSample;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+				"VALID_ARCHS[sdk=*]" = "i386 x86_64 armv7 armv7s arm64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		936DE01916DF69B400D586D0 /* Build configuration list for PBXProject "AlexaCompanionAppSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				936DE03E16DF69B400D586D0 /* Debug */,
+				936DE03F16DF69B400D586D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		936DE04016DF69B400D586D0 /* Build configuration list for PBXNativeTarget "AlexaCompanionAppSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				936DE04116DF69B400D586D0 /* Debug */,
+				936DE04216DF69B400D586D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 936DE01616DF69B400D586D0 /* Project object */;
+}

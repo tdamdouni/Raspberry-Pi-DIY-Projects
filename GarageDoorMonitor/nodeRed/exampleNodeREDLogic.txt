@@ -1,0 +1,215 @@
+[
+    {
+        "id": "748d6ede.a792a",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "8e79eb6e.f1e318",
+        "type": "mqtt in",
+        "z": "748d6ede.a792a",
+        "name": "GarageDoor1",
+        "topic": "/EshThings/Events/GarageSwitch/Switch1/Status",
+        "qos": "2",
+        "broker": "890398bb.79ae38",
+        "x": 85,
+        "y": 303,
+        "wires": [
+            [
+                "ac83baca.4c8298"
+            ]
+        ]
+    },
+    {
+        "id": "ac83baca.4c8298",
+        "type": "switch",
+        "z": "748d6ede.a792a",
+        "name": "IsOpenOrClosed",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 284,
+        "y": 301,
+        "wires": [
+            [
+                "f4a6e559.9722e8"
+            ],
+            [
+                "6744f32d.14b35c"
+            ]
+        ]
+    },
+    {
+        "id": "64140adb.3aeb74",
+        "type": "mqtt out",
+        "z": "748d6ede.a792a",
+        "name": "GarageIndicatorPattern",
+        "topic": "/EshThings/Indicators/GarageIndicator/Pattern",
+        "qos": "2",
+        "retain": "true",
+        "broker": "890398bb.79ae38",
+        "x": 956,
+        "y": 371,
+        "wires": []
+    },
+    {
+        "id": "f9498abf.8e1d78",
+        "type": "mqtt in",
+        "z": "748d6ede.a792a",
+        "name": "GarageDoor0",
+        "topic": "/EshThings/Events/GarageSwitch/Switch0/Status",
+        "qos": "2",
+        "broker": "890398bb.79ae38",
+        "x": 91,
+        "y": 419,
+        "wires": [
+            [
+                "88851f4e.a443b"
+            ]
+        ]
+    },
+    {
+        "id": "88851f4e.a443b",
+        "type": "switch",
+        "z": "748d6ede.a792a",
+        "name": "IsOpenOrClosed",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 274,
+        "y": 420,
+        "wires": [
+            [
+                "7d1f76c0.f26be8"
+            ],
+            [
+                "991a5482.de9038"
+            ]
+        ]
+    },
+    {
+        "id": "f4a6e559.9722e8",
+        "type": "function",
+        "z": "748d6ede.a792a",
+        "name": "NoteDoor1Open",
+        "func": "\nnode.log(\"Door_1 is Open\");\n\nflow.set(\"Door_1\", \"1\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 488,
+        "y": 292,
+        "wires": [
+            [
+                "1c77e5a0.459efa"
+            ]
+        ]
+    },
+    {
+        "id": "6744f32d.14b35c",
+        "type": "function",
+        "z": "748d6ede.a792a",
+        "name": "NoteDoor1Closed",
+        "func": "\nnode.log(\"Door_1 is Closed\");\n\nflow.set(\"Door_1\", \"0\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 331,
+        "wires": [
+            [
+                "1c77e5a0.459efa"
+            ]
+        ]
+    },
+    {
+        "id": "1c77e5a0.459efa",
+        "type": "function",
+        "z": "748d6ede.a792a",
+        "name": "DeterminePattern",
+        "func": "\ndoor0 = flow.get(\"Door_0\")||\"u\";\ndoor1 = flow.get(\"Door_1\")||\"u\";\n\n//if door 1 and door 0 are open\n//send solid white pattern\nif(door0 === \"0\" && door1===\"0\")\n{\n    node.log(\"Both closed\");\n    msg.payload = \"0\";\n}\nelse if (door0 === \"1\" && door1 ===\"0\")\n{\n    node.log(\"door0 open\");\n    msg.payload = \"9\";\n}\nelse if (door0 === \"0\" && door1 === \"1\")\n{\n    node.log(\"door1 open\");\n    msg.payload = \"10\";\n}\nelse if (door0 === \"1\" && door1 === \"1\")\n{\n    node.log(\"doors open\");\n    msg.payload = \"8\";\n}\nelse\n{\n    node.log(\"unknown issue\");\n    msg.payload = \"1\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 706,
+        "y": 371,
+        "wires": [
+            [
+                "64140adb.3aeb74"
+            ]
+        ]
+    },
+    {
+        "id": "991a5482.de9038",
+        "type": "function",
+        "z": "748d6ede.a792a",
+        "name": "NoteDoor0Closed",
+        "func": "\nnode.log(\"Door_0 is Closed\");\n\nflow.set(\"Door_0\", \"0\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 472,
+        "y": 449,
+        "wires": [
+            [
+                "1c77e5a0.459efa"
+            ]
+        ]
+    },
+    {
+        "id": "7d1f76c0.f26be8",
+        "type": "function",
+        "z": "748d6ede.a792a",
+        "name": "NoteDoor0Open",
+        "func": "\nnode.log(\"Door_0 is Open\");\n\nflow.set(\"Door_0\", \"1\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 468,
+        "y": 405,
+        "wires": [
+            [
+                "1c77e5a0.459efa"
+            ]
+        ]
+    },
+    {
+        "id": "890398bb.79ae38",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]
+

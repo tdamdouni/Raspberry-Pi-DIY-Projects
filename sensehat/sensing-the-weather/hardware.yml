@@ -1,0 +1,12 @@
+- name: 1 x Weather board
+  img: weather-board
+- name: 1 x Rain gauge
+  img: rain-gauge
+- name: 1 x Anemometer
+  img: wind-speed-sensor
+- name: 1 x Wind vane
+  img: wind-vane
+- name: 1 x Soil temperature probe
+  img: soil-temperature-probe
+- name: 1 x Air quality sensor
+  img: air-quality-sensor

@@ -1,0 +1,13 @@
+phatbeat (0.0.2) stable; urgency=low
+
+  * Bugfix: Corrected (reversed) order of pixels in second bar
+  * New: Optional threading for button handlers
+  * New: Added hold() to attach a handler to a button hold event
+
+ -- Phil Howard <phil@pimoroni.com>  Wed, 12 Apr 2017 00:00:00 +0000
+
+phatbeat (0.0.1) stable; urgency=low
+
+  * Initial release
+
+ -- Phil Howard <phil@pimoroni.com>  Mon, 27 Feb 2017 00:00:00 +0000

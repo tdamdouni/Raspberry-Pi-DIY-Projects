@@ -1,0 +1,9 @@
+{
+  "name": "actives",
+  "version": "1.0.0",
+  "description": "Server side Node app for couting web socket connections",
+  "author": "David Maitland <hello@davidmaitland.me>",
+  "dependencies": {
+    "socket.io": "^1.3.7"
+  }
+}

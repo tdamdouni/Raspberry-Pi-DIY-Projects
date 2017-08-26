@@ -1,0 +1,174 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<canvas id="canvas"></canvas>
+<canvas id="palette"></canvas>
+<button id="clear">Clear</button>
+
+<div id="slider"></div>
+
+<script src="admin/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+</script>
+<script>
+var bw = 1101;
+var bh = 501;
+var p = 0;
+
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+var colour = '#000000';
+
+canvas.height = bh;
+canvas.width = bw;
+
+var paletteCanvas = document.getElementById("palette");
+var paletteContext = paletteCanvas.getContext("2d");
+
+paletteCanvas.height = 20;
+paletteCanvas.width = 40;
+
+var on = {};
+var brightness = 2;
+
+function drawGrid() {
+	for (var x = 0; x <= bw; x += 100) {
+		context.moveTo(0.5 + x, 0);
+		context.lineTo(0.5 + x, bh);
+	}
+
+	for (var x = 0; x <= bh; x += 100) {
+		context.moveTo(0, 0.5 + x);
+		context.lineTo(bw, 0.5 + x);
+	}
+
+	context.strokeStyle = "#ccc";
+	context.stroke();
+}
+
+function updatePHAT() {
+	$.post( "led.php", { data: JSON.stringify(on), brightness: brightness } ).done(function( data ) {
+		//console.log( "Data Loaded: " + data );
+	});
+}
+
+function updateArray(x, y) {
+	p = context.getImageData(x, y, 1, 1).data;
+
+	x = x / 100;
+	y = y / 100;
+
+	key = x.toString() + y.toString();
+
+	if (p[0] === 255) {
+		delete on[key];
+	} else {
+		on[key] = [x, y];
+	}
+}
+
+function drawPalette() {
+	colours = ['white', 'black'];
+	for (i = 0; i < 2; i++) {
+		paletteContext.beginPath();
+		paletteContext.rect(i*20, 0, 20, 20);
+		paletteContext.fillStyle = colours[i];
+		paletteContext.fill();
+	}
+}
+
+function drawPixel(x, y) {
+	context.beginPath();
+	context.rect(x, y, 100, 100);
+	context.fillStyle = colour;
+	context.fill();
+}
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+}
+
+paletteCanvas.addEventListener('click', function(evt) {
+	var mousePos = getMousePos(paletteCanvas, evt);
+
+	p = paletteContext.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+
+	hex = "rgba(" + p[0] + "," + p[1] + "," + p[2] + "," + p[3] + ")";
+
+	colour = hex;
+}, false);
+
+canvas.addEventListener('mousemove', function(evt) {
+	if (evt.buttons === 1) {
+		var mousePos = getMousePos(canvas, evt);
+		drawX = Math.floor((mousePos.x / 100)) * 100;
+		drawY = Math.floor((mousePos.y / 100)) * 100;
+		drawPixel(drawX, drawY);
+		updateArray(drawX, drawY);
+
+		drawGrid();
+	}
+}, false);
+
+canvas.addEventListener('mouseup', function(evt) {
+	updatePHAT();
+}, false);
+
+var mouseClick = false;
+
+canvas.addEventListener('click', function(evt) {
+	mouseClick = true;
+	var mousePos = getMousePos(canvas, evt);
+
+	drawX = Math.floor((mousePos.x / 100)) * 100;
+	drawY = Math.floor((mousePos.y / 100)) * 100;
+
+	drawPixel(drawX, drawY);
+
+	updateArray(drawX, drawY);
+	updatePHAT();
+
+	drawGrid();
+}, false);
+
+$( "#slider" ).slider({
+	value: 2,
+	max: 255
+});
+
+
+$( "#slider" ).on( "slidechange", function( event, ui ) {
+	console.log(ui.value);
+
+	brightness = ui.value;		
+
+	updatePHAT();
+});
+
+$("#clear").on("click", function(){ 
+	context.beginPath();
+	context.rect(0, 0, bw, bh);
+	context.fillStyle = "rgba(255, 255, 255, 1)";
+	context.fill();
+
+	on = {};
+
+	drawGrid();
+
+	updatePHAT();
+});
+
+
+context.beginPath();
+context.rect(0, 0, bw, bh);
+context.fillStyle = "rgba(255, 255, 255, 1)";
+context.fill();
+
+drawGrid();
+drawPalette();
+
+</script>

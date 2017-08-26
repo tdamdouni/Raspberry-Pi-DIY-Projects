@@ -1,0 +1,6 @@
+README
+
+Stereo amplifier, buttons and dual RGB VU meter for your Raspberry Pi.
+
+Learn more: https://shop.pimoroni.com/products/phat-beat
+For examples run: `curl -sS get.pimoroni.com/phatbeat | bash`

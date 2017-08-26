@@ -1,0 +1,7 @@
+---
+applications:
+- name: python-iot-hackathon
+  memory: 128M
+  services:
+   - iot-python
+   - iot-twilio

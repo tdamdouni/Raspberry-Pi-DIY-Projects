@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Alexa Voice Service Companion</string>
+
+    <string name="welcome">Welcome to the Alexa Voice Service Companion App!</string>
+
+    <string name="connect">Connect</string>
+
+    <string name="address_title">Device Address</string>
+    <string name="address_hint">Eg: https://10.0.2.2:8443</string>
+
+    <string name="error">Error</string>
+    <string name="success_message">Your device is now successfully provisioned and ready to use.</string>
+
+    <string name="login_button_description">Login with Amazon</string>
+    <string name="saved_device_address" translatable="false">saved_device_address</string>
+</resources>

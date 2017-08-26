@@ -1,0 +1,4 @@
+EnvirophatTemperatureIntent read temperature
+EnvirophatTemperatureIntent say the temperature
+EnvirophatTemperatureIntent what the temperature is
+EnvirophatTemperatureIntent find the temperature

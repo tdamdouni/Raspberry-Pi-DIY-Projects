@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LED Control Test</title>
+    <style>
+        html {
+            padding: 0;
+            margin: 0;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+        
+        p {
+            text-align: center;
+        }
+        
+        .channel {
+            width: 100px;
+            border: 1px solid black;
+            padding: 10px 0;
+            margin: 0 auto;
+            float: left;
+            margin-right: 10px;
+        }
+        
+        .channel.pirate {
+            transform: rotate(180deg);
+            float: right;
+        }
+        
+        .pin {
+            height: 35px;
+            width: 35px;
+            border-radius: 35px;
+            clear: left;
+            margin: 0 auto;
+            margin-top: 5px;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+        
+        .pin:first-child {
+            margin-top: 0px;
+        }
+        
+        .container {
+            width: 240px;
+            margin: 0 auto;
+        }
+        
+        .pirateRadioMode {
+            clear: both;
+            text-align: center;
+            padding-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>pHAT BEAT LED Control Test</h1>
+    <p>A simple demonstration to show the possibilities of node controlled access to the pHAT BEAT device's LEDs.</p>
+    <div class="container">
+        <div class="channel">
+            <div class="pin" data-pinno="7" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="6" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="5" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="4" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="3" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="2" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="1" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="0" data-state="0" onclick="javascript:handleClick(this)"></div>
+        </div>
+        <div class="channel">
+            <div class="pin" data-pinno="8" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="9" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="10" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="11" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="12" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="13" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="14" data-state="0" onclick="javascript:handleClick(this)"></div>
+            <div class="pin" data-pinno="15" data-state="0" onclick="javascript:handleClick(this)"></div>
+        </div>
+        <div class="pirateRadioMode">
+            Is Pirate Radio? <input type="checkbox" onchange="javascript:pirateChange(this)" />
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+        function pirateChange(ele) {
+            if (ele.checked) {
+                $(".channel").addClass("pirate");
+            } else {
+                $(".channel").removeClass("pirate");
+            }
+        }
+        function handleClick(ele) {
+            var settings = {
+                "url": "/led/",
+                "method": "POST",
+                "headers": {
+                    "pin": ele.attributes["data-pinno"].value,
+                    "state": ele.attributes["data-state"].value,
+                    "cache-control": "no-cache"
+                }
+            };
+
+            $.ajax(settings).done(function (response) {
+                ele.attributes["data-state"].value = response.newState;
+                if (response.newState === 1) {
+                    ele.setAttribute("style", "background-color: rgb(" + response.red + ", " + response.green + ", " + response.blue + ")");
+                }
+                else {
+                    delete ele.setAttribute("style", "");
+                }
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript" language="javascript"></script>
+</body>
+
+</html>

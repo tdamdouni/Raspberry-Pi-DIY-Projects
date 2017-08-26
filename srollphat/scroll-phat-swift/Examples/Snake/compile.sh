@@ -1,0 +1,1 @@
+swiftc -v -o snake -I ../../SMBus/Packages/Ci2c -I ../../SMBus/Packages/CioctlHelper ../../SMBus/Sources/SMBus.swift ../../Sources/ScrollpHAT.swift main.swift

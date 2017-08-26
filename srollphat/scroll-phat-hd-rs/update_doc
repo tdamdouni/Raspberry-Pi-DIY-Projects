@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cargo doc --no-deps
+
+git checkout gh-pages
+
+cp -r ./target/doc/* .
+rm -rf ./target
+
+git add .
+git commit -a -m 'update doc'
+
+git checkout master

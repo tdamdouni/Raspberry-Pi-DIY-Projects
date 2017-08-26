@@ -1,0 +1,34 @@
+menu "EshThing"
+
+# This is actually also handled in the ESP32 startup code, not only in FreeRTOS.
+config ESHTHING_SWITCH_DETECTOR
+	bool "unit monitors two GPIO values for switch changes"
+	default y
+	help
+		this unit monitors two GPIO inputs for changes and sends MQTT events when changed.
+
+config ESHTHING_MQTT_SERVER
+    string "Target MQTT server dns name or ip address"
+    default "192.168.1.200"
+    help
+        The IP address or DNS name for the MQTT server this device will operate with.
+
+config ESHTHING_MQTT_CLIENTID
+string "MQTT ClientId"
+    default "ClientId_1"
+    help
+        The MQTT ClientID for this build.
+
+config ESHTHING_WIFI_SSID
+    string "Target Wifi SSID"
+    default "EshThings"
+    help
+        Wifi SSID as string.
+
+config ESHTHING_WIFI_PASSWORD
+    string "Target Wifi password"
+    default ""
+    help
+        The password for the target Wifi SSID.
+
+endmenu

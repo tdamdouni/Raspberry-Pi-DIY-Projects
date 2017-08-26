@@ -1,0 +1,21 @@
+[package]
+name = "scroll_phat_hd"
+version = "0.2.2"
+keywords = ["scroll", "led", "matrix", "raspberry", "pi"]
+repository = "https://github.com/tiziano88/scroll-phat-hd-rs"
+homepage = "https://github.com/tiziano88/scroll-phat-hd-rs"
+authors = ["Tiziano Santoro <tiziano88@gmail.com>"]
+documentation = "https://tiziano88.github.io/scroll-phat-hd-rs/scroll_phat_hd/index.html"
+license = "MIT"
+description = """
+Scroll Phat HD library.
+"""
+
+[badges]
+travis-ci = { repository = "tiziano88/scroll-phat-hd-rs" }
+
+[dependencies]
+termion = "1.0"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+i2cdev = "0.3"

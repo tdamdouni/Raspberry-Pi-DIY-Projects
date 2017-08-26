@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <RollingFile name="file" fileName="logs/application.log" filePattern="logs/application-%d{yyyy-MM-dd}-%i.log" >
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/> 
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.eclipse.jetty" level="info" additivity="false" />
+        <!-- InputStreamResponseListener is a copy from Jetty at the moment, so give it the same log levels as Jetty -->
+        <Logger name="com.amazon.alexa.avs.http.jetty.InputStreamResponseListener" level="info" additivity="false" />
+        <Root level="debug">
+            <AppenderRef ref="file" level="DEBUG"/>
+            <AppenderRef ref="stdout" level="ERROR"/>
+        </Root>
+    </Loggers>
+</Configuration>

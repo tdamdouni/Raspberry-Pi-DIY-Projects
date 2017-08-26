@@ -1,0 +1,19 @@
+{
+    "productId":"${ProductID}",
+    "dsn":"${DeviceSerialNumber}",
+    "provisioningMethod":"companionService",
+    "wakeWordAgentEnabled":${Wake_Word_Detection_Enabled},
+    "locale":"${Locale}",
+    "companionApp":{
+        "localPort":8443,
+        "sslKeyStore":"${Java_Client_Loc}/certs/server/jetty.pkcs12",
+        "sslKeyStorePassphrase":"${KeyStorePassword}",
+        "lwaUrl":"https://api.amazon.com"
+    },
+    "companionService":{
+        "serviceUrl":"https://localhost:3000",
+        "sslClientKeyStore":"${Java_Client_Loc}/certs/client/client.pkcs12",
+        "sslClientKeyStorePassphrase":"${KeyStorePassword}",
+        "sslCaCert":"${Java_Client_Loc}/certs/ca/ca.crt"
+    }
+}

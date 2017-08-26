@@ -1,0 +1,6 @@
+framework module LoginWithAmazon {
+  umbrella header "LoginWithAmazon.h"
+
+  export *
+  module * { export * }
+}

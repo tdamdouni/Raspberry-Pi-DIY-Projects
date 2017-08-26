@@ -1,0 +1,10 @@
+{
+  "intents": [
+    {
+      "intent": "EnvirophatTemperatureIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}

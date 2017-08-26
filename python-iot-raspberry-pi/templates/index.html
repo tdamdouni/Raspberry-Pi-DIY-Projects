@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hello from Flask</title>
+    </head>
+    <body>
+        <h1>Simple Python App to Turn a Light on an off</h1>
+        <br />
+        <form action="/phoneNumber" method="POST">
+            <input name="phoneNumber" type="text" placeholder="5555551212"/>
+            <input name="message" type="text" placeholder="Button Pushed"/>
+            <input type="submit" value="Save my phone number and text message" />
+        </form>
+        <br />
+        <form action="/light/on" method="POST">
+            <input type="submit" value="Turn Light On">
+        </form>
+        <form action="/light/off" method="POST">
+            <input type="submit" value="Turn Light Off">
+        </form>
+    </body>
+</html>
