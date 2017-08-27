@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>MoteControl: {{status}}</title>
+	<style>
+
+        .button {
+          display: inline-block;
+          padding: 1px 20px;
+          font-size: 22px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          outline: none;
+          color: #fff;
+          background-color: #FFAF50;
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+      }
+			.button_red {
+				display: inline-block;
+				padding: 1px 20px;
+				font-size: 22px;
+				cursor: pointer;
+				text-align: center;
+				text-decoration: none;
+				outline: none;
+				color: #fff;
+				background-color: #ff0000;
+				border: none;
+				border-radius: 15px;
+				box-shadow: 0 9px #999;
+		}
+        .button_off {
+          display: inline-block;
+          padding: 1px 20px;
+          font-size: 22px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          outline: none;
+          color: #fff;
+          background-color: #20B2AA;
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+    }
+        .button_dis {
+          display: inline-block;
+          padding: 1px 20px;
+          font-size: 22px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          outline: none;
+          color: #fff;
+          background-color: #ccffcc;
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+}
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+          background-color: #3e8e41;
+          box-shadow: 0 5px #666;
+          transform: translateY(4px);
+      }
+
+		body {
+            font: 100 1.5em Helvetica, Arial, sans-serif;
+
+            background-color: #52707A;
+		}
+		article {
+			width: 650px;
+			margin: auto;
+		}
+		h1, #htmldog {
+			text-align: center;
+            color: #0000ff;
+		}
+        h3, #htmldog {
+			text-align: center;
+            color: #003300;
+		}
+        h2, #htmldog {
+			text-align: left;
+            color: #6600cc;
+		}
+	</style>
+</head>
+
+<body>
+
+	<article>
+
+        <form  action="/" method="post">
+
+			<p>
+          {% if btn1 == 'r' %}
+          <input class="button_off" type="submit" name="submit" value="Rainbow Off">
+          {% else %}
+          <input class="button" type="submit" name="submit" value="Rainbow">
+          {%endif %}
+					{% if btn1 == 'w' %}
+					<input class="button_off" type="submit" name="submit" value="White Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="White">
+					{%endif %}
+					{% if btn1 == 's' %}
+					<input class="button_off" type="submit" name="submit" value="Sun Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Sunny">
+					{%endif %}
+					{% if btn1 == 'd' %}
+					<input class="button_off" type="submit" name="submit" value="Disco Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Disco">
+					{%endif %}
+					{% if btn1 == 'f' %}
+					<input class="button_off" type="submit" name="submit" value="Strobe Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Strobe">
+					{%endif %}
+					{% if btn1 == 'p' %}
+					<input class="button_off" type="submit" name="submit" value="Sparkles Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Sparkles">
+					{%endif %}
+					{% if btn1 == 't' %}
+					<input class="button_off" type="submit" name="submit" value="Stars Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Stars">
+					{%endif %}
+					{% if btn1 == 'k' %}
+					<input class="button_off" type="submit" name="submit" value="Larson Off">
+					{% else %}
+					<input class="button" type="submit" name="submit" value="Larson">
+					{%endif %}
+      </p>
+			<p>
+          {% if mote1 == 'on' %}
+					<input type="checkbox" name="motes1" value="on" checked> One
+					{% else %}
+						<input type="checkbox" name="motes1" value="on"> One
+					{% endif %}
+					{% if mote2 == 'on' %}
+					<input type="checkbox" name="motes2" value="on" checked> Two
+					{% else %}
+						<input type="checkbox" name="motes2" value="on"> Two
+					{% endif %}
+					{% if mote3 == 'on' %}
+					<input type="checkbox" name="motes3" value="on" checked> Three
+					{% else %}
+						<input type="checkbox" name="motes3" value="on"> Three
+					{% endif %}
+					{% if mote4 == 'on' %}
+ 					<input type="checkbox" name="motes4" value="on" checked> Four
+ 					{% else %}
+ 						<input type="checkbox" name="motes4" value="on"> Four
+ 					{% endif %} <br>
+
+				<input id="slider1" type="range" min="0" max="255" step="10" name="slider_r" value="{{ slider_r }}"/>
+
+				<em style="color:red;"> Red </em><br/>
+
+				 <input id="slider1" type="range" min="0" max="255" step="10" name="slider_g" value="{{ slider_g }}"/>
+					<em style="color:#11F032;"> Green </em><br/>
+
+					<input id="slider1" type="range" min="0" max="255" step="10" name="slider_b" value="{{ slider_b }}"/>
+					<em style="color:blue;"> Blue </em><br/>
+
+				 {% if btn1 == 'c' %}
+				 <input class="button_off" type="submit" name="submit" value="Manual Off">
+				 {% else %}
+				 <input class="button" type="submit" name="submit" value="Manual">
+				 {%endif %}
+			 <input id="cp" type="color" name="colpick" value="{{picker}}"/>
+			 {% if btn1 == 'z' %}
+			<input class="button_off" type="submit" name="submit" value="Pick Set Off">
+			{% else %}
+			<input class="button" type="submit" name="submit" value="Pick Set">
+			{%endif %}
+
+<br><center>
+
+					{% if btn1 == 'v' %}
+					<input class="button_off" type="submit" name="submit" value="Red Off">
+					{% else %}
+					 <input class="button_red" type="submit" name="submit" value="RED ALERT">
+					{%endif %}
+</center>			</p>
+        </form>
+
+
+	</article>
+
+
+</body>
+
+</html>

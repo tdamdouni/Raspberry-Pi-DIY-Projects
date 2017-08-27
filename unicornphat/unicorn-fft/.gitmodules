@@ -1,0 +1,3 @@
+[submodule "unicorn-hat"]
+	path = unicorn-hat
+	url = https://github.com/pimoroni/unicorn-hat.git

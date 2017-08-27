@@ -1,6 +1,6 @@
 # Beginner’s Guide to Installing Node.js on a Raspberry Pi
 
-_Captured: 2017-08-08 at 17:40 from [thisdavej.com](http://thisdavej.com/beginners-guide-to-installing-node-js-on-a-raspberry-pi/)_
+_Captured: 2017-08-27 at 13:55 from [thisdavej.com](http://thisdavej.com/beginners-guide-to-installing-node-js-on-a-raspberry-pi/)_
 
 > This article has been updated to cover the installation of the latest version of Node at the time of this writing which is Node 8.x.
 
@@ -193,7 +193,7 @@ Our friends at [NodeSource](https://nodesource.com/) host and maintain some exce
 > 
 > If the result returned starts with "armv6", you are running a Raspberry Pi based on the older ARMv6 chipset and the next Node.js installation step will not work; otherwise, you are ready for the next step.
 
-Here we go in the final stretch! Let's proceed with an installation of the latest version of Node at the moment which is Node 8.2.1.
+Here we go in the final stretch! Let's proceed with an installation of the latest version of Node at the moment which is Node 8.4.0.
 
 The previous command updates our Debian apt package repository to include the NodeSource packages.
 

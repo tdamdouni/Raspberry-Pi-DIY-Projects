@@ -1,6 +1,6 @@
 # Tutorial & Review: Enviro pHAT for Raspberry Pi
 
-_Captured: 2017-07-30 at 16:00 from [blog.initialstate.com](http://blog.initialstate.com/tutorial-review-enviro-phat-for-raspberry-pi/)_
+_Captured: 2017-08-26 at 21:37 from [blog.initialstate.com](http://blog.initialstate.com/tutorial-review-enviro-phat-for-raspberry-pi/)_
 
 ![2016-07-26 pHAT enviro Hero](http://blog.initialstate.com/wp-content/uploads/2016/07/2016-07-26-pHAT-enviro-Hero-1024x502.jpg)
 

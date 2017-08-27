@@ -1,6 +1,6 @@
 # Hacking a Raspberry Pi into a wireless airplay speaker
 
-_Captured: 2017-05-01 at 17:27 from [jordanburgess.com](http://jordanburgess.com/post/38986434391/raspberry-pi-airplay)_
+_Captured: 2017-08-19 at 10:31 from [jordanburgess.com](http://jordanburgess.com/post/38986434391/raspberry-pi-airplay)_
 
 **The raspberry pi is fully functional credit card-sized computer that is cheap enough ($25) that it can be used just for a single purpose. With this hack the computer imitates an airplay speaker, making it possible to send songs over to an old stereo wirelessly from your phone.**
 

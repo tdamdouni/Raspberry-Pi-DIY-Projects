@@ -1,0 +1,5 @@
+# Ignore Spyder files
+.spyderproject
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]

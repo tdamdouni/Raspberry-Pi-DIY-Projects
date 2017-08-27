@@ -1,0 +1,31 @@
+version: "2.0"
+services:
+
+  redis:
+    image: alexellis2/redis-arm:v6
+    ports:
+      - 6379/TCP
+    networks:
+      - frontend
+  web:
+    build:
+      context: "./webhook-listener/"
+    networks:
+      - frontend
+    depends_on:
+      - redis
+    ports:
+      - "3000:3000"
+  led_updater:
+    build:
+      context: "./led-updater"
+    networks:
+      - frontend
+    privileged: true
+    depends_on:
+      - redis
+
+networks:
+  frontend:
+    driver: bridge
+

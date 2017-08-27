@@ -1,6 +1,6 @@
 # Getting Started with Raspberry pi and Node.js
 
-_Captured: 2017-08-08 at 18:49 from [thejackalofjavascript.com](http://thejackalofjavascript.com/getting-started-raspberry-pi-node-js/)_
+_Captured: 2017-08-23 at 22:02 from [thejackalofjavascript.com](http://thejackalofjavascript.com/getting-started-raspberry-pi-node-js/)_
 
 Did you know that there will be [6.18 billion devices](https://gigaom.com/2014/02/13/step-aside-6-billion-new-devices-will-connect-to-the-internet-in-2014/) connected to the internet by the end of 2014 and a whooping 19.42 billion devices between 2015 and 2017. Imagine the fight for bandwidth!
 

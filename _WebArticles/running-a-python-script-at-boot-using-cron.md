@@ -1,10 +1,6 @@
 # Running A Python Script At Boot Using Cron
 
-_Captured: 2017-05-06 at 15:57 from [www.raspberrypi-spy.co.uk](http://www.raspberrypi-spy.co.uk/2013/07/running-a-python-script-at-boot-using-cron/)_
-
-![Crontab Example - Python at Boot](http://www.raspberrypi-spy.co.uk/wp-content/uploads/2013/07/crontab_example_02-651x336.png)
-
-There maybe times when you want to run a Python script when your Raspberry Pi boots up. There are a number of different techniques to do this but I prefer the method that uses "cron".
+_Captured: 2017-08-26 at 10:25 from [www.raspberrypi-spy.co.uk](http://www.raspberrypi-spy.co.uk/2013/07/running-a-python-script-at-boot-using-cron/#more-2067)_
 
 Cron is a job scheduler that allows the system to perform tasks at defined times or intervals. It is a very powerful tool and useful in lots of situations. You can use it to run commands or in this case, a Python script.
 
@@ -29,6 +25,8 @@ To create a new job to Cron we will modify the "crontab". This is a table that c
     sudo crontab -e
 
 Each user of the system (ie "pi") can have its own Crontab but in this case we want to add it as an admin so we prefix our "crontab -e" command with "sudo". You should see something that looks like this :
+
+![Crontab Example - Python at Boot](http://www.raspberrypi-spy.co.uk/wp-content/uploads/2013/07/crontab_example_01.png)
 
 Using your cursor keys scroll to the bottom and add the following line :
     

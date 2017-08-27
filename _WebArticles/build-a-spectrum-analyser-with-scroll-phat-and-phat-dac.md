@@ -1,6 +1,6 @@
 # Build a spectrum analyser with Scroll pHAT and pHAT DAC
 
-_Captured: 2017-08-01 at 07:15 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/scroll-phat-spectrum-analyser)_
+_Captured: 2017-08-27 at 14:03 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/scroll-phat-spectrum-analyser)_
 
 ![Spectrum analyser](https://learn.pimoroni.com/static/repos/learn/sandyj/spectrum-analyser-3.jpg)
 

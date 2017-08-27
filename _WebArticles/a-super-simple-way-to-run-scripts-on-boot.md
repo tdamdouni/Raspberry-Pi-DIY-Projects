@@ -1,6 +1,6 @@
 # A super-simple way to run scripts on boot
 
-_Captured: 2017-08-14 at 09:56 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/running-scripts-at-boot)_
+_Captured: 2017-08-26 at 11:57 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/sandyj/running-scripts-at-boot)_
 
 Here's a super-simple way to run scripts automatically on boot on your Raspberry Pi, using cron, that you can have up and running in literally a few seconds.
 
