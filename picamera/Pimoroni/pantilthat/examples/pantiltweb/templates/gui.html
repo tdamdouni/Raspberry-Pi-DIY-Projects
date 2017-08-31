@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="charset" value="utf-8">
+        <title>PanTilt HAT</title>
+        <style type="text/css">
+            .main {
+                width:220px;
+                height:220px;
+                background:#F0F0F0;
+                position:relative;
+            }
+            .main ul, .main li {
+                list-style:none;
+                margin:0;
+                padding:0;
+            }
+            .main li {
+                width:50px;
+                height:50px;
+                border:5px outset #DDDDDD;
+                background:#CCCCCC;
+                position:absolute;
+                cursor:pointer;
+                line-height:50px;
+                text-align:center;
+            }
+            .main .up {left:50%;margin-left:-35px;}
+            .main .down {left:50%;bottom:0;margin-left:-35px;}
+            .main .left {top:50%;margin-top:-35px;}
+            .main .right {top:50%;right:0;margin-top:-35px;}
+        </style>
+    </head>
+    <body>
+        <h1>Pan Tilt HAT: Web Interface</h1>
+
+        <div class="main">
+            <ul>
+                <li class="up" data-action="tilt:-1">Up</li>
+                <li class="down" data-action="tilt:+1">Down</li>
+                <li class="left" data-action="pan:+1">Left</li>
+                <li class="right" data-action="pan:-1">Right</li>
+            </ul>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            var current_pan = 90;
+            var current_tilt = 90;
+            var pantilt_speed = 60; // Delay between increments in ms
+
+            var interval = null;
+            var current_direction = null;
+            var current_angle = null;
+
+            $(function(){
+                $(window).on('keydown',function(e){
+                    clearInterval(interval);
+
+                    switch(e.keyCode){
+                        case 38: // Arrow Up
+                            current_direction = 'tilt';
+                            current_angle = 1;
+                            interval = setInterval(pantilt,pantilt_speed);
+                            break;
+                        case 40: // Arrow Down
+                            current_direction = 'tilt';
+                            current_angle = -1;
+                            interval = setInterval(pantilt,pantilt_speed);
+                            break;
+                        case 37: // Arrow Left
+                            current_direction = 'pan';
+                            current_angle = 1;
+                            interval = setInterval(pantilt,pantilt_speed);
+                            break;
+                        case 39: // Arrow Right
+                            current_direction = 'pan';
+                            current_angle = -1;
+                            interval = setInterval(pantilt,pantilt_speed);
+                            break;
+                    }
+                });
+                $(window).on('keyup',function(e){clearInterval(interval)});
+                $('.main').on('mousedown','li',function(e){
+                   e.preventDefault();
+                   clearInterval(interval);
+
+                   var obj = $(this);
+                   var action = obj.data('action');
+                   current_direction = action.split(':')[0];
+                   current_angle = parseInt(action.split(':')[1]);
+
+                   interval = setInterval(pantilt,pantilt_speed);
+               })
+               .on('mouseup','li',function(e){
+                   clearInterval(interval);
+               });
+
+               function pantilt(){
+                   var angle = 0;
+
+                   if(current_direction == 'pan'){
+                       current_pan += current_angle;
+                       if(current_pan < 0) current_pan = 0;
+                       if(current_pan > 180) current_pan = 180;
+                       angle = current_pan;
+                   }
+
+                   if(current_direction == 'tilt'){
+                       current_tilt += current_angle;
+                       if(current_tilt < 0) current_tilt = 0;
+                       if(current_tilt > 180) current_tilt = 180;
+                       angle = current_tilt;
+                   }
+
+                   $.get('/api/' + current_direction + '/' + angle); 
+                }
+            });
+        </script>
+    </body>
+</html>

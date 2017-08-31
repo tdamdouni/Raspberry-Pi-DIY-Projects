@@ -1,0 +1,17 @@
+- action:
+  - data: {}
+    service: python_script.pan_slider
+  alias: Pan Automation
+  condition: []
+  id: '1503933026472'
+  trigger:
+  - entity_id: input_slider.pan_control
+    platform: state
+- action:
+  - service: python_script.tilt_slider
+  alias: Tilt Automation
+  condition: []
+  id: '1503936125604'
+  trigger:
+  - entity_id: input_slider.tilt_control
+    platform: state

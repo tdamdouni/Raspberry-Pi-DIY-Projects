@@ -1,0 +1,6 @@
+'1503899567501':
+  sequence:
+  - alias: home-pan-tilt
+    data: {}
+    service: pan_tilt_phat.home
+  alias: home-pan-tilt
