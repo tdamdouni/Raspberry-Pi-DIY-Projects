@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '4'
+deploy:
+  provider: npm
+  email: work@denwilliams.net
+  on:
+    tags: true
+    repo: denwilliams/envirophat-mqtt
+  api_key:
+    secure: RNkPQXw8InWhdExSvkaXAU7b87PfE4qcYj415iMyRQTxE3FjQpdIOwGEffdzql8whMum/49I6lKWI38aD1j94OorGz7sY/RMh8m0aqbEAk5EohDX/nF16Uw+C1Tdqns34JqHQg/Wjj+RE+vbNh3uhp+nh2miZeBDdlU4cFCGLh/AIA7py1A7pQqH2B7zaYtb22JcZf0joCdC0i9Ko9bR0P/JBeoL4UJFk8Ej1KirfjnO3nK/IDUftZAgbEDlMHmMEfDKwna9260mFDYspWOokJu5H/Woj6uWEWAMGqZHWennYsFUD3DaNcoykOCQA8zTsTRHzXulr5aXfcPPgts6tUAdQ+OvKWpi51s/tOn/xedrrmZRCht/xJkPv5I6OUo4iZWe2JriV8mZ52m5g0Ms/udRbiOd2wXFQWDOqYY0PQ/GlDPPl+FKtZG6JQRhBFywbjleXAj+xsSMl60vtiIEXR43BjbT1bJTiN6Sp0Of0U0qn7wwE1jAMyAZQjTkVb5Ciobigo5NpOyC445BHuWotySlrWC/RunvudAL3cX/kgwingM7eIUd1i0QLeGoUcFRZWV27cUm1TLb4Nh4QjdeHJGuyS8yFHTyM2dtDziN5nhbtJgaKO04vgF95ggkMJabJpjVtAaIyECS8UuKkVzcZRAB3PMj0R7CVc6dEYnU2gE=

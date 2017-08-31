@@ -1,0 +1,29 @@
+{
+  "name": "envirophat-mqtt",
+  "description": "Publish sensor updates from Enviro pHat to MQTT",
+  "version": "1.0.2",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "envirophat-mqtt": "./bin/envirophat-mqtt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denwilliams/envirophat-mqtt.git"
+  },
+  "author": "Den Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denwilliams/envirophat-mqtt/issues"
+  },
+  "homepage": "https://github.com/denwilliams/envirophat-mqtt#readme",
+  "dependencies": {
+    "loke-config": "^2.0.1",
+    "moving-average": "^0.1.1",
+    "mqtt": "^2.8.0",
+    "node-raspi": "^1.0.1",
+    "python-shell": "^0.4.0"
+  }
+}

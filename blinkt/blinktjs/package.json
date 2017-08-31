@@ -1,0 +1,30 @@
+{
+  "name": "blinktjs",
+  "version": "0.8.1",
+  "description": "Node.js class for the Pimoroni Blinkt!",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinkkis/blinktjs.git"
+  },
+  "keywords": [
+    "node",
+    "pimoroni",
+    "blinkt",
+    "neopixel",
+    "rgb",
+    "led"
+  ],
+  "dependencies": {
+    "wiring-pi": "2.1.1"
+  },
+  "author": "Kristian Koivisto-Kokko <pinkkis@gmail.com> (http://pinkkis.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinkkis/blinktjs/issues"
+  },
+  "homepage": "https://github.com/pinkkis/blinktjs#readme"
+}

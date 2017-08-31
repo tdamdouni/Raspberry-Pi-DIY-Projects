@@ -1,0 +1,9 @@
+---
+
+mqtt:
+  host: localhost
+  topic: envirophat/sensor
+temperature:
+  factor: 1.2
+interval:
+  duration: 60000
