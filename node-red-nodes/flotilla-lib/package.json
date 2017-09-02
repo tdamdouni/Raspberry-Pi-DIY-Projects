@@ -1,0 +1,21 @@
+{
+    "name"          : "pimoroni-flotilla",
+    "version"       : "0.0.3",
+    "description"   : "Library to talk to Pimoroni Flotilla",
+    "dependencies"  : {
+        "serialport"   : "~4.0.1",
+	"object.assign": "^4.0.3"
+    },
+    "main": "./lib/index.js",
+    "repository" : {
+        "type":"git",
+        "url":"https://github.com/pimoroni/node-red-nodes/tree/master/flotilla/flotilla"
+    },
+    "license": "Apache-2.0",
+    "keywords": [ "pimoroni", "flotilla" ],
+    "author": {
+        "name": "Philip Howard",
+        "email": "phil@pimoroni.com",
+        "url": "http://pimoroni.com"
+    }
+}

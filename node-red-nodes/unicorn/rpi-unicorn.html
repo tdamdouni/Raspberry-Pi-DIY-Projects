@@ -1,0 +1,54 @@
+<!--
+  Copyright 2016 Pimoroni Ltd
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType("rpi-unicorn out",{
+        category: "Raspberry Pi",
+        paletteLabel: "Unicorn (p)HAT",
+        color: '#c6dbef',
+        defaults: {
+            name: { value: "" },
+        },
+        inputs:1,
+        outputs:0,
+        icon:  "rpi.png",
+        label: function() {
+            return this.name||"Unicorn (p)HAT";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+</script>
+
+<script type="text/x-red" data-template-name="rpi-unicorn out">
+<div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name">
+</div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-unicorn out">
+<p>Raspberry Pi Unicorn HAT/pHAT output node.</p>
+<p>This node controls the 32 or 64 RGB, WS2812 LEDs on the Pimoroni Unicorn pHAT or HAT boards.</p>
+
+<p><b>Set A Pixel</b></p>
+<p>To set a pixel to a particular colour, you should send Unicorn a message with the topic <code>pixel.&lt;x&gt;.&lt;y&gt;</code> and the payload <code>&lt;red&gt;,&lt;green&gt;,&lt;blue&gt;</code></p>
+<p>For example, to set the first pixel to red, you would send:<p>
+<p>Topic: <code>pixel.0.0</code>, Payload: <code>255,0,0</code></p>
+</script>
+

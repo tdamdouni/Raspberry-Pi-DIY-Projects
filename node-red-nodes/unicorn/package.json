@@ -1,0 +1,23 @@
+{
+    "name"          : "node-red-contrib-unicornhat",
+    "version"       : "0.0.1",
+    "description"   : "Node-RED nodes to talk to Pimoroni Unicorn HAT",
+    "dependencies"  : {},
+    "repository" : {
+        "type":"git",
+        "url":"https://github.com/pimoroni/node-red-nodes/tree/master/unicornhat"
+    },
+    "license": "Apache-2.0",
+    "keywords": [ "node-red", "Unicorn HAT" ],
+    "node-red": {
+        "version": ">=0.13.0",
+        "nodes": {
+            "flotilla": "rpi-unicorn.js"
+        }
+    },
+    "author": {
+        "name": "Philip Howard",
+        "email": "phil@pimoroni.com",
+        "url": "http://pimoroni.com"
+    }
+}

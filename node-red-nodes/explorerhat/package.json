@@ -1,0 +1,23 @@
+{
+    "name"          : "node-red-contrib-explorerhat",
+    "version"       : "0.0.1",
+    "description"   : "Node-RED nodes to talk to Pimoroni Explorer HAT",
+    "dependencies"  : {},
+    "repository" : {
+        "type":"git",
+        "url":"https://github.com/pimoroni/node-red-nodes/tree/master/explorerhat"
+    },
+    "license": "Apache-2.0",
+    "keywords": [ "node-red", "Explorer HAT" ],
+    "node-red": {
+        "version": ">=0.13.0",
+        "nodes": {
+            "flotilla": "rpi-explorerhat.js"
+        }
+    },
+    "author": {
+        "name": "Philip Howard",
+        "email": "phil@pimoroni.com",
+        "url": "http://pimoroni.com"
+    }
+}
