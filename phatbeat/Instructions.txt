@@ -1,0 +1,24 @@
+From the terminal window do the following:
+sudo apt-get update
+sudo apt-get install libusb-dev
+git clone https://github.com/walac/pyusb
+cd pyusb
+sudo python3 setup.py install
+
+Now copy the PRRC.py to the Pi folder at the top of the directry tree, same place you've been putting the THP.py sense hat file.
+Then from the terminal window run sudo crontab -e, and add the following line to the end of it.
+
+@reboot sleep 15;sudo python3 /home/pi/PRRC.py &
+ctrl x and save.
+
+I had to put a 15 second delay so that it doesn't run until after the all the pHat Beat VLC radio stuff loads. 
+You'l hear a couple of seconds of music then a second or two of garbled sound, thats my file loading.
+Once the sound goes back to normal your remote should work.
+
+The Red power button will shut the Pi down.
+The buttons with the speaker + - are Volume up down.
+The pause is pause, I thnk you what button that is. This is basically your mute button. I may actuall add a seperat mute function down the road.
+The two button just above pause with the double triangles are the next station, prevouse station.
+I matched the symbols on the remotes buttons to what is maarked on the pHat Beat.
+
+EDIT, had to change sudo nanao crontab -e to sudo crontab -e 
