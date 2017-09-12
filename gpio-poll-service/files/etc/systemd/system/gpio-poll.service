@@ -1,0 +1,25 @@
+# --------------------------------------------------------------------------
+# Systemd service Definition for gpio-poll.service.
+#
+# The service just starts the script /usr/local/sbin/gpio-poll.py.
+#
+# Please edit /etc/gpio-poll.conf to configure the GPIO to monitor
+# and the script to be started.
+#
+# Author: Bernhard Bablok
+# License: GPL3
+#
+# Website: https://github.com/bablokb/gpio-poll-service
+#
+# --------------------------------------------------------------------------
+
+[Unit]
+Description=Monitor GPIO pin and execute script on interrupt
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/gpio-poll.py
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,47 @@
+#!/bin/bash
+# --------------------------------------------------------------------------
+# Sample script for gpio-poll.service
+#
+# This script initiates or cancels shutdown and notifies the desktop user.
+#
+# Required packages: libnotify-bin, notification-daemon
+#
+# You should copy this script to /usr/local/sbin and
+# add the following configuration to /etc/gpio-poll.conf (configure to your taste)
+#
+# [GLOBAL]
+# gpios: 27
+#
+# [GPIO27]
+# active_low: 1
+# edge: both
+# command: /usr/local/sbin/gpio-shutdown
+#
+# --------------------------------------------------------------------------
+# Author: Bernhard Bablok
+# License: GPL3
+#
+# Website: https://github.com/bablokb/gpio-poll-service
+# --------------------------------------------------------------------------
+
+# First argument is GPIO pin number, second argument is value
+# For this application we only need the value
+gpio="$1"
+value="$2"
+
+# some constants, change as needed
+DESKTOP_USER=$(ps -C "notification-daemon" --no-headers -o "%U")
+MESSAGE_1="no AC: shutdown in 3 minutes! Please close open files!"
+MESSAGE_0="AC available again: shutdown cancelled!"
+
+# environment
+export DISPLAY=":0.0"
+export XAUTHORITY="/home/$DESKTOP_USER/.Xauthority"
+
+if [ "$value" -eq 1 ]; then
+  su - $DESKTOP_USER -c 'notify-send -u critical "$MESSAGE_1"'
+  shutdown +3
+else
+  su - $DESKTOP_USER -c 'notify-send -u normal "$MESSAGE_0"'
+  shutdown -c
+fi
