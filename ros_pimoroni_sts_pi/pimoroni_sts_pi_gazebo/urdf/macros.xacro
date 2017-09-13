@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot>
+  <!--macro name="cylinder_inertia" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+      iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+      izz="${m*r*r/2}"
+    />
+  </macro>
+
+  <macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+      iyy="${m*(x*x+z*z)/12}" iyz = "0"
+      izz="${m*(x*x+z*z)/12}"
+    />
+  </macro>
+
+  <macro name="sphere_inertia" params="m r">
+    <inertia  ixx="${2*m*r*r/5}" ixy = "0" ixz = "0"
+      iyy="${2*m*r*r/5}" iyz = "0"
+      izz="${2*m*r*r/5}"
+    />
+  </macro>
+
+
+
+
+
+
+
+  <macro name="wheel" params="lr tY">
+
+    <link name="${lr}_wheel">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+        <geometry>
+          <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+        <geometry>
+          <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}" />
+        <mass value="${wheelMass}"/>
+        <cylinder_inertia m="${wheelMass}" r="${wheelRadius}" h="${wheelWidth}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="${lr}_wheel">
+      <mu1 value="1.0"/>
+      <mu2 value="1.0"/>
+      <kp  value="10000000.0" />
+      <kd  value="1.0" />
+      <fdir1 value="1 0 0"/>
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+
+    <joint name="${lr}_wheel_hinge" type="continuous">
+      <parent link="chassis"/>
+      <child link="${lr}_wheel"/>
+    <origin xyz="${-wheelPos+chassisLength/2} ${tY*wheelWidth/2+tY*chassisWidth/2} ${wheelRadius}" rpy="0 0 0" />
+      <axis xyz="0 1 0" rpy="0 0 0" />
+      <limit effort="10000" velocity="10000"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+
+    <transmission name="${lr}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${lr}_wheel_hinge">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${lr}Motor">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>10</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </macro-->
+
+
+
+
+
+</robot>

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+GPIOA=17
+GPIOA_title="D1"
+GPIOB=27
+GPIOB_title="D2"
+
+test -e /sys/class/gpio/gpio$GPIOA || (echo $GPIOA > /sys/class/gpio/export && echo in > /sys/class/gpio/gpio$GPIOA/direction)
+test -e /sys/class/gpio/gpio$GPIOB || (echo $GPIOB > /sys/class/gpio/export && echo in > /sys/class/gpio/gpio$GPIOB/direction)
+valA=$(cat /sys/class/gpio/gpio$GPIOA/value)
+valB=$(cat /sys/class/gpio/gpio$GPIOB/value)
+
+if [ "$valA" == "1" ]; then
+    GPIOA_text="SHUT"
+else
+    GPIOA_text="OPEN"
+fi
+
+if [ "$valB" == "1" ]; then
+    GPIOB_text="SHUT"
+else
+    GPIOB_text="OPEN"
+fi
+echo "$GPIOA_title:$GPIOA_text - $GPIOB_title:$GPIOB_text"
+echo 1 1>&2

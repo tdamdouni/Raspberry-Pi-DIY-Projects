@@ -1,0 +1,10 @@
+<launch>
+<arg name="robot" default="pimoroni_sts_pi1" />
+<arg name="ip_address" default="192.168.1.107" />
+<group ns="$(arg robot)">
+  <node pkg="pimoroni_sts_pi" type="pimoroni_sts_pi.py" args="-i $(arg ip_address)" name="driver" required="true" output="screen">
+   </node>
+   <!--<node pkg="pimoroni_sts_pi" type="pimoroni_sts_pi_ultrasonic.py" args="-i $(arg ip_address)" name="driver2" required="true" output="screen">
+   </node>-->
+</group>
+</launch>

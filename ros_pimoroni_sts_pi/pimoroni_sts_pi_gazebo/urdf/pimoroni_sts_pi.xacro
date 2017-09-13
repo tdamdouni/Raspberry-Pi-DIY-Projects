@@ -1,0 +1,250 @@
+<?xml version='1.0'?>
+
+<robot name="myrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+
+  <xacro:include filename="$(find pimoroni_sts_pi_gazebo)/urdf/pimoroni_sts_pi.gazebo" />
+  <xacro:include filename="$(find pimoroni_sts_pi_gazebo)/urdf/materials.xacro" />
+  <xacro:include filename="$(find pimoroni_sts_pi_gazebo)/urdf/macros.xacro" />
+
+  <xacro:property name="M_PI" value="3.1415926535897931" /> 
+<!--
+<macro name="cylinder_inertia" params="m r h">
+  <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+    iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+    izz="${m*r*r/2}"
+  />
+</macro>
+-->
+
+    <link name="chassis"/>
+    <!--
+       Base link is set at the bottom of the base mould.
+       This is done to be compatible with the way base link
+       was configured for turtlebot 1. Refer to
+       
+       https://github.com/turtlebot/turtlebot/issues/40
+       
+       To put the base link at the more oft used wheel
+       axis, set the z-distance from the base_footprint
+       to 0.352.
+      -->
+    <joint name="base_joint" type="fixed">
+      <origin xyz="0.03 0 -0.024" rpy="0 0 0" />
+      <parent link="chassis"/>
+      <child link="chassis2" />
+    </joint>
+
+  <link name='chassis2'>
+    <pose>0 0.0 0.0 0.0 0 0</pose>
+    <joint name="base_joint" type="fixed">
+      <origin xyz="0 0 0.0102" rpy="0 0 0" />
+      <parent link="chassis2"/>
+      <child link="base_link" />
+    </joint>
+    <inertial>
+      <mass value="0.277"/>
+        <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+      <inertia
+          ixx="0.00032" ixy="0.00" ixz="0.00"
+          iyy="0.00032" iyz="0.00"
+          izz="0.00064"
+      />
+    </inertial>
+
+    <collision name='collision'>
+        <origin xyz="-0.03 0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".048 .11 .005"/>
+      </geometry>
+   </collision>
+    <collision name='collision2'>
+        <origin xyz="0.015 0.0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".041 .075 .005"/>
+      </geometry>
+    </collision>
+    <collision name='collision3'>
+        <origin xyz="0.056 0.0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".041 .055 .005"/>
+      </geometry>
+    </collision>
+    <collision name='collision4'>
+        <origin xyz="0.06 0.0 0.016" rpy="0 0 0"/>
+      <geometry>
+        <box size=".012 .012 .012"/>
+      </geometry>
+    </collision>
+    <collision name='collision5'>
+        <origin xyz="-0.008 0.0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <box size=".085 .05 .01"/>
+      </geometry>
+    </collision>
+
+
+
+    <visual name='chassis_visual'>
+        <origin xyz="-0.03 0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".048 .11 .005"/>
+      </geometry>
+    </visual>
+
+    <visual name='chassis_visual2'>
+        <origin xyz="0.015 0.0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".041 .075 .005"/>
+      </geometry>
+    </visual>
+   <visual name='chassis_visual3'>
+        <origin xyz="0.056 0.0 0.024" rpy="0 0 0"/>
+      <geometry>
+        <box size=".041 .055 .005"/>
+      </geometry>
+    </visual>
+
+    <visual name='chassis_visualfront'>
+        <origin xyz="0.06 0.0 0.016" rpy="0 0 0"/>
+      <geometry>
+        <box size=".012 .012 .012"/>
+      </geometry>
+    </visual>
+
+    <visual name='chassis_pi'>
+        <origin xyz="-0.008 0.0 0.03" rpy="0 0 0"/>
+      <geometry>
+        <box size=".085 .05 .01"/>
+      </geometry>
+    </visual>
+
+<!--
+    <sensor name="laser" type="ray">
+        <pose>0.01 0 0.03 0 -0 0</pose>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1</resolution>
+              <min_angle>-2.26889</min_angle>
+              <max_angle>2.268899</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.08</min>
+            <max>10</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+       <plugin name="laser" filename="libRayPlugin.so" />
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+-->
+  </link>
+
+
+  <joint type="continuous" name="left_wheel_hinge">
+     <origin xyz="-0.03 0.075 0.024" rpy="${-M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+     <child link="left_wheel"/>
+    <parent link="chassis2"/>
+
+  </joint>
+  <link name="left_wheel">
+
+    <collision name="collision">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+        <cylinder length="0.02" radius="0.024"/>
+       </geometry>
+
+   </collision>
+    <visual name="left_wheel_visual">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+        <cylinder length="0.02" radius="0.024"/>
+       </geometry>
+    </visual>
+    <inertial>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <mass value="0.022" />
+
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+                 iyy="0.00001" iyz="0.0" 
+                 izz="0.00001" />
+    </inertial>
+  </link>
+
+  <joint type="continuous" name="right_wheel_hinge">
+      <origin xyz="-0.03 -0.075 0.024" rpy="${-M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    <child link="right_wheel"/>
+    <parent link="chassis2"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  <link name="right_wheel">
+    <collision name="collision">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+         <cylinder length="0.02" radius="0.024"/>
+      </geometry>
+    </collision>
+    <visual name="right_wheel_visual">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+         <cylinder length="0.02" radius="0.024"/>
+      </geometry>
+    </visual>
+    <inertial>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <mass value="0.022" />
+
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+                 iyy="0.00001" iyz="0.0" 
+                 izz="0.00001" />
+    </inertial>
+  </link>
+
+  <joint type="continuous" name="front_wheel_hinge">
+      <origin xyz="0.06 0.00 0.006" rpy="${-M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    <child link="front_wheel"/>
+    <parent link="chassis2"/>
+   <!-- <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>-->
+  </joint>
+  <link name="front_wheel">
+    <collision name="collision">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+         <sphere radius="0.006"/>
+         <!--<cylinder length="0.006" radius="0.006"/>-->
+      </geometry>
+    </collision>
+    <visual name="right_wheel_visual">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+     <geometry>
+         <!--<cylinder length="0.006" radius="0.006"/>-->
+         <sphere radius="0.006"/>
+      </geometry>
+    </visual>
+    <inertial>
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+         <mass value="0.006" />
+
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0"
+                 iyy="0.00001" iyz="0.0" 
+                 izz="0.00001" />
+    </inertial>
+  </link>
+</robot>
