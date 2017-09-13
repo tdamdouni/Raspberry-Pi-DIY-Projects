@@ -1,0 +1,22 @@
+This node shows how to use coroutines together with the 
+connect/input/disconnect events to build session based
+interactions for telnet connections.
+
+How to test: 
+ * Start info-beamer
+
+   $ ../../info-beamer .
+
+ * Telnet to localhost:4444 and connect to this 
+   parrot node.
+
+   $ telnet localhost 4444
+   Info Beamer ... Select your channel!
+   parrot
+   ok!
+   I will repeat everything you send me
+   hello
+   hello
+
+Image source: 
+http://openclipart.org/detail/164251/blue-macaw-by-luchapress

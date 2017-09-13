@@ -1,0 +1,435 @@
+Version 0.9.8-beta [2017-08-14] https://info-beamer.com/lnk/0.9.8
+
+ * Updated luajit to v2.1 beta3
+ * resource.open_file now accepts an 'openfile' object
+   as argument. This is essentially the same as calling
+   filename_argument:copy()
+ * load_image now has an additional 'nearest' option
+   to use GL_NEAREST sampling instead of GL_LINEAR.
+ * POTENTIAL INCOMPATIBILITY:
+   'type' now returns the proper type name for all
+   info-beamer objects instead of the previous 'userdata'
+   response. If you have relied upon the 'userdata'
+   value, you'll have to update your code.
+
+Version 0.9.7-beta [2017-04-05] https://info-beamer.com/lnk/0.9.7
+
+ * Fixed support for kernel > 4.4. No more "cannot read
+   serial" errors.
+ * Raw videos can still be modified if playback was
+   completed.
+ * Allow 'node.alias "*"' that will let the node
+   catch all incoming packets.
+ * Show a warning if the filesystem of the node is not
+   a supported filesystem (like e.g. NFS).
+ * Warn about the known HDMI/audio firmware bug.
+   See README.txt
+
+Version 0.9.6-beta [2016-07-25] https://info-beamer.com/lnk/0.9.6
+
+ * Updated luajit to 972a1a4c. This update solves a
+   problem introduced in mid may which is fixed in
+   c98660c8.
+
+Version 0.9.5-beta [2016-07-18] https://info-beamer.com/lnk/0.9.5
+
+ * added node.make_nested() which enables notifications
+   of child node content/child activity using the
+   content_update, content_remove, child_update and
+   child_remove events. It also enables loading of
+   resources in nested folders.
+ * Added utility function util.noglobals() which,
+   once called, prevents reading and writing of
+   undefined global variables.
+ * More debug information in log level 3/4.
+ * Fixed minimal flickering that sometimes occured
+   when starting info-beamer.
+ * os.time() now returns the unix timestamp as a
+   floating point value with millisecond precision.
+ * Better explanation when info-beamer gets stuck.
+   This can be used to detect if the pi firmware
+   crashed and a system reboot is required.
+ * Added experimental INFOBEAMER_GLOBAL_VSYNC
+ * Added :source / :alpha to raw_videos
+ * shader uniform values can be booleans.
+ * Added IPv6 support. By default info-beamer will
+   listen to 127.0.0.1 and ::1.
+ * Fixed a bug that might sometimes result in wrong
+   arguments given to gl.rotate/scale/transform if
+   the lua jit compiler inlined those functions.
+ * POTENTIAL INCOMPATIBILITY:
+   info-beamer now detects files and directories
+   in a defined order: directories sorted
+   by name, all files except node.lua sorted by
+   filename and finally node.lua.
+   This change shouldn't have any impact on your
+   code, as the order in which files where detected
+   was previously random, so relying on a specific
+   order would be a bug anyway.
+
+Version 0.9.4-beta [2015-11-30] https://info-beamer.com/lnk/0.9.4
+
+ * Added versions for both raspbian jessie and
+   raspbian wheezy.
+ * Added resource tracking to make it easier to
+   find object leaks. To see the loaded object list
+   send info-beamer a SIGUSR1 signal.
+ * Added back hardware accelerated jpeg decoding.
+   By default it is only enabled on the PI1 for
+   larger baseline JPEGs. You can use
+   INFOBEAMER_HW_JPEG to force or disable this
+   feature. See info-beamer -h
+ * Fixed raw video playback not starting when
+   using audio.
+ * Fixed a problem for some video files that
+   got temporarily stuck when auto looping them.
+ * Downsample audio to stereo. Previously some
+   audio formats wouldn't properly play. This adds
+   a new runtime dependency, that probably already
+   installed. See README.txt (Installation) for
+   details. In the future real support for more
+   than 2 channels will be added.
+ * stack tracebacks now include documentation links
+   for info-beamer builtins.
+ * Disable keyboard input so starting in the
+   background from a shell (using &) works now.
+   Note that starting info-beamer that way is probably
+   not a good idea. To run info-beamer have a
+   look at https://info-beamer.com/lnk/running
+ * Video size is now determined by the decoder.
+   Playing streamed video content now works better
+   since the size often isn't available when
+   starting to read a stream.
+ * Added experimental features that might improve
+   texture uploading. See info-beamer -h
+
+Version 0.9.3-beta [2015-09-21] https://info-beamer.com/lnk/0.9.3
+
+ * Fixed a bug in the video pipeline. Pausing and
+   restarting a video now pauses audio.
+ * added *query/*nodes tcp command to query loaded
+   nodes. Requires INFOBEAMER_CMD_NODES to be set,
+   otherwise the returned list is empty.
+ * Added support for multiple displays. You can now
+   use INFOBEAMER_TARGET_D=lcd to output to a DSI
+   connected display (like the official RPi display).
+   Or INFOBEAMER_TARGET_D=tv to display on HDMI
+   even if a DSI display is connected.
+
+Version 0.9.2-beta [2015-08-27] https://info-beamer.com/lnk/0.9.2
+
+ * Fixed a precision problem that occured when info-beamer
+   was running for a long time. Visualizations should now
+   be smooth no matter how long they are running.
+ * Slightly improved font rendering performance.
+ * You can now use tvservice -o / tvservice -p to
+   turn the screen off while info-beamer is running.
+   It will try to restore the output once you turn
+   the screen back on. This only works when the
+   resolution stays the same.
+
+Version 0.9.1-beta [2015-06-28] https://info-beamer.com/lnk/0.9.1
+
+ * Fixed video playback error that might lead to info-beamer
+   getting stuck.
+
+Version 0.9.0-beta [2015-06-11] https://info-beamer.com/lnk/0.9.0
+
+ * Reworked the video subsystem. It now supports
+   starting paused (so preloading videos and then
+   running them at an exact time is possible now).
+ * Videos now support seamless looping.
+ * Added a way to play video completely outside
+   of the normal OpenGL pipeline. This can be
+   used for a perfectly smooth playback for FullHD
+   videos. Learn more about this feature at
+   https://info-beamer.com/lnk/rawvideo
+ * info-beamer now uses a new way to hide the background
+   behind the output generated by info-beamer. This might
+   free up resources and memory bandwidth for complicated
+   setups. See https://info-beamer.com/lnk/blank
+   If you want to restore the previous behaviour, use
+   INFOBEAMER_BLANK_MODE=layer
+ * Exposed the luajit compiler. So you can use
+   info-beamer to precompile your node.lua into
+   binary bytecode without installing luajit.
+ * The "connect" event provides the optional node
+   suffix provided when connecting as a second
+   argument now. So you can dispatch to different
+   endpoints in the "connect" event.
+ * It is now possible to disconnect TCP clients
+   from within lua using node.client_disconnect.
+ * All functions that previously required a filename
+   argument now also accept the new openfile object.
+   Those objects capture a file when they are created.
+   Later using that openfile object when loading a
+   resource will still work even if the underlying
+   file was deleted from the filesystem.
+   See https://info-beamer.com/lnk/openfile
+ * Show more debug information when print'ing objects.
+ * info-beamer now by default binds to 127.0.0.1
+   instead of 0.0.0.0. So by default your info-beamer
+   process is not reachable over the network. Use
+   INFOBEAMER_ADDR=0.0.0.0 to restore the previous
+   behaviour.
+ * Support GLSL shader arrays. Tables with 2-4
+   elements are still available as vec{2|3|4}. Tables
+   with more elements (up to 1024) as available
+   as an array. Note that you don't have to send an
+   unchanged array each frame. Values persist between
+   frames.
+ * Images and GL videos can now display subareas of
+   their texture using the draw call. Four optional
+   additional parameters specify the top-left and
+   bottom-right corner. Default is 0, 0, 1, 1 which
+   draws the complete texture:
+   image:draw(0, 0, WIDTH, HEIGHT, 1, 0, 0, 1, 1)
+ * gl.perspective takes two optional parameters that
+   can be used to create a perspective projection that
+   isn't centered on the screen.
+ * Added support for OSC bundle messages and the
+   OSC string data type.
+ * Rotate through log levels using SIGUSR2
+ * require will now also try to load modules from the
+   file luabundle.zip. You can use this file to
+   store required modules so they don't pollute
+   the filesystem. Nested directories are supported
+   inside the zip, so you can use standard module
+   layout.
+ * Allow empty node alias. The node with the empty
+   alias will get all messages/connections that don't
+   match any other node path/alias.
+ * Added os.time/os.date functions. Using them is
+   discouraged. For testing and better timezone
+   support it is almost always better to externally
+   provide time using info-beamers great scriptability.
+ * POTENTIAL INCOMPATIBILITY:
+   Unified the vertical orientation of almost all
+   textures, so inside shaders 0, 0 is now actually in
+   the top left corner. If you have previously used
+   shaders you might have to change the way you use
+   TexCoord.y. Contact me if you need help with that.
+
+Version 0.8.3-beta [2015-03-05] https://info-beamer.com/lnk/0.8.3
+
+ * Now uses libjpeg-turbo. This will result in faster
+   load times for JPEG files on all PI versions. On the
+   new Pi 2, it will use NEON instructions to speed things
+   up even more.
+ * Video playback now uses two buffers by default to
+   prevent screen tearing. This increases the amount
+   of GPU memory required to play back videos. So the
+   recommended minimum GPU memory is now 192MB. Please
+   see README.txt on how to set the reserved memory size.
+   If you want the old behaviour back, you can set
+   INFOBEAMER_NO_VIDEO_DOUBLEBUFFER=1
+ * Now detects pressed keys while the program is running.
+   Hitting escape (while the terminal that is running
+   info-beamer still has focus) now quits info-beamer.
+ * Added INFOBEAMER_SWAP_INTERVAL. This allows you to
+   control at which screen refresh rate interval the
+   current surface is blit to the screen. See the
+   release link above for more information.
+ * Added an endless loop/stuck detection. Once detected,
+   info-beamer will try to get a traceback, so you know
+   where to fix the problem. The info-beamer process
+   will then terminate with an error.
+ * Added the ability to export the embedded userlib.lua,
+   so you can see what's going on. Use the new command
+   line ./info-beamer -d userlib.lua to export it.
+   See the embedded comments for more information on
+   what you can do with it.
+ * Added bit module support. See http://bitop.luajit.org/
+ * New pretty printer for debugging. Example output: pp(_G)
+ * util.auto_loader now embraces async loading: It only
+   updates the target value once the resource is loaded.
+   So when you use rename to atomically move in a new
+   image, the previously loaded image will remain available
+   while the new image is being loaded. During initial
+   loading of an async resource a dummy transparent pixel
+   is provided.
+ * Fixed a crash bug that was triggered by calling
+   node.client_write without arguments.
+ * Fixed a minor (72bytes/playback) resource leak then
+   playing videos.
+ * POTENTIAL INCOMPATIBILITY:
+   Removed functions table.show, table.filter and table.keys.
+   They were undocumented in the past and are no longer
+   available. Of course you can implement them yourself
+   easily if you used them. Contact me, if you need help.
+
+Version 0.8.2-beta [2015-02-13] https://info-beamer.com/lnk/0.8.2
+
+ * Now runs on the Raspberry PI 2.
+ * Changes in how garbage collection is handled. See
+   https://info-beamer.com/lnk/gc for more information.
+ * More functions now fail with lua errors when you run
+   out of arm/gpu memory instead of failing silently.
+ * Fixed compatibilities with the new Raspberry PI 2
+   userland/kernel.
+ * Switched to a new cross compiled build system which
+   might enable more optimizations in the future.
+ * Closed some rarely occuring memory leaks.
+ * Fixed text not being properly rendered sometimes while
+   starting a node.
+ * Optimized render path to avoid sending GL commands
+   that don't change the current GL state.
+ * You can now query for uncaught node errors using
+   TCP. Connect to info-beamer and use
+   *query/*error/<node-path>. See the updated python client:
+   https://github.com/info-beamer/tools/tree/master/ibquery
+   If you're only interested if there was an error (and not
+   it's actual message), you can use
+   *query/*has_error/<node-path>.
+   From inside lua you can reset the global error flag
+   using node.reset_error().
+ * You can use a new environment variable
+   INFOBEAMER_OUTSIDE_SOURCES=1 to allow info-beamer to
+   read files from outside the node directories. Using
+   this feature is strongly discouraged as it makes it
+   more difficult to keep your node code modular.
+ * POTENTIAL INCOMPATIBILITY:
+   resource.load_image is now asynchronous by default. So
+   loading images no longer blocks rendering. This also
+   means that image:size() is not immediately available
+   after calling resource.load_image. You have to probe
+   image:state() to get the current loading progress.
+   Feedback is appreciated.
+ * POTENTIAL INCOMPATIBILITY:
+   sys.set_flag and sys.client_write were moved to
+   node.set_flag and node.client_write since they work
+   on node scope and not system scope. They will still
+   be inside the sys table till at least version 0.9.
+
+Version 0.8.1-beta [2015-01-21] https://info-beamer.com/lnk/0.8.1
+
+ * Optimized internal handling of shaders and default shader
+   setup. This might give you a huge performance boost.
+ * Optimized the way the Lua API is called. Might give you
+   a slight performance boost.
+ * Added profiler support. Use the new INFOBEAMER_PROFILE
+   environment variable to enable profiling.
+ * Fonts now use kerning. It's enabled by default. If your
+   output suffers for some reason you can disable kerning
+   by setting the environment variable INFOBEAMER_NO_KERNING=1
+ * Switched to luajit 2.1
+ * Removed contrib directory. All tools are available on
+   https://github.com/info-beamer/tools
+ * Reworked console output. There is less output in the
+   default setting now. Use the new INFOBEAMER_LOG_LEVEL
+   environment variable to change the log level. Setting
+   it to 3 restores the previous quite noisy output.
+ * Bundled utf8 support library.
+
+Version 0.8.0-beta [2014-10-11] https://info-beamer.com/lnk/0.8.0
+
+ * Unused framebuffers (allocated when rendering child nodes)
+   are now discarded earlier. This will leave more GPU memory
+   or other resources.
+ * New way of using the hardware surface. This will give you
+   a 10% performance boost on average. As a side effect it
+   also allows you to render the info-beamer top level node
+   into a region on the screen. This is useful if you're
+   using a frame grabber device of some kind that requires
+   content in a certain region.
+ * Added a way to snapshot sub regions when using
+   resource.create_snapshot.
+ * info-beamer content can now be fully transparent. So you
+   can now draw over other raspberry PI layers. Use
+   INFOBEAMER_TRANSPARENT=1 for that.
+ * Added a way to make noise free 2-way conversions with
+   your nodes using the TCP method. print no longer writes
+   to all connected clients. Added a sys.client_write
+   function to write to connected clients. See updated
+   samples/parrot example.
+ * Added *help command when connecting by TCP. It will
+   show all available commands.
+ * Added Raspberry PI frame grabber code to take screenshots.
+   See contrib/frame.
+ * Various minor (performance) fixes.
+ * Updated luajit
+
+Version 0.7.2-beta [2014-03-19]
+
+ * Firmware from march 14th or newer will produce a
+   flipped video output. This case is now handled by
+   flipping the texture coordinates of the video texture.
+ * Updated to luajit 2.0.3
+
+Version 0.7.1-beta [2014-02-17]
+
+ * Removed photos-fade example from samples directory. It wasn't
+   meant to be included in the release. Please use the example in
+   https://github.com/dividuum/info-beamer-nodes/ for an up to date
+   version.
+ * Show a warning if GPU memory provided seems too small.
+
+Version 0.7-beta [2013-12-20]
+
+ * Huge font rendering performance boost.
+   Also deduplicates loaded fonts, so using
+   the same font in multiple nodes only keeps
+   them in memory once.
+ * Included native json decoder. If you do
+   require("json"), the native module will
+   be loaded unless there is a local json.lua.
+ * POTENTIAL INCOMPATIBILITY:
+   Prevented some functions from being
+   called outside the node.render function, e.g.
+   it's no longer possible to call font:write
+   while the node is still initializing.
+
+Version 0.6.3-beta [2013-11-30]
+
+ * Fixed image loading bug during startup for images
+   with a width not divisible by 4.
+
+Version 0.6.2-beta [2013-11-22]
+
+ * Fixed inotify race conditions that occur
+   when rapidly updating directories.
+
+Version 0.6.1-beta [2013-11-13]
+
+ * Added experimental async image loading using
+   resource.load_image_async
+ * Dispatched background work into a fixed set of
+   worker threads to prevent memory leaks that
+   occur when using short lived threads.
+
+Version 0.6-beta [2013-10-31]
+
+ * Video playback, loading and unloading is now fully handled
+   in a dedicated thread. This will hopefully prevent any
+   stuttering while loading videos.
+ * A running info-beamer can now be queried for various
+   runtime values using a TCP connection. See the included
+   file contrib/ibquery.py
+ * Displays information on startup/runtime. This should make it
+   easier to find problems in the future.
+
+Version 0.5.1-beta [2013-07-05]
+
+ * Increased the size of audio buffers. Needed for 48000hz
+   audio playback.
+
+Version 0.5-beta
+
+ * Videos now support audio playback. Use
+
+   util.videoplayer("file.mp4", {audio: true})
+
+   to play a video with audio playback.
+
+Version 0.4-beta
+
+ * Fixed video looping when using util.videoplayer.
+
+Version 0.3-beta
+
+ * Error deduplication. Repeating errors are only printed once.
+
+ * Fixed osc/data mapper
+   Now works as intended: The callback function now receives all
+   captures from a single match. Patterns without captures only
+   receive the callback data.
