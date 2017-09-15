@@ -1,10 +1,10 @@
-# Getting Started With Raspberry Pi 3 and Node.js
+# Getting Started With Raspberry Pi 1, Zero, or Zero W and Node.js
 
-_Captured: 2017-08-29 at 09:42 from [docs.resin.io](https://docs.resin.io/raspberrypi3/nodejs/getting-started/)_
+_Captured: 2017-08-29 at 09:45 from [docs.resin.io](https://docs.resin.io/raspberrypi/nodejs/getting-started/)_
 
 ## Introduction 
 
-In this guide we will build a simple Node.js web server project on a Raspberry Pi 3. Along the way you will learn the basics of resin.io. We will walk through getting a Raspberry Pi 3 online and deploying some Node.js code to it.
+In this guide we will build a simple Node.js web server project on a Raspberry Pi 1, Zero, or Zero W. Along the way you will learn the basics of resin.io. We will walk through getting a Raspberry Pi 1, Zero, or Zero W online and deploying some Node.js code to it.
 
 We will also look into using the built in web terminal to run test commands and debug issues. Once you have a handle on the resin.io deployment workflow, we will introduce you to resin sync and our CLI which will allow you to increase your development speed on resin.io.
 
@@ -12,11 +12,11 @@ We will also look into using the built in web terminal to run test commands and 
 
 ![](https://docs.resin.io/img/raspberrypi/raspberrypi.jpg)
 
-  * A [Raspberry Pi 3 model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/). See our [supported devices list](https://docs.resin.io/hardware/devices/) for other boards.
-  * A 4GB or larger microSD card. The [speed class](https://en.wikipedia.org/wiki/Secure_Digital#Speed_class_rating) of the card also matters - class 10 card or above is the way to go.
-  * **[Optional]** An ethernet cable
+  * A Raspberry Pi 1 (model [B, B+](https://www.raspberrypi.org/products/model-b-plus/), or [A+](https://www.raspberrypi.org/products/model-a-plus/)), [Zero](https://www.raspberrypi.org/products/pi-zero/), or [Zero W](https://www.raspberrypi.org/products/pi-zero-w/). See our [supported devices list](https://docs.resin.io/hardware/devices/) for other boards.
+  * A 4GB or larger SD card. All the Raspberry Pi, except older model Bs, uses a microSD card. The [speed class](https://en.wikipedia.org/wiki/Secure_Digital#Speed_class_rating) of the card also matters - class 10 card or above is the way to go.
+  * An ethernet cable or WiFi adapter (not needed for the Zero W). Check our [list of supported wifi adapters](https://docs.resin.io/hardware/wifi-dongles/).
   * A micro USB cable.
-  * **[Optional]** A [2A USB micro power supply](https://www.raspberrypi.org/products/universal-power-supply/).
+  * **[Optional]** A [2A USB micro power supply](https://www.raspberrypi.org/products/universal-power-supply/)
   * A [resin.io account](https://dashboard.resin.io/signup).
 
 ## Getting Help 
@@ -47,8 +47,6 @@ To help us understand all the moving parts in resin.io, lets first define a few 
 
 If you don't already have a resin.io account head over to our [signup page](https://dashboard.resin.io/signup), during the sign up process you will be asked to set up an SSH key so you can securely push code.
 
-### Adding an SSH Key 
-
 SSH keys use the power of [public-key cryptography](http://en.wikipedia.org/wiki/Public-key_cryptography) to secure your connection when sending your code to us. In order to secure your [git](http://git-scm.com/) connection, you need to add your **public** [SSH Key](http://en.wikipedia.org/wiki/Secure_Shell) (you should never share your _private_ key with anyone.)
 
 ![](https://docs.resin.io/img/common/sign_up_flow/enter_ssh_key_cropped.png)
@@ -69,15 +67,15 @@ You will then have to enter your github username into the prompt:
 
 ![](https://docs.resin.io/img/common/sign_up_flow/enter_github_username_cropped.png)
 
-If you don't have a ssh key setup yet, but want to explore resin.io, just click `skip`. Note that you will not be able to push code to your Raspberry Pi 3 until you have a ssh key saved. This can be done at anytime from the `[Preferences`](https://dashboard.resin.io/preferences?tab=sshkeys) page on the dashboard.
+If you don't have a ssh key setup yet, but want to explore resin.io, just click `skip`. Note that you will not be able to push code to your Raspberry Pi 1, Zero, or Zero W until you have a ssh key saved. This can be done at anytime from the `[Preferences`](https://dashboard.resin.io/preferences?tab=sshkeys) page on the dashboard.
 
 ## Creating an Application 
 
-To create an application simply type in a name, select the Raspberry Pi 3 type from the drop down list and click the create button. You should now be taken to the dashboard of your newly created application:
+To create an application simply type in a name, select the Raspberry Pi 1, Zero, or Zero W type from the drop down list and click the create button. You should now be taken to the dashboard of your newly created application:
 
 ![](https://docs.resin.io/img/common/main_dashboard/select_fleet_type.png)
 
-This dashboard may not look like much right now, but this is where you will command and manage a whole fleet of Raspberry Pi 3s.
+This dashboard may not look like much right now, but this is where you will command and manage a whole fleet of Raspberry Pi 1, Zero, or Zero Ws.
 
 ## Adding Your First Device 
 
@@ -108,10 +106,6 @@ Now we have to flash the downloaded `.img` file onto our SD card. We recommend u
 
 You can of course use any other SD card writing software you like, some options are:
 
-  * [win32diskimager](http://sourceforge.net/projects/win32diskimager/) for Windows.
-  * [piFiller](http://ivanx.com/raspberrypi/) for osx.
-  * [dd or "Disk Destroyer"](http://man7.org/linux/man-pages/man1/dd.1.html) for Linux.
-
 **Note:** Before you flash resinOS to your SD card you may need to formatted it as [FAT32](http://en.wikipedia.org/wiki/Fat32#FAT32). [WikiHow](http://www.wikihow.com/Main-Page) has great [instructions](http://www.wikihow.com/Format-an-SD-Card) on how to do this.
 
 For simplicity this tutorial will assume you are using [Etcher](https://etcher.io/). Once you have Etcher installed, start it up. You may be asked to allow Etcher administrative privileges. This is just so Etcher can access your SD card.
@@ -131,11 +125,11 @@ Etcher will give you a little ping! when it's done, and safely eject the SD card
 
 ## Setting Up Your Device 
 
-Insert the SD card into the Raspberry Pi 3 and connect the ethernet cable if necessary. Now power up the Raspberry Pi 3 by inserting the micro USB cable.
+Insert the SD card into the Raspberry Pi 1, Zero, or Zero W and, if necessary, connect the ethernet cable or the USB WiFi adapter. Now power up your Pi by inserting the micro USB cable.
 
 ![insert SD](https://docs.resin.io/img/gifs/insert-sd.gif)
 
-It will take a minute or two for the Raspberry Pi 3 to appear on your [resin.io dashboard](https://dashboard.resin.io/). While you wait the resinOS is expanding the partitions on your SD card to use all available space, installing a custom linux environment and establishing a secure connection with our servers.
+It will take a minute or two for the device to appear on your [resin.io dashboard](https://dashboard.resin.io/). While you wait the resinOS is expanding the partitions on your SD card to use all available space, installing a custom linux environment and establishing a secure connection with our servers.
 
 You should now be ready to deploy some code!
 
@@ -143,11 +137,11 @@ You should now be ready to deploy some code!
 
 ##### Help! My device won't show up. 
 
-If your device still hasn't shown up on your dashboard after 10 minutes, something is definitely wrong. First check that you entered the wifi credentials correctly and ensure that your network meets these [basic requirements](https://docs.resin.io/deployment/network/). It may also be worth checking the [LED error notifications](https://docs.resin.io/troubleshooting/error)
+If your device still hasn't shown up on your dashboard after 10 minutes, something is definitely wrong. First check that you entered the wifi credentials correctly and ensure that your network meets these [basic requirements](https://docs.resin.io/deployment/network/). It may also be worth checking the [LED error notifications](https://docs.resin.io/troubleshooting/error).
 
 If you still can't get your device online, come on over and chat to us on our [support channel](https://docs.resin.io/support/).
 
-**Note:** If you have an HDMI screen attached, you should see `"Booted - Check your resin.io dashboard."` on the screen when the device boots. If instead you see rainbow colours or a black screen with 4 raspberries on it, it could mean that the SD card was not burned correctly or is corrupted.
+**Note:** If you have an HDMI screen attached, you should see `"Booted - Check your resin.io dashboard."` on the screen when the device boots. If instead you see rainbow colours or a black screen with a raspberry on it, it could mean that the SD card was not burned correctly or is corrupted.
 
 ## Deploying Code 
 
@@ -198,7 +192,7 @@ You should now have a node.js web server running on your device and see some log
 
 If you follow the URL, you will be served a page saying "Hello, World!". Alternatively you can point your browser to your devices IP address.
 
-You should now have a basic idea of how to deploy a node.js application on resin.io. If you feel like you have a handle on Docker and Node.js projects, then skip over the next section and go straight to "[Using the web terminal"](https://docs.resin.io/raspberrypi3/nodejs/getting-started/).
+You should now have a basic idea of how to deploy a node.js application on resin.io. If you feel like you have a handle on Docker and Node.js projects, then skip over the next section and go straight to "[Using the web terminal"](https://docs.resin.io/raspberrypi/nodejs/getting-started/).
 
 #### Let's dive into the code 
 
@@ -216,15 +210,15 @@ If we look at our `Dockerfile.template`, the first thing we see is:
     FROM resin/%%RESIN_MACHINE_NAME%%-node:slim
     
 
-This line has quite a bit packed into it. The first thing that happens is that the `%%RESIN_MACHINE_NAME%%` place holder gets stripped and replaced with the resin device name. For example if your application type is a Raspberry Pi 3, the line will be replaced with:
+This line has quite a bit packed into it. The first thing that happens is that the `%%RESIN_MACHINE_NAME%%` place holder gets stripped and replaced with the resin device name. For example if your application type is a Raspberry Pi 1, Zero, or Zero W, the line will be replaced with:
     
     
-    FROM resin/raspberrypi3-node:slim
+    FROM resin/raspberrypi-node:slim
     
 
 Which tells the resin builder that this is the Docker image we want as our base. Checkout the full [list of official resin device names](https://docs.resin.io/devicetypes/) and the [matching Docker Hub base images](https://hub.docker.com/u/resin/).
 
-We also have a `:slim` tag associated to the base image which denotes that we want the stripped down version only contains the minimal packages needed to run node, so no `[node-gyp`](https://github.com/nodejs/node-gyp) and other build-essentials. If you need to build some native modules, say node-i2c, you should switch to `:latest` tag. We also have a number of pinned version tags, which should be used for production devices. Checkout the full [list of -node tags](https://hub.docker.com/r/resin/raspberrypi3-node/tags/), if you want to target a specify node.js version or a fixed date build.
+We also have a `:slim` tag associated to the base image which denotes that we want the stripped down version only contains the minimal packages needed to run node, so no `[node-gyp`](https://github.com/nodejs/node-gyp) and other build-essentials. If you need to build some native modules, say node-i2c, you should switch to `:latest` tag. We also have a number of pinned version tags, which should be used for production devices. Checkout the full [list of -node tags](https://hub.docker.com/r/resin/raspberrypi-node/tags/), if you want to target a specify node.js version or a fixed date build.
 
 Next up we have 3 line which were commented out:
     
@@ -269,7 +263,7 @@ After the `npm install` we copy the rest of our source code into the working dir
 
 The last 2 commands are runtime directives. The `ENV INITSYSTEM on` is used to enable the [systemd](https://en.wikipedia.org/wiki/Systemd) init within the container. This is useful for a number of reasons, like keeping the container open after application crash and handling `/dev` updates as new USB devices are plugged in. If you don't want an init system, just set it to `off` or remove the line for the `Dockerfile`.
 
-The last command, `CMD` is perhaps one of the most important. This command defines what will run at container start on your Raspberry Pi 3, in our example we have told npm to start a process. It should be noted that you can only have **one** `CMD` per `Dockerfile`.
+The last command, `CMD` is perhaps one of the most important. This command defines what will run at container start on your Raspberry Pi 1, Zero, or Zero W, in our example we have told npm to start a process. It should be noted that you can only have **one** `CMD` per `Dockerfile`.
 
 In our `package.json` the parts to focus on are our "scripts" and "dependencies":
     
@@ -304,7 +298,7 @@ To fire up a terminal session on your device you need to two things:
 
 Number `.1` is usually pretty easy, but number `.2` catches people pretty often. Since if the main process of the Docker container crashes or ends, the container effectively stops and there is nothing for the web terminal to SSH into `:(` . For this reason we normally recommend using the systemd init system during development as this will ensure your container is always up and running, even if your application code crashes.
 
-![](https://docs.resin.io/img/common/webterminal/terminal-raspberrypi3.png)
+![](https://docs.resin.io/img/common/webterminal/terminal-raspberrypi.png)
 
 To start a session, just navigate to the `>_ Terminal` page for the device and hit the "Start the terminal session" button. It will take a few seconds to establish a connection and then you are good to go.
 
@@ -365,8 +359,6 @@ You should then be presented with 3 options to login. The recommended method is 
 
 Cross-compilation is not needed when using `resin sync` and Node.js as it is an interpreted language. Interpreted languages are programming languages in which programs may be run from source code form, they do not need to be compiled.
 
-#### Using resin sync 
-
 You are now ready to start using `resin sync`, so open a terminal in the directory which we were using earlier in this guide. Make a trivial change to your source code and then run:
     
     
@@ -410,8 +402,8 @@ Provided you are already logged in on the CLI and you have a device online, you 
     
     resin:simple-server-node shaun$ resin ssh 5dc2c87
     Connecting with: 5dc2c87
-    root@raspberrypi3-5dc2c8:/# uname -a
-    Linux Raspberry Pi 3-5dc2c8 3.10.93 #1 SMP PREEMPT Wed Apr 20 10:25:12 CEST 2016 armv7l GNU/Linux
+    root@raspberrypi-5dc2c8:/# uname -a
+    Linux Raspberry Pi 1, Zero, or Zero W-5dc2c8 3.10.93 #1 SMP PREEMPT Wed Apr 20 10:25:12 CEST 2016 armv6 GNU/Linux
     
 
 ## Example Projects to Build From 
@@ -420,11 +412,11 @@ There are even more hidden treasures in the resin.io platform and tools, but we 
 
 ### Basic GPIO Control in Node.js 
 
-This sample project will get you started blinking LEDs on the Raspberry Pi 3 using only javascript. For this project you will need some additional hardware, namely a basic LED, a breadboard and a 220 ohm resistor.
+This sample project will get you started blinking LEDs on the Raspberry Pi 1, Zero, or Zero W using only javascript. For this project you will need some additional hardware, namely a basic LED, a breadboard and a 220 ohm resistor.
 
 ### Audio stock ticker in Node.js 
 
-The audio stock ticker will verbally announce a list of your favourite stocks every couple of minutes or hours, depending on how you configure it. For this project you will need some head phones or speakers to connect to the Raspberry Pi 3's audio jack.
+The audio stock ticker will verbally announce a list of your favourite stocks every couple of minutes or hours, depending on how you configure it. For this project you will need some head phones or speakers to connect to the Raspberry Pi 1, Zero, or Zero W's audio jack.
 
 ### Servo motor control in Node.js 
 
@@ -435,8 +427,6 @@ Send SMSes with Twilio and convert them to speech on your Raspberry Pi. For this
 ### I2C proximity sensor 
 
 This is a simple node.js project that uses [i2c-bus](https://www.npmjs.com/package/i2c-bus) to get data from a [VLNC4000 proximity & light sensor](https://www.adafruit.com/products/466). It is made to be generic and act as base for any i2c sensor integration. It should work on any of the resin.io supported devices, you just need to make sure i2c is enabled in the kernel and know the i2c bus number for you device.
-
-### RPI camera module example in Node.js 
 
 **Enjoy Resinifying All the Things!**
 

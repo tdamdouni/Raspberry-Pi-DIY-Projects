@@ -1,6 +1,6 @@
 # Get Started with Docker on Raspberry Pi
 
-_Captured: 2017-05-14 at 20:22 from [blog.alexellis.io](http://blog.alexellis.io/getting-started-with-docker-on-raspberry-pi/)_
+_Captured: 2017-08-30 at 09:42 from [blog.alexellis.io](https://blog.alexellis.io/getting-started-with-docker-on-raspberry-pi/)_
 
 I have put this guide together to help you get started with Docker 1.12 (or newer) on your Raspberry Pi. For simplicity we will use the default operating system for the Pi - called Raspbian. This guide currently works with most models of Raspberry Pi and I'd recommending using the Model B 2/3 or Zero.
 
@@ -24,9 +24,17 @@ I used to give instructions for using `dd` on Mac and Linux with a third option 
 
 Download Etcher here:
 
-Now follow the instructions in Etcher to flash your SD card.
+Now follow the instructions in Etcher to flash your SD card. There is one more thing we have to do before ejecting the SD card.
 
-![](http://blog.alexellis.io/content/images/2017/03/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4332394578305758554145526958772e6a7067.jpeg)
+![](https://blog.alexellis.io/content/images/2017/03/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4332394578305758554145526958772e6a7067.jpeg)
+
+  * Enable SSH on the SD Card
+
+To help prevent Raspberry Pis around the globe from being hacked the RPi foundation have now disabled SSH on the default image. Just create a text file in /boot/ called `ssh` \- it can be blank or you can type anything you want inside it.
+
+> Make sure it has no extension such as ssh.txt - it must just be `ssh`.
+
+Now insert the SD card, networking and power etc.
 
 ### Install Docker
 
@@ -62,7 +70,7 @@ Edit `/boot/config.txt` and add this line:
 An automated script maintained by the Docker project will create a `systemd` service file and copy the relevant Docker binaries into `/usr/bin/`.
     
     
-    $ curl -sSL get.docker.com | sh
+    $ curl -sSL https://get.docker.com | sh
     
 
 Until recently installing Docker on a Pi was a very manual process which often meant having to build Docker from scratch on a very underpowered device (this could take hours). Lots of hard work by ARM enthusiasts [Hypriot](https://twitter.com/hypriottweets/) has helped make `.deb` packages a first-class citizen in Docker's own CI process.
@@ -105,16 +113,16 @@ Support for ARM and the Raspberry Pi is a work-in-progress item which means ther
 
 If you pull down the `busybox` image from the Docker hub it will not function correctly. This is because the contents are designed for a regular PC or the x86_64 architecture. There are on-going efforts to fix this in future versions of Docker.
 
-We should only attempt to use images which we know are designed to work on ARM. At present there are no strictly official images but the Docker team maintains a number of experimental images under the prefix [armhf](https://hub.docker.com/r/armhf).
+We should only attempt to use images which we know are designed to work on ARM. At present there are no strictly official images but the Docker team maintains a number of experimental images under the prefix [arm32v6](https://hub.docker.com/r/arm32v6).
 
-> armhf refers to the way the code on the Raspberry Pi is ported - hf means hard float.
+> Update 30th May 2017: the `armhf` account has been renamed to `arm32v6` \- so for future reference use the `arm32v6` prefix instead.
 
 #### Running your first ARM image
 
-Let's try starting Docker's official Alpine Linux image `armhf/alpine`. Alpine Linux is a very compact 1.8MB download.
+Let's try starting Docker's official Alpine Linux image `arm32v6/alpine`. Alpine Linux is a very compact 1.8MB download.
     
     
-    $ docker run -ti armhf/alpine:3.5 /bin/sh
+    $ docker run -ti arm32v6/alpine:3.5 /bin/sh
     
     / # cat /etc/os-release 
     NAME="Alpine Linux"  
@@ -140,7 +148,7 @@ We launched `sh` \- a BusyBox shell, but we could have launched any command dire
 Here's another example without using the shell - we just run the `date` binary directly:
     
     
-    $ docker run armhf/alpine:3.5 date
+    $ docker run arm32v6/alpine:3.5 date
     Sun Mar 12 21:00:45 UTC 2017  
     
 
@@ -185,7 +193,7 @@ If you want to delete the `curl_docker` image type in: `docker rmi curl_docker`.
 Alpine Linux doesn't use `apt-get` to package its packages but a tool named `apk`, here's how to achieve the same thing:
     
     
-    FROM armhf/alpine:3.5
+    FROM arm32v6/alpine:3.5
     
     RUN apk add --no-cache curl ca-certificates
     
@@ -198,7 +206,7 @@ To build and run the Alpine container, you can do exactly the same thing or use 
     $ docker build -t curl_docker_alpine .
     
     Sending build context to Docker daemon 2.048 kB  
-    Step 1/3 : FROM armhf/alpine:3.5  
+    Step 1/3 : FROM arm32v6/alpine:3.5  
      ---> 4c5b559db95b
     Step 2/3 : RUN apk add --no-cache curl ca-certificates  
      ---> Running in 68254b2889a0
@@ -304,7 +312,7 @@ The following Python code can be used to will blink an LED connected to GPIO pin
 
 _app.py_
 
-![](http://blog.alexellis.io/content/images/2016/08/Screen-Shot-2016-08-20-at-09-40-46-1.png)
+![](https://blog.alexellis.io/content/images/2016/08/Screen-Shot-2016-08-20-at-09-40-46-1.png)
 
 Just use `ADD` to transfer the script into a new image depriving from `gpio-base`:
     

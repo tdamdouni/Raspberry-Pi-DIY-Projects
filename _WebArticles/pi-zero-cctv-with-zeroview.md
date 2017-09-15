@@ -1,6 +1,6 @@
 # Pi Zero CCTV with ZeroView
 
-_Captured: 2017-08-05 at 18:51 from [richardhayler.blogspot.de](http://richardhayler.blogspot.de/2016/06/pi-zero-cctv-with-zeroview.html?m=1)_
+_Captured: 2017-08-30 at 09:17 from [richardhayler.blogspot.de](http://richardhayler.blogspot.de/2016/06/pi-zero-cctv-with-zeroview.html)_
 
 One of the first things I used a raspberry Pi for was to build a simple CCTV system. In fact that original model B is still up and running and today. It is a nice compact, self contained system.
 
@@ -8,19 +8,19 @@ However the addition of a camera capability to the Pi Zero opened up the possibi
 
 Those rambunctious pirates at Pimoroni were quick off the mark with their dinky Little Bro kit. This is a smart CCTV sign that has a hole for the camera and comes with a mounting bracket for the Pi Zero which also allows you to fix the whole thing to a wall. When I wanted to make a timelapse of some garden work that was happening I simply used some string to hang the Little Bro from the window handle. This worked fine although it was a bit wobbly (especially when the window as opened) and when I had to adjust something I didn't manage to put it back up without altering the field of view slightly (you can see that the picture jumps slightly at about 00:10). It was also difficult to get the camera as close to the glass to keep reflections to a minimum.
 
-![](https://3.bp.blogspot.com/-02Nf35A3oGc/V2JkGzQwnOI/AAAAAAAAGd0/NXz-gwicFLQ3h8fYj7exDe94uVwzOLPDACLcB/s280/IMG_0378.JPG)
+![](https://3.bp.blogspot.com/-02Nf35A3oGc/V2JkGzQwnOI/AAAAAAAAGd0/NXz-gwicFLQ3h8fYj7exDe94uVwzOLPDACLcB/s320/IMG_0378.JPG)
 
 Then The PiHut launched the excellent ZeroView, designed for exactly this sort of thing. It uses two sucker pads to stick to a window thus keep the camera as close to the glass as possible. Because the frame can be removed from the suckers while leaving them attached to the window, it also allows for easy adjustment and replacement without altering the field of view.
 
-![](https://3.bp.blogspot.com/-3kfUvStnPSA/V2JkLTEWKaI/AAAAAAAAGeA/vf_Wv1rKaPI3VL9SQ2p_aFFwPTaSnKvHACLcB/s280/IMG_0389.JPG)
+![](https://3.bp.blogspot.com/-3kfUvStnPSA/V2JkLTEWKaI/AAAAAAAAGeA/vf_Wv1rKaPI3VL9SQ2p_aFFwPTaSnKvHACLcB/s320/IMG_0389.JPG)
 
 Initial tests confirmed that this was genius!
 
-![](https://3.bp.blogspot.com/-tYkpBIoeayI/V2JkKcxL5VI/AAAAAAAAGd8/oPpFaySJQQUIeVaqpCh-cIie6TDfLc13gCLcB/s280/IMG_0379.JPG)
+![](https://3.bp.blogspot.com/-tYkpBIoeayI/V2JkKcxL5VI/AAAAAAAAGd8/oPpFaySJQQUIeVaqpCh-cIie6TDfLc13gCLcB/s320/IMG_0379.JPG)
 
 Remixing my original CCTV build (which uses Motion to detect movement and then uploads the resulting movie to Dropbox) was easy. On the first night of testing I managed to catch this wily fox sneaking through my garden at dawn.
 
-![](https://3.bp.blogspot.com/-biBlBQ1NfnY/V2Jk1RNYirI/AAAAAAAAGeU/vxe1RuLtYLgpqP1kEyq8SkGb-4W_6RVXACLcB/s280/Snip20160616_1.png)
+![](https://3.bp.blogspot.com/-biBlBQ1NfnY/V2Jk1RNYirI/AAAAAAAAGeU/vxe1RuLtYLgpqP1kEyq8SkGb-4W_6RVXACLcB/s320/Snip20160616_1.png)
 
 However there were a couple of issues about making this a permanent installation that I wanted to address:
 
@@ -29,11 +29,10 @@ However there were a couple of issues about making this a permanent installation
 
 So as a combined solution to both of these, I used a [ProtoZero](http://www.protoboards.co.uk/2016/01/protozero.html) board, an [accelerometer](http://www.ebay.co.uk/itm/For-Arduino-1pcs-New-ADXL345-3-Axis-Digital-Acceleration-Of-Gravity-Tilt-Module-/271870675843?var=&hash=item3f4cc14b83:m:m8NmprfE9r44WGW83T9eHuw) and an RGB LED.
 
-![](https://3.bp.blogspot.com/-o9dJzgi8_IE/V2JlBkJEmtI/AAAAAAAAGec/nG6j-UdfZ6wCW821shjDN4j9oQ4NEFfLQCLcB/s280/IMG_0384.JPG)
+![](https://3.bp.blogspot.com/-o9dJzgi8_IE/V2JlBkJEmtI/AAAAAAAAGec/nG6j-UdfZ6wCW821shjDN4j9oQ4NEFfLQCLcB/s320/IMG_0384.JPG)
 
 Some simple python checks the accelerometer and looks for abrupt changes in the values reported, to detect if the Pi falls off the window. In this event it uploads a picture of Humpty Dumpty to DropBox. The same code also periodically checks that it is still connected to the Internet (by pinging Google) and changes the colour of the RGB LED from green to red. There are a few other visual cues too: the LED flashes blue when the baseline accelerometer readings are being measured at start-up and also flashes green when a ping test is underway. This is run at startup via /etc/rc.local.
 
-```
 #!/usr/bin/python3  
 from gpiozero import RGBLED  
 from adxl345 import ADXL345  
@@ -112,7 +111,6 @@ led.color = (0,0.2,0)
 else:  
 logging.info('Comms Down :-(')  
 led.blink(on_time=0.1, off_time=0.1, on_color=(1,0,0), background=True)
-```
 
 ###  Notes:
 
