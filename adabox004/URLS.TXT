@@ -1,9 +1,0 @@
-ice1.somafm.com:80/secretagent-128-mp3
-18783.live.streamtheworld.com:80/WYEPFMAAC_SC
-ice1.somafm.com:80/u80s-128-mp3
-streaming.radionomy.com:80/SKAspotRadio
-audio.wgbh.org:8000/
-audio.wgbh.org:8100/
-ice1.somafm.com:80/thistle-128-mp3
-ice1.somafm.com:80/doomed-128-mp3
-ice1.somafm.com:80/folkfwd-128-mp3

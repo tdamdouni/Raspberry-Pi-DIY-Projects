@@ -1,6 +1,6 @@
 # NeoPixels on Raspberry Pi
 
-_Captured: 2017-08-25 at 00:02 from [learn.adafruit.com](https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all)_
+_Captured: 2017-09-03 at 13:13 from [learn.adafruit.com](https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all)_
 
 The are some reports that this library does not work with the new Raspberry Pi 2. Be warned that the library is not confirmed to work with the Pi 2 hardware yet--only the first generation Pi is known to work.
 

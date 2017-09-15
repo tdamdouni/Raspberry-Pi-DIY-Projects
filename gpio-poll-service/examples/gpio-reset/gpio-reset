@@ -1,0 +1,112 @@
+#!/bin/bash
+# --------------------------------------------------------------------------
+# Sample script for gpio-poll.service
+#
+# This script initiates reboot or shutdown depending on the duration a given
+# button was pressed:
+#   - after 2s: reboot the system
+#   - after 5s: shutdown the system
+#
+# You can also configure a GPIO controlling a LED. It will start blinking
+# if you pressed long enough for reboot and will blink faster if you pressed
+# long enough for shutdown.
+#
+# You should copy this script to /usr/local/sbin and
+# add the following configuration to /etc/gpio-poll.conf (configure to your taste)
+#
+# [GLOBAL]
+# gpios: 23
+#
+# [GPIO23]
+# edge: both
+# ignore_initial: 1
+# command: '/usr/local/sbin/gpio-reset'
+#
+# --------------------------------------------------------------------------
+# Author: Bernhard Bablok
+# License: GPL3
+#
+# Website: https://github.com/bablokb/gpio-poll-service
+# --------------------------------------------------------------------------
+
+# some constants, change as needed
+DUR_MIN=2      # button must be pressed at least DUR_MIN seconds
+DUR_HALT=5     # if pressed more than DUR_HALT seconds, initiate halt
+DUR_MAX=15     # end of supported interval
+PIN_BLINK="18" # if empty, ignore blinking
+
+# --- helper-function (start/stop blinking)   ------------------------------
+
+setup_blink() {
+  [ -z "$PIN_BLINK" ] && return
+  if [ ! -d /sys/class/gpio/gpio$PIN_BLINK ]; then
+    echo "$PIN_BLINK" > /sys/class/gpio/export
+    echo "out"  > /sys/class/gpio/gpio$PIN_BLINK/direction
+  fi
+  BLINK_PATH="/sys/class/gpio/gpio$PIN_BLINK/value"
+  BLINK_RUN="/var/run/gpio-reset.blink"
+}
+
+stop_blink() {
+  [ -z "$PIN_BLINK" ] && return
+  rm "$BLINK_RUN"
+  sleep 1.5
+  echo "0" > "$BLINK_PATH"
+}
+
+start_blink() {
+  [ -z "$PIN_BLINK" ] && return
+  touch "$BLINK_RUN"
+
+  # wait until DUR_MIN and return if already stopped
+  sleep $DUR_MIN
+  [ ! -f "$BLINK_RUN" ] && return
+  
+  # blink slowly until DUR_HALT
+  n=$DUR_MIN
+  while [ -f "$BLINK_RUN" -a $n -lt $DUR_HALT ]; do
+    echo "1" > "$BLINK_PATH"
+    sleep 0.5
+    echo "0" > "$BLINK_PATH"
+    sleep 0.5
+    let n+=1
+  done
+
+  # now blink faster
+  while [ -f "$BLINK_RUN" ]; do
+    echo "1" > "$BLINK_PATH"
+    sleep 0.25
+    echo "0" > "$BLINK_PATH"
+    sleep 0.25
+  done
+}
+
+# --- main program   -------------------------------------------------------
+
+# First argument is GPIO pin number, second argument is value,
+# third is switch-time and fourth is repeat-time
+# For this application we only need the value and switch-time
+pinnr="$1"
+value="$2"
+stime="${3%.*}"    # cut off fractions
+
+setup_blink
+
+if [ "$value" -eq 1 ]; then
+  # button is pressed
+  logger -t "gpio-reset" "button $pinnr pressed"
+  start_blink
+else
+  logger -t "gpio-reset" "button $pinnr released after $stime s"  
+  stop_blink
+  if [ $stime -gt $DUR_MAX -o $stime -lt $DUR_MIN ]; then
+    # we ignore these values (sanity check)
+    logger -t "gpio-reset" "ignoring (outside range [$DUR_MIN,$DUR_MAX]"
+  elif [ $stime -ge $DUR_MIN -a $stime -le $DUR_HALT ]; then
+    logger -t "gpio-reset" "initiating reboot"
+    # reboot &
+  else
+    logger -t "gpio-reset" "initiating shutdown"
+    # halt -p &
+  fi
+fi

@@ -1,0 +1,31 @@
+#!/bin/bash
+# --------------------------------------------------------------------------
+# Sample script for gpio-poll.service
+#
+# This script reads events from the pipe /var/run/gpio-poll.fifo and
+# dumps the the result to the system log.
+#
+# You should copy this script to /usr/local/sbin and use a sample
+# configuration similar to the gpio-poll.conf in this directory.
+#  
+# --------------------------------------------------------------------------
+# Author: Bernhard Bablok
+# License: GPL3
+#
+# Website: https://github.com/bablokb/gpio-poll-service
+# --------------------------------------------------------------------------
+
+# wait for pipe to be available
+
+while ! test -p /var/run/gpio-poll.fifo; do
+  sleep 1
+done
+
+# read from pipe and dump values to the system log
+
+while read pin state switch_time repeat_time; do
+  logger -s -t "fifo-test" "pin:   $pin"
+  logger -s -t "fifo-test" "state: $state"
+  logger -s -t "fifo-test" "stime: $switch_time"
+  logger -s -t "fifo-test" "rtime: $repeat_time"
+done < /var/run/gpio-poll.fifo

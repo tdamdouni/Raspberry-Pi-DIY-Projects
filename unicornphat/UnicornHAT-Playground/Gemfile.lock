@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    chroma (0.0.1)
+    color (1.8)
+    color-generator (0.0.4)
+    color_gradient (0.1.0)
+      color (~> 1.8)
+    ws2812 (0.0.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  chroma
+  color
+  color-generator
+  color_gradient
+  ws2812
+
+BUNDLED WITH
+   1.11.2

@@ -1,5 +1,0 @@
-NetworkName,PassPhrase
-NetworkName,PassPhrase
-NetworkName,PassPhrase
-NetworkName,PassPhrase
-NetworkName,PassPhrase

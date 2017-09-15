@@ -1,6 +1,6 @@
 # Getting Started With Raspberry Pi 3 and Node.js
 
-_Captured: 2017-08-08 at 17:33 from [docs.resin.io](https://docs.resin.io/raspberrypi3/nodejs/getting-started/)_
+_Captured: 2017-08-29 at 09:42 from [docs.resin.io](https://docs.resin.io/raspberrypi3/nodejs/getting-started/)_
 
 ## Introduction 
 
@@ -139,11 +139,15 @@ It will take a minute or two for the Raspberry Pi 3 to appear on your [resin.io 
 
 You should now be ready to deploy some code!
 
+**Note:** Class 4 SD cards can take up to 3 times longer so it's well worth investing in the fastest card you can find.
+
 ##### Help! My device won't show up. 
 
 If your device still hasn't shown up on your dashboard after 10 minutes, something is definitely wrong. First check that you entered the wifi credentials correctly and ensure that your network meets these [basic requirements](https://docs.resin.io/deployment/network/). It may also be worth checking the [LED error notifications](https://docs.resin.io/troubleshooting/error)
 
 If you still can't get your device online, come on over and chat to us on our [support channel](https://docs.resin.io/support/).
+
+**Note:** If you have an HDMI screen attached, you should see `"Booted - Check your resin.io dashboard."` on the screen when the device boots. If instead you see rainbow colours or a black screen with 4 raspberries on it, it could mean that the SD card was not burned correctly or is corrupted.
 
 ## Deploying Code 
 
@@ -164,6 +168,8 @@ Once the repo is cloned, change directory into the newly created `simple-server-
     $ git remote add resin <USERNAME>@git.resin.io:<USERNAME>/<APPNAME>.git
     
 
+**Note:** On other git clients there may be an alternative way to add a remote repository.
+
 So now we have set up a reference in our local git repository (the one on our development computer) to the resin.io application remote repository. So when we push new changes to this remote repository it will get compiled and built on our servers and deployed to every device in the application fleet.
 
 Now to deploy this code to all device(s) in the application just run the command:
@@ -173,6 +179,8 @@ Now to deploy this code to all device(s) in the application just run the command
     
 
 If you want to completely replace the source code of the application with a new source tree, you may need to force the push by running `git push resin master --force`, due to how git works.
+
+**Note:** On your very first push, git may ask you if you would like to add this host to your list of allowed hosts. Don't worry about this, just type 'yes' and carry on your merry way.
 
 You'll know your code has been successfully compiled and built when our friendly unicorn mascot appears in your terminal:
 
@@ -190,7 +198,7 @@ You should now have a node.js web server running on your device and see some log
 
 If you follow the URL, you will be served a page saying "Hello, World!". Alternatively you can point your browser to your devices IP address.
 
-You should now have a basic idea of how to deploy a node.js application on resin.io. If you feel like you have a handle on docker and Node.js projects, then skip over the next section and go straight to "[Using the web terminal"](https://docs.resin.io/raspberrypi3/nodejs/getting-started/).
+You should now have a basic idea of how to deploy a node.js application on resin.io. If you feel like you have a handle on Docker and Node.js projects, then skip over the next section and go straight to "[Using the web terminal"](https://docs.resin.io/raspberrypi3/nodejs/getting-started/).
 
 #### Let's dive into the code 
 
@@ -214,7 +222,7 @@ This line has quite a bit packed into it. The first thing that happens is that t
     FROM resin/raspberrypi3-node:slim
     
 
-Which tells the resin builder that this is the docker image we want as our base. Checkout the full [list of official resin device names](https://docs.resin.io/devicetypes/) and the [matching dockerhub base images](https://hub.docker.com/u/resin/).
+Which tells the resin builder that this is the Docker image we want as our base. Checkout the full [list of official resin device names](https://docs.resin.io/devicetypes/) and the [matching Docker Hub base images](https://hub.docker.com/u/resin/).
 
 We also have a `:slim` tag associated to the base image which denotes that we want the stripped down version only contains the minimal packages needed to run node, so no `[node-gyp`](https://github.com/nodejs/node-gyp) and other build-essentials. If you need to build some native modules, say node-i2c, you should switch to `:latest` tag. We also have a number of pinned version tags, which should be used for production devices. Checkout the full [list of -node tags](https://hub.docker.com/r/resin/raspberrypi3-node/tags/), if you want to target a specify node.js version or a fixed date build.
 
@@ -228,7 +236,7 @@ Next up we have 3 line which were commented out:
 
 This is just a demonstration of how you can use `apt-get` to install dependencies in your container. In this case we would install some useful linux sound utilities.
 
-The next two directives are pretty straight forward and key parts of using docker.
+The next two directives are pretty straight forward and key parts of using Docker.
     
     
     # Defines our working directory in container
@@ -294,11 +302,13 @@ To fire up a terminal session on your device you need to two things:
   1. An online device.
   2. A running container.
 
-Number `.1` is usually pretty easy, but number `.2` catches people pretty often. Since if the main process of the docker container crashes or ends, the container effectively stops and there is nothing for the web terminal to SSH into `:(` . For this reason we normally recommend using the systemd init system during development as this will ensure your container is always up and running, even if your application code crashes.
+Number `.1` is usually pretty easy, but number `.2` catches people pretty often. Since if the main process of the Docker container crashes or ends, the container effectively stops and there is nothing for the web terminal to SSH into `:(` . For this reason we normally recommend using the systemd init system during development as this will ensure your container is always up and running, even if your application code crashes.
 
 ![](https://docs.resin.io/img/common/webterminal/terminal-raspberrypi3.png)
 
 To start a session, just navigate to the `>_ Terminal` page for the device and hit the "Start the terminal session" button. It will take a few seconds to establish a connection and then you are good to go.
+
+**Note:** Currently if you navigate away from the `>_ Terminal` page, you session will be killed. This is a known issue and will be remedied very soon.
 
 ## Using Resin Sync to Develop Fast 
 
@@ -308,9 +318,13 @@ Okay, so now we know how to provision a device and push code. There is just one 
 
 Luckily, our nifty little command line tool `resin sync` is here to save the day. It allows you to quickly sync source code and file changes across to one of the devices in your fleet, so you can rapidly iterate code on this test device before releasing it to the whole fleet.
 
+**Note:** Resin sync will only work on ResinOS v1.1.4+ and Agent v1.8.0+.
+
 #### Setting up resin sync. 
 
 Resin sync is bundled in with our handy resin CLI. The CLI allows you to basically do all your resin.io management from the comfort of the command line. Read the [CLI reference](https://docs.resin.io/tools/cli/) more info on all the cool things it can do.
+
+**Warning:** Currently resin sync is **NOT** supported on Windows. Support is currently being worked on, you can check the progress on this on the [git repository](https://github.com/resin-io-modules/resin-sync/blob/feat/windows-support/README.md#windows).
 
 To install resin CLI and sync you need at least `[node.js 4.0.0`](https://nodejs.org/en/) on your development machine, then run:
     
@@ -319,6 +333,8 @@ To install resin CLI and sync you need at least `[node.js 4.0.0`](https://nodejs
     
 
 You may need to run the install with admin privileges depending on how you have installed node.js.
+
+**Note:** If you already have resin CLI installed, you will need to upgrade to resin-cli v4.0.0+
 
 Once the CLI is installed globally, login with your resin account:
     
