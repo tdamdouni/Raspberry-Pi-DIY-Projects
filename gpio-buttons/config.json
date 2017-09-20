@@ -1,0 +1,32 @@
+{
+  "playPause":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 17,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  },
+  "volumeUp":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 18,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  },
+  "volumeDown":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 22,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  },
+  "previous":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 23,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  },
+  "next":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 24,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  },
+  "shutdown":{
+    "enabled": {"value": false, "type": "boolean"},
+    "pin": {"value": 3,"type":"number"},
+    "value": {"value": 0, "type": "number"}
+  }
+}

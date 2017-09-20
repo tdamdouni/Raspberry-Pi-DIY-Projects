@@ -1,0 +1,38 @@
+#!/bin/sh
+echo 'started  - do-nothing'
+node do-nothing
+echo 'finished - do-nothing'
+
+echo 'started  - do-almost-nothing'
+node do-almost-nothing
+echo 'finished - do-almost-nothing'
+
+echo 'started  - verify-events'
+node verify-events
+echo 'finished - verify-events'
+
+echo 'started  - closed'
+node closed
+echo 'finished - closed'
+
+echo 'started  - one-shot'
+echo | node one-shot
+echo 'finished - one-shot'
+
+echo 'started  - two-shot'
+echo | node two-shot
+echo 'finished - two-shot'
+
+# brute-force-leak-check takes a while to execute so its only run occasionally
+#echo 'started  - brute-force-leak-check'
+#echo | node brute-force-leak-check
+#echo 'finished - brute-force-leak-check'
+
+echo 'started  - performance-check'
+echo | node performance-check
+echo 'finished - performance-check'
+
+echo 'started  - no-gc-allowed'
+echo | node no-gc-allowed
+echo 'finished - no-gc-allowed'
+

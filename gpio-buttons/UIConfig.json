@@ -1,0 +1,783 @@
+{
+  "page": {
+    "label": "GPIO Buttons"
+  },
+  "sections": [
+    {
+      "id": "gpio_setup",
+      "element": "section",
+      "label": "Setup your GPIO button actions",
+      "icon": "fa-plug",
+      "onSave": {"type":"controller", "endpoint":"system_controller/gpio-buttons", "method":"saveConfig"},
+      "saveButton": {
+        "label": "Save",
+        "data": [
+          "playPauseEnabled",
+          "playPausePin",
+          "volumeUpEnabled",
+          "volumeUpPin",
+          "volumeDownEnabled",
+          "volumeDownPin",
+          "previousEnabled",
+          "previousPin",
+          "nextEnabled",
+          "nextPin",
+          "shutdownEnabled",
+          "shutdownPin"
+        ]
+      },
+      "content": [
+        {
+          "id": "playPauseEnabled",
+          "element": "switch",
+          "label": "Enable Play/pause",
+          "value": false
+        },
+        {
+          "id": "playPausePin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "playPauseEnabled",
+            "value": true
+          }
+        },
+        {
+          "id": "volumeUpEnabled",
+          "element": "switch",
+          "label": "Enable Vol+",
+          "value": false
+        },
+        {
+          "id": "volumeUpPin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "volumeUpEnabled",
+            "value": true
+          }
+        },
+        {
+          "id": "volumeDownEnabled",
+          "element": "switch",
+          "label": "Enable Vol-",
+          "value": false
+        },
+        {
+          "id": "volumeDownPin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "volumeDownEnabled",
+            "value": true
+          }
+        },
+        {
+          "id": "previousEnabled",
+          "element": "switch",
+          "label": "Enable Previous",
+          "value": false
+        },
+        {
+          "id": "previousPin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "previousEnabled",
+            "value": true
+          }
+        },
+        {
+          "id": "nextEnabled",
+          "element": "switch",
+          "label": "Enable Next",
+          "value": false
+        },
+        {
+          "id": "nextPin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "nextEnabled",
+            "value": true
+          }
+        },
+        {
+          "id": "shutdownEnabled",
+          "element": "switch",
+          "label": "Enable Shutdown",
+          "value": false
+        },
+        {
+          "id": "shutdownPin",
+          "element": "select",
+          "label": "GPIO Pin",
+          "value": {"value": 0,
+                    "label": "0"
+          },
+
+          "options": [
+            {
+              "value": 2,
+              "label": "2"
+            },
+            {
+              "value": 3,
+              "label": "3"
+            },
+            {
+              "value": 4,
+              "label": "4"
+            },
+            {
+              "value": 5,
+              "label": "5"
+            },
+            {
+              "value": 6,
+              "label": "6"
+            },
+            {
+              "value": 7,
+              "label": "7"
+            },
+            {
+              "value": 8,
+              "label": "8"
+            },
+            {
+              "value": 9,
+              "label": "9"
+            },
+            {
+              "value": 10,
+              "label": "10"
+            },
+            {
+              "value": 11,
+              "label": "11"
+            },
+            {
+              "value": 12,
+              "label": "12"
+            },
+            {
+              "value": 13,
+              "label": "13"
+            },
+            {
+              "value": 14,
+              "label": "14"
+            },
+            {
+              "value": 15,
+              "label": "15"
+            },
+            {
+              "value": 16,
+              "label": "16"
+            },
+            {
+              "value": 17,
+              "label": "17"
+            },
+            {
+              "value": 18,
+              "label": "18"
+            },
+            {
+              "value": 19,
+              "label": "19"
+            },
+            {
+              "value": 20,
+              "label": "20"
+            },
+            {
+              "value": 21,
+              "label": "21"
+            },
+            {
+              "value": 22,
+              "label": "22"
+            },
+            {
+              "value": 23,
+              "label": "23"
+            },
+            {
+              "value": 24,
+              "label": "24"
+            },
+            {
+              "value": 25,
+              "label": "25"
+            },
+            {
+              "value": 26,
+              "label": "26"
+            },
+            {
+              "value": 27,
+              "label": "27"
+            }
+          ],
+          "visibleIf": {
+            "field": "shutdownEnabled",
+            "value": true
+          }
+        }
+      ]
+    }
+  ]
+}

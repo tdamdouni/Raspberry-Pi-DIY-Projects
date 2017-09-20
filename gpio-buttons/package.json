@@ -1,0 +1,24 @@
+{
+  "name": "gpio-buttons",
+  "version": "0.8.0",
+  "description": "GPIO button-listener plugin for Volumio2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tomatpasser",
+  "license": "ISC",
+  "volumio_info": {
+    "prettyName": "GPIO Buttons",
+    "icon": "fa-microchip",
+    "plugin_type": "system_controller",
+    "boot_priority": 10
+  },
+  "dependencies": {
+    "fs-extra": "^0.28.0",
+    "kew": "^0.7.0",
+    "v-conf": "^0.10.0",
+    "onoff": "^1.1.1",
+    "socket.io-client": "^1.4.5"
+  }
+}

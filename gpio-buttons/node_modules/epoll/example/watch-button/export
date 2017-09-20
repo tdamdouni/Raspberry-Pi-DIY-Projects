@@ -1,0 +1,5 @@
+#!/bin/sh
+echo 4 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio4/direction
+echo both > /sys/class/gpio/gpio4/edge
+

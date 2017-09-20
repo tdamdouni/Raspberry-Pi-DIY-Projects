@@ -1,0 +1,4 @@
+#!/bin/sh
+echo 7 > /sys/class/gpio/unexport
+echo 8 > /sys/class/gpio/unexport
+

@@ -1,0 +1,7 @@
+#!/bin/sh
+echo 7 > /sys/class/gpio/export
+echo 8 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio7/direction
+echo both > /sys/class/gpio/gpio7/edge
+echo out > /sys/class/gpio/gpio8/direction
+
