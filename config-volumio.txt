@@ -1,0 +1,15 @@
+initramfs volumio.initrd
+gpu_mem=16
+max_usb_current=1
+dtparam=audio=on
+audio_pwm_mode=2
+dtparam=i2c_arm=on
+disable_splash=1
+hdmi_group=2
+hmdi_mode=1
+hdmi_mode=87
+hdmi_cvt 1024 600 60
+hdmi_drive=1
+#### Volumio i2s setting below: do not alter ####
+dtoverlay=boomberry-dac
+
