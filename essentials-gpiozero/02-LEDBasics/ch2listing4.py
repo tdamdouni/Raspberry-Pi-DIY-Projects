@@ -1,0 +1,5 @@
+from gpiozero import TrafficHatfrom time import sleepth = TrafficHat()
+try:    while True:        # Traffic light code        # First, turn the green LED on        th.lights.green.on()        print(“Press the button to stop the lights!”)        # Next, we want to wait until the button is pressed        while(th.button.is_pressed == False):            #While not pressed do nothing            pass        # Button has been pressed!        th.lights.green.off()        # Amber on for a couple of seconds        th.lights.amber.on()        sleep(2)        th.lights.amber.off()        # Turn the red on        th.lights.red.on()        # Buzz the buzzer 20 times with 0.1 second intervals
+        th.buzzer.blink(0.1,0.1,20,False)        sleep(1)        th.lights.red.off()        # Red off and blink amber 4 times with 0.5 second intervals
+        th.lights.amber.blink(0.5,0.5,4,False)except KeyboardInterrupt:
+    exit()

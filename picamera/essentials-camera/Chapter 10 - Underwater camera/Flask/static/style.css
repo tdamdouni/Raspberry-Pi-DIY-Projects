@@ -1,0 +1,32 @@
+* {margin:0;padding:0}
+/* mac hide \*/
+html,body{height:100%;width:100%;}
+/* end hide */
+body { 
+background-color: #cccccc;
+text-align:center;
+min-height:468px;/* for good browsers*/
+min-width:552px;/* for good browsers*/
+}
+#outer{
+height:100%;
+width:100%;
+display:table;
+vertical-align:middle;
+}
+#container {
+text-align: center;
+position:relative;
+vertical-align:middle;
+display:table-cell;
+height: 468px;
+} 
+#inner {
+width: 552px;
+background:red;
+height: 468px;
+text-align: center;
+margin-left:auto;
+margin-right:auto;
+border:1px solid #000;
+}

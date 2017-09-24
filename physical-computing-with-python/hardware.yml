@@ -1,0 +1,32 @@
+- name: 1 x Solderless breadboard
+  img: breadboard
+- name: Male-to-female jumper leads
+  img: jumper-male-to-female
+- name: Female-to-female jumper leads
+  img: jumper-female-to-female
+- name: Male-to-male jumper leads
+  img: jumper-male-to-male
+- name: 1 x Tactile button
+  img: tactile-push-button
+- name: 3 x LEDs
+  img: led
+- name: Ultrasonic distance sensor
+  img: ultrasonic-distance-sensor
+- name: Passive infrared motion sensor
+  img: pir
+- name: Light dependent resistor
+  img: ldr
+- name: 2 x 5V Micro Metal Gearmotor
+  img: motor
+- name: 3 x 330Ω resistors
+  img: resistor-330r
+- name: 470Ω resistor
+  img: resistor-470r
+- name: 1 x 1μF Capacitor
+  img: capacitor
+- name: Buzzer
+  img: piezo-buzzer
+- name: motor controller
+  img: motor-controller
+- name: battery pack
+  img: battery-pack
