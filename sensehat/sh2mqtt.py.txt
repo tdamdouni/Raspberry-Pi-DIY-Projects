@@ -1,0 +1,56 @@
+# Sensehat to MQTT brdige
+
+import sense_hat as sHat
+from time import sleep
+import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
+
+basePath    = 'usr/vish/'
+appPath     = 'sensehat'
+
+# MQTT Broker Params
+mqtt_broker = "192.168.1.54"
+mqtt_port   = 1883
+
+## Init Sensehat
+sh  = sHat.SenseHat();
+
+## Define MQTT callbacks
+def onConnect( client, userData, retCode ):
+    print "Connected to broker."
+    client.publish( basePath+'devices/sensehat', '{"name":"sensehat","desc":"Sensehat to MQTT bridge"}' )
+
+def senseNsend( client ):
+    dataPacket  = {}
+
+    # Get environmental sensors data from sense hat
+    dataPacket['humidity']  = sh.get_humidity()
+    dataPacket['pressure']  = sh.get_pressure()
+    dataPacket['temperature']   = sh.get_temperature()
+
+    mqttPacket = "{" + ','.join( '"%s":"%r"' %(k,v) for (k,v) in dataPacket.iteritems() ) + "}"
+    client.publish( basePath+appPath, mqttPacket )
+
+def main():
+    print "\t\t**    Sensehat to MQTT brdige    **"
+
+    ## Init MQTT Connection
+    print "Connecting to MQTT Broker: " + mqtt_broker
+    client  = mqtt.Client( client_id = "sh2mqtt_bridge",
+                            clean_session = True )
+    client.on_connect   = onConnect
+    client.connect( mqtt_broker, mqtt_port, 60 )
+    client.loop_start()
+
+    try:
+        while True:
+            senseNsend( client )
+            sleep( 10 )
+
+
+    except KeyboardInterrupt:
+        client.disconnect()
+        print "Stoping SH2MQTT Bridge"
+
+main()
+

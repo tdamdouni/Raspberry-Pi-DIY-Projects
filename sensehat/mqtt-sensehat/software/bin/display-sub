@@ -1,0 +1,61 @@
+#!/usr/bin/python
+
+# Subscribe to MQTT topic and update SenseHAT display
+
+import os
+import ConfigParser
+import sys
+import time
+import json
+from sense_hat import SenseHat
+import paho.mqtt.client as mqtt
+
+config = ConfigParser.ConfigParser()
+config.read("/opt/iotdemo/conf/iotdemo.conf")
+
+broker = config.get('common', 'mqtt_broker')
+
+topic = config.get('display', 'topic')
+
+sense = SenseHat()
+sense.set_rotation(0)
+red = (255, 0, 0)
+green = (0, 255, 0)
+
+# MQTT
+
+## The callback for when the client receives a CONNACK response from the server.
+
+def on_connect(client, userdata, flags, rc):
+        print("Connected with result code "+str(rc))
+        print broker + topic
+	sense.show_message("Connected", text_colour=green)
+        client.subscribe(topic, 0)
+
+## The callback for when a PUBLISH message is received from the server
+
+def on_message(client, userdata, msg):
+        print msg.payload
+	disp = json.loads((msg.payload))
+        sense.show_message(disp['text'], text_colour=(disp['red'], disp['green'], disp['blue']))
+
+## Setup client
+
+client = mqtt.Client(client_id="sensehat_display", clean_session=True)
+client.on_connect = on_connect
+client.on_message = on_message
+
+# Main loop
+
+try:
+    client.connect(broker, 1883, 60)
+except (KeyboardInterrupt, SystemExit):
+    raise
+except:
+    print "Failed to connect to broker"
+    sense.showmessage("Failed to connect to broker", text_colour=red)
+    time.sleep(1)
+
+## Run loop and wait for messages
+
+client.loop_forever()

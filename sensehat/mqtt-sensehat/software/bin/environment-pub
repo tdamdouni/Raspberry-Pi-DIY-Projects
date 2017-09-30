@@ -1,0 +1,42 @@
+#!/usr/bin/python
+
+# Read SenseHAT sensors and publish readings to MQTT topics
+
+import os
+import ConfigParser
+import sys
+import time
+import json
+from sense_hat import SenseHat
+import paho.mqtt.publish as publish
+
+config = ConfigParser.ConfigParser()
+config.read("/opt/iotdemo/conf/iotdemo.conf")
+
+broker = config.get('common', 'mqtt_broker')
+
+humidity_t = config.get('environment', 'humidity_topic')
+temperature_t = config.get('environment', 'temperature_topic')
+temphum_t = config.get('environment', 'temphum_topic')
+temppress_t = config.get('environment', 'temppress_topic')
+pressure_t = config.get('environment', 'pressure_topic')
+
+sense = SenseHat()
+
+while True:
+   humidity = sense.get_humidity()
+   temperature = sense.get_temperature()
+   temphum = sense.get_temperature_from_humidity()
+   temppress = sense.get_temperature_from_pressure()
+   pressure = sense.get_pressure()
+
+   msgs = [{'topic':humidity_t, 'payload':humidity}, (temperature_t, temperature, 0, False), (temphum_t, temphum, 0, False), (temppress_t, temppress, 0, False), (pressure_t, pressure, 0, False)]
+
+   try:
+      publish.multiple(msgs, hostname=broker, client_id="sensehat_sensors")
+   except (KeyboardInterrupt, SystemExit):
+      raise
+   except:
+      print "Failed to publish to broker"
+
+   time.sleep(2)

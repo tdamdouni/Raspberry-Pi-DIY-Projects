@@ -1,0 +1,1 @@
+Timestamp = 2016-05-15 05:32:09.359428,Temp = 23.420 deg C,Pressure  = 1008.89 hPa,Humidity  = 45.52 %

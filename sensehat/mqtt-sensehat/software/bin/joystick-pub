@@ -1,0 +1,31 @@
+#!/usr/bin/python
+
+# Wait for joystick events and publish direction + action to MQTT
+
+import os
+import ConfigParser
+import sys
+import time
+import json
+from sense_hat import SenseHat
+import paho.mqtt.publish as publish
+
+config = ConfigParser.ConfigParser()
+config.read("/opt/iotdemo/conf/iotdemo.conf")
+
+broker = config.get('common', 'mqtt_broker')
+
+topic = config.get('joystick', 'topic')
+
+sense = SenseHat()
+
+while True:
+   event = sense.stick.wait_for_event(emptybuffer=True)
+   msg = json.dumps({'action' : event.action, 'direction' : event.direction})
+
+   try:
+      publish.single(topic, msg, hostname=broker, client_id="sensehat_joystick")
+   except (KeyboardInterrupt, SystemExit):
+      raise
+   except:
+      print "Failed to publish to broker"

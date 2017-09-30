@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="mqttws31.js" type="text/javascript"></script>  
+    
+    <script type="text/javascript">  
+
+    var wsbroker = "test.mosquitto.org";  //mqtt websocket enabled broker
+    var wsport = 8080 // port for above
+
+    var client = new Paho.MQTT.Client( wsbroker, wsport, 
+        "clientId_" + parseInt(Math.random()*100,10) );  
+
+    client.onConnectionLost = function onConnectionLost(responseObject) {  
+      console.log( "onConnectionLost: "+responseObject.errorMessage );    
+    };
+
+    client.onMessageArrived = function onMessageArrived(message) {  
+      console.log("New message: "+message.payloadString);  
+      var status = document.getElementById("messages");  
+      var currentdate = new Date();  
+      status.innerHTML = status.innerHTML +  
+                          currentdate.getDate() + "-" +  
+                          (currentdate.getMonth()+1)  + "-" +  
+                          currentdate.getFullYear() + " "  +  
+                          currentdate.getHours() + ":"  +  
+                          currentdate.getMinutes() + ":" +  
+                          currentdate.getSeconds() +  
+                          ": " + message.payloadString + "<br/>";  
+    };
+
+    function onSuccess() {
+      console.log("mqtt connected");
+      // Connection succeeded; subscribe to our topic, you can add multile lines of these
+      client.subscribe('/World', {qos: 1});
+        
+      //use the below if you want to publish to a topic on connect
+      message = new Paho.MQTT.Message("Hello");
+      message.destinationName = "/World";
+      client.send(message);
+    }
+
+    function onFailure(message) {
+      console.log( "Connection failed: " + message.errorMessage );
+    }
+
+    var options = {
+      timeout: 3,
+      onSuccess: onSuccess,
+      onFailure: onFailure
+    };      
+
+    function connectToBroker() {
+      console.log( "Attempting connection..." );
+      client.connect( options );  
+    } 
+  </script>
+  </head>  
+  <body onload="connectToBroker();">  
+    <div id="status">  
+      Connecting to broker...  
+    </div>  
+    <div id="messages">  
+    </div>  
+  </body>   
+</html>  

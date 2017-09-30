@@ -1,0 +1,11 @@
+[Unit]
+Description=SenseHAT MQTT Display
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=no
+ExecStart=/opt/iotdemo/bin/joystick-pub
+
+[Install]
+WantedBy=multi-user.target

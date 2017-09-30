@@ -1,0 +1,65 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "SenseHat",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Temparature",
+						"size": "regular",
+						"value": "parseFloat(datasources[\"mercury-sensehat\"][\"usr/vish/sensehat\"][\"temperature\"]).toFixed(2)",
+						"sparkline": true,
+						"animate": true,
+						"units": "C"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Pressure",
+						"size": "regular",
+						"value": "parseFloat(datasources[\"mercury-sensehat\"][\"usr/vish/sensehat\"][\"pressure\"]).toFixed(2)",
+						"sparkline": true,
+						"animate": true,
+						"units": "mbar"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Humidity",
+						"size": "regular",
+						"value": "parseFloat(datasources[\"mercury-sensehat\"][\"usr/vish/sensehat\"][\"humidity\"]).toFixed(2)",
+						"sparkline": true,
+						"animate": true
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "mercury-sensehat",
+			"type": "paho_mqtt_js",
+			"settings": {
+				"server": "192.168.1.54",
+				"port": 9001,
+				"client_id": "freeboard-sh",
+				"topics": "usr/vish/sensehat"
+			}
+		}
+	],
+	"columns": 3
+}
