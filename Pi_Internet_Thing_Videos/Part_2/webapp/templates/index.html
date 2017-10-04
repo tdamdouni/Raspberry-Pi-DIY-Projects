@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <!-- Place favicon.ico in the root directory -->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="jumbotron">
+          <div class="container">
+            <h1>Raspberry Pi Internet 'Thing' Part 2</h1>
+            <p>Hello world! Welcome to my internet thing!</p>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>Switch: <span id='switch_value' class="label"></span></h3>
+            </div>
+            <div class="col-md-4">
+              <h3>LED</h3>
+              <button class="btn btn-default" type='button' id='led_on'>LED ON</button>
+              <button class="btn btn-default" type='button' id='led_off'>LED OFF</button>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script>
+          $(document).ready(function() {
+            // Setup button click handlers.
+            $('#led_on').click(function() {
+              $.post('/led/1');
+            });
+            $('#led_off').click(function() {
+              $.post('/led/0');
+            });
+
+            // Function to update the switch state on the page.
+            function updateSwitch(switchState) {
+              if (switchState === '0') {
+                $('#switch_value').text('Off');
+                $('#switch_value').toggleClass('label-danger', false);
+                $('#switch_value').toggleClass('label-default', true);
+              }
+              else if (switchState === '1') {
+                $('#switch_value').text('On');
+                $('#switch_value').toggleClass('label-danger', true);
+                $('#switch_value').toggleClass('label-default', false);
+              }
+            }
+
+            // Setup switch server sent event receiver.
+            var switchSource = new EventSource("{{ url_for('switch') }}");
+            switchSource.onmessage = function(e) {
+              updateSwitch(e.data);
+            }
+
+            // Set the switch based on the value passed to this template.
+            updateSwitch('{{ switch }}');
+          });
+        </script>
+    </body>
+</html>

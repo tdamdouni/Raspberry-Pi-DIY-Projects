@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <!-- Place favicon.ico in the root directory -->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="jumbotron">
+          <div class="container">
+            <h1>Raspberry Pi Internet 'Thing' Part 4</h1>
+            <p>Hello world! Welcome to my internet thing!</p>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>Switch: <span id='switch_value' class="label"></span></h3>
+            </div>
+            <div class="col-md-4">
+              <h3>LED</h3>
+              <button class="btn btn-default" type='button' id='led_on'>LED ON</button>
+              <button class="btn btn-default" type='button' id='led_off'>LED OFF</button>
+            </div>
+            <div class="col-md-4">
+              <h2>DHT Sensor</h2>
+              <canvas id='dht_chart' width='400' height='400'></canvas>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+        <script>
+          $(document).ready(function() {
+            // Setup temperature & humidity chart.
+            var ctx = $('#dht_chart').get(0).getContext('2d');
+            var dhtChart = new Chart(ctx).Line({
+              labels: [],
+              datasets: [
+                {
+                  label: "Temperature (Celsius)",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: []
+                },
+                {
+                  label: "Humidity (%)",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: []
+                }
+              ]
+            });
+
+            // Function to update the switch state on the page.
+            function updateSwitch(switchState) {
+              console.log('Switch state ' + switchState);
+              if (switchState === 0) {
+                $('#switch_value').text('Off');
+                $('#switch_value').toggleClass('label-danger', false);
+                $('#switch_value').toggleClass('label-default', true);
+              }
+              else if (switchState === 1) {
+                $('#switch_value').text('On');
+                $('#switch_value').toggleClass('label-danger', true);
+                $('#switch_value').toggleClass('label-default', false);
+              }
+            }
+
+            // Function to update the page with the latest thing state.
+            function updateTempHumidity(temperature, humidity) {
+              // Add the temperature and humidity to the chart.
+              dhtChart.addData([temperature, humidity],
+                new Date().toLocaleTimeString());
+              // Bump off the oldest chart measurement after 20 of them are taken.
+              if (dhtChart.datasets[0].points.length > 20) {
+                dhtChart.removeData();
+              }
+            }
+
+            // Set the switch based on the value passed to this template.
+            updateSwitch({{ switch }});
+
+            // Create SocketIO connect and attach handlers for events from the server.
+            var socket = io.connect();
+            socket.on('switch_change', function(e) {
+              updateSwitch(e.switch);
+            });
+            socket.on('temp_humidity_change', function(e) {
+              updateTempHumidity(e.temperature, e.humidity);
+            });
+
+            // Setup button click handlers.
+            $('#led_on').click(function() {
+              // Use SocketIO to send a LED change event.
+              socket.emit('change_led', 'on')
+            });
+            $('#led_off').click(function() {
+              socket.emit('change_led', 'off')
+            });
+          });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+doctype
+html
+  head
+    title Raspberry Pi Interface
+    script(src="/js/jquery-2.0.3.min.js")
+    script(src="/js/interface.js")
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    header
+      div.mainContainer
+        h1 Raspberry Pi Interface
+        h2 Sensor Readings
+        p Temperature: 
+          span#temperature 0
+          span  C
+        p Humidity: 
+          span#humidity 0
+          span  %
+
+        h2 Camera
+        img#camera(src='')

@@ -1,0 +1,81 @@
+body {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.header {
+	padding-top: 70px;
+	padding-left: 30px;
+	width: 50%;
+	height: 150px;
+	font-family: 'Quicksand','Open Sans', sans-serif;
+}
+
+.temperatureHumidity {
+	margin-top: 30px;
+}
+
+.temperature {
+	display: inline;
+	background-color: white;
+	height: 200px;
+	text-align: left;
+}
+
+.humidity {
+	display: inline;
+	background-color: white;
+	height: 200px;
+	text-align: left;
+}
+
+.hugenumber {
+	font-size: 500%;
+	display: inline;
+}
+
+.unitImage {
+	height:50px;
+	width:auto;
+	display:inline;
+}
+
+.doorIntrusion {
+	margin-top: 50px;
+}
+
+.lamp {
+	display: inline;
+	background-color: white;
+	height: 200px;
+	text-align: left;
+}
+
+.photo {
+	display: inline;
+	background-color: white;
+	height: 200px;
+	text-align: left;
+}
+
+
+/* ABOUT PAGE */
+
+.aboutDescription {
+	margin-top: 50px;
+	font-family: 'Roboto','Quicksand','Open Sans', sans-serif;
+	font-size: 20px;
+}
+
+.names {
+	margin-top: 50px;
+	font-family: 'Roboto','Quicksand','Open Sans', sans-serif;
+	font-size: 20px;
+}
+
+/* HELP PAGE */
+.helpInitialtext {
+	margin-top: 50px;
+	font-family: 'Roboto','Quicksand','Open Sans', sans-serif;
+	font-size: 20px;
+}

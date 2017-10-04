@@ -1,0 +1,6 @@
+sudo apt-get install bluetooth bluez-tools
+sudo apt-get install build-essential autoconf glib2.0 libglib2.0-dev libdbus-1-dev libudev-dev libical-dev libreadline-dev
+sudo apt-get install rsync python-dbus python3-dbus python-dbusmock python3-dbusmock
+sudo pip3 install Sphinx
+sudo pip3 install sphinx_rtd_theme
+sudo pip3 install pycodestyle

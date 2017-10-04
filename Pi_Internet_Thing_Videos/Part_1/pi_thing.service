@@ -1,0 +1,8 @@
+[Unit]
+Description=Raspberry Pi Internet Thing
+
+[Service]
+ExecStart=/usr/bin/python /home/pi/Pi_Internet_Thing_Videos/Part_1/webapp/main.py
+
+[Install]
+WantedBy=multi-user.target
