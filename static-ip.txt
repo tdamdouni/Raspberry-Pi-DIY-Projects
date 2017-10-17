@@ -1,0 +1,14 @@
+# In /etc/network/interfaces
+
+iface usb0 inet static
+    dns-nameservers 8.8.8.8 8.8.4.4
+    address 10.0.16.16
+    netmask 255.255.0.0
+    gateway 10.0.16.32
+    
+# In /etc/dhcpcd.conf
+
+denyinterfaces usb0
+
+
+I'm not sure if the "dns-nameservers" line actually works, I've been having trouble with /etc/resolv.conf being trounced.
