@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "tph.py", line 20, in <module>
+    sense.show_message(msg, scroll_speed=0.05, back_colour=bg)
+  File "/usr/lib/python2.7/dist-packages/sense_hat/sense_hat.py", line 465, in show_message
+    time.sleep(scroll_speed)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tph.py", line 4, in <module>
+    sense.rotate(180)
+AttributeError: 'SenseHat' object has no attribute 'rotate'
