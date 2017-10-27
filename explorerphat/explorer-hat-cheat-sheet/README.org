@@ -1,0 +1,112 @@
+* ExplorerHAT Cheatsheet
+** Simple Outputs
+*** Wiring
+[[file:images/led.png]]
+*** Code
+#+begin_src python
+import explorerhat
+from time import sleep
+explorerhat.output.one.on()
+sleep(3)
+explorerhat.output.one.off()
+#+end_src
+Additionally the following methods are supported
+| toggle()                                                | Changes the output to its opposite state                                         |
+| blink( on_time, off_time )                              | Turns the output on for "on_time" and then off for "off_time"                    |
+| pulse( fade_in_time, fade_out_time, on_time, off_time ) | Same as blink, but lets you fade between on and off                              |
+| fade( from, to, time )                                  | Fade from 0-100 to 0-100 brightness over a number of seconds specified by "time" |
+| stop()                                                  | Stops any running blink, fade or pulse action                                    |
+
+** Simple Inputs
+*** Wiring
+[[file:images/button.png]]
+*** Code
+**** Reading the value of an input
+#+begin_src python
+import explorerhat
+print(explorerhat.input.on.read())
+#+end_src
+**** Calling a handler functionn
+#+begin_src python
+import explorerhat
+
+def push(input):
+    state = input.read()
+    if state == 1:
+        print('You pushed me')
+    else:
+        print('You released me')
+
+explorerhat.input.one.changed(push)
+#+end_src
+or alternatively:
+#+begin_src python
+import explorerhat
+
+def pushed(input):
+    print('You pushed me')
+
+def released(input):
+    print('You released me')
+
+explorerhat.input.one.on_high(pushed)
+explorerhat.input.one.on_low(released)
+#+end_src
+** PIR
+*** Wiring
+| PIR | ExplorerHAT |
+| VCC | 5V          |
+| OUT | INPUT #     |
+| GND | GND         |
+[[file:images/pir.png]]
+*** Code
+**** Reading the value of the PIR
+#+begin_src python
+import explorerhat
+print(explorerhat.input.on.read())
+#+end_src
+**** Calling a handler function
+#+begin_src python
+import explorerhat
+
+def moving(input):
+    state = input.read()
+    if state == 1:
+        print('MOVING')
+    else:
+        print('NOT MOVING')
+
+explorerhat.input.one.changed(moving)
+#+end_src
+
+** Analog Inputs
+*** Wiring
+[[file:images/ldr.png]]
+*** Code
+#+begin_src python
+import explorerhat
+
+print(explorerhat.analog.one.read())
+#+end_src
+or detect a change, for example in the code below this is looking for a change of only 0.01mV
+#+begin_src python
+import explorerhat
+
+def light(channel, event):
+    print('Light changed')
+    
+explorerhat.analog.one.changed(light,0.01)
+#+end_src
+** Motor
+*** Wiring
+[[file:images/motor.png]]
+*** Code
+#+begin_src python
+import explorerhat
+from time import sleep
+
+explorerhat.motor.one.forward(100)
+sleep(3)
+explorerhat.motor.one.backward(100)
+sleep(3)
+#+end_src

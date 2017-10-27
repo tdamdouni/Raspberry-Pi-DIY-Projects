@@ -1,0 +1,10 @@
+- name: Explorer HAT
+  img: explorer-hat
+- name: 4 x male-to-female jumper leads
+  img: jumper-male-to-female
+- name: 2 x motors
+  img: motor
+- name: 2 x moon buggy wheels
+  img: foam-wheel
+- name: USB power pack
+  img: usb-power-pack
