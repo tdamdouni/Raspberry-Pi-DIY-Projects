@@ -1,0 +1,39 @@
+---
+##################
+# Basic Settings #
+##################
+
+# Image resolution Set to empty object (`{ }`) to use default resolution.
+resolution: { }
+  # width: 480
+  # height: 270
+
+# The number of images to capture.
+total_images: 10
+
+# The interval between captures (in seconds).
+interval: 1
+
+# Whether to create an animated gif after capturing the time-lapse images.
+create_gif: False
+
+# Whether to create an video after capturing the time-lapse images.
+create_video: False
+
+#####################
+# Advanced settings #
+#####################
+
+# ISO value. 0 = auto, 60-800 for manual ISO.
+iso: 0
+
+# Shutter speed. 0 = auto, else value in microseconds (seconds * 1000000).
+shutter_speed: 0
+
+# White balance. Set to empty object (`{ }`) to use auto white balance.
+white_balance: { }
+  # red_gain: 1.3
+  # blue_gain: 1.75
+
+# Rotate the images taken by the camera. Possible value are 0, 90, 180 or 270
+rotation: 0
