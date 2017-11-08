@@ -1,0 +1,3 @@
+B8:27:EB:9A:D8:A3 #rpi
+F8:1A:67:4D:82:E5 #ripe atlas probe
+78:44:76:7A:A6:86 #webradio

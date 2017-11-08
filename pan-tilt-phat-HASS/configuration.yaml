@@ -1,0 +1,67 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 51.3797
+  longitude: -0.2416
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 22
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/London
+  # Customization file
+  customize: !include customize.yaml
+
+frontend:
+config:
+
+http:
+updater:
+logbook:
+
+# Track the sun
+sun:
+python_script:
+script: !include scripts.yaml
+automation: !include automations.yaml
+
+# Camera
+camera:
+  - platform: rpi_camera
+    vertical_flip: 1
+    timelapse: 5000
+    file_path: /home/pi/Desktop/hass-cam/image.jpg
+
+
+pan_tilt_phat:
+
+input_number:
+  pan_control:
+    name: Pan
+    initial: 0
+    min: -90
+    max: 90
+    step: 1
+  tilt_control:
+    name: Tilt
+    initial: 0
+    min: -90
+    max: 90
+    step: 1
+
+group:
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - camera.raspberry_pi_camera
+      - group.controls_group
+
+  controls_group:
+    name: Controls
+    entities:
+      - sensor.pan_tilt_phat
+      - script.1503899567501
+      - input_number.pan_control
+      - input_number.tilt_control

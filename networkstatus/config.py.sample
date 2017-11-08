@@ -1,0 +1,11 @@
+broker = {
+	"hostname": "mqtt.tiefpunkt.com",
+	"port": 1883,
+	"user": "",
+	"password": ""
+	}
+
+base_topic = "mumalab/room/network/"
+interval = 30
+mac_filter = os.path.dirname(os.path.abspath(__file__)) + "/filter.txt"
+ssh_key = os.path.dirname(os.path.abspath(__file__)) + "/router.key"
