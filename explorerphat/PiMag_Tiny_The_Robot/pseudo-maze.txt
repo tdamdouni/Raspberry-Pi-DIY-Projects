@@ -1,0 +1,14 @@
+1   pseudo code for reading destance sensor
+2
+3   listOfMoves = [ forward, right, forward, right, forward, left, forward, left, forward]
+4
+5   fuction turn(move)
+6	   if move equals 'left' then set left motors forwards and right motors backwards until turned 90 degrees
+7	   if move equals 'right' then set left motors backwards and right motors forwards until turned 90 degrees
+8	   if move equals 'forward' then set left motors forwards and right motors forwards
+9	   
+10   for nextMove in listOfMoves
+11     read sensor
+12     if sensor less than 10cm then turn(nextMove)
+13     sleep for 0.1 seconds
+	

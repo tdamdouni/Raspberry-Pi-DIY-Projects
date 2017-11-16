@@ -1,0 +1,7 @@
+1   pseudo code for straight-line speed test
+2
+3	while True
+4     read sensor
+5     if sensor return value is less than 10cm then turn left
+6     if sensor returned value is greater than 15cm then turn right
+7     sleep for 0.1 seconds
