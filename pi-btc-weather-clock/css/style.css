@@ -1,0 +1,131 @@
+@font-face {
+	font-family: OSP-DIN;
+	src: url(../font/OSP-DIN.ttf);
+}
+
+body {
+	text-align: center;
+	background: gray;
+	color: white;
+	font-family: 'OSP-DIN', Arial, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+#shell {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+#display {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: black;
+	-webkit-animation: random 300s infinite;
+	animation: random 300s infinite;
+}
+
+@-webkit-keyframes random {
+	0% { background-color: black; }
+	25% { background-color: maroon; }
+	50% { background-color: indigo; }
+	75% { background-color: darkgreen; }
+	100% { background-color: midnightblue; }
+}
+
+.forecast {
+	width: 20%;
+}
+
+#forecast1 {
+	color: #fff;
+}
+
+#forecast2 {
+	color: #ddd;
+}
+
+#forecast3 {
+	color: #bbb;
+}
+
+#forecast4 {
+	color: #999;
+}
+
+#forecast5 {
+	color: #777;
+}
+
+.wi {
+	font-size: 14vmin;
+	line-height: 19vmin !important;
+}
+
+#current {
+	height: 100%;
+	padding-top: 4vh;
+}
+
+#current .wi {
+	font-size: 18vmin;
+}
+
+#forecast {
+	font-size: 15vmin;
+	margin-bottom: 4vmin;
+}
+
+.day {
+	font-size: 3.5vmin;
+	margin-bottom: 1.5vmin;
+}
+
+.desc {
+	font-size: 3.5vmin;
+	margin-top: 2.5vmin;
+	margin-bottom: 0.5vmin;
+}
+
+.highTemp {
+	font-size: 3vmin;
+}
+
+.lowTemp {
+	font-size: 3vmin;
+}
+
+.currentTemp {
+	font-size: 3.5vmin;
+}
+
+.temp {
+	font-size: 15vmin;
+}
+
+#current .desc {
+	font-size: 8vmin;
+	margin-bottom: 0.5vmin;
+}
+
+#current .tvminp {
+	font-size: 2.5vmin;
+}
+
+#time {
+	font-size: 15vmin;
+}
+
+#date {
+	font-size: 6vmin;
+	color: #ccc;
+}
+
+#btcprice {
+	font-size: 9vmin;
+	color: #eee;
+}

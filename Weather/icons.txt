@@ -1,0 +1,52 @@
+ 0 - Thunderstorms
+ 1 - Windy Rain
+ 2 - Windy Rain
+ 3 - Thunderstorms
+ 4 - T-Storms
+ 5 - Rain Snow
+ 6 - Rain Sleet
+ 7 - Snow/Rain Icy Mix
+ 8 - Freezing Drizzle
+ 9 - Drizzle
+10 - Freezing Rain
+11 - T-Showers
+11 - Showers
+11 - Light Rain
+12 - Heavy Rain
+13 - Snow Flurries
+14 - Light Snow
+15 - Snowflakes
+16 - Heavy Snow
+17 - Thunderstorms
+18 - Hail
+19 - Dust
+20 - Fog
+21 - Haze
+22 - Smoke
+23 - Windy
+24 - Windy
+25 - Frigid
+26 - Cloudy
+27 - Mostly Cloudy Night (the "Night" will not be included)
+28 - Mostly Cloudy
+29 - Partly Cloudy Night (the "Night" will not be included)
+30 - Partly Cloudy
+31 - Clear Night (the "Night" will not be included)
+32 - Sunny
+33 - Fair
+33 - Mostly Clear Night (the "Night" will not be included)
+34 - Fair
+34 - Mostly Sunny
+35 - Thunderstorms
+36 - Hot
+37 - Isolated Thunder
+38 - Scattered T-Storms
+39 - Scattered Rain
+40 - Heavy Rain
+41 - Scattered Snow
+42 - Heavy Snow
+43 - Windy/Snowy
+44 - Partly Cloudy Day
+45 - Scattered Showers Night (the "Night" will not be included)
+46 - Snowy Night
+47 - Scattered T-Storms Night (the "Night" will not be included)

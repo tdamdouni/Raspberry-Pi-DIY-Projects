@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="application-name" content="Pi BTC Weather Clock"/>
+		<meta name="description" content="Pi BTC Weather Clock"/>
+
+		<title>Pi BTC Weather Clock</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/weather-icons.css" />
+	</head>
+	<body>
+		<div id="shell">
+			<table id="display">
+				<tbody>
+					<tr>
+						<td id="current" colspan="2">
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="currentTemp">Temperature:<br /><span class="temp"></span></div>
+						</td>
+						<td colspan="3">
+							<div id="time"></div>
+							<div id="date"></div>
+							<div id='btcprice'></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="forecast" id="forecast1">
+							<div class="day"></div>
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="highTemp">High: <span class="high"></span></div>
+							<div class="lowTemp">Low: <span class="low"></span></div>
+						</td>
+						<td class="forecast" id="forecast2">
+							<div class="day"></div>
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="highTemp">High: <span class="high"></span></div>
+							<div class="lowTemp">Low: <span class="low"></span></div>
+						</td>
+						<td class="forecast" id="forecast3">
+							<div class="day"></div>
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="highTemp">High: <span class="high"></span></div>
+							<div class="lowTemp">Low: <span class="low"></span></div>
+						</td>
+						<td class="forecast" id="forecast4">
+							<div class="day"></div>
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="highTemp">High: <span class="high"></span></div>
+							<div class="lowTemp">Low: <span class="low"></span></div>
+						</td>
+						<td class="forecast" id="forecast5">
+							<div class="day"></div>
+							<div class="icon"></div>
+							<div class="desc"></div>
+							<div class="highTemp">High: <span class="high"></span></div>
+							<div class="lowTemp">Low: <span class="low"></span></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script src="libs/jquery.min.js"></script>
+		<script src="libs/moment.min.js"></script>
+		<script src="js/icons.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
