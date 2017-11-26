@@ -1,0 +1,14 @@
+# /etc/pulse/default.pa
+
+# module-suspend-on-idle is the module that suspends ALSA, stopping the clock, when
+# Pulse determines that there's no incoming audio stream.
+# Raising this timeout keeps the i2s clock running perpetually, and eliminates pops
+
+### Automatically suspend sinks/sources that become idle for too long
+load-module module-suspend-on-idle timeout=604800
+
+### Allow local connections over tcp, for mopidy etc
+load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+
+### Allow unauthenticated connections from other users so aplay, etc work via pulse
+load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulseaudio.socket
