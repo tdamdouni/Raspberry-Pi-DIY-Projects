@@ -1,0 +1,175 @@
+#This is an overview of all the commands you need to properly configure the Raspberry Pi as an access point server.
+
+#Step 1: Run updates
+sudo apt-get update
+
+#Step 2: Check that you are connected to the Internet. The following command should print 5 packets from google.com
+ping -c 5 google.com
+
+#Step 3: Install Apache
+sudo apt-get install apache2 -y
+
+#Step 4: Navigate to installation folder
+cd /var/www/
+
+#Step 5: Change permissions to enter and edit the html file
+sudo chown pi: html
+
+#Step 6: Navigate back to home folder
+cd
+
+#Step 7: Install server software onto RPi
+sudo apt-get install hostapd isc-dhcp-server
+
+#Step 8: Install an iptables manager:
+sudo apt-get install iptables-persistent
+
+    #Say "yes" to both config screens (by typing "y")
+
+#Step 9: Set up the DHCP Server - Edit the DHCP file.
+sudo nano /etc/dhcp/dhcpd.conf
+
+  #Add a "#" in front of the following lines:
+    option domain-name "example.org";
+    option domain-name-servers ns1.example.org, ns2.example.org;
+  
+  #Find the lines that say:
+    # If this DHCP server is the official DHCP server for the local
+    # network, the authoritative directive should be uncommented.
+    #authoritative;
+
+  #Remove the "#" in front of the following lines:
+    #authoritative;
+
+  #Add the following code at the bottom of the file:
+    subnet 192.168.42.0 netmask 255.255.255.0 {
+      range 192.168.42.10 192.168.42.50;
+      option broadcast-address 192.168.42.255;
+      option routers 192.168.42.1;
+      default-lease-time 600;
+      max-lease-time 7200;
+      option domain-name "local";
+      option domain-name-servers 8.8.8.8, 8.8.4.4;
+    }
+
+  #Save the file by typing "Control-X", then "Y" and "Enter"
+ 
+#Step 10: Set up the DHCP Server - Edit the default file for the DHCP server
+  sudo nano /etc/default/isc-dhcp-server
+
+  #Scroll down to INTERFACES="" and change it to read INTERFACES="wlan0" (or whatever the name of your WiFi adapter is)
+
+#Step 11: Set up wlan0 for static IP.
+  sudo ifdown wlan0
+
+  #Set up the wlan0 connection to be static and incoming. Edit the following file:
+    nano /etc/network/interfaces
+  
+  #Edit the file so that it looks like this:
+    auto lo
+
+    iface lo inet loopback
+    iface eth0 inet dhcp
+
+    allow-hotplug wlan0
+
+    iface wlan0 inet static
+      address 192.168.42.1
+      netmask 255.255.255.0
+
+     #iface wlan0 inet manual
+     #wpa-roam /etc/wpa-supplicant/wpa_supplicant.conf
+     #iface default inet dhcp
+
+   #Save the file and exit (Control-X Y)
+   
+   #Assign a static IP address to the wifi adapter by running:
+    sudo ifconfig wlan0 192.168.42.1
+
+
+#Step 12: Configure Access Point
+  sudo nano /etc/hostapd/hostapd.conf
+  
+  #Write in the following exactly as-is (no extra spaces): 
+    interface=wlan0
+    ssid=HelloWorld
+    country_code=US
+    hw_mode=g
+    channel=6
+    macaddr_acl=0
+    auth_algs=1
+    ignore_broadcast_ssid=0
+    #wpa=2
+    #wpa_passphrase=Raspberry
+    #wpa_key_mgmt=WPA-PSK
+    #wpa_pairwise=CCMP
+    #wpa_group_rekey=86400
+    ieee80211n=1
+    wme_enabled=1
+  
+  #To enable a password, remove the "#" in front of the 5 lines starting with "wpa" 
+  #Change the wpa_passphrase to whatever password you chose for your RPi
+  #You can change the network broadcast name by changing the text after "ssid"
+  
+  #Save and close
+  
+  #Tell the RPi where to find this configuration file:
+   sudo nano /etc/default/hostapd
+  
+  #Find the line "#DAEMON_CONF="" ", remove the "#" and edit it so it says:
+    DAEMON_CONF="/etc/hostapd/hostapd.conf"
+  
+  #Save and Close
+  
+  #Edit the initialization file for hostapd:
+    sudo nano /etc/init.d/hostapd
+    
+    #Find the line "DAEMON_CONF="" ", and edit it so it says:
+    DAEMON_CONF=/etc/hostapd/hostapd.conf
+  
+#Step 13: Configure Network Address Translation ("NAT") to allow multiple clients to connect to the Raspberry Pi WiFi:
+  #Edit the sysctl configuration file:
+    sudo nano /etc/sysctl.conf
+    
+    #Add the following to the end of the file:
+      net.ipv4,ip_forward=1
+    
+    #Exit and save the file.
+  
+  #Activate IP Forwarding:
+    sudo sh -c “echo 1 > /proc/sys/net/ipv4/ip_forward”
+
+  #Create network translation between eth0 and wlan0:
+    sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+    sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+  #Ensure NAT happens on reboot:
+    sudo sh -c “iptables-save > /etc/iptables/rules.v4”
+  
+
+#Step 14: Test your access point.
+sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf
+
+  #Check status of host AP server and DHCP server:
+    sudo service hostapd status
+    sudo service isc-dhcp-server status
+
+#Step 15: Finishing up by setting up a daemon - a program that starts everytime the RPi boots.
+sudo service hostapd start
+sudo service isc-dhcp-server start
+
+  #Run the following two commands:
+  sudo update-rc.d hostapd enable 
+  sudo update-rc.d isc-dhcp-server enable
+
+
+#Done! Go forth and create! If you need help w/ next steps, go to the "Server Website" folder
+
+
+
+
+  
+
+
+  

@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--This is the title of your webpage that is displayed 
+on the top of the browser -->
+<title>Jenfoxbot's Local Web Server! </title>
+<style>
+div.img img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 2px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+</head>
+<body>
+
+<!-- This is the heading at the top of the front page-->
+<h2><center>
+    jenfoxbot's Web Server!
+</center></h2>
+<!-- This is the short description at the top-->
+<h3><center>
+	Hosted on a Raspberry Pi :D
+</center></h3>
+
+<!-- This is the longer description at the top-->
+<div><center>
+  <p>Depending on the position of the moon & stars*, this hotspot may or may not provide an Internet connection.  </p>
+  <p>If there IS an Internet connection, check out <a href="http://www.foxbotindustries.com">jenfoxbot's website</a> and learn about the other cool stuff she does!</p>
+  <p><i>*And by position of the moon & stars we mean the current whims of the builder, jenfoxbot :)</i></p>
+  </center>
+</div>
+
+<!-- This is a table that sets up links to more pages in your website.-->
+<div><center>
+<div class="img">
+<table>
+  <tr>
+  <!-- Headers for pages. Add more by adding more table headers after Books like this: <th>Your Table Header Here</th>-->
+    <th>Helpful Information</th>
+    <th>Books</th>
+  </tr>
+  <tr>
+  <!-- Links and images for internal HTML pages. Change the links by changing this text: href="internal/NewLinkHere.html"
+  Change the images by changing: src="images/NewImageTitleHere.jpg"-->
+    <td><a target="_top" href="internal/helpfulinfo.html"><img src="images/teddyBearInWoods.jpg" style="width:300px;height=300px"></a></td>
+    <td><a target="_top" href="internal/books.html"><img src="images/teddybearReadingBook.jpg" style="width:300px;height=300px"></a></td>
+  <tr> 
+  <!--Brief description of each page on your website.-->
+    <td>A handful of handy documents like a survival guide and an overview of HTML :) </td>   
+    <td>A few of my favorite books :D</td>
+</table>
+</div>
+</center></div>
+
+<!--Optional: A short description of this site at the bottom.-->
+<div>
+<h3>About this Site</h3>
+<p>This website is a <strong>local web server</strong> that stores things I want to have access to if the Internet goes down. Or if I am traveling to a place with spotty WiFi and want to make sure I have access to certain books/documents. Or heck, if I'm moving and my ISP is taking its sweet time to get me hooked up to the Internet. Or, you know, if the weather decides that it is dismantling our cable infrastructure.</p>
+<p>There are tons of reasons why this local network would be helpful! Those are a few of mine.</p>
+<p>I also want to help folks get used to building web servers and hosting information so that we could ultimately build a public Internet!</p>
+<p>Heck yes, power to the people :)</p>
+
+
+</body>
+</html>

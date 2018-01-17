@@ -1,0 +1,106 @@
+#! /usr/bin/python
+#
+# HOW TO USE:
+#
+# HAVE TO RUN THIS SCRIPT WITH SUDO PRIVILIDGES. Shutdown commands needs SUDO.
+# As always, we recommend using the latest version of the software. To do that use commands
+#  sudo apt-get update
+#  sudo apt-get upgrade
+#  sudo apt-get dist-upgrade    (Note - this will update the kernel and the OS. Use it with caution.)
+#
+#
+#
+# Recommend to save this file in /usr/local/bin. Please make sure the run bit is set. Here are the commands:
+# sudo cp GPIO-crontab.py /usr/local/bin
+# sudo chmod 755 /usr/local/bin/GPIO-crontab.py
+#
+# Now modify the crontab to execute the command every 2 minutes (or longer).
+# Use "sudo crontab -e" command to add the line below:
+#    */2 * * * * python /usr/local/bin/GPIO-crontab.py
+#
+#  The */2 can be replaced with */1 for every 1 minute, */3 for every 3 minnutes etc.
+#
+# Best to reboot the Pi to make sure all changes etc have been adopted.
+#
+#
+# RIGHT TO USE STATEMENT
+# (C) 2017 Alchemy Power Inc.
+# Right to use, copy, distribute etc. of this code with Pi-UpTimeUPS or
+# PiZ-UpTime or any other Alchemy Power Inc. product or any product. Right is granted to you
+# by Alchemy Power Inc. as long as you maintain the lines from line 1 to "END OF HEADERS" line
+# with every copy.
+#
+####################  END OF HEADERS  ##########################
+#
+#
+# This file shows alternate ways to use the Python code. You can use whichever one you
+# are familair with.
+#
+# Instead of firt line /usr/bin/python, you can use line below to setup the environment for Python.
+#
+#!/usr/bin/env python
+#
+#
+#
+import RPi.GPIO as GPIO
+import time
+#
+# import os if using the os method to initiate the shutdown.
+#
+import os
+#
+# sys is needed for flushing std out on an interrupt.
+#
+import sys
+#
+# import subprocess to start the shut down process as a seperate thread
+# and exit the script cleaning out the GPIO.
+#
+import subprocess
+# Use the number carefully - GPIO.BOARD for pin number on the board.
+# Use the BCM method if
+# Use the GPIO.BCM if you are using the BCM method to assign the GPIO number.
+# Make sure the GPIO jumper is in.
+# If the GPIO jumper is out, the GPIO connection is broken.
+#
+buttonPin = 37 # GPIO 26, Pin 37
+# Use pin number 37 on the board by using the setmode below.
+#
+GPIO.setmode(GPIO.BOARD)
+#
+# Use GPIO number if you are using BCM technique below.
+# GPIO.setmode(GPIO.BCM)
+#
+# Use the pull up i.e. expect output to be zero. When it goes to 1, GPIO is set.
+GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#
+# Opposite of what we did above - normally 1, GPIO set when it goes to zero.
+# GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+#
+# Use schlaf variable below to indicate how long the program sleeps for before checking again.
+#
+if (not(GPIO.input(buttonPin))):
+	# GPIO is 1. We are here because the sensors triggered the battery being low.
+	time.sleep(2)
+	# Sleep for 2 seconds, just to make sure the battery level is indeed low and not a jitter...
+	# Check again.
+	if (not(GPIO.input(buttonPin))):
+		print("Shutdown initiated at %s " % (time.ctime()))
+		#
+		# The command shuts down the pi in 2 minutes. Replace
+		# 2 with word "now" (without the quotes) for immediate
+		# shutdown. If you use the Pi-Zero-Uptime (the one which uses 14500 battery)
+		# recommend using shutdown -h now instead of shutdown -h 2.
+		# The subprocess method forks a process which can run in the background while this
+		# program exits properly. os.system method continues to run in the program thread.
+		#
+		#
+		subprocess.call("shutdown -h 2 &", shell=True)
+		#
+		# Sleep for a second or so for the shutdown process to fork and then exit
+		# script cleaning out GPIO.
+		time.sleep(2)
+		# Flush any stdout messages before exiting..
+		sys.stdout.flush()
+		#  Force exit.
+		exit()
