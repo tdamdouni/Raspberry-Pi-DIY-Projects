@@ -1,6 +1,6 @@
 # Raspberry Pi System Stats
 
-_Captured: 2017-05-10 at 23:53 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/networked-pi/raspberry-pi-system-stats-python)_
+_Captured: 2017-10-05 at 09:04 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/networked-pi/raspberry-pi-system-stats-python)_
 
 Live system stats are the "hello world" of Raspberry Pi networking. In this guide you'll learn about a couple of Python modules:
 
@@ -78,3 +78,7 @@ Right-click and download: [system-stats.py](https://learn.pimoroni.com/tutorial/
     
 
 Download this code to your Raspberry Pi and run with:
+    
+    
+    python system-stats.py
+    
