@@ -1,0 +1,26 @@
+Last login: Mon Nov 13 15:21:37 on ttys000
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.105
+pi@192.168.178.105's password: 
+Linux pienviro 4.9.59+ #1047 Sun Oct 29 11:47:10 GMT 2017 armv6l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Nov 13 14:13:45 2017 from 192.168.178.20
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pienviro:~ $ cd Pimoroni/envirophat/examples/
+pi@pienviro:~/Pimoroni/envirophat/examples $ python all.py 
+^Cpi@pienviro:~/Pimoroni/envirophat/examples $ 
+Temp: 23.0c
+Pressure: 95495.55Pa
+Light: 60
+RGB: 136, 119, 140 
+Heading: 283.72
+Analog: 0: 0.537, 1: 0.576, 2: 0.531, 3: 0.555
+

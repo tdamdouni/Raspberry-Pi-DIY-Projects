@@ -1,0 +1,359 @@
+Last login: Fri Oct 27 21:40:03 on ttys000
+Peters-MacBook-Pro:~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Oct 16 14:18:06 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@piblinkt:~ $ sudo apt-get update
+Get:1 http://mirrordirector.raspbian.org jessie InRelease [14.9 kB]
+Hit http://apt.adafruit.com jessie InRelease                                   
+Get:2 http://archive.raspberrypi.org jessie InRelease [22.9 kB]
+Get:3 http://mirrordirector.raspbian.org jessie/main armhf Packages [9,536 kB]
+Hit http://apt.adafruit.com jessie/main armhf Packages                         
+Hit http://archive.raspberrypi.org jessie/main armhf Packages                  
+Hit http://archive.raspberrypi.org jessie/ui armhf Packages                    
+Ign http://apt.adafruit.com jessie/main Translation-en_GB                      
+Ign http://apt.adafruit.com jessie/main Translation-en                         
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB               
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB                 
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Get:4 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43.3 kB]
+Get:5 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84.2 kB]
+Get:6 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1,356 B]   
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en              
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB            
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en               
+Fetched 9,702 kB in 30s (322 kB/s)                                             
+Reading package lists... Done
+pi@piblinkt:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  wpasupplicant
+1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 777 kB of archives.
+After this operation, 5,120 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main wpasupplicant armhf 2.3-1+deb8u5 [777 kB]
+Fetched 777 kB in 0s (893 kB/s)        
+Reading changelogs... Done
+(Reading database ... 38236 files and directories currently installed.)
+Preparing to unpack .../wpasupplicant_2.3-1+deb8u5_armhf.deb ...
+Unpacking wpasupplicant (2.3-1+deb8u5) over (2.3-1+deb8u4) ...
+Processing triggers for dbus (1.8.22-0+deb8u1) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Setting up wpasupplicant (2.3-1+deb8u5) ...
+pi@piblinkt:~ $ sudo apt-get install build-essential python-dev python-pip
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+build-essential is already the newest version.
+python-pip is already the newest version.
+The following extra packages will be installed:
+  libpython-dev libpython2.7-dev python2.7-dev
+The following NEW packages will be installed:
+  libpython-dev libpython2.7-dev python-dev python2.7-dev
+0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+Need to get 18.2 MB of archives.
+After this operation, 25.7 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libpython2.7-dev armhf 2.7.9-2+deb8u1 [17.9 MB]
+Get:2 http://mirrordirector.raspbian.org/raspbian/ jessie/main libpython-dev armhf 2.7.9-1 [19.6 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main python2.7-dev armhf 2.7.9-2+deb8u1 [287 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main python-dev armhf 2.7.9-1 [1,188 B]
+Fetched 18.2 MB in 15s (1,188 kB/s)                                            
+Selecting previously unselected package libpython2.7-dev:armhf.
+(Reading database ... 38236 files and directories currently installed.)
+Preparing to unpack .../libpython2.7-dev_2.7.9-2+deb8u1_armhf.deb ...
+Unpacking libpython2.7-dev:armhf (2.7.9-2+deb8u1) ...
+Selecting previously unselected package libpython-dev:armhf.
+Preparing to unpack .../libpython-dev_2.7.9-1_armhf.deb ...
+Unpacking libpython-dev:armhf (2.7.9-1) ...
+Selecting previously unselected package python2.7-dev.
+Preparing to unpack .../python2.7-dev_2.7.9-2+deb8u1_armhf.deb ...
+Unpacking python2.7-dev (2.7.9-2+deb8u1) ...
+Selecting previously unselected package python-dev.
+Preparing to unpack .../python-dev_2.7.9-1_armhf.deb ...
+Unpacking python-dev (2.7.9-1) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Setting up libpython2.7-dev:armhf (2.7.9-2+deb8u1) ...
+Setting up libpython-dev:armhf (2.7.9-1) ...
+Setting up python2.7-dev (2.7.9-2+deb8u1) ...
+Setting up python-dev (2.7.9-1) ...
+pi@piblinkt:~ $ sudo pip install RPi.GPIO
+Requirement already satisfied (use --upgrade to upgrade): RPi.GPIO in /usr/lib/python2.7/dist-packages
+Cleaning up...
+pi@piblinkt:~ $ sudo apt-get install python-imaging python-smbus
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  i2c-tools libjbig0 liblcms2-2 libtiff5 libwebp5 libwebpdemux1 libwebpmux1
+  python-pil
+Suggested packages:
+  libi2c-dev liblcms2-utils python-pil-doc python-pil-dbg
+The following NEW packages will be installed:
+  i2c-tools libjbig0 liblcms2-2 libtiff5 libwebp5 libwebpdemux1 libwebpmux1
+  python-imaging python-pil python-smbus
+0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
+Need to get 962 kB of archives.
+After this operation, 2,748 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libjbig0 armhf 2.1-3.1 [27.5 kB]
+Get:2 http://archive.raspberrypi.org/debian/ jessie/main i2c-tools armhf 3.1.1+svn-2 [51.3 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main liblcms2-2 armhf 2.6-3+deb8u1 [116 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libtiff5 armhf 4.0.3-12.3+deb8u4 [202 kB]
+Get:5 http://archive.raspberrypi.org/debian/ jessie/main python-smbus armhf 3.1.1+svn-2 [9,462 B]
+Get:6 http://mirrordirector.raspbian.org/raspbian/ jessie/main libwebp5 armhf 0.4.1-1.2 [164 kB]
+Get:7 http://mirrordirector.raspbian.org/raspbian/ jessie/main libwebpdemux1 armhf 0.4.1-1.2 [49.4 kB]
+Get:8 http://mirrordirector.raspbian.org/raspbian/ jessie/main libwebpmux1 armhf 0.4.1-1.2 [54.6 kB]
+Get:9 http://mirrordirector.raspbian.org/raspbian/ jessie/main python-pil armhf 2.6.1-2+deb8u3 [278 kB]
+Get:10 http://mirrordirector.raspbian.org/raspbian/ jessie/main python-imaging all 2.6.1-2+deb8u3 [9,846 B]
+Fetched 962 kB in 1s (860 kB/s)       
+Selecting previously unselected package libjbig0:armhf.
+(Reading database ... 38371 files and directories currently installed.)
+Preparing to unpack .../libjbig0_2.1-3.1_armhf.deb ...
+Unpacking libjbig0:armhf (2.1-3.1) ...
+Selecting previously unselected package liblcms2-2:armhf.
+Preparing to unpack .../liblcms2-2_2.6-3+deb8u1_armhf.deb ...
+Unpacking liblcms2-2:armhf (2.6-3+deb8u1) ...
+Selecting previously unselected package libtiff5:armhf.
+Preparing to unpack .../libtiff5_4.0.3-12.3+deb8u4_armhf.deb ...
+Unpacking libtiff5:armhf (4.0.3-12.3+deb8u4) ...
+Selecting previously unselected package libwebp5:armhf.
+Preparing to unpack .../libwebp5_0.4.1-1.2_armhf.deb ...
+Unpacking libwebp5:armhf (0.4.1-1.2) ...
+Selecting previously unselected package libwebpdemux1:armhf.
+Preparing to unpack .../libwebpdemux1_0.4.1-1.2_armhf.deb ...
+Unpacking libwebpdemux1:armhf (0.4.1-1.2) ...
+Selecting previously unselected package libwebpmux1:armhf.
+Preparing to unpack .../libwebpmux1_0.4.1-1.2_armhf.deb ...
+Unpacking libwebpmux1:armhf (0.4.1-1.2) ...
+Selecting previously unselected package python-pil:armhf.
+Preparing to unpack .../python-pil_2.6.1-2+deb8u3_armhf.deb ...
+Unpacking python-pil:armhf (2.6.1-2+deb8u3) ...
+Selecting previously unselected package python-imaging.
+Preparing to unpack .../python-imaging_2.6.1-2+deb8u3_all.deb ...
+Unpacking python-imaging (2.6.1-2+deb8u3) ...
+Selecting previously unselected package i2c-tools.
+Preparing to unpack .../i2c-tools_3.1.1+svn-2_armhf.deb ...
+Unpacking i2c-tools (3.1.1+svn-2) ...
+Selecting previously unselected package python-smbus.
+Preparing to unpack .../python-smbus_3.1.1+svn-2_armhf.deb ...
+Unpacking python-smbus (3.1.1+svn-2) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Setting up libjbig0:armhf (2.1-3.1) ...
+Setting up liblcms2-2:armhf (2.6-3+deb8u1) ...
+Setting up libtiff5:armhf (4.0.3-12.3+deb8u4) ...
+Setting up libwebp5:armhf (0.4.1-1.2) ...
+Setting up libwebpdemux1:armhf (0.4.1-1.2) ...
+Setting up libwebpmux1:armhf (0.4.1-1.2) ...
+Setting up python-pil:armhf (2.6.1-2+deb8u3) ...
+Setting up python-imaging (2.6.1-2+deb8u3) ...
+Setting up i2c-tools (3.1.1+svn-2) ...
+/run/udev or .udevdb or .udev presence implies active udev.  Aborting MAKEDEV invocation.
+Setting up python-smbus (3.1.1+svn-2) ...
+Processing triggers for libc-bin (2.19-18+deb8u10) ...
+pi@piblinkt:~ $ sudo apt-get install git
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+git is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@piblinkt:~ $ git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
+Cloning into 'Adafruit_Python_SSD1306'...
+remote: Counting objects: 112, done.
+remote: Total 112 (delta 0), reused 0 (delta 0), pack-reused 112
+Receiving objects: 100% (112/112), 34.60 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (57/57), done.
+Checking connectivity... done.
+pi@piblinkt:~ $ cd Adafruit_Python_SSD1306
+pi@piblinkt:~/Adafruit_Python_SSD1306 $ sudo python setup.py install
+running install
+running bdist_egg
+running egg_info
+creating Adafruit_SSD1306.egg-info
+writing requirements to Adafruit_SSD1306.egg-info/requires.txt
+writing Adafruit_SSD1306.egg-info/PKG-INFO
+writing top-level names to Adafruit_SSD1306.egg-info/top_level.txt
+writing dependency_links to Adafruit_SSD1306.egg-info/dependency_links.txt
+writing manifest file 'Adafruit_SSD1306.egg-info/SOURCES.txt'
+reading manifest file 'Adafruit_SSD1306.egg-info/SOURCES.txt'
+writing manifest file 'Adafruit_SSD1306.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-armv6l/egg
+running install_lib
+running build_py
+creating build
+creating build/lib.linux-armv6l-2.7
+creating build/lib.linux-armv6l-2.7/Adafruit_SSD1306
+copying Adafruit_SSD1306/__init__.py -> build/lib.linux-armv6l-2.7/Adafruit_SSD1306
+copying Adafruit_SSD1306/SSD1306.py -> build/lib.linux-armv6l-2.7/Adafruit_SSD1306
+creating build/bdist.linux-armv6l
+creating build/bdist.linux-armv6l/egg
+creating build/bdist.linux-armv6l/egg/Adafruit_SSD1306
+copying build/lib.linux-armv6l-2.7/Adafruit_SSD1306/__init__.py -> build/bdist.linux-armv6l/egg/Adafruit_SSD1306
+copying build/lib.linux-armv6l-2.7/Adafruit_SSD1306/SSD1306.py -> build/bdist.linux-armv6l/egg/Adafruit_SSD1306
+byte-compiling build/bdist.linux-armv6l/egg/Adafruit_SSD1306/__init__.py to __init__.pyc
+byte-compiling build/bdist.linux-armv6l/egg/Adafruit_SSD1306/SSD1306.py to SSD1306.pyc
+creating build/bdist.linux-armv6l/egg/EGG-INFO
+copying Adafruit_SSD1306.egg-info/PKG-INFO -> build/bdist.linux-armv6l/egg/EGG-INFO
+copying Adafruit_SSD1306.egg-info/SOURCES.txt -> build/bdist.linux-armv6l/egg/EGG-INFO
+copying Adafruit_SSD1306.egg-info/dependency_links.txt -> build/bdist.linux-armv6l/egg/EGG-INFO
+copying Adafruit_SSD1306.egg-info/requires.txt -> build/bdist.linux-armv6l/egg/EGG-INFO
+copying Adafruit_SSD1306.egg-info/top_level.txt -> build/bdist.linux-armv6l/egg/EGG-INFO
+zip_safe flag not set; analyzing archive contents...
+creating dist
+creating 'dist/Adafruit_SSD1306-1.6.1-py2.7.egg' and adding 'build/bdist.linux-armv6l/egg' to it
+removing 'build/bdist.linux-armv6l/egg' (and everything under it)
+Processing Adafruit_SSD1306-1.6.1-py2.7.egg
+Copying Adafruit_SSD1306-1.6.1-py2.7.egg to /usr/local/lib/python2.7/dist-packages
+Adding Adafruit-SSD1306 1.6.1 to easy-install.pth file
+
+Installed /usr/local/lib/python2.7/dist-packages/Adafruit_SSD1306-1.6.1-py2.7.egg
+Processing dependencies for Adafruit-SSD1306==1.6.1
+Searching for Adafruit-GPIO>=0.6.5
+Best match: Adafruit-GPIO 0.6.5
+Downloading https://github.com/adafruit/Adafruit_Python_GPIO/tarball/master#egg=Adafruit-GPIO-0.6.5
+Processing master
+Writing /tmp/easy_install-pvZM_U/adafruit-Adafruit_Python_GPIO-22a1ff4/setup.cfg
+Running adafruit-Adafruit_Python_GPIO-22a1ff4/setup.py -q bdist_egg --dist-dir /tmp/easy_install-pvZM_U/adafruit-Adafruit_Python_GPIO-22a1ff4/egg-dist-tmp-ju8Z06
+zip_safe flag not set; analyzing archive contents...
+Adding Adafruit-GPIO 1.0.3 to easy-install.pth file
+
+Installed /usr/local/lib/python2.7/dist-packages/Adafruit_GPIO-1.0.3-py2.7.egg
+Searching for spidev
+Reading https://pypi.python.org/simple/spidev/
+Best match: spidev 3.2
+Downloading https://pypi.python.org/packages/36/83/73748b6e1819b57d8e1df8090200195cdae33aaa22a49a91ded16785eedd/spidev-3.2.tar.gz#md5=f601676f1bb48b9aa3b3897f95216365
+Processing spidev-3.2.tar.gz
+Writing /tmp/easy_install-TlzEII/spidev-3.2/setup.cfg
+Running spidev-3.2/setup.py -q bdist_egg --dist-dir /tmp/easy_install-TlzEII/spidev-3.2/egg-dist-tmp-wcVueG
+zip_safe flag not set; analyzing archive contents...
+Adding spidev 3.2 to easy-install.pth file
+
+Installed /usr/local/lib/python2.7/dist-packages/spidev-3.2-py2.7-linux-armv6l.egg
+Searching for adafruit-pureio
+Reading https://pypi.python.org/simple/adafruit-pureio/
+Best match: Adafruit-PureIO 0.2.1
+Downloading https://pypi.python.org/packages/55/fa/99b1006fb4bb356762357b297d8db6ec9ffa13af480692ab72aa4a0dd0c4/Adafruit_PureIO-0.2.1.tar.gz#md5=5b3276059eb55d6c37429a8413a92029
+Processing Adafruit_PureIO-0.2.1.tar.gz
+Writing /tmp/easy_install-AeHfhE/Adafruit_PureIO-0.2.1/setup.cfg
+Running Adafruit_PureIO-0.2.1/setup.py -q bdist_egg --dist-dir /tmp/easy_install-AeHfhE/Adafruit_PureIO-0.2.1/egg-dist-tmp-ys4pxE
+zip_safe flag not set; analyzing archive contents...
+Adding Adafruit-PureIO 0.2.1 to easy-install.pth file
+
+Installed /usr/local/lib/python2.7/dist-packages/Adafruit_PureIO-0.2.1-py2.7.egg
+Finished processing dependencies for Adafruit-SSD1306==1.6.1
+pi@piblinkt:~/Adafruit_Python_SSD1306 $ cd
+pi@piblinkt:~ $ git clone http://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git
+Cloning into 'Adafruit-Raspberry-Pi-Python-Code'...
+remote: Counting objects: 654, done.
+remote: Total 654 (delta 0), reused 0 (delta 0), pack-reused 654
+Receiving objects: 100% (654/654), 199.45 KiB | 351.00 KiB/s, done.
+Resolving deltas: 100% (307/307), done.
+Checking connectivity... done.
+pi@piblinkt:~ $ sudo apt-get install python-rpi.gpio
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python-rpi.gpio is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@piblinkt:~ $ sudo raspi-config
+pi@piblinkt:~ $ sudo i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- 3c -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
+pi@piblinkt:~ $ sudo i2cdetect -y 0
+Error: Could not open file `/dev/i2c-0' or `/dev/i2c/0': No such file or directory
+pi@piblinkt:~ $ ls
+Adafruit_Python_SSD1306            monitor.py             node-red
+Adafruit-Raspberry-Pi-Python-Code  node_latest_armhf.deb  Pimoroni
+pi@piblinkt:~ $ cd Adafruit_Python_SSD1306/
+pi@piblinkt:~/Adafruit_Python_SSD1306 $ ls
+Adafruit_SSD1306           build  examples     ez_setup.pyc  README.md
+Adafruit_SSD1306.egg-info  dist   ez_setup.py  LICENSE       setup.py
+pi@piblinkt:~/Adafruit_Python_SSD1306 $ cd examples/
+pi@piblinkt:~/Adafruit_Python_SSD1306/examples $ ls
+animate.py  happycat_oled_32.ppm  image.py   stats.py
+buttons.py  happycat_oled_64.ppm  shapes.py
+pi@piblinkt:~/Adafruit_Python_SSD1306/examples $ sudo python stats.py 
+^CTraceback (most recent call last):
+  File "stats.py", line 114, in <module>
+    CPU = subprocess.check_output(cmd, shell = True )
+  File "/usr/lib/python2.7/subprocess.py", line 567, in check_output
+    output, unused_err = process.communicate()
+  File "/usr/lib/python2.7/subprocess.py", line 791, in communicate
+    stdout = _eintr_retry_call(self.stdout.read)
+  File "/usr/lib/python2.7/subprocess.py", line 476, in _eintr_retry_call
+    return func(*args)
+KeyboardInterrupt
+pi@piblinkt:~/Adafruit_Python_SSD1306/examples $ ls
+animate.py  happycat_oled_32.ppm  image.py   stats.py
+buttons.py  happycat_oled_64.ppm  shapes.py
+pi@piblinkt:~/Adafruit_Python_SSD1306/examples $ sudo python buttons.py 
+^Cpi@piblinkt:~/Adafruit_Python_SSD1306/examples $ sudo python animate.py 
+Press Ctrl-C to quit.
+
+  [27.10.2017, 23:16:53 Wiederhergestellt]
+Last login: Fri Oct 27 23:16:17 on console
+Peters-MBP:~ tdamdouni$ 
+  [27.10.2017, 23:29:37 Wiederhergestellt]
+Last login: Fri Oct 27 23:28:43 on console
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Oct 27 21:44:36 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@piblinkt:~ $ sudo shutdown -h now
+packet_write_wait: Connection to 192.168.178.106: Broken pipe
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.102
+The authenticity of host '192.168.178.102 (192.168.178.102)' can't be established.
+ECDSA key fingerprint is SHA256:dR0C1xEYHybczuoyhGjPfy+GIE5YuS+6Qv7Hy6Fxkvw.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.178.102' (ECDSA) to the list of known hosts.
+pi@192.168.178.102's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Aug 27 16:31:03 2017 from tdamdounis-ipad.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@piradio:~ $ 

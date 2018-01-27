@@ -1,0 +1,40 @@
+Die Liste zeigt WLAN-Geräte, die aktuell mit der FRITZ!Box verbunden oder aus früheren Verbindungen bekannt sind.
+Name 	IP-Adresse 	MAC-Adresse 	Datenrate
+(Mbit/s) 	Eigenschaften
+ESP-3B1053	192.168.178.28	5C:CF:7F:3B:10:53	72 / 17	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+pantiltpi	192.168.178.103	B8:27:EB:AD:F6:DA	70 / 15	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+pisense	192.168.178.100	74:DA:38:3A:47:BA	72 / 30	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+pispy	192.168.178.130	B8:27:EB:86:9E:98	68 / 66	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+SharpDMR--00-25-92-ad-6b-db	192.168.178.25	CC:79:CF:01:EB:6E	71 / 54	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+ESP-3A2DC2	192.168.178.32	5C:CF:7F:3A:2D:C2	63 / 4	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+Nicoles-ipad	192.168.178.26	24:A0:74:33:1A:5F	866 / 866	5 GHz / ac / 80 MHz
+WPA2, 2 x 2
+tdamdounis-iPad	192.168.178.23	74:81:14:45:73:50	650 / 866	5 GHz / ac / 80 MHz
+WPA2, 2 x 2
+Nicoles-iPhone	192.168.178.24	C0:D0:12:84:67:CA	866 / 780	5 GHz / ac / 80 MHz
+WPA2, 2 x 2
+raspberrypi	192.168.178.106	B8:27:EB:05:7F:A3	57 / 51	2,4 GHz / n / 20 MHz
+WPA2, 1 x 1
+tdamdouni	192.168.178.21	48:4B:AA:74:D7:06	122 / 29	2,4 GHz / n / 20 MHz
+WPA2, 2 x 2
+Peters-MBP	192.168.178.20	00:26:BB:0B:AB:14	81 / 108	5 GHz / n / 40 MHz
+WPA2, 2 x 2
+iPad-2	192.168.178.33	74:E2:F5:CF:FA:AE		nicht verbunden
+iPhone	192.168.178.27	7C:C5:37:C2:70:B3		nicht verbunden
+iPhonevonNicole	192.168.178.22	D0:C5:F3:67:76:E3		nicht verbunden
+iPhone	192.168.178.29	64:76:BA:05:72:AD		nicht verbunden
+MacBooks-MBP	192.168.178.30	00:1E:C2:C0:E6:46		nicht verbunden
+Nicoles-iPhone	192.168.178.37	F0:CB:A1:72:85:D7		nicht verbunden
+pibeat	192.168.178.104	B8:27:EB:93:25:A3		nicht verbunden
+pienviro	192.168.178.105	B8:27:EB:67:9C:3F		nicht verbunden
+pigassist	192.168.178.2	B8:27:EB:DD:56:E3		nicht verbunden
+piradio	192.168.178.102	B8:27:EB:0D:94:55		nicht verbunden
+pitimelapse	192.168.178.131	B8:27:EB:9E:3E:0B		nicht verbunden
+pizerocam1	192.168.178.51	B8:27:EB:16:53:12		nicht verbunden
+unicornpi	192.168.178.101	B8:27:EB:02:86:04		nicht verbunden	

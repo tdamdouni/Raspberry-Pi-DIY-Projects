@@ -1,0 +1,731 @@
+Last login: Tue Nov  7 08:42:16 on console
+Peters-MBP:~ tdamdouni$ ssh admin@192.168.178.103
+admin@192.168.178.103's password: 
+Permission denied, please try again.
+admin@192.168.178.103's password: 
+Permission denied, please try again.
+admin@192.168.178.103's password: 
+Permission denied (publickey,password).
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Oct 27 14:04:57 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ sudo apt-get update
+Holen: 1 http://mirrordirector.raspbian.org jessie InRelease [14,9 kB]
+Holen: 2 http://archive.raspberrypi.org jessie InRelease [22,9 kB]
+Holen: 3 https://deb.nodesource.com jessie InRelease [4.631 B]        
+Holen: 4 http://mirrordirector.raspbian.org jessie/main armhf Packages [9.536 kB]
+Holen: 5 https://deb.nodesource.com jessie/main Sources [20 B]
+Holen: 6 http://archive.raspberrypi.org jessie/main armhf Packages [169 kB]    
+Holen: 7 https://deb.nodesource.com jessie/main armhf Packages [1.003 B]       
+Holen: 8 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]      
+Holen: 9 https://deb.nodesource.com jessie/main Translation-de [162 B]         
+Holen: 10 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 11 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Holen: 12 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Holen: 13 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 14 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Holen: 15 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Holen: 16 http://archive.raspberrypi.org jessie/ui armhf Packages [58,9 kB]    
+Holen: 17 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 18 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Holen: 19 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Holen: 20 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 21 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Ign https://deb.nodesource.com jessie/main Translation-de_DE                   
+Holen: 22 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Ign https://deb.nodesource.com jessie/main Translation-de                      
+Holen: 23 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Ign https://deb.nodesource.com jessie/main Translation-en                      
+Ign http://archive.raspberrypi.org jessie/main Translation-de_DE               
+Ign http://archive.raspberrypi.org jessie/main Translation-de 
+Ign http://archive.raspberrypi.org jessie/main Translation-en           
+Holen: 24 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43,3 kB]
+Holen: 25 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84,2 kB]
+Ign http://archive.raspberrypi.org jessie/ui Translation-de_DE                 
+Holen: 26 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1.356 B]
+Ign http://archive.raspberrypi.org jessie/ui Translation-de                    
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de_DE        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de           
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de_DE           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de              
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en              
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de_DE       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de          
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de_DE            
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de               
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en               
+Es wurden 9.936 kB in 16 s geholt (609 kB/s).                                  
+Paketlisten werden gelesen... Fertig
+pi@pantiltpi:~ $ sudo apt-get upgrade
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Paketaktualisierung (Upgrade) wird berechnet... Die folgenden Pakete wurden automatisch installiert und werden nicht mehr benötigt:
+  libc-ares2 libv8-3.14.5
+Verwenden Sie »apt-get autoremove«, um sie zu entfernen.
+Fertig
+Die folgenden Pakete werden aktualisiert (Upgrade):
+  curl libav-tools libavcodec-dev libavcodec56 libavdevice55 libavfilter5
+  libavformat-dev libavformat56 libavresample-dev libavresample2 libavutil-dev
+  libavutil54 libcurl3 libcurl3-gnutls libssl1.0.0 libswscale-dev libswscale3
+  nodejs openssl wget
+20 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+Es müssen 22,2 MB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 788 kB Plattenplatz zusätzlich benutzt.
+Möchten Sie fortfahren? [J/n] J
+Holen: 1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libssl1.0.0 armhf 1.0.1t-1+deb8u7 [853 kB]
+Holen: 2 https://deb.nodesource.com/node_6.x/ jessie/main nodejs armhf 6.12.0-1nodesource1 [8.780 kB]
+Holen: 3 http://mirrordirector.raspbian.org/raspbian/ jessie/main libswscale-dev armhf 6:11.11-1~deb8u1+rpi1 [126 kB]
+Holen: 4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libswscale3 armhf 6:11.11-1~deb8u1+rpi1 [158 kB]
+Holen: 5 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavformat-dev armhf 6:11.11-1~deb8u1+rpi1 [630 kB]
+Holen: 6 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavcodec-dev armhf 6:11.11-1~deb8u1+rpi1 [3.198 kB]
+Holen: 7 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavresample-dev armhf 6:11.11-1~deb8u1+rpi1 [94,6 kB]
+Holen: 8 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavresample2 armhf 6:11.11-1~deb8u1+rpi1 [99,1 kB]
+Holen: 9 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavutil-dev armhf 6:11.11-1~deb8u1+rpi1 [184 kB]
+Holen: 10 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavutil54 armhf 6:11.11-1~deb8u1+rpi1 [162 kB]
+Holen: 11 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavformat56 armhf 6:11.11-1~deb8u1+rpi1 [857 kB]
+Holen: 12 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavcodec56 armhf 6:11.11-1~deb8u1+rpi1 [4.494 kB]
+Holen: 13 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavdevice55 armhf 6:11.11-1~deb8u1+rpi1 [98,1 kB]
+Holen: 14 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavfilter5 armhf 6:11.11-1~deb8u1+rpi1 [201 kB]
+Holen: 15 http://mirrordirector.raspbian.org/raspbian/ jessie/main libav-tools armhf 6:11.11-1~deb8u1+rpi1 [463 kB]
+Holen: 16 http://mirrordirector.raspbian.org/raspbian/ jessie/main curl armhf 7.38.0-4+deb8u7 [196 kB]
+Holen: 17 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3 armhf 7.38.0-4+deb8u7 [233 kB]
+Holen: 18 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3-gnutls armhf 7.38.0-4+deb8u7 [225 kB]
+Holen: 19 http://mirrordirector.raspbian.org/raspbian/ jessie/main wget armhf 1.16-1+deb8u4 [475 kB]
+Holen: 20 http://mirrordirector.raspbian.org/raspbian/ jessie/main openssl armhf 1.0.1t-1+deb8u7 [652 kB]
+Es wurden 22,2 MB in 2 min 11 s geholt (168 kB/s).                             
+Lese Changelogs... Fertig
+Vorkonfiguration der Pakete ...
+(Lese Datenbank ... 148759 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von .../libssl1.0.0_1.0.1t-1+deb8u7_armhf.deb ...
+Entpacken von libssl1.0.0:armhf (1.0.1t-1+deb8u7) über (1.0.1t-1+deb8u6) ...
+Vorbereitung zum Entpacken von .../libswscale-dev_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libswscale-dev (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libswscale3_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libswscale3:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavformat-dev_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavformat-dev (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavcodec-dev_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavcodec-dev (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavresample-dev_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavresample-dev (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavresample2_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavresample2:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavutil-dev_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavutil-dev (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavutil54_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavutil54:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavformat56_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavformat56:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavcodec56_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavcodec56:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavdevice55_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavdevice55:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libavfilter5_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libavfilter5:armhf (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../libav-tools_6%3a11.11-1~deb8u1+rpi1_armhf.deb ...
+Entpacken von libav-tools (6:11.11-1~deb8u1+rpi1) über (6:11.9-1~deb8u1+rpi1) ...
+Vorbereitung zum Entpacken von .../curl_7.38.0-4+deb8u7_armhf.deb ...
+Entpacken von curl (7.38.0-4+deb8u7) über (7.38.0-4+deb8u6) ...
+Vorbereitung zum Entpacken von .../libcurl3_7.38.0-4+deb8u7_armhf.deb ...
+Entpacken von libcurl3:armhf (7.38.0-4+deb8u7) über (7.38.0-4+deb8u6) ...
+Vorbereitung zum Entpacken von .../libcurl3-gnutls_7.38.0-4+deb8u7_armhf.deb ...
+Entpacken von libcurl3-gnutls:armhf (7.38.0-4+deb8u7) über (7.38.0-4+deb8u6) ...
+Vorbereitung zum Entpacken von .../wget_1.16-1+deb8u4_armhf.deb ...
+Entpacken von wget (1.16-1+deb8u4) über (1.16-1+deb8u2) ...
+Vorbereitung zum Entpacken von .../nodejs_6.12.0-1nodesource1_armhf.deb ...
+Detected old npm client, removing...
+Entpacken von nodejs (6.12.0-1nodesource1) über (6.11.5-1nodesource1) ...
+Vorbereitung zum Entpacken von .../openssl_1.0.1t-1+deb8u7_armhf.deb ...
+Entpacken von openssl (1.0.1t-1+deb8u7) über (1.0.1t-1+deb8u6) ...
+Trigger für man-db (2.7.5-1~bpo8+1) werden verarbeitet ...
+Trigger für install-info (5.2.0.dfsg.1-6) werden verarbeitet ...
+libssl1.0.0:armhf (1.0.1t-1+deb8u7) wird eingerichtet ...
+libavutil54:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavutil-dev (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libswscale3:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libswscale-dev (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavresample2:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavcodec56:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavresample-dev (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavcodec-dev (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavformat56:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavformat-dev (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavdevice55:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libavfilter5:armhf (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libav-tools (6:11.11-1~deb8u1+rpi1) wird eingerichtet ...
+libcurl3:armhf (7.38.0-4+deb8u7) wird eingerichtet ...
+curl (7.38.0-4+deb8u7) wird eingerichtet ...
+libcurl3-gnutls:armhf (7.38.0-4+deb8u7) wird eingerichtet ...
+wget (1.16-1+deb8u4) wird eingerichtet ...
+nodejs (6.12.0-1nodesource1) wird eingerichtet ...
+openssl (1.0.1t-1+deb8u7) wird eingerichtet ...
+Trigger für libc-bin (2.19-18+deb8u10) werden verarbeitet ...
+pi@pantiltpi:~ $ ls
+config.ini    opencv_contrib-3.3.0               pimotion
+Desktop       opencv_contrib.zip                 pistreaming
+Documents     opencv.zip                         Public
+Downloads     PanTilt                            python_games
+get-pip.py    PanTiltFacetracker                 rp_usbdisplay
+mote_api.py   picamera-motion                    Smart-Security-Camera
+Music         Pictures                           Templates
+nohup.out     Pimoroni                           Videos
+opencv-3.3.0  Pimoroni-PanTilt-Hat-WebInterface
+pi@pantiltpi:~ $ ps
+  PID TTY          TIME CMD
+ 9582 pts/0    00:00:00 bash
+10788 pts/0    00:00:00 ps
+pi@pantiltpi:~ $ ps -la
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S  1000   810   696  0  80   0 -  1727 wait_w tty1     00:00:00 bash
+0 R  1000 10789  9582  0  80   0 -  1070 -      pts/0    00:00:00 ps
+pi@pantiltpi:~ $ ps -la | grep python
+pi@pantiltpi:~ $ sudo apt-get upgrade -y
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Paketaktualisierung (Upgrade) wird berechnet... Die folgenden Pakete wurden automatisch installiert und werden nicht mehr benötigt:
+  libc-ares2 libv8-3.14.5
+Verwenden Sie »apt-get autoremove«, um sie zu entfernen.
+Fertig
+0 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+pi@pantiltpi:~ $ sudo apt-get install python3 python3-venv python3-pip
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+python3 ist schon die neueste Version.
+python3-pip ist schon die neueste Version.
+python3-venv ist schon die neueste Version.
+python3-venv wurde als manuell installiert festgelegt.
+Die folgenden Pakete wurden automatisch installiert und werden nicht mehr benötigt:
+  libc-ares2 libv8-3.14.5
+Verwenden Sie »apt-get autoremove«, um sie zu entfernen.
+0 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+pi@pantiltpi:~ $ sudo useradd -rm homeassistant
+pi@pantiltpi:~ $ cd /srv
+pi@pantiltpi:/srv $ sudo mkdir homeassistant
+pi@pantiltpi:/srv $ sudo chown homeassistant:homeassistant homeassistant
+pi@pantiltpi:/srv $ sudo su -s /bin/bash homeassistant
+homeassistant@pantiltpi:/srv $ cd /srv/homeassistant
+homeassistant@pantiltpi:/srv/homeassistant $ python3 -m venv .
+homeassistant@pantiltpi:/srv/homeassistant $ source bin/activate
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ pip3 install homeassistant
+Downloading/unpacking homeassistant
+  Downloading homeassistant-0.57.2-py2.py3-none-any.whl (7.5MB): 7.5MB downloaded
+Downloading/unpacking async-timeout==2.0.0 (from homeassistant)
+  Downloading async_timeout-2.0.0-py3-none-any.whl
+Downloading/unpacking astral==1.4 (from homeassistant)
+  Downloading astral-1.4-py2.py3-none-any.whl
+Downloading/unpacking pip>=8.0.3 (from homeassistant)
+  Downloading pip-9.0.1-py2.py3-none-any.whl (1.3MB): 1.3MB downloaded
+Downloading/unpacking pytz>=2017.02 (from homeassistant)
+  Downloading pytz-2017.3-py2.py3-none-any.whl (511kB): 511kB downloaded
+Downloading/unpacking aiohttp==2.2.5 (from homeassistant)
+  Downloading aiohttp-2.2.5.tar.gz (788kB): 788kB downloaded
+  Running setup.py (path:/tmp/pip-build-4bihlycn/aiohttp/setup.py) egg_info for package aiohttp
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.html'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.*.so'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.pyd'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.*.pyd'
+    warning: no previously-included files found matching 'aiohttp/_websocket.html'
+    warning: no previously-included files found matching 'aiohttp/_websocket.*.so'
+    warning: no previously-included files found matching 'aiohttp/_websocket.pyd'
+    warning: no previously-included files found matching 'aiohttp/_websocket.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+Downloading/unpacking typing>=3,<4 (from homeassistant)
+  Downloading typing-3.6.2-py3-none-any.whl
+Downloading/unpacking voluptuous==0.10.5 (from homeassistant)
+  Downloading voluptuous-0.10.5.tar.gz (41kB): 41kB downloaded
+  Running setup.py (path:/tmp/pip-build-4bihlycn/voluptuous/setup.py) egg_info for package voluptuous
+    WARNING: Could not locate pandoc, using Markdown long_description.
+    
+Downloading/unpacking certifi>=2017.4.17 (from homeassistant)
+  Downloading certifi-2017.11.5-py2.py3-none-any.whl (330kB): 330kB downloaded
+Downloading/unpacking requests==2.18.4 (from homeassistant)
+  Downloading requests-2.18.4-py2.py3-none-any.whl (88kB): 88kB downloaded
+Downloading/unpacking jinja2>=2.9.6 (from homeassistant)
+  Downloading Jinja2-2.9.6-py2.py3-none-any.whl (340kB): 340kB downloaded
+Downloading/unpacking chardet==3.0.4 (from homeassistant)
+  Downloading chardet-3.0.4-py2.py3-none-any.whl (133kB): 133kB downloaded
+Downloading/unpacking pyyaml>=3.11,<4 (from homeassistant)
+  Downloading PyYAML-3.12.tar.gz (253kB): 253kB downloaded
+  Running setup.py (path:/tmp/pip-build-4bihlycn/pyyaml/setup.py) egg_info for package pyyaml
+    
+Downloading/unpacking multidict>=2.1.4 (from aiohttp==2.2.5->homeassistant)
+  Downloading multidict-3.3.2.tar.gz (129kB): 129kB downloaded
+  Running setup.py (path:/tmp/pip-build-4bihlycn/multidict/setup.py) egg_info for package multidict
+    /usr/lib/python3.4/distutils/dist.py:260: UserWarning: Unknown distribution option: 'python_requires'
+      warnings.warn(msg)
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files found matching 'multidict/_multidict.html'
+    warning: no previously-included files found matching 'multidict/_multidict.*.so'
+    warning: no previously-included files found matching 'multidict/_multidict.pyd'
+    warning: no previously-included files found matching 'multidict/_multidict.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+Downloading/unpacking yarl>=0.11 (from aiohttp==2.2.5->homeassistant)
+  Downloading yarl-0.13.0.tar.gz (136kB): 136kB downloaded
+  Running setup.py (path:/tmp/pip-build-4bihlycn/yarl/setup.py) egg_info for package yarl
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files matching '*.cache' found anywhere in distribution
+    warning: no previously-included files found matching 'yarl/_quoting.html'
+    warning: no previously-included files found matching 'yarl/_quoting.*.so'
+    warning: no previously-included files found matching 'yarl/_quoting.pyd'
+    warning: no previously-included files found matching 'yarl/_quoting.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+Downloading/unpacking idna>=2.5,<2.7 (from requests==2.18.4->homeassistant)
+  Downloading idna-2.6-py2.py3-none-any.whl (56kB): 56kB downloaded
+Downloading/unpacking urllib3>=1.21.1,<1.23 (from requests==2.18.4->homeassistant)
+  Downloading urllib3-1.22-py2.py3-none-any.whl (132kB): 132kB downloaded
+Downloading/unpacking MarkupSafe>=0.23 (from jinja2>=2.9.6->homeassistant)
+  Downloading MarkupSafe-1.0.tar.gz
+  Running setup.py (path:/tmp/pip-build-4bihlycn/MarkupSafe/setup.py) egg_info for package MarkupSafe
+    
+Installing collected packages: homeassistant, async-timeout, astral, pip, pytz, aiohttp, typing, voluptuous, certifi, requests, jinja2, chardet, pyyaml, multidict, yarl, idna, urllib3, MarkupSafe
+  Found existing installation: pip 1.5.6
+    Uninstalling pip:
+      Successfully uninstalled pip
+  Running setup.py install for aiohttp
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.html'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.*.so'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.pyd'
+    warning: no previously-included files found matching 'aiohttp/_frozenlist.*.pyd'
+    warning: no previously-included files found matching 'aiohttp/_websocket.html'
+    warning: no previously-included files found matching 'aiohttp/_websocket.*.so'
+    warning: no previously-included files found matching 'aiohttp/_websocket.pyd'
+    warning: no previously-included files found matching 'aiohttp/_websocket.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+    building 'aiohttp._websocket' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c aiohttp/_websocket.c -o build/temp.linux-armv7l-3.4/aiohttp/_websocket.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/aiohttp/_websocket.o -o build/lib.linux-armv7l-3.4/aiohttp/_websocket.cpython-34m.so
+    building 'aiohttp._http_parser' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c aiohttp/_http_parser.c -o build/temp.linux-armv7l-3.4/aiohttp/_http_parser.o
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c vendor/http-parser/http_parser.c -o build/temp.linux-armv7l-3.4/vendor/http-parser/http_parser.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/aiohttp/_http_parser.o build/temp.linux-armv7l-3.4/vendor/http-parser/http_parser.o -o build/lib.linux-armv7l-3.4/aiohttp/_http_parser.cpython-34m.so
+    building 'aiohttp._frozenlist' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c aiohttp/_frozenlist.c -o build/temp.linux-armv7l-3.4/aiohttp/_frozenlist.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/aiohttp/_frozenlist.o -o build/lib.linux-armv7l-3.4/aiohttp/_frozenlist.cpython-34m.so
+  Running setup.py install for voluptuous
+    WARNING: Could not locate pandoc, using Markdown long_description.
+    
+*** Error compiling '/tmp/pip-build-4bihlycn/jinja2/jinja2/asyncfilters.py'...
+  File "/tmp/pip-build-4bihlycn/jinja2/jinja2/asyncfilters.py", line 7
+    async def auto_to_seq(value):
+            ^
+SyntaxError: invalid syntax
+
+*** Error compiling '/tmp/pip-build-4bihlycn/jinja2/jinja2/asyncsupport.py'...
+  File "/tmp/pip-build-4bihlycn/jinja2/jinja2/asyncsupport.py", line 22
+    async def concat_async(async_gen):
+            ^
+SyntaxError: invalid syntax
+
+  Running setup.py install for pyyaml
+    checking if libyaml is compilable
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c build/temp.linux-armv7l-3.4/check_libyaml.c -o build/temp.linux-armv7l-3.4/check_libyaml.o
+    build/temp.linux-armv7l-3.4/check_libyaml.c:2:18: fatal error: yaml.h: Datei oder Verzeichnis nicht gefunden
+     #include <yaml.h>
+                      ^
+    compilation terminated.
+    
+    libyaml is not found or a compiler error: forcing --without-libyaml
+    (if libyaml is installed correctly, you may need to
+     specify the option --include-dirs or uncomment and
+     modify the parameter include_dirs in setup.cfg)
+    
+  Running setup.py install for multidict
+    /usr/lib/python3.4/distutils/dist.py:260: UserWarning: Unknown distribution option: 'python_requires'
+      warnings.warn(msg)
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files found matching 'multidict/_multidict.html'
+    warning: no previously-included files found matching 'multidict/_multidict.*.so'
+    warning: no previously-included files found matching 'multidict/_multidict.pyd'
+    warning: no previously-included files found matching 'multidict/_multidict.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+    building 'multidict._multidict' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c multidict/_multidict.c -o build/temp.linux-armv7l-3.4/multidict/_multidict.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/multidict/_multidict.o -o build/lib.linux-armv7l-3.4/multidict/_multidict.cpython-34m.so
+    building 'multidict._istr' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c multidict/_istr.c -o build/temp.linux-armv7l-3.4/multidict/_istr.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/multidict/_istr.o -o build/lib.linux-armv7l-3.4/multidict/_istr.cpython-34m.so
+  Running setup.py install for yarl
+    
+    warning: no previously-included files matching '*.pyc' found anywhere in distribution
+    warning: no previously-included files matching '*.cache' found anywhere in distribution
+    warning: no previously-included files found matching 'yarl/_quoting.html'
+    warning: no previously-included files found matching 'yarl/_quoting.*.so'
+    warning: no previously-included files found matching 'yarl/_quoting.pyd'
+    warning: no previously-included files found matching 'yarl/_quoting.*.pyd'
+    no previously-included directories found matching 'docs/_build'
+    building 'yarl._quoting' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c yarl/_quoting.c -o build/temp.linux-armv7l-3.4/yarl/_quoting.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/yarl/_quoting.o -o build/lib.linux-armv7l-3.4/yarl/_quoting.cpython-34m.so
+  Running setup.py install for MarkupSafe
+    
+    building 'markupsafe._speedups' extension
+    arm-linux-gnueabihf-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -fPIC -I/srv/homeassistant/include -I/usr/include/python3.4m -c markupsafe/_speedups.c -o build/temp.linux-armv7l-3.4/markupsafe/_speedups.o
+    arm-linux-gnueabihf-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 build/temp.linux-armv7l-3.4/markupsafe/_speedups.o -o build/lib.linux-armv7l-3.4/markupsafe/_speedups.cpython-34m.so
+Successfully installed homeassistant async-timeout astral pip pytz aiohttp typing voluptuous certifi requests jinja2 chardet pyyaml multidict yarl idna urllib3 MarkupSafe
+Cleaning up...
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Unable to find configuration. Creating default one in /home/homeassistant/.homeassistant
+Config directory: /home/homeassistant/.homeassistant
+WARNING:homeassistant.bootstrap:Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+INFO:homeassistant.bootstrap:Home Assistant core initialized
+INFO:homeassistant.loader:Loaded history from homeassistant.components.history
+INFO:homeassistant.loader:Loaded recorder from homeassistant.components.recorder
+INFO:homeassistant.loader:Loaded http from homeassistant.components.http
+INFO:homeassistant.loader:Loaded frontend from homeassistant.components.frontend
+INFO:homeassistant.loader:Loaded api from homeassistant.components.api
+INFO:homeassistant.loader:Loaded websocket_api from homeassistant.components.websocket_api
+INFO:homeassistant.loader:Loaded introduction from homeassistant.components.introduction
+INFO:homeassistant.setup:Setting up introduction
+INFO:homeassistant.components.introduction:
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+INFO:homeassistant.loader:Loaded persistent_notification from homeassistant.components.persistent_notification
+INFO:homeassistant.setup:Setup of domain introduction took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=introduction>
+INFO:homeassistant.core:Bus:Handling <Event call_service[L]: service_data=message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, title=Welcome Home!, service_call_id=1970085616-1, service=create, domain=persistent_notification>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=persistent_notification.notification, old_state=None, new_state=<state persistent_notification.notification=notifying; message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component., title=Welcome Home! @ 2017-11-08T16:07:14.249811+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event service_executed[L]: service_call_id=1970085616-1>
+INFO:homeassistant.util.package:Attempting install of home-assistant-frontend==20171105.0
+INFO:homeassistant.util.package:Attempting install of sqlalchemy==1.1.14
+INFO:homeassistant.setup:Setting up recorder
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+INFO:homeassistant.util.package:Attempting install of aiohttp_cors==0.5.3
+INFO:homeassistant.setup:Setup of domain recorder took 1.5 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=recorder>
+INFO:homeassistant.setup:Setting up http
+INFO:homeassistant.setup:Setup of domain http took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=http>
+INFO:homeassistant.setup:Setting up history
+INFO:homeassistant.setup:Setup of domain history took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=history>
+INFO:homeassistant.setup:Setting up api
+INFO:homeassistant.setup:Setting up websocket_api
+INFO:homeassistant.setup:Setup of domain websocket_api took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=websocket_api>
+INFO:homeassistant.setup:Setup of domain api took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=api>
+INFO:homeassistant.setup:Setting up frontend
+INFO:homeassistant.setup:Setup of domain frontend took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=frontend>
+INFO:homeassistant.loader:Loaded config from homeassistant.components.config
+INFO:homeassistant.loader:Loaded group from homeassistant.components.group
+INFO:homeassistant.setup:Setting up group
+INFO:homeassistant.loader:Loaded logbook from homeassistant.components.logbook
+INFO:homeassistant.loader:Loaded map from homeassistant.components.map
+INFO:homeassistant.setup:Setting up map
+INFO:homeassistant.setup:Setup of domain map took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=map>
+INFO:homeassistant.loader:Loaded sensor from homeassistant.components.sensor
+INFO:homeassistant.loader:Loaded sensor.yr from homeassistant.components.sensor.yr
+INFO:homeassistant.setup:Setting up sensor
+INFO:homeassistant.loader:Loaded tts from homeassistant.components.tts
+INFO:homeassistant.loader:Loaded tts.google from homeassistant.components.tts.google
+INFO:homeassistant.loader:Loaded updater from homeassistant.components.updater
+INFO:homeassistant.loader:Loaded conversation from homeassistant.components.conversation
+INFO:homeassistant.loader:Loaded discovery from homeassistant.components.discovery
+INFO:homeassistant.loader:Loaded automation from homeassistant.components.automation
+INFO:homeassistant.loader:Loaded script from homeassistant.components.script
+INFO:homeassistant.loader:Loaded sun from homeassistant.components.sun
+INFO:homeassistant.setup:Setting up sun
+INFO:homeassistant.setup:Setup of domain sun took 0.1 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=sun>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=None, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.05, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=set, domain=group>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+INFO:homeassistant.setup:Setup of domain group took 0.2 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=group>
+INFO:homeassistant.setup:Setting up config
+INFO:homeassistant.setup:Setting up logbook
+INFO:homeassistant.loader:Loaded config.core from homeassistant.components.config.core
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config.core>
+INFO:homeassistant.util.package:Attempting install of mutagen==1.38
+INFO:homeassistant.loader:Loaded config.hassbian from homeassistant.components.config.hassbian
+INFO:homeassistant.loader:Loaded config.automation from homeassistant.components.config.automation
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config.automation>
+INFO:homeassistant.loader:Loaded config.script from homeassistant.components.config.script
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config.script>
+INFO:homeassistant.loader:Loaded config.customize from homeassistant.components.config.customize
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config.customize>
+INFO:homeassistant.loader:Loaded config.group from homeassistant.components.config.group
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config.group>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+INFO:homeassistant.setup:Setup of domain logbook took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=logbook>
+INFO:homeassistant.setup:Setting up automation
+INFO:homeassistant.setup:Setting up script
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+INFO:homeassistant.setup:Setup of domain script took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=script>
+INFO:homeassistant.setup:Setup of domain config took 0.1 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=config>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=trigger, domain=automation>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=reload, domain=automation>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=toggle, domain=automation>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_on, domain=automation>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=turn_off, domain=automation>
+INFO:homeassistant.setup:Setup of domain automation took 0.1 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=automation>
+INFO:homeassistant.setup:Setting up tts
+INFO:homeassistant.components.tts:Create cache dir /home/homeassistant/.homeassistant/tts.
+INFO:homeassistant.util.package:Attempting install of distro==1.0.4
+WARNING:homeassistant.setup:Setup of sensor is taking over 10 seconds.
+INFO:homeassistant.setup:Setting up updater
+INFO:homeassistant.setup:Setup of domain updater took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=updater>
+INFO:homeassistant.util.package:Attempting install of fuzzywuzzy==0.15.1
+INFO:homeassistant.setup:Setting up conversation
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=process, domain=conversation>
+INFO:homeassistant.setup:Setup of domain conversation took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=conversation>
+INFO:homeassistant.util.package:Attempting install of netdisco==1.2.3
+WARNING:homeassistant.setup:Setup of tts is taking over 10 seconds.
+INFO:homeassistant.setup:Setting up discovery
+INFO:homeassistant.setup:Setup of domain discovery took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=discovery>
+INFO:homeassistant.util.package:Attempting install of xmltodict==0.11.0
+INFO:homeassistant.components.sensor:Setting up sensor.yr
+INFO:homeassistant.util.package:Attempting install of gTTS-token==1.1.1
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sensor.yr_symbol, old_state=None, new_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, friendly_name=yr Symbol, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK. @ 2017-11-08T16:08:41.006225+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sensor.yr_symbol, old_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, friendly_name=yr Symbol, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK. @ 2017-11-08T16:08:41.006225+01:00>, new_state=<state sensor.yr_symbol=4; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=4;content_type=image/png, friendly_name=yr Symbol, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK. @ 2017-11-08T16:08:43.132119+01:00>>
+INFO:homeassistant.setup:Setup of domain sensor took 44.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=sensor>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=google_say, domain=tts>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=clear_cache, domain=tts>
+INFO:homeassistant.setup:Setup of domain tts took 39.9 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=tts>
+INFO:homeassistant.bootstrap:Home Assistant initialized in 94.41s
+INFO:homeassistant.core:Starting Home Assistant core loop
+INFO:homeassistant.core:Starting Home Assistant
+INFO:homeassistant.core:Bus:Handling <Event homeassistant_start[L]>
+INFO:homeassistant.core:Timer:starting
+INFO:homeassistant.components.discovery:Found new service: hass_ios {'properties': {'buildNumber': '3', 'versionNumber': '1.1.0', 'permanentID': 'D8F75B4C-2B33-401F-8A15-5884FCD97003', 'bundleIdentifier': 'io.robbie.HomeAssistant'}, 'port': 65535, 'host': '192.168.178.21', 'hostname': 'tdamdouni.local.'}
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.loader:Loaded ios from homeassistant.components.ios
+INFO:homeassistant.loader:Loaded device_tracker from homeassistant.components.device_tracker
+INFO:homeassistant.loader:Loaded zone from homeassistant.components.zone
+INFO:homeassistant.loader:Loaded zeroconf from homeassistant.components.zeroconf
+INFO:homeassistant.setup:Setting up zone
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=zone.home, old_state=None, new_state=<state zone.home=zoning; latitude=48.3333, icon=mdi:home, radius=100, friendly_name=Home, longitude=11.0833, hidden=True @ 2017-11-08T16:09:00.338938+01:00>>
+INFO:homeassistant.setup:Setup of domain zone took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=zone>
+INFO:homeassistant.setup:Setting up device_tracker
+ERROR:homeassistant.components.device_tracker:Unable to load /home/homeassistant/.homeassistant/known_devices.yaml: Config file not found: /home/homeassistant/.homeassistant/known_devices.yaml
+INFO:homeassistant.core:Bus:Handling <Event call_service[L]: service_data=visible=False, entities=[], name=all devices, object_id=all_devices, service_call_id=1970085616-2, service=set, domain=group>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=group.all_devices, old_state=None, new_state=<state group.all_devices=unknown; friendly_name=all devices, auto=True, entity_id=[], assumed_state=False, hidden=True, order=0 @ 2017-11-08T16:09:00.400068+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event service_executed[L]: service_call_id=1970085616-2>
+INFO:homeassistant.core:Bus:Handling <Event service_registered[L]: service=see, domain=device_tracker>
+INFO:homeassistant.setup:Setup of domain device_tracker took 0.2 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=device_tracker>
+INFO:homeassistant.setup:Setting up zeroconf
+INFO:homeassistant.setup:Setup of domain zeroconf took 0.8 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=zeroconf>
+INFO:homeassistant.setup:Setting up ios
+INFO:homeassistant.core:Bus:Handling <Event platform_discovered[L]: platform=ios, discovered=, service=load_platform.sensor>
+INFO:homeassistant.setup:Setup of domain ios took 0.0 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=ios>
+INFO:homeassistant.loader:Loaded notify from homeassistant.components.notify
+INFO:homeassistant.setup:Setting up notify
+INFO:homeassistant.core:Bus:Handling <Event platform_discovered[L]: discovered=properties=buildNumber=3, versionNumber=1.1.0, permanentID=D8F75B4C-2B33-401F-8A15-5884FCD97003, bundleIdentifier=io.robbie.HomeAssistant, port=65535, host=192.168.178.21, hostname=tdamdouni.local., service=hass_ios>
+INFO:homeassistant.loader:Loaded sensor.ios from homeassistant.components.sensor.ios
+INFO:homeassistant.components.sensor:Setting up sensor.ios
+INFO:homeassistant.setup:Setup of domain notify took 0.1 seconds.
+INFO:homeassistant.core:Bus:Handling <Event component_loaded[L]: component=notify>
+INFO:homeassistant.core:Bus:Handling <Event platform_discovered[L]: platform=ios, discovered=, service=load_platform.notify>
+INFO:homeassistant.loader:Loaded notify.ios from homeassistant.components.notify.ios
+INFO:homeassistant.components.notify:Setting up notify.ios
+ERROR:homeassistant.components.notify.ios:The notify.ios platform was loaded but no devices exist! Please check the documentation at https://home-assistant.io/ecosystem/ios/notifications/ for more information
+INFO:homeassistant.components.http:Serving /api/config to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /manifest.json to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/states to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/ios/identify to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving / to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/themes to 192.168.178.21 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.05, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.34, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.54, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving / to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/themes to 192.168.178.21 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.34, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.54, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.53, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.41, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving / to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/themes to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/core/check_config to 192.168.178.21 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.53, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.41, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.73, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.27, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/themes to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/logbook/2017-11-07T23:00:00.000Z to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/history/period/2017-11-07T23:00:00.000Z to 192.168.178.21 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.73, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.27, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.92, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.13, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving / to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/themes to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=238.92, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=4.13, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.11, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.99, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.11, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.99, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.3, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.86, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.3, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.86, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.49, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.72, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving /api/events to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/template to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/states/persistent_notification.notification to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=persistent_notification.notification, old_state=<state persistent_notification.notification=notifying; message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component., title=Welcome Home! @ 2017-11-08T16:07:14.249811+01:00>, new_state=None>
+INFO:homeassistant.components.http:Serving /api/history/period/2017-11-07T15:16:14.498Z to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event call_service[L]: service_data=None, service_call_id=1970085616-3, service=reload_core_config, domain=homeassistant>
+INFO:homeassistant.core:Bus:Handling <Event service_executed[L]: service_call_id=1970085616-3>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.49, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.72, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.69, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.58, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.69, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.58, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.88, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.44, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=239.88, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.44, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.07, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.3, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.07, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.3, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.26, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.17, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.26, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.17, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.45, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.03, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.45, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=3.03, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.64, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.89, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.64, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.89, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.83, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=240.83, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.02, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.62, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.02, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.62, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.21, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.48, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.21, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.48, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.4, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.34, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.http:Serving /api/logbook/2017-11-07T23:00:00.000Z to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/history/period/2017-11-07T15:25:55.359Z to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/history/period/2017-11-07T23:00:00.000Z to 192.168.178.20 (auth: True)
+INFO:homeassistant.components.http:Serving /api/config/customize/config/zone.home to 192.168.178.20 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.4, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.34, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.59, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.21, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.59, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.21, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.78, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.07, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.78, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=2.07, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.97, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.93, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=241.97, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.93, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.16, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.8, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.16, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.8, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.34, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.66, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.34, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.66, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.53, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.53, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.53, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.53, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.72, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.39, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.72, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.39, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.91, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.26, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=242.91, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.26, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.1, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.13, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.1, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=1.13, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.28, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.99, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.28, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.99, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.47, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.86, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.47, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.86, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.66, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.73, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.66, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.73, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.84, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.6, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=243.84, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.6, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.03, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.47, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.03, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.47, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.22, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.35, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.22, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.35, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.4, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.22, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.4, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.22, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.59, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.09, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.59, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=0.09, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.77, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.07, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.77, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.07, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.96, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.33, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=244.96, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.33, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.15, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.55, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.15, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.55, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.33, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=above_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.33, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-08T15:46:48+00:00, elevation=-0.75, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:07:59.218680+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.39, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-0.81, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.39, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-0.81, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.52, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-0.94, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/websocket to 192.168.178.21 (auth: True)
+INFO:homeassistant.components.http:Serving /api/history/period/2017-11-07T23:00:00.000Z to 192.168.178.21 (auth: True)
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.52, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-0.94, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.7, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.12, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.7, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.12, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.89, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.3, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=245.89, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.3, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=246.07, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.47, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+INFO:homeassistant.components.discovery:Unknown service discovered: DLNA {'serial': None, 'port': 49000, 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_number': 'avm'}
+INFO:homeassistant.components.discovery:Unknown service discovered: home_assistant {'properties': {'version': '0.57.2', 'base_url': 'http://192.168.178.103:8123', 'requires_api_password': False}, 'port': 8123, 'host': '192.168.178.103', 'hostname': 'Home._home-assistant._tcp.local.'}
+INFO:homeassistant.core:Bus:Handling <Event state_changed[L]: entity_id=sun.sun, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=246.07, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.47, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-08T22:59:29+00:00, next_rising=2017-11-09T06:13:26+00:00, friendly_name=Sun, azimuth=246.25, next_dawn=2017-11-09T05:39:57+00:00, next_setting=2017-11-09T15:45:24+00:00, elevation=-1.64, next_noon=2017-11-09T10:59:25+00:00, next_dusk=2017-11-08T16:20:11+00:00 @ 2017-11-08T16:46:49.663591+01:00>>
+

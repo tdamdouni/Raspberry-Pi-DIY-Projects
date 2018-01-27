@@ -1,0 +1,1279 @@
+Last login: Fri Nov 24 22:03:31 on console
+Peters-MBP:~ tdamdouni$ sudo nano /Users/tdamdouni/.ssh/known_hosts
+Password:
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+The authenticity of host '192.168.178.100 (192.168.178.100)' can't be established.
+ECDSA key fingerprint is SHA256:3aeW79ycIeANqpcV03G6eOnrRr0C2vEVbNF5ZWEyglo.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.178.100' (ECDSA) to the list of known hosts.
+pi@192.168.178.100's password: 
+Linux hassbian 4.9.41-v7+ #1023 SMP Tue Aug 8 16:00:15 BST 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@hassbian:~ $ sudo apt-get update
+Get:1 http://mirrordirector.raspbian.org/raspbian stretch InRelease [15.0 kB]
+Get:2 http://archive.raspberrypi.org/debian stretch InRelease [25.3 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian stretch/main armhf Packages [11.7 MB]
+Get:4 http://archive.raspberrypi.org/debian stretch/main armhf Packages [123 kB]
+Get:5 http://mirrordirector.raspbian.org/raspbian stretch/non-free armhf Packages [95.2 kB]
+Get:6 http://archive.raspberrypi.org/debian stretch/ui armhf Packages [27.0 kB]
+Fetched 11.9 MB in 16s (725 kB/s)                                              
+Reading package lists... Done
+pi@hassbian:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  apt apt-transport-https apt-utils bind9-host bluetooth bluez bluez-firmware
+  curl dhcpcd5 gnupg gnupg-agent gpgv libapt-inst2.0 libapt-pkg5.0
+  libbind9-140 libbluetooth-dev libbluetooth3 libcurl3 libcurl3-gnutls
+  libdns-export162 libdns162 libgssapi-krb5-2 libisc-export160 libisc160
+  libisccc140 libisccfg140 libk5crypto3 libkrb5-3 libkrb5support0
+  libldap-2.4-2 libldap-common liblwres141 libraspberrypi-bin
+  libraspberrypi-dev libraspberrypi-doc libraspberrypi0 libssl-dev libssl-doc
+  libssl1.0.2 libssl1.1 libwbclient0 linux-libc-dev openssl
+  raspberrypi-bootloader raspberrypi-kernel samba-common wget wpasupplicant
+48 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 87.9 MB of archives.
+After this operation, 302 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.raspberrypi.org/debian stretch/main armhf bluez armhf 5.43-2+rpt2+deb9u2 [721 kB]
+Get:2 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libapt-pkg5.0 armhf 1.4.8 [833 kB]
+Get:4 http://archive.raspberrypi.org/debian stretch/main armhf bluetooth all 5.43-2+rpt2+deb9u2 [41.5 kB]
+Get:6 http://archive.raspberrypi.org/debian stretch/main armhf bluez-firmware all 1.2-3+rpt1 [89.7 kB]
+Get:8 http://archive.raspberrypi.org/debian stretch/main armhf dhcpcd5 armhf 1:6.11.5-1+rpt4 [135 kB]
+Get:3 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libapt-inst2.0 armhf 1.4.8 [190 kB]
+Get:5 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf apt armhf 1.4.8 [1,190 kB]
+Get:10 http://archive.raspberrypi.org/debian stretch/main armhf libbluetooth-dev armhf 5.43-2+rpt2+deb9u2 [181 kB]
+Get:12 http://archive.raspberrypi.org/debian stretch/main armhf libbluetooth3 armhf 5.43-2+rpt2+deb9u2 [92.5 kB]
+Get:11 http://ftp.halifax.rwth-aachen.de/raspbian/raspbian stretch/main armhf libwbclient0 armhf 2:4.5.12+dfsg-2+deb9u1 [121 kB]
+Get:14 http://archive.raspberrypi.org/debian stretch/main armhf libraspberrypi-doc armhf 1.20171029-1 [31.4 MB]
+Get:7 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf apt-utils armhf 1.4.8 [392 kB]
+Get:19 http://ftp.halifax.rwth-aachen.de/raspbian/raspbian stretch/main armhf libssl-dev armhf 1.1.0f-3+deb9u1 [1,369 kB]
+Get:9 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf gpgv armhf 2.1.18-8~deb9u1 [440 kB]
+Get:13 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf samba-common all 2:4.5.12+dfsg-2+deb9u1 [172 kB]
+Get:21 http://ftp.halifax.rwth-aachen.de/raspbian/raspbian stretch/main armhf wget armhf 1.18-5+deb9u1 [768 kB]
+Get:15 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf gnupg-agent armhf 2.1.18-8~deb9u1 [498 kB]
+Get:16 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf gnupg armhf 2.1.18-8~deb9u1 [1,019 kB]
+Get:17 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libssl1.0.2 armhf 1.0.2l-2+deb9u1 [894 kB]
+Get:42 http://archive.raspberrypi.org/debian stretch/main armhf libraspberrypi-dev armhf 1.20171029-1 [404 kB]
+Get:18 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libssl-doc all 1.1.0f-3+deb9u1 [1,456 kB]
+Get:45 http://archive.raspberrypi.org/debian stretch/main armhf raspberrypi-kernel armhf 1.20171029-1 [31.7 MB]
+Get:20 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libssl1.1 armhf 1.1.0f-3+deb9u1 [1,105 kB]
+Get:22 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libgssapi-krb5-2 armhf 1.15-1+deb9u1 [131 kB]
+Get:23 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libkrb5-3 armhf 1.15-1+deb9u1 [262 kB]
+Get:24 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libkrb5support0 armhf 1.15-1+deb9u1 [58.1 kB]
+Get:25 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libk5crypto3 armhf 1.15-1+deb9u1 [115 kB]
+Get:26 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf bind9-host armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [230 kB]
+Get:27 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libisc160 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [366 kB]
+Get:46 http://archive.raspberrypi.org/debian stretch/main armhf libraspberrypi-bin armhf 1.20171029-1 [335 kB]
+Get:47 http://archive.raspberrypi.org/debian stretch/main armhf libraspberrypi0 armhf 1.20171029-1 [837 kB]
+Get:28 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libdns162 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [952 kB]
+Get:48 http://archive.raspberrypi.org/debian stretch/main armhf raspberrypi-bootloader armhf 1.20171029-1 [3,513 kB]
+Get:29 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libisccc140 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [196 kB]
+Get:30 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libisccfg140 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [215 kB]
+Get:31 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libbind9-140 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [204 kB]
+Get:32 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf liblwres141 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [210 kB]
+Get:33 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libldap-2.4-2 armhf 2.4.44+dfsg-5+deb9u1 [195 kB]
+Get:34 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libldap-common all 2.4.44+dfsg-5+deb9u1 [85.4 kB]
+Get:35 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libcurl3-gnutls armhf 7.52.1-5+deb9u2 [259 kB]
+Get:36 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf apt-transport-https armhf 1.4.8 [165 kB]
+Get:37 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf curl armhf 7.52.1-5+deb9u2 [220 kB]
+Get:38 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libcurl3 armhf 7.52.1-5+deb9u2 [261 kB]
+Get:39 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libisc-export160 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [316 kB]
+Get:40 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libdns-export162 armhf 1:9.10.3.dfsg.P4-12.3+deb9u3 [764 kB]
+Get:41 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf linux-libc-dev armhf 4.9.51-1+rpi3 [1,261 kB]
+Get:43 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf openssl armhf 1.1.0f-3+deb9u1 [691 kB]
+Get:44 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf wpasupplicant armhf 2:2.4-1+deb9u1 [793 kB]
+Fetched 87.9 MB in 33s (2,631 kB/s)                                            
+Reading changelogs... Done
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... 39905 files and directories currently installed.)
+Preparing to unpack .../libapt-pkg5.0_1.4.8_armhf.deb ...
+Unpacking libapt-pkg5.0:armhf (1.4.8) over (1.4.7) ...
+Setting up libapt-pkg5.0:armhf (1.4.8) ...
+(Reading database ... 39905 files and directories currently installed.)
+Preparing to unpack .../libapt-inst2.0_1.4.8_armhf.deb ...
+Unpacking libapt-inst2.0:armhf (1.4.8) over (1.4.7) ...
+Preparing to unpack .../archives/apt_1.4.8_armhf.deb ...
+Unpacking apt (1.4.8) over (1.4.7) ...
+Setting up apt (1.4.8) ...
+(Reading database ... 39905 files and directories currently installed.)
+Preparing to unpack .../apt-utils_1.4.8_armhf.deb ...
+Unpacking apt-utils (1.4.8) over (1.4.7) ...
+Preparing to unpack .../gpgv_2.1.18-8~deb9u1_armhf.deb ...
+Unpacking gpgv (2.1.18-8~deb9u1) over (2.1.18-6) ...
+Setting up gpgv (2.1.18-8~deb9u1) ...
+(Reading database ... 39905 files and directories currently installed.)
+Preparing to unpack .../libwbclient0_2%3a4.5.12+dfsg-2+deb9u1_armhf.deb ...
+Unpacking libwbclient0:armhf (2:4.5.12+dfsg-2+deb9u1) over (2:4.5.8+dfsg-2+deb9u2) ...
+Preparing to unpack .../samba-common_2%3a4.5.12+dfsg-2+deb9u1_all.deb ...
+Unpacking samba-common (2:4.5.12+dfsg-2+deb9u1) over (2:4.5.8+dfsg-2+deb9u2) ...
+Preparing to unpack .../gnupg-agent_2.1.18-8~deb9u1_armhf.deb ...
+Unpacking gnupg-agent (2.1.18-8~deb9u1) over (2.1.18-6) ...
+Setting up gnupg-agent (2.1.18-8~deb9u1) ...
+(Reading database ... 39905 files and directories currently installed.)
+Preparing to unpack .../gnupg_2.1.18-8~deb9u1_armhf.deb ...
+Unpacking gnupg (2.1.18-8~deb9u1) over (2.1.18-6) ...
+Setting up gnupg (2.1.18-8~deb9u1) ...
+(Reading database ... 39904 files and directories currently installed.)
+Preparing to unpack .../00-libssl1.0.2_1.0.2l-2+deb9u1_armhf.deb ...
+Unpacking libssl1.0.2:armhf (1.0.2l-2+deb9u1) over (1.0.2l-2) ...
+Preparing to unpack .../01-libssl-doc_1.1.0f-3+deb9u1_all.deb ...
+Unpacking libssl-doc (1.1.0f-3+deb9u1) over (1.1.0f-3) ...
+Preparing to unpack .../02-libssl-dev_1.1.0f-3+deb9u1_armhf.deb ...
+Unpacking libssl-dev:armhf (1.1.0f-3+deb9u1) over (1.1.0f-3) ...
+Preparing to unpack .../03-libssl1.1_1.1.0f-3+deb9u1_armhf.deb ...
+Unpacking libssl1.1:armhf (1.1.0f-3+deb9u1) over (1.1.0f-3) ...
+Preparing to unpack .../04-wget_1.18-5+deb9u1_armhf.deb ...
+Unpacking wget (1.18-5+deb9u1) over (1.18-5) ...
+Preparing to unpack .../05-libgssapi-krb5-2_1.15-1+deb9u1_armhf.deb ...
+Unpacking libgssapi-krb5-2:armhf (1.15-1+deb9u1) over (1.15-1) ...
+Preparing to unpack .../06-libkrb5-3_1.15-1+deb9u1_armhf.deb ...
+Unpacking libkrb5-3:armhf (1.15-1+deb9u1) over (1.15-1) ...
+Preparing to unpack .../07-libkrb5support0_1.15-1+deb9u1_armhf.deb ...
+Unpacking libkrb5support0:armhf (1.15-1+deb9u1) over (1.15-1) ...
+Preparing to unpack .../08-libk5crypto3_1.15-1+deb9u1_armhf.deb ...
+Unpacking libk5crypto3:armhf (1.15-1+deb9u1) over (1.15-1) ...
+Preparing to unpack .../09-bind9-host_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking bind9-host (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../10-libisc160_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libisc160:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../11-libdns162_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libdns162:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../12-libisccc140_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libisccc140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../13-libisccfg140_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libisccfg140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../14-libbind9-140_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libbind9-140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../15-liblwres141_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking liblwres141:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../16-libldap-2.4-2_2.4.44+dfsg-5+deb9u1_armhf.deb ...
+Unpacking libldap-2.4-2:armhf (2.4.44+dfsg-5+deb9u1) over (2.4.44+dfsg-5) ...
+Preparing to unpack .../17-libldap-common_2.4.44+dfsg-5+deb9u1_all.deb ...
+Unpacking libldap-common (2.4.44+dfsg-5+deb9u1) over (2.4.44+dfsg-5) ...
+Preparing to unpack .../18-libcurl3-gnutls_7.52.1-5+deb9u2_armhf.deb ...
+Unpacking libcurl3-gnutls:armhf (7.52.1-5+deb9u2) over (7.52.1-5+deb9u1) ...
+Preparing to unpack .../19-apt-transport-https_1.4.8_armhf.deb ...
+Unpacking apt-transport-https (1.4.8) over (1.4.7) ...
+Preparing to unpack .../20-bluez_5.43-2+rpt2+deb9u2_armhf.deb ...
+Unpacking bluez (5.43-2+rpt2+deb9u2) over (5.43-2+rpt1+deb9u1) ...
+Preparing to unpack .../21-bluetooth_5.43-2+rpt2+deb9u2_all.deb ...
+Unpacking bluetooth (5.43-2+rpt2+deb9u2) over (5.43-2+rpt1+deb9u1) ...
+Preparing to unpack .../22-bluez-firmware_1.2-3+rpt1_all.deb ...
+Unpacking bluez-firmware (1.2-3+rpt1) over (1.2-3+rpi2) ...
+Preparing to unpack .../23-curl_7.52.1-5+deb9u2_armhf.deb ...
+Unpacking curl (7.52.1-5+deb9u2) over (7.52.1-5+deb9u1) ...
+Preparing to unpack .../24-libcurl3_7.52.1-5+deb9u2_armhf.deb ...
+Unpacking libcurl3:armhf (7.52.1-5+deb9u2) over (7.52.1-5+deb9u1) ...
+Preparing to unpack .../25-dhcpcd5_1%3a6.11.5-1+rpt4_armhf.deb ...
+Unpacking dhcpcd5 (1:6.11.5-1+rpt4) over (1:6.11.5-1+rpt2) ...
+Preparing to unpack .../26-libbluetooth-dev_5.43-2+rpt2+deb9u2_armhf.deb ...
+Unpacking libbluetooth-dev (5.43-2+rpt2+deb9u2) over (5.43-2+rpt1+deb9u1) ...
+Preparing to unpack .../27-libbluetooth3_5.43-2+rpt2+deb9u2_armhf.deb ...
+Unpacking libbluetooth3:armhf (5.43-2+rpt2+deb9u2) over (5.43-2+rpt1+deb9u1) ...
+Preparing to unpack .../28-libisc-export160_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libisc-export160 (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../29-libdns-export162_1%3a9.10.3.dfsg.P4-12.3+deb9u3_armhf.deb ...
+Unpacking libdns-export162 (1:9.10.3.dfsg.P4-12.3+deb9u3) over (1:9.10.3.dfsg.P4-12.3+deb9u2) ...
+Preparing to unpack .../30-linux-libc-dev_4.9.51-1+rpi3_armhf.deb ...
+Unpacking linux-libc-dev:armhf (4.9.51-1+rpi3) over (4.9.30-2+deb9u2+rpi1+stretch) ...
+Preparing to unpack .../31-openssl_1.1.0f-3+deb9u1_armhf.deb ...
+Unpacking openssl (1.1.0f-3+deb9u1) over (1.1.0f-3) ...
+Preparing to unpack .../32-wpasupplicant_2%3a2.4-1+deb9u1_armhf.deb ...
+Unpacking wpasupplicant (2:2.4-1+deb9u1) over (2:2.4-1) ...
+Preparing to unpack .../33-libraspberrypi-doc_1.20171029-1_armhf.deb ...
+Unpacking libraspberrypi-doc (1.20171029-1) over (1.20170811-1) ...
+Preparing to unpack .../34-libraspberrypi-dev_1.20171029-1_armhf.deb ...
+Unpacking libraspberrypi-dev (1.20171029-1) over (1.20170811-1) ...
+Preparing to unpack .../35-raspberrypi-kernel_1.20171029-1_armhf.deb ...
+Adding 'diversion of /boot/bcm2708-rpi-0-w.dtb to /usr/share/rpikernelhack/bcm2708-rpi-0-w.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2708-rpi-b-plus.dtb to /usr/share/rpikernelhack/bcm2708-rpi-b-plus.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2708-rpi-b.dtb to /usr/share/rpikernelhack/bcm2708-rpi-b.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2708-rpi-cm.dtb to /usr/share/rpikernelhack/bcm2708-rpi-cm.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2709-rpi-2-b.dtb to /usr/share/rpikernelhack/bcm2709-rpi-2-b.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2710-rpi-3-b.dtb to /usr/share/rpikernelhack/bcm2710-rpi-3-b.dtb by rpikernelhack'
+Adding 'diversion of /boot/bcm2710-rpi-cm3.dtb to /usr/share/rpikernelhack/bcm2710-rpi-cm3.dtb by rpikernelhack'
+Adding 'diversion of /boot/kernel.img to /usr/share/rpikernelhack/kernel.img by rpikernelhack'
+Adding 'diversion of /boot/kernel7.img to /usr/share/rpikernelhack/kernel7.img by rpikernelhack'
+Adding 'diversion of /boot/COPYING.linux to /usr/share/rpikernelhack/COPYING.linux by rpikernelhack'
+Adding 'diversion of /boot/overlays/README to /usr/share/rpikernelhack/overlays/README by rpikernelhack'
+Adding 'diversion of /boot/overlays/adau1977-adc.dtbo to /usr/share/rpikernelhack/overlays/adau1977-adc.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/adau7002-simple.dtbo to /usr/share/rpikernelhack/overlays/adau7002-simple.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/ads1015.dtbo to /usr/share/rpikernelhack/overlays/ads1015.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/ads1115.dtbo to /usr/share/rpikernelhack/overlays/ads1115.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/ads7846.dtbo to /usr/share/rpikernelhack/overlays/ads7846.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/akkordion-iqdacplus.dtbo to /usr/share/rpikernelhack/overlays/akkordion-iqdacplus.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/allo-boss-dac-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-boss-dac-pcm512x-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/allo-digione.dtbo to /usr/share/rpikernelhack/overlays/allo-digione.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/allo-piano-dac-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-piano-dac-pcm512x-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/allo-piano-dac-plus-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-piano-dac-plus-pcm512x-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/at86rf233.dtbo to /usr/share/rpikernelhack/overlays/at86rf233.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/audioinjector-addons.dtbo to /usr/share/rpikernelhack/overlays/audioinjector-addons.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/audioinjector-wm8731-audio.dtbo to /usr/share/rpikernelhack/overlays/audioinjector-wm8731-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/audremap.dtbo to /usr/share/rpikernelhack/overlays/audremap.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/bmp085_i2c-sensor.dtbo to /usr/share/rpikernelhack/overlays/bmp085_i2c-sensor.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dht11.dtbo to /usr/share/rpikernelhack/overlays/dht11.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dionaudio-loco-v2.dtbo to /usr/share/rpikernelhack/overlays/dionaudio-loco-v2.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dionaudio-loco.dtbo to /usr/share/rpikernelhack/overlays/dionaudio-loco.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dpi18.dtbo to /usr/share/rpikernelhack/overlays/dpi18.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dpi24.dtbo to /usr/share/rpikernelhack/overlays/dpi24.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dwc-otg.dtbo to /usr/share/rpikernelhack/overlays/dwc-otg.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/dwc2.dtbo to /usr/share/rpikernelhack/overlays/dwc2.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/enc28j60-spi2.dtbo to /usr/share/rpikernelhack/overlays/enc28j60-spi2.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/enc28j60.dtbo to /usr/share/rpikernelhack/overlays/enc28j60.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/fe-pi-audio.dtbo to /usr/share/rpikernelhack/overlays/fe-pi-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/goodix.dtbo to /usr/share/rpikernelhack/overlays/goodix.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/googlevoicehat-soundcard.dtbo to /usr/share/rpikernelhack/overlays/googlevoicehat-soundcard.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/gpio-ir.dtbo to /usr/share/rpikernelhack/overlays/gpio-ir.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/gpio-poweroff.dtbo to /usr/share/rpikernelhack/overlays/gpio-poweroff.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/gpio-shutdown.dtbo to /usr/share/rpikernelhack/overlays/gpio-shutdown.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hifiberry-amp.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-amp.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hifiberry-dac.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-dac.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hifiberry-dacplus.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-dacplus.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hifiberry-digi-pro.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-digi-pro.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hifiberry-digi.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-digi.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hy28a.dtbo to /usr/share/rpikernelhack/overlays/hy28a.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/hy28b.dtbo to /usr/share/rpikernelhack/overlays/hy28b.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c-bcm2708.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-gpio.dtbo to /usr/share/rpikernelhack/overlays/i2c-gpio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-mux.dtbo to /usr/share/rpikernelhack/overlays/i2c-mux.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-pwm-pca9685a.dtbo to /usr/share/rpikernelhack/overlays/i2c-pwm-pca9685a.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-rtc-gpio.dtbo to /usr/share/rpikernelhack/overlays/i2c-rtc-gpio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-rtc.dtbo to /usr/share/rpikernelhack/overlays/i2c-rtc.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c-sensor.dtbo to /usr/share/rpikernelhack/overlays/i2c-sensor.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c0-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c0-bcm2708.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2c1-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c1-bcm2708.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/i2s-gpio28-31.dtbo to /usr/share/rpikernelhack/overlays/i2s-gpio28-31.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/iqaudio-dac.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-dac.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/iqaudio-dacplus.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-dacplus.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/iqaudio-digi-wm8804-audio.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-digi-wm8804-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/justboom-dac.dtbo to /usr/share/rpikernelhack/overlays/justboom-dac.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/justboom-digi.dtbo to /usr/share/rpikernelhack/overlays/justboom-digi.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/lirc-rpi.dtbo to /usr/share/rpikernelhack/overlays/lirc-rpi.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mcp23017.dtbo to /usr/share/rpikernelhack/overlays/mcp23017.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mcp23s17.dtbo to /usr/share/rpikernelhack/overlays/mcp23s17.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mcp2515-can0.dtbo to /usr/share/rpikernelhack/overlays/mcp2515-can0.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mcp2515-can1.dtbo to /usr/share/rpikernelhack/overlays/mcp2515-can1.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mcp3008.dtbo to /usr/share/rpikernelhack/overlays/mcp3008.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/midi-uart0.dtbo to /usr/share/rpikernelhack/overlays/midi-uart0.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/midi-uart1.dtbo to /usr/share/rpikernelhack/overlays/midi-uart1.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mmc.dtbo to /usr/share/rpikernelhack/overlays/mmc.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mpu6050.dtbo to /usr/share/rpikernelhack/overlays/mpu6050.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/mz61581.dtbo to /usr/share/rpikernelhack/overlays/mz61581.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/papirus.dtbo to /usr/share/rpikernelhack/overlays/papirus.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pi3-act-led.dtbo to /usr/share/rpikernelhack/overlays/pi3-act-led.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pi3-disable-bt.dtbo to /usr/share/rpikernelhack/overlays/pi3-disable-bt.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pi3-disable-wifi.dtbo to /usr/share/rpikernelhack/overlays/pi3-disable-wifi.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pi3-miniuart-bt.dtbo to /usr/share/rpikernelhack/overlays/pi3-miniuart-bt.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/piscreen.dtbo to /usr/share/rpikernelhack/overlays/piscreen.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/piscreen2r.dtbo to /usr/share/rpikernelhack/overlays/piscreen2r.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pisound.dtbo to /usr/share/rpikernelhack/overlays/pisound.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pitft22.dtbo to /usr/share/rpikernelhack/overlays/pitft22.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pitft28-capacitive.dtbo to /usr/share/rpikernelhack/overlays/pitft28-capacitive.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pitft28-resistive.dtbo to /usr/share/rpikernelhack/overlays/pitft28-resistive.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pitft35-resistive.dtbo to /usr/share/rpikernelhack/overlays/pitft35-resistive.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pps-gpio.dtbo to /usr/share/rpikernelhack/overlays/pps-gpio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pwm-2chan.dtbo to /usr/share/rpikernelhack/overlays/pwm-2chan.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/pwm.dtbo to /usr/share/rpikernelhack/overlays/pwm.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/qca7000.dtbo to /usr/share/rpikernelhack/overlays/qca7000.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/raspidac3.dtbo to /usr/share/rpikernelhack/overlays/raspidac3.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rotary-encoder.dtbo to /usr/share/rpikernelhack/overlays/rotary-encoder.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-backlight.dtbo to /usr/share/rpikernelhack/overlays/rpi-backlight.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-cirrus-wm5102.dtbo to /usr/share/rpikernelhack/overlays/rpi-cirrus-wm5102.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-dac.dtbo to /usr/share/rpikernelhack/overlays/rpi-dac.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-display.dtbo to /usr/share/rpikernelhack/overlays/rpi-display.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-ft5406.dtbo to /usr/share/rpikernelhack/overlays/rpi-ft5406.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-proto.dtbo to /usr/share/rpikernelhack/overlays/rpi-proto.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-sense.dtbo to /usr/share/rpikernelhack/overlays/rpi-sense.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rpi-tv.dtbo to /usr/share/rpikernelhack/overlays/rpi-tv.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/rra-digidac1-wm8741-audio.dtbo to /usr/share/rpikernelhack/overlays/rra-digidac1-wm8741-audio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sc16is750-i2c.dtbo to /usr/share/rpikernelhack/overlays/sc16is750-i2c.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sc16is752-spi1.dtbo to /usr/share/rpikernelhack/overlays/sc16is752-spi1.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sdhost.dtbo to /usr/share/rpikernelhack/overlays/sdhost.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sdio-1bit.dtbo to /usr/share/rpikernelhack/overlays/sdio-1bit.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sdio.dtbo to /usr/share/rpikernelhack/overlays/sdio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/sdtweak.dtbo to /usr/share/rpikernelhack/overlays/sdtweak.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/smi-dev.dtbo to /usr/share/rpikernelhack/overlays/smi-dev.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/smi-nand.dtbo to /usr/share/rpikernelhack/overlays/smi-nand.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/smi.dtbo to /usr/share/rpikernelhack/overlays/smi.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi-gpio35-39.dtbo to /usr/share/rpikernelhack/overlays/spi-gpio35-39.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi-rtc.dtbo to /usr/share/rpikernelhack/overlays/spi-rtc.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi0-cs.dtbo to /usr/share/rpikernelhack/overlays/spi0-cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi0-hw-cs.dtbo to /usr/share/rpikernelhack/overlays/spi0-hw-cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi1-1cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-1cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi1-2cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-2cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi1-3cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-3cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi2-1cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-1cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi2-2cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-2cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/spi2-3cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-3cs.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/tinylcd35.dtbo to /usr/share/rpikernelhack/overlays/tinylcd35.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/uart1.dtbo to /usr/share/rpikernelhack/overlays/uart1.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/vc4-fkms-v3d.dtbo to /usr/share/rpikernelhack/overlays/vc4-fkms-v3d.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/vc4-kms-v3d.dtbo to /usr/share/rpikernelhack/overlays/vc4-kms-v3d.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/vga666.dtbo to /usr/share/rpikernelhack/overlays/vga666.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/w1-gpio-pullup.dtbo to /usr/share/rpikernelhack/overlays/w1-gpio-pullup.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/w1-gpio.dtbo to /usr/share/rpikernelhack/overlays/w1-gpio.dtbo by rpikernelhack'
+Adding 'diversion of /boot/overlays/wittypi.dtbo to /usr/share/rpikernelhack/overlays/wittypi.dtbo by rpikernelhack'
+Unpacking raspberrypi-kernel (1.20171029-1) over (1.20170811-1) ...
+run-parts: executing /etc/kernel/postrm.d/initramfs-tools 4.9.41+ /boot/kernel.img
+run-parts: executing /etc/kernel/postrm.d/initramfs-tools 4.9.41-v7+ /boot/kernel7.img
+Preparing to unpack .../36-libraspberrypi-bin_1.20171029-1_armhf.deb ...
+Unpacking libraspberrypi-bin (1.20171029-1) over (1.20170811-1) ...
+Preparing to unpack .../37-libraspberrypi0_1.20171029-1_armhf.deb ...
+Unpacking libraspberrypi0 (1.20171029-1) over (1.20170811-1) ...
+Preparing to unpack .../38-raspberrypi-bootloader_1.20171029-1_armhf.deb ...
+Adding 'diversion of /boot/start.elf to /usr/share/rpikernelhack/start.elf by rpikernelhack'
+Adding 'diversion of /boot/start_cd.elf to /usr/share/rpikernelhack/start_cd.elf by rpikernelhack'
+Adding 'diversion of /boot/start_db.elf to /usr/share/rpikernelhack/start_db.elf by rpikernelhack'
+Adding 'diversion of /boot/start_x.elf to /usr/share/rpikernelhack/start_x.elf by rpikernelhack'
+Adding 'diversion of /boot/fixup.dat to /usr/share/rpikernelhack/fixup.dat by rpikernelhack'
+Adding 'diversion of /boot/fixup_cd.dat to /usr/share/rpikernelhack/fixup_cd.dat by rpikernelhack'
+Adding 'diversion of /boot/fixup_db.dat to /usr/share/rpikernelhack/fixup_db.dat by rpikernelhack'
+Adding 'diversion of /boot/fixup_x.dat to /usr/share/rpikernelhack/fixup_x.dat by rpikernelhack'
+Adding 'diversion of /boot/bootcode.bin to /usr/share/rpikernelhack/bootcode.bin by rpikernelhack'
+Adding 'diversion of /boot/LICENCE.broadcom to /usr/share/rpikernelhack/LICENCE.broadcom by rpikernelhack'
+Unpacking raspberrypi-bootloader (1.20171029-1) over (1.20170811-1) ...
+Setting up libapt-inst2.0:armhf (1.4.8) ...
+Setting up libwbclient0:armhf (2:4.5.12+dfsg-2+deb9u1) ...
+Setting up libisc160:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up bluez-firmware (1.2-3+rpt1) ...
+Setting up libisc-export160 (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up libldap-common (2.4.44+dfsg-5+deb9u1) ...
+Setting up apt-utils (1.4.8) ...
+Processing triggers for install-info (6.3.0.dfsg.1-1+b1) ...
+Setting up dhcpcd5 (1:6.11.5-1+rpt4) ...
+Setting up libbluetooth3:armhf (5.43-2+rpt2+deb9u2) ...
+Setting up raspberrypi-bootloader (1.20171029-1) ...
+Removing 'diversion of /boot/start.elf to /usr/share/rpikernelhack/start.elf by rpikernelhack'
+Removing 'diversion of /boot/start_cd.elf to /usr/share/rpikernelhack/start_cd.elf by rpikernelhack'
+Removing 'diversion of /boot/start_db.elf to /usr/share/rpikernelhack/start_db.elf by rpikernelhack'
+Removing 'diversion of /boot/start_x.elf to /usr/share/rpikernelhack/start_x.elf by rpikernelhack'
+Removing 'diversion of /boot/fixup.dat to /usr/share/rpikernelhack/fixup.dat by rpikernelhack'
+Removing 'diversion of /boot/fixup_cd.dat to /usr/share/rpikernelhack/fixup_cd.dat by rpikernelhack'
+Removing 'diversion of /boot/fixup_db.dat to /usr/share/rpikernelhack/fixup_db.dat by rpikernelhack'
+Removing 'diversion of /boot/fixup_x.dat to /usr/share/rpikernelhack/fixup_x.dat by rpikernelhack'
+Removing 'diversion of /boot/bootcode.bin to /usr/share/rpikernelhack/bootcode.bin by rpikernelhack'
+Removing 'diversion of /boot/LICENCE.broadcom to /usr/share/rpikernelhack/LICENCE.broadcom by rpikernelhack'
+Setting up linux-libc-dev:armhf (4.9.51-1+rpi3) ...
+Setting up samba-common (2:4.5.12+dfsg-2+deb9u1) ...
+Setting up libkrb5support0:armhf (1.15-1+deb9u1) ...
+Setting up libssl1.0.2:armhf (1.0.2l-2+deb9u1) ...
+Setting up libisccc140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+Setting up libldap-2.4-2:armhf (2.4.44+dfsg-5+deb9u1) ...
+Setting up libssl1.1:armhf (1.1.0f-3+deb9u1) ...
+Setting up raspberrypi-kernel (1.20171029-1) ...
+Removing 'diversion of /boot/bcm2708-rpi-0-w.dtb to /usr/share/rpikernelhack/bcm2708-rpi-0-w.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2708-rpi-b-plus.dtb to /usr/share/rpikernelhack/bcm2708-rpi-b-plus.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2708-rpi-b.dtb to /usr/share/rpikernelhack/bcm2708-rpi-b.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2708-rpi-cm.dtb to /usr/share/rpikernelhack/bcm2708-rpi-cm.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2709-rpi-2-b.dtb to /usr/share/rpikernelhack/bcm2709-rpi-2-b.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2710-rpi-3-b.dtb to /usr/share/rpikernelhack/bcm2710-rpi-3-b.dtb by rpikernelhack'
+Removing 'diversion of /boot/bcm2710-rpi-cm3.dtb to /usr/share/rpikernelhack/bcm2710-rpi-cm3.dtb by rpikernelhack'
+Removing 'diversion of /boot/kernel.img to /usr/share/rpikernelhack/kernel.img by rpikernelhack'
+Removing 'diversion of /boot/kernel7.img to /usr/share/rpikernelhack/kernel7.img by rpikernelhack'
+Removing 'diversion of /boot/COPYING.linux to /usr/share/rpikernelhack/COPYING.linux by rpikernelhack'
+Removing 'diversion of /boot/overlays/README to /usr/share/rpikernelhack/overlays/README by rpikernelhack'
+Removing 'diversion of /boot/overlays/adau1977-adc.dtbo to /usr/share/rpikernelhack/overlays/adau1977-adc.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/adau7002-simple.dtbo to /usr/share/rpikernelhack/overlays/adau7002-simple.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/ads1015.dtbo to /usr/share/rpikernelhack/overlays/ads1015.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/ads1115.dtbo to /usr/share/rpikernelhack/overlays/ads1115.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/ads7846.dtbo to /usr/share/rpikernelhack/overlays/ads7846.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/akkordion-iqdacplus.dtbo to /usr/share/rpikernelhack/overlays/akkordion-iqdacplus.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/allo-boss-dac-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-boss-dac-pcm512x-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/allo-digione.dtbo to /usr/share/rpikernelhack/overlays/allo-digione.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/allo-piano-dac-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-piano-dac-pcm512x-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/allo-piano-dac-plus-pcm512x-audio.dtbo to /usr/share/rpikernelhack/overlays/allo-piano-dac-plus-pcm512x-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/at86rf233.dtbo to /usr/share/rpikernelhack/overlays/at86rf233.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/audioinjector-addons.dtbo to /usr/share/rpikernelhack/overlays/audioinjector-addons.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/audioinjector-wm8731-audio.dtbo to /usr/share/rpikernelhack/overlays/audioinjector-wm8731-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/audremap.dtbo to /usr/share/rpikernelhack/overlays/audremap.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/bmp085_i2c-sensor.dtbo to /usr/share/rpikernelhack/overlays/bmp085_i2c-sensor.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dht11.dtbo to /usr/share/rpikernelhack/overlays/dht11.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dionaudio-loco-v2.dtbo to /usr/share/rpikernelhack/overlays/dionaudio-loco-v2.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dionaudio-loco.dtbo to /usr/share/rpikernelhack/overlays/dionaudio-loco.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dpi18.dtbo to /usr/share/rpikernelhack/overlays/dpi18.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dpi24.dtbo to /usr/share/rpikernelhack/overlays/dpi24.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dwc-otg.dtbo to /usr/share/rpikernelhack/overlays/dwc-otg.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/dwc2.dtbo to /usr/share/rpikernelhack/overlays/dwc2.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/enc28j60-spi2.dtbo to /usr/share/rpikernelhack/overlays/enc28j60-spi2.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/enc28j60.dtbo to /usr/share/rpikernelhack/overlays/enc28j60.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/fe-pi-audio.dtbo to /usr/share/rpikernelhack/overlays/fe-pi-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/goodix.dtbo to /usr/share/rpikernelhack/overlays/goodix.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/googlevoicehat-soundcard.dtbo to /usr/share/rpikernelhack/overlays/googlevoicehat-soundcard.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/gpio-ir.dtbo to /usr/share/rpikernelhack/overlays/gpio-ir.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/gpio-poweroff.dtbo to /usr/share/rpikernelhack/overlays/gpio-poweroff.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/gpio-shutdown.dtbo to /usr/share/rpikernelhack/overlays/gpio-shutdown.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hifiberry-amp.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-amp.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hifiberry-dac.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-dac.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hifiberry-dacplus.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-dacplus.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hifiberry-digi-pro.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-digi-pro.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hifiberry-digi.dtbo to /usr/share/rpikernelhack/overlays/hifiberry-digi.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hy28a.dtbo to /usr/share/rpikernelhack/overlays/hy28a.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/hy28b.dtbo to /usr/share/rpikernelhack/overlays/hy28b.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c-bcm2708.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-gpio.dtbo to /usr/share/rpikernelhack/overlays/i2c-gpio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-mux.dtbo to /usr/share/rpikernelhack/overlays/i2c-mux.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-pwm-pca9685a.dtbo to /usr/share/rpikernelhack/overlays/i2c-pwm-pca9685a.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-rtc-gpio.dtbo to /usr/share/rpikernelhack/overlays/i2c-rtc-gpio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-rtc.dtbo to /usr/share/rpikernelhack/overlays/i2c-rtc.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c-sensor.dtbo to /usr/share/rpikernelhack/overlays/i2c-sensor.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c0-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c0-bcm2708.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2c1-bcm2708.dtbo to /usr/share/rpikernelhack/overlays/i2c1-bcm2708.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/i2s-gpio28-31.dtbo to /usr/share/rpikernelhack/overlays/i2s-gpio28-31.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/iqaudio-dac.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-dac.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/iqaudio-dacplus.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-dacplus.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/iqaudio-digi-wm8804-audio.dtbo to /usr/share/rpikernelhack/overlays/iqaudio-digi-wm8804-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/justboom-dac.dtbo to /usr/share/rpikernelhack/overlays/justboom-dac.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/justboom-digi.dtbo to /usr/share/rpikernelhack/overlays/justboom-digi.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/lirc-rpi.dtbo to /usr/share/rpikernelhack/overlays/lirc-rpi.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mcp23017.dtbo to /usr/share/rpikernelhack/overlays/mcp23017.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mcp23s17.dtbo to /usr/share/rpikernelhack/overlays/mcp23s17.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mcp2515-can0.dtbo to /usr/share/rpikernelhack/overlays/mcp2515-can0.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mcp2515-can1.dtbo to /usr/share/rpikernelhack/overlays/mcp2515-can1.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mcp3008.dtbo to /usr/share/rpikernelhack/overlays/mcp3008.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/midi-uart0.dtbo to /usr/share/rpikernelhack/overlays/midi-uart0.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/midi-uart1.dtbo to /usr/share/rpikernelhack/overlays/midi-uart1.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mmc.dtbo to /usr/share/rpikernelhack/overlays/mmc.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mpu6050.dtbo to /usr/share/rpikernelhack/overlays/mpu6050.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/mz61581.dtbo to /usr/share/rpikernelhack/overlays/mz61581.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/papirus.dtbo to /usr/share/rpikernelhack/overlays/papirus.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pi3-act-led.dtbo to /usr/share/rpikernelhack/overlays/pi3-act-led.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pi3-disable-bt.dtbo to /usr/share/rpikernelhack/overlays/pi3-disable-bt.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pi3-disable-wifi.dtbo to /usr/share/rpikernelhack/overlays/pi3-disable-wifi.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pi3-miniuart-bt.dtbo to /usr/share/rpikernelhack/overlays/pi3-miniuart-bt.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/piscreen.dtbo to /usr/share/rpikernelhack/overlays/piscreen.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/piscreen2r.dtbo to /usr/share/rpikernelhack/overlays/piscreen2r.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pisound.dtbo to /usr/share/rpikernelhack/overlays/pisound.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pitft22.dtbo to /usr/share/rpikernelhack/overlays/pitft22.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pitft28-capacitive.dtbo to /usr/share/rpikernelhack/overlays/pitft28-capacitive.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pitft28-resistive.dtbo to /usr/share/rpikernelhack/overlays/pitft28-resistive.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pitft35-resistive.dtbo to /usr/share/rpikernelhack/overlays/pitft35-resistive.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pps-gpio.dtbo to /usr/share/rpikernelhack/overlays/pps-gpio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pwm-2chan.dtbo to /usr/share/rpikernelhack/overlays/pwm-2chan.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/pwm.dtbo to /usr/share/rpikernelhack/overlays/pwm.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/qca7000.dtbo to /usr/share/rpikernelhack/overlays/qca7000.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/raspidac3.dtbo to /usr/share/rpikernelhack/overlays/raspidac3.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rotary-encoder.dtbo to /usr/share/rpikernelhack/overlays/rotary-encoder.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-backlight.dtbo to /usr/share/rpikernelhack/overlays/rpi-backlight.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-cirrus-wm5102.dtbo to /usr/share/rpikernelhack/overlays/rpi-cirrus-wm5102.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-dac.dtbo to /usr/share/rpikernelhack/overlays/rpi-dac.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-display.dtbo to /usr/share/rpikernelhack/overlays/rpi-display.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-ft5406.dtbo to /usr/share/rpikernelhack/overlays/rpi-ft5406.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-proto.dtbo to /usr/share/rpikernelhack/overlays/rpi-proto.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-sense.dtbo to /usr/share/rpikernelhack/overlays/rpi-sense.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rpi-tv.dtbo to /usr/share/rpikernelhack/overlays/rpi-tv.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/rra-digidac1-wm8741-audio.dtbo to /usr/share/rpikernelhack/overlays/rra-digidac1-wm8741-audio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sc16is750-i2c.dtbo to /usr/share/rpikernelhack/overlays/sc16is750-i2c.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sc16is752-spi1.dtbo to /usr/share/rpikernelhack/overlays/sc16is752-spi1.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sdhost.dtbo to /usr/share/rpikernelhack/overlays/sdhost.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sdio-1bit.dtbo to /usr/share/rpikernelhack/overlays/sdio-1bit.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sdio.dtbo to /usr/share/rpikernelhack/overlays/sdio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/sdtweak.dtbo to /usr/share/rpikernelhack/overlays/sdtweak.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/smi-dev.dtbo to /usr/share/rpikernelhack/overlays/smi-dev.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/smi-nand.dtbo to /usr/share/rpikernelhack/overlays/smi-nand.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/smi.dtbo to /usr/share/rpikernelhack/overlays/smi.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi-gpio35-39.dtbo to /usr/share/rpikernelhack/overlays/spi-gpio35-39.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi-rtc.dtbo to /usr/share/rpikernelhack/overlays/spi-rtc.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi0-cs.dtbo to /usr/share/rpikernelhack/overlays/spi0-cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi0-hw-cs.dtbo to /usr/share/rpikernelhack/overlays/spi0-hw-cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi1-1cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-1cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi1-2cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-2cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi1-3cs.dtbo to /usr/share/rpikernelhack/overlays/spi1-3cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi2-1cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-1cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi2-2cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-2cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/spi2-3cs.dtbo to /usr/share/rpikernelhack/overlays/spi2-3cs.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/tinylcd35.dtbo to /usr/share/rpikernelhack/overlays/tinylcd35.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/uart1.dtbo to /usr/share/rpikernelhack/overlays/uart1.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/vc4-fkms-v3d.dtbo to /usr/share/rpikernelhack/overlays/vc4-fkms-v3d.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/vc4-kms-v3d.dtbo to /usr/share/rpikernelhack/overlays/vc4-kms-v3d.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/vga666.dtbo to /usr/share/rpikernelhack/overlays/vga666.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/w1-gpio-pullup.dtbo to /usr/share/rpikernelhack/overlays/w1-gpio-pullup.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/w1-gpio.dtbo to /usr/share/rpikernelhack/overlays/w1-gpio.dtbo by rpikernelhack'
+Removing 'diversion of /boot/overlays/wittypi.dtbo to /usr/share/rpikernelhack/overlays/wittypi.dtbo by rpikernelhack'
+run-parts: executing /etc/kernel/postinst.d/apt-auto-removal 4.9.59+ /boot/kernel.img
+run-parts: executing /etc/kernel/postinst.d/initramfs-tools 4.9.59+ /boot/kernel.img
+run-parts: executing /etc/kernel/postinst.d/apt-auto-removal 4.9.59-v7+ /boot/kernel7.img
+run-parts: executing /etc/kernel/postinst.d/initramfs-tools 4.9.59-v7+ /boot/kernel7.img
+Processing triggers for systemd (232-25+deb9u1) ...
+Setting up liblwres141:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up openssl (1.1.0f-3+deb9u1) ...
+Setting up wget (1.18-5+deb9u1) ...
+Processing triggers for man-db (2.7.6.1-2) ...
+Setting up libssl-doc (1.1.0f-3+deb9u1) ...
+Processing triggers for dbus (1.10.22-0+deb9u1) ...
+Setting up bluez (5.43-2+rpt2+deb9u2) ...
+Setting up libraspberrypi0 (1.20171029-1) ...
+Setting up libk5crypto3:armhf (1.15-1+deb9u1) ...
+Setting up libbluetooth-dev (5.43-2+rpt2+deb9u2) ...
+Setting up libraspberrypi-doc (1.20171029-1) ...
+Setting up libraspberrypi-dev (1.20171029-1) ...
+Setting up libssl-dev:armhf (1.1.0f-3+deb9u1) ...
+Setting up libdns-export162 (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up wpasupplicant (2:2.4-1+deb9u1) ...
+Setting up bluetooth (5.43-2+rpt2+deb9u2) ...
+Setting up libkrb5-3:armhf (1.15-1+deb9u1) ...
+Setting up libraspberrypi-bin (1.20171029-1) ...
+Setting up libgssapi-krb5-2:armhf (1.15-1+deb9u1) ...
+Setting up libdns162:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up libcurl3:armhf (7.52.1-5+deb9u2) ...
+Setting up libcurl3-gnutls:armhf (7.52.1-5+deb9u2) ...
+Setting up libisccfg140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up libbind9-140:armhf (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up bind9-host (1:9.10.3.dfsg.P4-12.3+deb9u3) ...
+Setting up apt-transport-https (1.4.8) ...
+Setting up curl (7.52.1-5+deb9u2) ...
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+pi@hassbian:~ $ sudo apt-get install sense-hat
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  libblas-common libblas3 libgfortran3 libjbig0 liblapack3 liblcms2-2
+  librtimulib-dev librtimulib-utils librtimulib7 libtiff5 libwebp6
+  libwebpdemux2 libwebpmux2 python-numpy python-pil python-rtimulib
+  python-sense-hat python3-numpy python3-pil python3-rtimulib
+  python3-sense-hat
+Suggested packages:
+  liblcms2-utils octave gfortran python-nose python-numpy-dbg python-numpy-doc
+  python-pil-doc python-pil-dbg python3-nose python3-numpy-dbg python3-pil-dbg
+The following NEW packages will be installed:
+  libblas-common libblas3 libgfortran3 libjbig0 liblapack3 liblcms2-2
+  librtimulib-dev librtimulib-utils librtimulib7 libtiff5 libwebp6
+  libwebpdemux2 libwebpmux2 python-numpy python-pil python-rtimulib
+  python-sense-hat python3-numpy python3-pil python3-rtimulib
+  python3-sense-hat sense-hat
+0 upgraded, 22 newly installed, 0 to remove and 0 not upgraded.
+Need to get 6,818 kB of archives.
+After this operation, 31.0 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.raspberrypi.org/debian stretch/main armhf librtimulib7 armhf 7.2.1-4 [47.7 kB]
+Get:3 http://archive.raspberrypi.org/debian stretch/main armhf librtimulib-dev armhf 7.2.1-4 [21.3 kB]
+Get:2 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libjbig0 armhf 2.1-3.1 [27.5 kB]
+Get:5 http://archive.raspberrypi.org/debian stretch/main armhf librtimulib-utils armhf 7.2.1-4 [13.2 kB]
+Get:4 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libblas-common armhf 3.7.0-2 [14.2 kB]
+Get:6 http://archive.raspberrypi.org/debian stretch/main armhf python-rtimulib armhf 7.2.1-4 [47.3 kB]
+Get:7 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libgfortran3 armhf 6.3.0-18+rpi1 [166 kB]
+Get:8 http://archive.raspberrypi.org/debian stretch/main armhf python-sense-hat armhf 2.2.0-1 [13.8 kB]
+Get:10 http://archive.raspberrypi.org/debian stretch/main armhf python3-rtimulib armhf 7.2.1-4 [47.5 kB]
+Get:9 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libblas3 armhf 3.7.0-2 [107 kB]
+Get:11 http://archive.raspberrypi.org/debian stretch/main armhf python3-sense-hat armhf 2.2.0-1 [13.9 kB]
+Get:13 http://archive.raspberrypi.org/debian stretch/main armhf sense-hat all 1.2 [11.6 kB]
+Get:12 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf liblapack3 armhf 3.7.0-2 [1,509 kB]
+Get:14 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf liblcms2-2 armhf 2.8-4 [118 kB]
+Get:15 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libtiff5 armhf 4.0.8-2+deb9u1 [218 kB]
+Get:16 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libwebp6 armhf 0.5.2-1 [202 kB]
+Get:17 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libwebpdemux2 armhf 0.5.2-1 [72.5 kB]
+Get:18 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf libwebpmux2 armhf 0.5.2-1 [80.1 kB]
+Get:19 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf python-numpy armhf 1:1.12.1-3 [1,694 kB]
+Get:20 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf python-pil armhf 4.0.0-4 [350 kB]
+Get:21 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf python3-numpy armhf 1:1.12.1-3 [1,693 kB]
+Get:22 http://debian.bio.lmu.de/raspbian/raspbian stretch/main armhf python3-pil armhf 4.0.0-4 [350 kB]
+Fetched 6,818 kB in 5s (1,147 kB/s)
+Selecting previously unselected package libjbig0:armhf.
+(Reading database ... 39921 files and directories currently installed.)
+Preparing to unpack .../00-libjbig0_2.1-3.1_armhf.deb ...
+Unpacking libjbig0:armhf (2.1-3.1) ...
+Selecting previously unselected package libblas-common.
+Preparing to unpack .../01-libblas-common_3.7.0-2_armhf.deb ...
+Unpacking libblas-common (3.7.0-2) ...
+Selecting previously unselected package libgfortran3:armhf.
+Preparing to unpack .../02-libgfortran3_6.3.0-18+rpi1_armhf.deb ...
+Unpacking libgfortran3:armhf (6.3.0-18+rpi1) ...
+Selecting previously unselected package libblas3.
+Preparing to unpack .../03-libblas3_3.7.0-2_armhf.deb ...
+Unpacking libblas3 (3.7.0-2) ...
+Selecting previously unselected package liblapack3.
+Preparing to unpack .../04-liblapack3_3.7.0-2_armhf.deb ...
+Unpacking liblapack3 (3.7.0-2) ...
+Selecting previously unselected package liblcms2-2:armhf.
+Preparing to unpack .../05-liblcms2-2_2.8-4_armhf.deb ...
+Unpacking liblcms2-2:armhf (2.8-4) ...
+Selecting previously unselected package librtimulib7.
+Preparing to unpack .../06-librtimulib7_7.2.1-4_armhf.deb ...
+Unpacking librtimulib7 (7.2.1-4) ...
+Selecting previously unselected package librtimulib-dev.
+Preparing to unpack .../07-librtimulib-dev_7.2.1-4_armhf.deb ...
+Unpacking librtimulib-dev (7.2.1-4) ...
+Selecting previously unselected package librtimulib-utils.
+Preparing to unpack .../08-librtimulib-utils_7.2.1-4_armhf.deb ...
+Unpacking librtimulib-utils (7.2.1-4) ...
+Selecting previously unselected package libtiff5:armhf.
+Preparing to unpack .../09-libtiff5_4.0.8-2+deb9u1_armhf.deb ...
+Unpacking libtiff5:armhf (4.0.8-2+deb9u1) ...
+Selecting previously unselected package libwebp6:armhf.
+Preparing to unpack .../10-libwebp6_0.5.2-1_armhf.deb ...
+Unpacking libwebp6:armhf (0.5.2-1) ...
+Selecting previously unselected package libwebpdemux2:armhf.
+Preparing to unpack .../11-libwebpdemux2_0.5.2-1_armhf.deb ...
+Unpacking libwebpdemux2:armhf (0.5.2-1) ...
+Selecting previously unselected package libwebpmux2:armhf.
+Preparing to unpack .../12-libwebpmux2_0.5.2-1_armhf.deb ...
+Unpacking libwebpmux2:armhf (0.5.2-1) ...
+Selecting previously unselected package python-numpy.
+Preparing to unpack .../13-python-numpy_1%3a1.12.1-3_armhf.deb ...
+Unpacking python-numpy (1:1.12.1-3) ...
+Selecting previously unselected package python-pil:armhf.
+Preparing to unpack .../14-python-pil_4.0.0-4_armhf.deb ...
+Unpacking python-pil:armhf (4.0.0-4) ...
+Selecting previously unselected package python-rtimulib.
+Preparing to unpack .../15-python-rtimulib_7.2.1-4_armhf.deb ...
+Unpacking python-rtimulib (7.2.1-4) ...
+Selecting previously unselected package python-sense-hat.
+Preparing to unpack .../16-python-sense-hat_2.2.0-1_armhf.deb ...
+Unpacking python-sense-hat (2.2.0-1) ...
+Selecting previously unselected package python3-numpy.
+Preparing to unpack .../17-python3-numpy_1%3a1.12.1-3_armhf.deb ...
+Unpacking python3-numpy (1:1.12.1-3) ...
+Selecting previously unselected package python3-pil:armhf.
+Preparing to unpack .../18-python3-pil_4.0.0-4_armhf.deb ...
+Unpacking python3-pil:armhf (4.0.0-4) ...
+Selecting previously unselected package python3-rtimulib.
+Preparing to unpack .../19-python3-rtimulib_7.2.1-4_armhf.deb ...
+Unpacking python3-rtimulib (7.2.1-4) ...
+Selecting previously unselected package python3-sense-hat.
+Preparing to unpack .../20-python3-sense-hat_2.2.0-1_armhf.deb ...
+Unpacking python3-sense-hat (2.2.0-1) ...
+Selecting previously unselected package sense-hat.
+Preparing to unpack .../21-sense-hat_1.2_all.deb ...
+Unpacking sense-hat (1.2) ...
+Setting up librtimulib7 (7.2.1-4) ...
+Setting up liblcms2-2:armhf (2.8-4) ...
+Setting up libjbig0:armhf (2.1-3.1) ...
+Setting up python3-rtimulib (7.2.1-4) ...
+Setting up libblas-common (3.7.0-2) ...
+Setting up libgfortran3:armhf (6.3.0-18+rpi1) ...
+Setting up libtiff5:armhf (4.0.8-2+deb9u1) ...
+Setting up libblas3 (3.7.0-2) ...
+update-alternatives: using /usr/lib/libblas/libblas.so.3 to provide /usr/lib/libblas.so.3 (libblas.so.3) in auto mode
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+Setting up librtimulib-dev (7.2.1-4) ...
+Setting up python-rtimulib (7.2.1-4) ...
+Processing triggers for man-db (2.7.6.1-2) ...
+Setting up libwebp6:armhf (0.5.2-1) ...
+Setting up librtimulib-utils (7.2.1-4) ...
+Setting up liblapack3 (3.7.0-2) ...
+update-alternatives: using /usr/lib/lapack/liblapack.so.3 to provide /usr/lib/liblapack.so.3 (liblapack.so.3) in auto mode
+Setting up libwebpmux2:armhf (0.5.2-1) ...
+Setting up python-numpy (1:1.12.1-3) ...
+Setting up libwebpdemux2:armhf (0.5.2-1) ...
+Setting up python-pil:armhf (4.0.0-4) ...
+Setting up python3-pil:armhf (4.0.0-4) ...
+Setting up python3-numpy (1:1.12.1-3) ...
+Setting up python3-sense-hat (2.2.0-1) ...
+Setting up python-sense-hat (2.2.0-1) ...
+Setting up sense-hat (1.2) ...
+Enabling I2C...
+modprobe: ERROR: ../libkmod/libkmod.c:586 kmod_search_moddep() could not open moddep file '/lib/modules/4.9.41-v7+/modules.dep.bin'
+modprobe: FATAL: Module i2c-dev not found in directory /lib/modules/4.9.41-v7+
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+pi@hassbian:~ $ sudo reboot
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+Linux hassbian 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 24 21:34:00 2017 from 192.168.178.20
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@hassbian:~ $ ls
+pi@hassbian:~ $ ls -la
+total 24
+drwxr-xr-x 2 pi   pi   4096 Nov 24 21:49 .
+drwxr-xr-x 4 root root 4096 Oct 11 18:01 ..
+-rw------- 1 pi   pi     84 Nov 24 21:49 .bash_history
+-rw-r--r-- 1 pi   pi    220 Oct  8 21:28 .bash_logout
+-rw-r--r-- 1 pi   pi   3523 Oct  8 21:28 .bashrc
+-rw-r--r-- 1 pi   pi    675 Oct  8 21:28 .profile
+pi@hassbian:~ $ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        7582216 1418112   5822392  20% /
+devtmpfs          470180       0    470180   0% /dev
+tmpfs             474788       0    474788   0% /dev/shm
+tmpfs             474788    6292    468496   2% /run
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs             474788       0    474788   0% /sys/fs/cgroup
+/dev/mmcblk0p1     42152   21336     20816  51% /boot
+tmpfs              94956       0     94956   0% /run/user/1000
+pi@hassbian:~ $ sudo systemctl stop home-assistant@homeassistant.service 
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ source /srv/homeassistant/bin/activate
+(homeassistant) homeassistant@hassbian:/home/pi $ pip3 install --upgrade homeassistant
+Requirement already up-to-date: homeassistant in /srv/homeassistant/lib/python3.5/site-packages
+Requirement already up-to-date: chardet==3.0.4 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: typing<4,>=3 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: voluptuous==0.10.5 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: certifi>=2017.4.17 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: pyyaml<4,>=3.11 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: aiohttp==2.3.2 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: requests==2.18.4 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: pip>=8.0.3 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: yarl==0.14.0 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: async-timeout==2.0.0 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: jinja2>=2.9.6 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: pytz>=2017.02 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: astral==1.4 in /srv/homeassistant/lib/python3.5/site-packages (from homeassistant)
+Requirement already up-to-date: multidict>=3.0.0 in /srv/homeassistant/lib/python3.5/site-packages (from aiohttp==2.3.2->homeassistant)
+Requirement already up-to-date: urllib3<1.23,>=1.21.1 in /srv/homeassistant/lib/python3.5/site-packages (from requests==2.18.4->homeassistant)
+Requirement already up-to-date: idna<2.7,>=2.5 in /srv/homeassistant/lib/python3.5/site-packages (from requests==2.18.4->homeassistant)
+Requirement already up-to-date: MarkupSafe>=0.23 in /srv/homeassistant/lib/python3.5/site-packages (from jinja2>=2.9.6->homeassistant)
+(homeassistant) homeassistant@hassbian:/home/pi $ cd /home/homeassistant/.homeassistant
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano configuration.yaml
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ pip3 install sense-hatCollecting sense-hat
+  Downloading sense_hat-2.2.0-py2.py3-none-any.whl
+Collecting pillow (from sense-hat)
+  Downloading https://www.piwheels.hostedpi.com/simple/pillow/Pillow-4.3.0-cp35-cp35m-linux_armv7l.whl (1.0MB)
+    100% |████████████████████████████████| 1.0MB 170kB/s 
+Collecting numpy (from sense-hat)
+  Downloading https://www.piwheels.hostedpi.com/simple/numpy/numpy-1.13.3-cp35-cp35m-linux_armv7l.whl (6.1MB)
+    100% |████████████████████████████████| 6.1MB 30kB/s 
+Collecting olefile (from pillow->sense-hat)
+  Downloading https://www.piwheels.hostedpi.com/simple/olefile/olefile-0.44-py3-none-any.whl (52kB)
+    100% |████████████████████████████████| 61kB 504kB/s 
+Installing collected packages: olefile, pillow, numpy, sense-hat
+Successfully installed numpy-1.13.3 olefile-0.44 pillow-4.3.0 sense-hat-2.2.0
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano configuration.yaml
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ hass --script check_config
+Testing configuration at /home/homeassistant/.homeassistant
+2017-11-24 22:04:34 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/configuration.yaml contains duplicate key "sensor". Check lines 58 and 66.
+2017-11-24 22:04:34 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/configuration.yaml contains duplicate key "group". Check lines 96 and 104.
+2017-11-24 22:04:34 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/configuration.yaml contains duplicate key "group". Check lines 104 and 108.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up system_log
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain system_log took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-24 22:04:37 ERROR (MainThread) [homeassistant.loader] Unable to find component customize
+2017-11-24 22:04:37 ERROR (MainThread) [homeassistant.setup] Setup failed for customize: Component not found.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 0.1 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.1 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.1 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up config
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain config took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.0 seconds.
+2017-11-24 22:04:37 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+Failed config
+  General Errors: 
+    - Component not found: customize
+    - Setup failed for customize: Component not found.
+
+Successful config (partial)
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ sudo raspi-config
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for homeassistant: 
+Sorry, try again.
+[sudo] password for homeassistant: 
+
+
+Sorry, try again.
+[sudo] password for homeassistant: 
+sudo: 3 incorrect password attempts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano configuration.yaml
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ hass --script check_config
+Testing configuration at /home/homeassistant/.homeassistant
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up system_log
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain system_log took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.2 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.2 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.2 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 0.1 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up config
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain config took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.0 seconds.
+2017-11-24 22:08:42 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ ls
+automations.yaml    customize.yaml  groups.yaml         home-assistant_v2.db  secrets.yaml
+configuration.yaml  deps            home-assistant.log  scripts.yaml          tts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano customize.yaml 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano groups.yaml 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ hass --script check_config
+Testing configuration at /home/homeassistant/.homeassistant
+2017-11-24 22:10:33 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/groups.yaml contains duplicate key "group". Check lines 0 and 8.
+2017-11-24 22:10:33 ERROR (MainThread) [homeassistant.config] Invalid config for [homeassistant]: [customize] is an invalid option for [homeassistant]. Check: homeassistant->customize->customize. (See /home/homeassistant/.homeassistant/configuration.yaml, line 2). 
+Failed config
+  homeassistant: 
+    customize: [source /home/homeassistant/.homeassistant/configuration.yaml:13]
+      customize: [source /home/homeassistant/.homeassistant/customize.yaml:1]
+        sensor.sensehat_humidity: [source /home/homeassistant/.homeassistant/customize.yaml:5]
+          friendly_name: Humidity
+          icon: mdi:weather-rainy
+        sensor.sensehat_pressure: [source /home/homeassistant/.homeassistant/customize.yaml:8]
+          friendly_name: Pressure
+          icon: mdi:gauge
+        sensor.sensehat_temperature: [source /home/homeassistant/.homeassistant/customize.yaml:2]
+          friendly_name: Temperature
+          icon: mdi:thermometer
+    elevation: 703
+    latitude: 47.4921
+    longitude: 11.0958
+    name: Home
+    time_zone: Europe/Berlin
+    unit_system: metric
+
+Successful config (partial)
+  homeassistant:
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ sudo systemctl start home-assistant@homeassistant.service
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for homeassistant: 
+
+Sorry, try again.
+[sudo] password for homeassistant: 
+
+Sorry, try again.
+[sudo] password for homeassistant: 
+
+sudo: 3 incorrect password attempts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano customize.yaml 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ nano groups.yaml 
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ sudo systemctl start home-assistant@homeassistant.service
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for homeassistant: 
+Sorry, try again.
+[sudo] password for homeassistant: 
+Sorry, try again.
+[sudo] password for homeassistant: 
+sudo: 3 incorrect password attempts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ hass --script check_config
+Testing configuration at /home/homeassistant/.homeassistant
+2017-11-24 22:13:13 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 1.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up system_log
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain system_log took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-24 22:13:14 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.2 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.1 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.1 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up config
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain config took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.0 seconds.
+2017-11-24 22:13:15 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ sudo systemctl start home-assistant@homeassistant.service 
+pi@hassbian:~ $ sudo apt-get install python3-rtimulib
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3-rtimulib is already the newest version (7.2.1-4).
+python3-rtimulib set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@hassbian:~ $ sudo apt-get install sense-hat
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+sense-hat is already the newest version (1.2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@hassbian:~ $ sudo addgroup homeassistant input
+Adding user `homeassistant' to group `input' ...
+Adding user homeassistant to group input
+Done.
+pi@hassbian:~ $ sudo addgroup homeassistant i2c
+The user `homeassistant' is already a member of `i2c'.
+pi@hassbian:~ $ sudo raspi-config
+Unit vncserver-x11-serviced.service could not be found.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  acl bc colord colord-data cups cups-browsed cups-client cups-common cups-core-drivers cups-daemon cups-filters
+  cups-filters-core-drivers cups-ppdc cups-server-common dconf-gsettings-backend dconf-service fontconfig
+  fontconfig-config fonts-dejavu-core fonts-droid-fallback fonts-noto-mono ghostscript gsfonts hicolor-icon-theme
+  imagemagick imagemagick-6-common imagemagick-6.q16 libavahi-client3 libavahi-glib1 libcairo2 libcolord2
+  libcolorhug2 libcups2 libcupscgi1 libcupsfilters1 libcupsimage2 libcupsmime1 libcupsppdc1 libdatrie1 libdconf1
+  libdjvulibre-text libdjvulibre21 libexif12 libfftw3-double3 libfile-copy-recursive-perl libfontconfig1
+  libfontembed1 libgd3 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-common libgphoto2-6 libgphoto2-l10n libgphoto2-port12
+  libgraphite2-3 libgs9 libgs9-common libgudev-1.0-0 libgusb2 libgutenprint2 libharfbuzz0b libieee1284-3 libijs-0.35
+  libilmbase12 libjbig2dec0 libjxr-tools libjxr0 liblouis-data liblouis12 liblouisutdml-bin liblouisutdml-data
+  liblouisutdml7 liblqr-1-0 libltdl7 libmagickcore-6.q16-3 libmagickcore-6.q16-3-extra libmagickwand-6.q16-3
+  libnetpbm10 libnspr4 libnss3 libopenexr22 libopenjp2-7 libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+  libpaper-utils libpaper1 libpixman-1-0 libpng12-0 libpolkit-agent-1-0 libpolkit-backend-1-0 libpolkit-gobject-1-0
+  libpoppler64 libqpdf17 libsane libsane-common libsane-extras libsane-extras-common libthai-data libthai0
+  libwmf0.2-7 libxcb-render0 libxcb-shm0 libxi6 libxpm4 libxrender1 libxtst6 libyaml-0-2 netpbm policykit-1
+  poppler-data poppler-utils printer-driver-gutenprint qpdf sane-utils ssl-cert update-inetd x11-common
+Suggested packages:
+  colord-sensor-argyll cups-bsd foomatic-db-compressed-ppds | foomatic-db printer-driver-hpcups hplip cups-pdf
+  smbclient xpp antiword docx2txt fonts-noto ghostscript-x imagemagick-doc autotrace cups-bsd | lpr | lprng enscript
+  ffmpeg gimp gnuplot grads graphviz hp2xx html2ps libwmf-bin mplayer povray radiance texlive-base-bin transfig
+  ufraw-batch xdg-utils libfftw3-bin libfftw3-dev libgd-tools gphoto2 gutenprint-locales ooo2dbk rtf2xml inkscape
+  fonts-japanese-mincho | fonts-ipafont-mincho fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai
+  fonts-arphic-uming fonts-nanum gutenprint-doc unpaper openssl-blacklist
+The following NEW packages will be installed:
+  acl bc colord colord-data cups cups-browsed cups-client cups-common cups-core-drivers cups-daemon cups-filters
+  cups-filters-core-drivers cups-ppdc cups-server-common dconf-gsettings-backend dconf-service fontconfig
+  fontconfig-config fonts-dejavu-core fonts-droid-fallback fonts-noto-mono ghostscript gsfonts hicolor-icon-theme
+  imagemagick imagemagick-6-common imagemagick-6.q16 libavahi-client3 libavahi-glib1 libcairo2 libcolord2
+  libcolorhug2 libcups2 libcupscgi1 libcupsfilters1 libcupsimage2 libcupsmime1 libcupsppdc1 libdatrie1 libdconf1
+  libdjvulibre-text libdjvulibre21 libexif12 libfftw3-double3 libfile-copy-recursive-perl libfontconfig1
+  libfontembed1 libgd3 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-common libgphoto2-6 libgphoto2-l10n libgphoto2-port12
+  libgraphite2-3 libgs9 libgs9-common libgudev-1.0-0 libgusb2 libgutenprint2 libharfbuzz0b libieee1284-3 libijs-0.35
+  libilmbase12 libjbig2dec0 libjxr-tools libjxr0 liblouis-data liblouis12 liblouisutdml-bin liblouisutdml-data
+  liblouisutdml7 liblqr-1-0 libltdl7 libmagickcore-6.q16-3 libmagickcore-6.q16-3-extra libmagickwand-6.q16-3
+  libnetpbm10 libnspr4 libnss3 libopenexr22 libopenjp2-7 libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+  libpaper-utils libpaper1 libpixman-1-0 libpng12-0 libpolkit-agent-1-0 libpolkit-backend-1-0 libpolkit-gobject-1-0
+  libpoppler64 libqpdf17 libsane libsane-common libsane-extras libsane-extras-common libthai-data libthai0
+  libwmf0.2-7 libxcb-render0 libxcb-shm0 libxi6 libxpm4 libxrender1 libxtst6 libyaml-0-2 netpbm policykit-1
+  poppler-data poppler-utils printer-driver-gutenprint qpdf realvnc-vnc-server sane-utils ssl-cert update-inetd
+  x11-common
+0 upgraded, 118 newly installed, 0 to remove and 0 not upgraded.
+Need to get 48.9 MB of archives.
+After this operation, 182 MB of additional disk space will be used.
+Do you want to continue? [Y/n] n
+Abort.
+Failed to enable unit: File vncserver-x11-serviced.service: No such file or directory
+Failed to get unit file state for pigpiod.service: No such file or directory
+
+Current default time zone: 'Europe/Berlin'
+Local time is now:      Fri Nov 24 23:21:17 CET 2017.
+Universal Time is now:  Fri Nov 24 22:21:17 UTC 2017.
+
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+Linux hassbian 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 24 22:50:30 2017 from 192.168.178.20
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@hassbian:~ $ 
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ source /srv/homeassistant/homeassistant_venv/bin/activate
+bash: /srv/homeassistant/homeassistant_venv/bin/activate: No such file or directory
+homeassistant@hassbian:/home/pi $ cd /home/homeassistant/.homeassistant
+homeassistant@hassbian:~/.homeassistant $ source /srv/homeassistant/bin/activate
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
+[GCC 6.3.0 20170124] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from sense_hat import SenseHat
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/__init__.py", line 2, in <module>
+    from .sense_hat import SenseHat, SenseHat as AstroPi
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/sense_hat.py", line 10, in <module>
+    import RTIMU  # custom version
+ImportError: No module named 'RTIMU'
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> 
+>>> exit()
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ pip3 install sense-hat
+Requirement already satisfied: sense-hat in /srv/homeassistant/lib/python3.5/site-packages
+Requirement already satisfied: pillow in /srv/homeassistant/lib/python3.5/site-packages (from sense-hat)
+Requirement already satisfied: numpy in /srv/homeassistant/lib/python3.5/site-packages (from sense-hat)
+Requirement already satisfied: olefile in /srv/homeassistant/lib/python3.5/site-packages (from pillow->sense-hat)
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ pip3 install rtimulib
+Collecting rtimulib
+  Could not find a version that satisfies the requirement rtimulib (from versions: )
+No matching distribution found for rtimulib
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ cd
+homeassistant@hassbian:~ $ ls
+homeassistant@hassbian:~ $ ls -la
+total 40
+drwxr-xr-x 5 homeassistant homeassistant 4096 Nov 24 23:27 .
+drwxr-xr-x 4 root          root          4096 Oct 11 20:01 ..
+-rw------- 1 homeassistant homeassistant  708 Nov 24 23:29 .bash_history
+-rw-r--r-- 1 homeassistant homeassistant  220 May 15  2017 .bash_logout
+-rw-r--r-- 1 homeassistant homeassistant 3523 Oct  8 23:28 .bashrc
+drwx------ 3 homeassistant homeassistant 4096 Nov 24 22:02 .cache
+drwxr-xr-x 4 homeassistant homeassistant 4096 Nov 24 23:31 .homeassistant
+drwxr-xr-x 2 homeassistant homeassistant 4096 Nov 24 22:55 .nano
+-rw-r--r-- 1 homeassistant homeassistant  675 May 15  2017 .profile
+-rw------- 1 homeassistant homeassistant   43 Nov 24 23:27 .python_history
+homeassistant@hassbian:~ $ source /srv/homeassistant/bin/activate
+(homeassistant) homeassistant@hassbian:~ $ cd /home/homeassistant/.homeassistant
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ ls
+automations.yaml    customize.yaml  groups.yaml         home-assistant_v2.db  secrets.yaml
+configuration.yaml  deps            home-assistant.log  scripts.yaml          tts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ pip3 install sense-hat
+Requirement already satisfied: sense-hat in /srv/homeassistant/lib/python3.5/site-packages
+Requirement already satisfied: numpy in /srv/homeassistant/lib/python3.5/site-packages (from sense-hat)
+Requirement already satisfied: pillow in /srv/homeassistant/lib/python3.5/site-packages (from sense-hat)
+Requirement already satisfied: olefile in /srv/homeassistant/lib/python3.5/site-packages (from pillow->sense-hat)
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ pip3 install rtimulib
+Collecting rtimulib
+  Could not find a version that satisfies the requirement rtimulib (from versions: )
+No matching distribution found for rtimulib
+pi@hassbian:~ $ sudo pip3 install rtimulib
+Requirement already satisfied: rtimulib in /usr/lib/python3/dist-packages
+pi@hassbian:~ $ sudo addgroup homeassistant video
+The user `homeassistant' is already a member of `video'.
+pi@hassbian:~ $ ln -s /usr/lib/python3/dist-packages/RTIMU.cpython-35m-arm-linux-gnueabihf.so /srv/homeassistant/lib/python3.5/site-packages/
+ln: failed to create symbolic link '/srv/homeassistant/lib/python3.5/site-packages/RTIMU.cpython-35m-arm-linux-gnueabihf.so': Permission denied
+pi@hassbian:~ $ sudo ln -s /usr/lib/python3/dist-packages/RTIMU.cpython-35m-arm-linux-gnueabihf.so /srv/homeassistant/lib/python3.5/site-packages/
+pi@hassbian:~ $ sudo reboot
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+Linux hassbian 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 24 23:22:23 2017 from 192.168.178.20
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ cd /home/homeassistant/.homeassistant
+homeassistant@hassbian:~/.homeassistant $ source /srv/homeassistant/bin/activate
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
+[GCC 6.3.0 20170124] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from sense_hat import SenseHat
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/__init__.py", line 2, in <module>
+    from .sense_hat import SenseHat, SenseHat as AstroPi
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/sense_hat.py", line 14, in <module>
+    from PIL import Image  # pillow
+  File "/srv/homeassistant/lib/python3.5/site-packages/PIL/Image.py", line 56, in <module>
+    from . import _imaging as core
+ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory
+>>> exit()
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
+[GCC 6.3.0 20170124] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> ImportError: libopenjp2.so.7: cannot open shared object file: No such file or dir
+  File "<stdin>", line 1
+    ImportError: libopenjp2.so.7: cannot open shared object file: No such file or dir
+               ^
+SyntaxError: invalid syntax
+>>> from sense_hat import SenseHat
+>>> sense = SenseHat()
+>>> sense.show_message("Hello world!")
+>>> print("Temperature: %s C" % sense.get_temperature_from_humidity())
+Temperature: 23.714969635009766 C
+>>> print("Humidity: %s %%rH" % sense.get_humidity())
+Humidity: 39.502044677734375 %rH
+>>> exit()
+pi@hassbian:~ $ ls
+pi@hassbian:~ $ ls -la
+total 32
+drwxr-xr-x 3 pi   pi   4096 Nov 25 00:04 .
+drwxr-xr-x 4 root root 4096 Oct 11 20:01 ..
+-rw------- 1 pi   pi    846 Nov 24 23:41 .bash_history
+-rw-r--r-- 1 pi   pi    220 Oct  8 23:28 .bash_logout
+-rw-r--r-- 1 pi   pi   3523 Oct  8 23:28 .bashrc
+drwxr-xr-x 3 pi   pi   4096 Nov 25 00:02 .config
+-rw-r--r-- 1 pi   pi    675 Oct  8 23:28 .profile
+-rw------- 1 pi   pi    291 Nov 25 00:04 .python_history
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ cd /home/homeassistant/.homeassistant
+homeassistant@hassbian:~/.homeassistant $ ls
+automations.yaml    customize.yaml  groups.yaml         home-assistant_v2.db  secrets.yaml
+configuration.yaml  deps            home-assistant.log  scripts.yaml          tts
+homeassistant@hassbian:~/.homeassistant $ nano /srv/homeassistant/pyvenv.cfg
+homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ sudo reboot
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+Linux hassbian 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Nov 24 23:44:44 2017 from 192.168.178.20
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@hassbian:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@hassbian:/home/pi $ cd /home/homeassistant/.homeassistant
+homeassistant@hassbian:~/.homeassistant $ source /srv/homeassistant/bin/activate
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
+[GCC 6.3.0 20170124] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from sense_hat import SenseHat
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/__init__.py", line 2, in <module>
+    from .sense_hat import SenseHat, SenseHat as AstroPi
+  File "/srv/homeassistant/lib/python3.5/site-packages/sense_hat/sense_hat.py", line 14, in <module>
+    from PIL import Image  # pillow
+  File "/srv/homeassistant/lib/python3.5/site-packages/PIL/Image.py", line 56, in <module>
+    from . import _imaging as core
+ImportError: libopenjp2.so.7: cannot open shared object file: No such file or directory
+>>> exit()
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ sudo systemctl restart home-assistant@homeassistant
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for homeassistant: 
+Sorry, try again.
+[sudo] password for homeassistant: 
+Sorry, try again.
+[sudo] password for homeassistant: 
+sudo: 3 incorrect password attempts
+(homeassistant) homeassistant@hassbian:~/.homeassistant $ exit
+exit
+pi@hassbian:~ $ sudo systemctl restart home-assistant@homeassistant
+pi@hassbian:~ $ sudo shutdown -h now
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ 

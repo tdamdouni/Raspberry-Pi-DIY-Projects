@@ -1,0 +1,179 @@
+Last login: Mon Nov 13 13:44:23 on ttys001
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 17:24:08 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weatherapp
+node_latest_armhf.deb.1  package-lock.json  weather-station
+pi@pisense:~ $ sudo shutdown -h now
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Nov 13 15:21:45 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pisense:~ $ sudo apt-get update
+Get:1 http://mirrordirector.raspbian.org jessie InRelease [14.9 kB]
+Get:2 http://archive.raspberrypi.org jessie InRelease [22.9 kB]
+Get:3 https://deb.nodesource.com jessie InRelease [4,631 B]                    
+Get:4 http://mirrordirector.raspbian.org jessie/main armhf Packages [9,536 kB] 
+Get:5 http://archive.raspberrypi.org jessie/main armhf Packages [169 kB]       
+Get:6 https://deb.nodesource.com jessie/main Sources [20 B]                    
+Get:7 https://deb.nodesource.com jessie/main armhf Packages [1,003 B]          
+Get:8 http://archive.raspberrypi.org jessie/ui armhf Packages [58.9 kB]        
+Get:9 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]         
+Get:10 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Get:11 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]        
+Get:12 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Get:13 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]        
+Get:14 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Get:15 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]        
+Get:16 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB               
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB             
+Get:17 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]
+Ign https://deb.nodesource.com jessie/main Translation-en_GB                   
+Get:18 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Ign https://deb.nodesource.com jessie/main Translation-en                      
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Get:19 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43.3 kB]
+Get:20 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84.2 kB]
+Get:21 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1,356 B]  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en              
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB            
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en               
+Fetched 9,936 kB in 31s (317 kB/s)                                             
+Reading package lists... Done
+pi@pisense:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  curl libcurl3 libcurl3-gnutls libssl1.0.0 nodejs openssl wget
+7 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 11.4 MB of archives.
+After this operation, 116 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 https://deb.nodesource.com/node_6.x/ jessie/main nodejs armhf 6.12.0-1nodesource1 [8,780 kB]
+Get:2 http://mirrordirector.raspbian.org/raspbian/ jessie/main libssl1.0.0 armhf 1.0.1t-1+deb8u7 [853 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main curl armhf 7.38.0-4+deb8u7 [196 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3 armhf 7.38.0-4+deb8u7 [233 kB]
+Get:5 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3-gnutls armhf 7.38.0-4+deb8u7 [225 kB]
+Get:6 http://mirrordirector.raspbian.org/raspbian/ jessie/main wget armhf 1.16-1+deb8u4 [475 kB]
+Get:7 http://mirrordirector.raspbian.org/raspbian/ jessie/main openssl armhf 1.0.1t-1+deb8u7 [652 kB]
+Fetched 11.4 MB in 7s (1,520 kB/s)                                             
+Reading changelogs... Done
+Preconfiguring packages ...
+(Reading database ... 65417 files and directories currently installed.)
+Preparing to unpack .../libssl1.0.0_1.0.1t-1+deb8u7_armhf.deb ...
+Unpacking libssl1.0.0:armhf (1.0.1t-1+deb8u7) over (1.0.1t-1+deb8u6) ...
+Preparing to unpack .../curl_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking curl (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../libcurl3_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking libcurl3:armhf (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../libcurl3-gnutls_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking libcurl3-gnutls:armhf (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../wget_1.16-1+deb8u4_armhf.deb ...
+Unpacking wget (1.16-1+deb8u4) over (1.16-1+deb8u2) ...
+Preparing to unpack .../nodejs_6.12.0-1nodesource1_armhf.deb ...
+Detected old npm client, removing...
+Unpacking nodejs (6.12.0-1nodesource1) over (6.11.4-1nodesource1) ...
+Preparing to unpack .../openssl_1.0.1t-1+deb8u7_armhf.deb ...
+Unpacking openssl (1.0.1t-1+deb8u7) over (1.0.1t-1+deb8u6) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Processing triggers for install-info (5.2.0.dfsg.1-6) ...
+Setting up libssl1.0.0:armhf (1.0.1t-1+deb8u7) ...
+Setting up libcurl3:armhf (7.38.0-4+deb8u7) ...
+Setting up curl (7.38.0-4+deb8u7) ...
+Setting up libcurl3-gnutls:armhf (7.38.0-4+deb8u7) ...
+Setting up wget (1.16-1+deb8u4) ...
+Setting up nodejs (6.12.0-1nodesource1) ...
+Setting up openssl (1.0.1t-1+deb8u7) ...
+Processing triggers for libc-bin (2.19-18+deb8u10) ...
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weatherapp
+node_latest_armhf.deb.1  package-lock.json  weather-station
+pi@pisense:~ $ cd taha
+pi@pisense:~/taha $ ls
+joystick.py  nohup.out  reaction_game.py  tph.py
+pi@pisense:~/taha $ cd
+pi@pisense:~ $ cd weatherapp/
+pi@pisense:~/weatherapp $ ls
+clock.py  nohup.out  templates  thermometer.py  weather.py
+pi@pisense:~/weatherapp $ nohup python weather.py &
+[1] 1705
+pi@pisense:~/weatherapp $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@pisense:~/weatherapp $ cd taha
+-bash: cd: taha: No such file or directory
+pi@pisense:~/weatherapp $ cd
+pi@pisense:~ $ cd taha
+pi@pisense:~/taha $ ls
+joystick.py  nohup.out  reaction_game.py  tph.py
+pi@pisense:~/taha $ nohup python tph.py &
+[2] 1720
+pi@pisense:~/taha $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@pisense:~/taha $ ps
+  PID TTY          TIME CMD
+  858 pts/0    00:00:00 bash
+ 1705 pts/0    00:00:01 python
+ 1708 pts/0    00:00:20 python
+ 1720 pts/0    00:00:20 python
+ 1733 pts/0    00:00:00 ps
+pi@pisense:~/taha $ ps -la
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000  1705   858  0  80   0 -  8457 wait   pts/0    00:00:01 python
+0 S  1000  1708  1705  3  80   0 - 11067 poll_s pts/0    00:00:20 python
+0 S  1000  1720   858  4  80   0 -  7075 poll_s pts/0    00:00:20 python
+0 R  1000  1734   858  0  80   0 -  1070 -      pts/0    00:00:00 ps
+pi@pisense:~/taha $ kill -9 1720
+pi@pisense:~/taha $ ps -la
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000  1705   858  0  80   0 -  8457 wait   pts/0    00:00:01 python
+0 S  1000  1708  1705  3  80   0 - 11067 poll_s pts/0    00:00:21 python
+0 R  1000  1738   858  0  80   0 -  1070 -      pts/0    00:00:00 ps
+[2]+  Killed                  nohup python tph.py
+pi@pisense:~/taha $ sudo nano tph.py 
+pi@pisense:~/taha $ nohup python tph.py &
+[2] 1752
+pi@pisense:~/taha $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@pisense:~/taha $ exit
+logout
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ 

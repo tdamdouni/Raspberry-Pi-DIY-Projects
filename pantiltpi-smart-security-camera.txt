@@ -1,0 +1,88 @@
+Last login: Fri Oct 27 01:26:24 on ttys000
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Oct 27 01:26:29 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ ls
+config.ini    opencv_contrib-3.3.0               pimotion
+Desktop       opencv_contrib.zip                 pistreaming
+Documents     opencv.zip                         Public
+Downloads     PanTilt                            python_games
+get-pip.py    PanTiltFacetracker                 rp_usbdisplay
+mote_api.py   picamera-motion                    Smart-Security-Camera
+Music         Pictures                           Templates
+nohup.out     Pimoroni                           Videos
+opencv-3.3.0  Pimoroni-PanTilt-Hat-WebInterface
+pi@pantiltpi:~ $ df -u
+df: Ungültige Option -- u
+„df --help“ liefert weitere Informationen.
+pi@pantiltpi:~ $ df
+Dateisystem    1K-Blöcke  Benutzt Verfügbar Verw% Eingehängt auf
+/dev/root       61293116 19181504  39560704   33% /
+devtmpfs          378828        0    378828    0% /dev
+tmpfs             383436        0    383436    0% /dev/shm
+tmpfs             383436    38920    344516   11% /run
+tmpfs               5120        4      5116    1% /run/lock
+tmpfs             383436        0    383436    0% /sys/fs/cgroup
+/dev/mmcblk0p1     42030    21503     20527   52% /boot
+tmpfs              76688        0     76688    0% /run/user/1000
+pi@pantiltpi:~ $ ls
+config.ini    opencv_contrib-3.3.0               pimotion
+Desktop       opencv_contrib.zip                 pistreaming
+Documents     opencv.zip                         Public
+Downloads     PanTilt                            python_games
+get-pip.py    PanTiltFacetracker                 rp_usbdisplay
+mote_api.py   picamera-motion                    Smart-Security-Camera
+Music         Pictures                           Templates
+nohup.out     Pimoroni                           Videos
+opencv-3.3.0  Pimoroni-PanTilt-Hat-WebInterface
+pi@pantiltpi:~ $ cd Smart-Security-Camera/
+pi@pantiltpi:~/Smart-Security-Camera $ ls
+camera.py   mail.py   main.py  nohup.out  requirements.txt
+camera.pyc  mail.pyc  models   README.md  templates
+pi@pantiltpi:~/Smart-Security-Camera $ cd
+pi@pantiltpi:~ $ sudo /etc/init.d/motion stop
+[ ok ] Stopping motion (via systemctl): motion.service.
+pi@pantiltpi:~ $ source ~/.profile
+pi@pantiltpi:~ $ workon cv
+(cv) pi@pantiltpi:~ $ cd Smart-Security-Camera/
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ nohup python main.py &
+[1] 4796
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ nohup: ignoriere Eingabe und hänge Ausgabe an „nohup.out“ an
+
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ ls
+camera.py   mail.py   main.py  nohup.out  requirements.txt
+camera.pyc  mail.pyc  models   README.md  templates
+[1]+  Exit 1                  nohup python main.py
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ ps
+  PID TTY          TIME CMD
+ 4661 pts/1    00:00:00 bash
+ 4814 pts/1    00:00:00 ps
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ nohup python main.py
+nohup: ignoriere Eingabe und hänge Ausgabe an „nohup.out“ an
+
+
+
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ 
+(cv) pi@pantiltpi:~/Smart-Security-Camera $ packet_write_wait: Connection to 192.168.178.103: Broken pipe
+Peters-MBP:~ tdamdouni$ cd

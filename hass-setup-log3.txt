@@ -1,0 +1,1665 @@
+Last login: Wed Nov  8 20:08:21 on ttys001
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov  8 19:16:41 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@pantiltpi:/home/pi $ source bin/activate
+bash: bin/activate: Datei oder Verzeichnis nicht gefunden
+homeassistant@pantiltpi:/home/pi $ cd
+homeassistant@pantiltpi:~ $ ls
+homeassistant@pantiltpi:~ $ ls -la
+insgesamt 32
+drwxr-xr-x 4 homeassistant homeassistant 4096 Nov  8 17:08 .
+drwxr-xr-x 4 root          root          4096 Nov  8 16:01 ..
+-rw------- 1 homeassistant homeassistant  988 Nov  8 21:34 .bash_history
+-rw-r--r-- 1 homeassistant homeassistant  220 Jan 15  2017 .bash_logout
+-rw-r--r-- 1 homeassistant homeassistant 3512 Jul  5 12:41 .bashrc
+drwx------ 3 homeassistant homeassistant 4096 Nov  8 16:07 .cache
+drwxr-xr-x 6 homeassistant homeassistant 4096 Nov  8 19:51 .homeassistant
+-rw-r--r-- 1 homeassistant homeassistant  675 Jan 15  2017 .profile
+homeassistant@pantiltpi:~ $ cd .homeassistant/
+homeassistant@pantiltpi:~/.homeassistant $ ls
+automations.yaml    customize.yaml  home-assistant.log    scripts.yaml
+configuration.yaml  deps            home-assistant_v2.db  secrets.yaml
+custom_components   groups.yaml     python_scripts        tts
+homeassistant@pantiltpi:~/.homeassistant $ cat configuration.yaml 
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 48.3333
+  longitude: 11.0833
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Berlin
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+# config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+  - platform: pan_tilt_phat
+
+# Text to speech
+tts:
+  - platform: google
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+camera:
+  - platform: rpi_camera
+    vertical_flip: 1
+    timelapse: 5000
+    file_path: /home/pi/hass-cam/image.jpg
+
+input_number:
+  pan_control:
+    name: Pan
+    initial: 0
+    min: -90
+    max: 90
+    step: 1
+  tilt_control:
+    name: Tilt
+    initial: 0
+    min: -90
+    max: 90
+    step: 1
+
+group:
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - camera.raspberry_pi_camera
+      - group.controls_group
+
+  controls_group:
+    name: Controls
+    entities:
+      - sensor.pan_tilt_phat
+      - script.1503899567501
+      - input_number.pan_control
+      - input_number.tilt_control
+homeassistant@pantiltpi:~/.homeassistant $ 
+homeassistant@pantiltpi:~/.homeassistant $ ls
+automations.yaml    customize.yaml  home-assistant.log    scripts.yaml
+configuration.yaml  deps            home-assistant_v2.db  secrets.yaml
+custom_components   groups.yaml     python_scripts        tts
+homeassistant@pantiltpi:~/.homeassistant $ cd custom_components/
+homeassistant@pantiltpi:~/.homeassistant/custom_components $ ls
+pan_tilt_phat.py  __pycache__
+homeassistant@pantiltpi:~/.homeassistant/custom_components $ cat pan_tilt_phat.py 
+"""
+Support for pan-tilt pHAT.
+For more details about this component, please refer to the documentation at
+https://home-assistant.io/components/pan_tilt_phat
+"""
+
+
+import logging
+
+from homeassistant.helpers.entity import Entity
+
+REQUIREMENTS = ['pantilthat==0.0.4']
+_LOGGER = logging.getLogger(__name__)
+DOMAIN = 'pan_tilt_phat'
+
+
+def setup(hass, config):
+    """Set up the pan-tilt-hat component."""
+    _LOGGER.info("Creating new pan-tilt-hat component")
+
+    if DOMAIN not in hass.data:
+        hass.data[DOMAIN] = []
+    try:
+        import pantilthat
+    except OSError:
+        _LOGGER.error("No pan-tilt pHAT was found.")
+        return False
+
+    def home_service(call):
+        """Return the stage to home."""
+        pantilthat.pan(0)
+        pantilthat.tilt(0)
+        return True
+
+    def pan_service(call):
+        """Pan the stage."""
+        pantilthat.pan(call.data.get("Pan"))
+        return True
+
+    def tilt_service(call):
+        """Pan the stage."""
+        pantilthat.tilt(call.data.get("Tilt"))
+        return True
+
+    hass.services.register(DOMAIN, 'home', home_service)
+    hass.services.register(DOMAIN, 'tilt', tilt_service)
+    hass.services.register(DOMAIN, 'pan', pan_service)
+    hass.data[DOMAIN] = PanTiltPhat(pantilthat)
+    return True
+
+
+class PanTiltPhat(Entity):
+    """Representation of the stage."""
+
+    ICON = 'mdi:camera-switch'
+
+    def __init__(self, pantilthat):
+        """Initialise the stage."""
+        self._name = DOMAIN
+        self._pantilthat = pantilthat
+        self._pan = self._pantilthat.get_pan()
+        self._tilt = self._pantilthat.get_tilt()
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return self._name
+
+    @property
+    def icon(self):
+        """Icon to use in the frontend, if any."""
+        return self.ICON
+
+    def update(self):
+        """Get the latest data from the stage."""
+        self._pan = self._pantilthat.get_pan()
+        self._tilt = self._pantilthat.get_tilt()
+homeassistant@pantiltpi:~/.homeassistant/custom_components $ cd ..
+homeassistant@pantiltpi:~/.homeassistant $ nano pan_tilt-phat.py
+homeassistant@pantiltpi:~/.homeassistant $ cd /srv/homeassistant
+homeassistant@pantiltpi:/srv/homeassistant $ exit
+exit
+pi@pantiltpi:~ $ mkdir """
+> Support for pan-tilt pHAT.
+> For more details about this component, please refer to the documentation at
+> https://home-assistant.io/components/pan_tilt_phat
+> """
+mkdir: das Verzeichnis „\nSupport for pan-tilt pHAT.\nFor more details about this component, please refer to the documentation at\nhttps://home-assistant.io/components/pan_tilt_phat\n“ kann nicht angelegt werden: Datei oder Verzeichnis nicht gefunden
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ import logging
+-bash: import: Kommando nicht gefunden.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ from homeassistant.helpers.entity import Entity
+from: can't read /var/mail/homeassistant.helpers.entity
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ REQUIREMENTS = ['pantilthat==0.0.4']
+-bash: REQUIREMENTS: Kommando nicht gefunden.
+pi@pantiltpi:~ $ _LOGGER = logging.getLogger(__name__)
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $ DOMAIN = 'pan_tilt_phat'
+-bash: DOMAIN: Kommando nicht gefunden.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ def setup(hass, config):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $     """Set up the pan-tilt-hat component."""
+-bash: Set up the pan-tilt-hat component.: Kommando nicht gefunden.
+pi@pantiltpi:~ $     _LOGGER.info("Creating new pan-tilt-hat component")
+-bash: Syntaxfehler beim unerwarteten Wort `"Creating new pan-tilt-hat component"'
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     if DOMAIN not in hass.data:
+>         hass.data[DOMAIN] = []
+>     try:
+>         import pantilthat
+>     except OSError:
+>         _LOGGER.error("No pan-tilt pHAT was found.")
+-bash: Syntaxfehler beim unerwarteten Wort `"No pan-tilt pHAT was found."'
+pi@pantiltpi:~ $         return False
+-bash: return: False: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     def home_service(call):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Return the stage to home."""
+-bash: Return the stage to home.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         pantilthat.pan(0)
+-bash: Syntaxfehler beim unerwarteten Wort `0'
+pi@pantiltpi:~ $         pantilthat.tilt(0)
+-bash: Syntaxfehler beim unerwarteten Wort `0'
+pi@pantiltpi:~ $         return True
+-bash: return: True: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     def pan_service(call):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Pan the stage."""
+-bash: Pan the stage.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         pantilthat.pan(call.data.get("Pan"))
+-bash: Syntaxfehler beim unerwarteten Wort `call.data.get'
+pi@pantiltpi:~ $         return True
+-bash: return: True: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     def tilt_service(call):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Pan the stage."""
+-bash: Pan the stage.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         pantilthat.tilt(call.data.get("Tilt"))
+-bash: Syntaxfehler beim unerwarteten Wort `call.data.get'
+pi@pantiltpi:~ $         return True
+-bash: return: True: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     hass.services.register(DOMAIN, 'home', home_service)
+-bash: Syntaxfehler beim unerwarteten Wort `DOMAIN,'
+pi@pantiltpi:~ $     hass.services.register(DOMAIN, 'tilt', tilt_service)
+-bash: Syntaxfehler beim unerwarteten Wort `DOMAIN,'
+pi@pantiltpi:~ $     hass.services.register(DOMAIN, 'pan', pan_service)
+-bash: Syntaxfehler beim unerwarteten Wort `DOMAIN,'
+pi@pantiltpi:~ $     hass.data[DOMAIN] = PanTiltPhat(pantilthat)
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $     return True
+-bash: return: True: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $ class PanTiltPhat(Entity):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $     """Representation of the stage."""
+-bash: Representation of the stage.: Kommando nicht gefunden.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     ICON = 'mdi:camera-switch'
+-bash: ICON: Kommando nicht gefunden.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     def __init__(self, pantilthat):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Initialise the stage."""
+-bash: Initialise the stage.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         self._name = DOMAIN
+-bash: self._name: Kommando nicht gefunden.
+pi@pantiltpi:~ $         self._pantilthat = pantilthat
+-bash: self._pantilthat: Kommando nicht gefunden.
+pi@pantiltpi:~ $         self._pan = self._pantilthat.get_pan()
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         self._tilt = self._pantilthat.get_tilt()
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     @property
+-bash: @property: Kommando nicht gefunden.
+pi@pantiltpi:~ $     def name(self):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Return the name of the sensor."""
+-bash: Return the name of the sensor.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         return self._name
+-bash: return: self._name: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     @property
+-bash: @property: Kommando nicht gefunden.
+pi@pantiltpi:~ $     def icon(self):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Icon to use in the frontend, if any."""
+-bash: Icon to use in the frontend, if any.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         return self.ICON
+-bash: return: self.ICON: Ein numerischer Parameter ist erforderlich.
+-bash: return: »Return« ist nur aus einer Funktion oder einem mit »source« ausgefühten Skript möglich.
+pi@pantiltpi:~ $ 
+pi@pantiltpi:~ $     def update(self):
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         """Get the latest data from the stage."""
+-bash: Get the latest data from the stage.: Kommando nicht gefunden.
+pi@pantiltpi:~ $         self._pan = self._pantilthat.get_pan()
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $         self._tilt = self._pantilthat.get_tilt()
+-bash: Syntaxfehler beim unerwarteten Wort `('
+pi@pantiltpi:~ $ ls
+config.ini    opencv_contrib-3.3.0               pimotion
+Desktop       opencv_contrib.zip                 pistreaming
+Documents     opencv.zip                         Public
+Downloads     PanTilt                            python_games
+get-pip.py    PanTiltFacetracker                 rp_usbdisplay
+mote_api.py   picamera-motion                    Smart-Security-Camera
+Music         Pictures                           Templates
+nohup.out     Pimoroni                           Videos
+opencv-3.3.0  Pimoroni-PanTilt-Hat-WebInterface
+pi@pantiltpi:~ $ mkdir hass-cam
+pi@pantiltpi:~ $ ls
+config.ini   opencv-3.3.0          Pimoroni-PanTilt-Hat-WebInterface
+Desktop      opencv_contrib-3.3.0  pimotion
+Documents    opencv_contrib.zip    pistreaming
+Downloads    opencv.zip            Public
+get-pip.py   PanTilt               python_games
+hass-cam     PanTiltFacetracker    rp_usbdisplay
+mote_api.py  picamera-motion       Smart-Security-Camera
+Music        Pictures              Templates
+nohup.out    Pimoroni              Videos
+pi@pantiltpi:~ $ sudo su -s /bin/bash homeassistant
+homeassistant@pantiltpi:/home/pi $ cd /srv/homeassistant
+homeassistant@pantiltpi:/srv/homeassistant $ source bin/activate
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:29:09 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/configuration.yaml contains duplicate key "group". Check lines 66 and 90.
+2017-11-09 00:29:09 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:29:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-1, service=create, domain=persistent_notification, service_data=message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, title=Welcome Home!>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state persistent_notification.notification=notifying; message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component., title=Welcome Home! @ 2017-11-09T00:29:11.283236+01:00>, old_state=None, entity_id=persistent_notification.notification>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-1>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:29:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 1.2 seconds.
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:29:12 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=unknown; assumed_state=False, view=True, friendly_name=default_view, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), order=0, hidden=True, icon=mdi:home @ 2017-11-09T00:29:12.668590+01:00>, old_state=None, entity_id=group.default_view>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=unknown; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:29:12.670697+01:00>, old_state=None, entity_id=group.controls_group>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:29:12 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.3 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=13.56, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.2 @ 2017-11-09T00:29:13.333217+01:00>, old_state=None, entity_id=sun.sun>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=updater>
+2017-11-09 00:29:13 ERROR (Thread-10) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set, domain=group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.9 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=1503899567501, domain=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state script.1503899567501=off; last_triggered=None, friendly_name=home-pan-tilt @ 2017-11-09T00:29:13.563789+01:00>, old_state=None, entity_id=script.1503899567501>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=enable_motion_detection, domain=camera>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=disable_motion_detection, domain=camera>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=snapshot, domain=camera>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.3 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=off; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:29:13.636827+01:00>, old_state=<state group.controls_group=unknown; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:29:12.670697+01:00>, entity_id=group.controls_group>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.1 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-2, service=set, domain=group, service_data=object_id=all_scripts, name=all scripts, entities=['script.1503899567501'], visible=False>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=off; assumed_state=False, view=True, friendly_name=default_view, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), order=0, hidden=True, icon=mdi:home @ 2017-11-09T00:29:13.726379+01:00>, old_state=<state group.default_view=unknown; assumed_state=False, view=True, friendly_name=default_view, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), order=0, hidden=True, icon=mdi:home @ 2017-11-09T00:29:12.668590+01:00>, entity_id=group.default_view>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_scripts=off; assumed_state=False, entity_id=('script.1503899567501',), hidden=True, auto=True, order=2, friendly_name=all scripts @ 2017-11-09T00:29:13.731480+01:00>, old_state=None, entity_id=group.all_scripts>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-2>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=process, domain=conversation>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=conversation>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=decrement, domain=input_number>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=increment, domain=input_number>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_value, domain=input_number>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.pan_control=0.0; max=90.0, step=1.0, mode=slider, friendly_name=Pan, min=-90.0 @ 2017-11-09T00:29:13.861798+01:00>, old_state=None, entity_id=input_number.pan_control>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.tilt_control=0.0; max=90.0, step=1.0, mode=slider, friendly_name=Tilt, min=-90.0 @ 2017-11-09T00:29:13.864517+01:00>, old_state=None, entity_id=input_number.tilt_control>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 1.1 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.1 seconds.
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=discovery>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.tilt_automation=off; id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00, friendly_name=Tilt Automation @ 2017-11-09T00:29:13.967650+01:00>, old_state=None, entity_id=automation.tilt_automation>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.pan_automation=off; id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00, friendly_name=Pan Automation @ 2017-11-09T00:29:13.970014+01:00>, old_state=None, entity_id=automation.pan_automation>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.slider_automation=off; id=1504157301166, last_triggered=None, friendly_name=Slider Automation @ 2017-11-09T00:29:13.972457+01:00>, old_state=None, entity_id=automation.slider_automation>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-3, service=set, domain=group, service_data=object_id=all_automations, name=all automations, entities=['automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'], visible=False>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_automations=off; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, order=3, friendly_name=all automations @ 2017-11-09T00:29:13.980305+01:00>, old_state=None, entity_id=group.all_automations>
+2017-11-09 00:29:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-3>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=trigger, domain=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.5 seconds.
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=automation>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.components.sensor] Setting up sensor.yr
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:29:14.176410+01:00>, old_state=None, entity_id=sensor.yr_symbol>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=google_say, domain=tts>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=clear_cache, domain=tts>
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.1 seconds.
+2017-11-09 00:29:14 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=tts>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sensor.yr_symbol=46; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=46;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:29:15.895589+01:00>, old_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:29:14.176410+01:00>, entity_id=sensor.yr_symbol>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 3.2 seconds.
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sensor>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.bootstrap] Home Assistant initialized in 6.44s
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Starting Home Assistant core loop
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Starting Home Assistant
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_start[L]>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Tilt Automation
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.tilt_automation=on; id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00, friendly_name=Tilt Automation @ 2017-11-09T00:29:15.933267+01:00>, old_state=<state automation.tilt_automation=off; id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00, friendly_name=Tilt Automation @ 2017-11-09T00:29:13.967650+01:00>, entity_id=automation.tilt_automation>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Pan Automation
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.pan_automation=on; id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00, friendly_name=Pan Automation @ 2017-11-09T00:29:15.938480+01:00>, old_state=<state automation.pan_automation=off; id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00, friendly_name=Pan Automation @ 2017-11-09T00:29:13.970014+01:00>, entity_id=automation.pan_automation>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Slider Automation
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.slider_automation=on; id=1504157301166, last_triggered=None, friendly_name=Slider Automation @ 2017-11-09T00:29:15.944587+01:00>, old_state=<state automation.slider_automation=off; id=1504157301166, last_triggered=None, friendly_name=Slider Automation @ 2017-11-09T00:29:13.972457+01:00>, entity_id=automation.slider_automation>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_automations=on; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, order=3, friendly_name=all automations @ 2017-11-09T00:29:15.949630+01:00>, old_state=<state group.all_automations=off; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, order=3, friendly_name=all automations @ 2017-11-09T00:29:13.980305+01:00>, entity_id=group.all_automations>
+2017-11-09 00:29:15 INFO (MainThread) [homeassistant.core] Timer:starting
+2017-11-09 00:29:30 INFO (MainThread) [homeassistant.components.discovery] Unknown service discovered: DLNA {'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'name': 'AVM FRITZ!Mediaserver', 'model_name': 'FRITZ!Box 7490', 'serial': None, 'model_number': 'avm', 'host': '192.168.178.1', 'port': 49000}
+2017-11-09 00:29:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=13.68, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.18 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=13.56, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.2 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:29:49 INFO (MainThread) [homeassistant.components.http] Serving / to 192.168.178.20 (auth: True)
+2017-11-09 00:29:49 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+2017-11-09 00:29:50 INFO (MainThread) [homeassistant.components.http] Serving /api/themes to 192.168.178.20 (auth: True)
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-4, service=turn_on, domain=script, service_data=entity_id=script.1503899567501>
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-5, service=1503899567501, domain=script, service_data=None>
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-4>
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.helpers.script] Script home-pan-tilt: Running script
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.helpers.script] Script home-pan-tilt: Executing step home-pan-tilt
+2017-11-09 00:29:56 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-6, service=home, domain=pan_tilt_phat, service_data=>
+2017-11-09 00:29:56 WARNING (MainThread) [homeassistant.core] Unable to find service pan_tilt_phat/home
+2017-11-09 00:30:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-5>
+2017-11-09 00:30:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state script.1503899567501=off; last_triggered=2017-11-09T00:29:56.661344+01:00, friendly_name=home-pan-tilt @ 2017-11-09T00:29:13.563789+01:00>, old_state=<state script.1503899567501=off; last_triggered=None, friendly_name=home-pan-tilt @ 2017-11-09T00:29:13.563789+01:00>, entity_id=script.1503899567501>
+2017-11-09 00:30:07 INFO (MainThread) [homeassistant.components.http] Serving /api/logbook/2017-11-08T23:00:00.000Z to 192.168.178.20 (auth: True)
+2017-11-09 00:30:13 INFO (MainThread) [homeassistant.components.http] Serving /api/history/period/2017-11-08T23:00:00.000Z to 192.168.178.20 (auth: True)
+2017-11-09 00:30:21 INFO (MainThread) [homeassistant.components.http] Serving /api/template to 192.168.178.20 (auth: True)
+2017-11-09 00:30:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=14.13, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.15 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=13.68, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.18 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:31:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=14.58, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.1 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=14.13, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.15 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:32:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.02, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.06 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=14.58, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.1 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:33:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.46, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.02 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.02, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.06 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:34:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.91, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-57.97 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.46, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-58.02 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:34:43 INFO (MainThread) [homeassistant.components.discovery] Unknown service discovered: DLNA {'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'name': 'AVM FRITZ!Mediaserver', 'model_name': 'FRITZ!Box 7490', 'serial': None, 'model_number': 'avm', 'host': '192.168.178.1', 'port': 49000}
+2017-11-09 00:35:06 INFO (MainThread) [homeassistant.components.http] Serving /states to 192.168.178.20 (auth: True)
+2017-11-09 00:35:06 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+2017-11-09 00:35:07 INFO (MainThread) [homeassistant.components.http] Serving /api/themes to 192.168.178.20 (auth: True)
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-7, service=turn_on, domain=script, service_data=entity_id=script.1503899567501>
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-8, service=1503899567501, domain=script, service_data=None>
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-7>
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.helpers.script] Script home-pan-tilt: Running script
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.helpers.script] Script home-pan-tilt: Executing step home-pan-tilt
+2017-11-09 00:35:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1974270448-9, service=home, domain=pan_tilt_phat, service_data=>
+2017-11-09 00:35:10 WARNING (MainThread) [homeassistant.core] Unable to find service pan_tilt_phat/home
+2017-11-09 00:35:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974270448-8>
+2017-11-09 00:35:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state script.1503899567501=off; last_triggered=2017-11-09T00:35:10.363700+01:00, friendly_name=home-pan-tilt @ 2017-11-09T00:29:13.563789+01:00>, old_state=<state script.1503899567501=off; last_triggered=2017-11-09T00:29:56.661344+01:00, friendly_name=home-pan-tilt @ 2017-11-09T00:29:13.563789+01:00>, entity_id=script.1503899567501>
+2017-11-09 00:35:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=16.35, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-57.93 @ 2017-11-09T00:29:13.333217+01:00>, old_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_rising=2017-11-09T06:13:26+00:00, azimuth=15.91, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, elevation=-57.97 @ 2017-11-09T00:29:13.333217+01:00>, entity_id=sun.sun>
+2017-11-09 00:35:34 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+^C2017-11-09 00:35:50 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_stop[L]>
+2017-11-09 00:35:50 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_close[L]>
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:35:57 ERROR (Thread-2) [homeassistant.util.yaml] YAML file /home/homeassistant/.homeassistant/configuration.yaml contains duplicate key "group". Check lines 66 and 90.
+2017-11-09 00:35:57 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:35:58 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_data=title=Welcome Home!, message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, service=create, domain=persistent_notification, service_call_id=1974254064-1>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=persistent_notification.notification, new_state=<state persistent_notification.notification=notifying; title=Welcome Home!, message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component. @ 2017-11-09T00:35:59.300261+01:00>, old_state=None>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974254064-1>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:35:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.8 seconds.
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:36:00 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=unknown; assumed_state=False, view=True, hidden=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), friendly_name=default_view, icon=mdi:home, order=0 @ 2017-11-09T00:36:00.529075+01:00>, old_state=None>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=unknown; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:36:00.536266+01:00>, old_state=None>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.2 seconds.
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:36:00 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=16.57, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.91, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.2 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=discovery>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=increment, domain=input_number>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=decrement, domain=input_number>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_value, domain=input_number>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.pan_control, new_state=<state input_number.pan_control=0.0; max=90.0, step=1.0, min=-90.0, friendly_name=Pan, mode=slider @ 2017-11-09T00:36:01.311902+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.tilt_control, new_state=<state input_number.tilt_control=0.0; max=90.0, step=1.0, min=-90.0, friendly_name=Tilt, mode=slider @ 2017-11-09T00:36:01.319682+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 1.0 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:36:01 ERROR (Thread-9) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set, domain=group>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.9 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=enable_motion_detection, domain=camera>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=disable_motion_detection, domain=camera>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=snapshot, domain=camera>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.1 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=1503899567501, domain=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=script.1503899567501, new_state=<state script.1503899567501=off; friendly_name=home-pan-tilt, last_triggered=None @ 2017-11-09T00:36:01.430727+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=off; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:36:01.433993+01:00>, old_state=<state group.controls_group=unknown; assumed_state=False, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1 @ 2017-11-09T00:36:00.536266+01:00>>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_data=object_id=all_scripts, entities=['script.1503899567501'], visible=False, name=all scripts, service=set, domain=group, service_call_id=1974254064-2>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=off; assumed_state=False, view=True, hidden=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), friendly_name=default_view, icon=mdi:home, order=0 @ 2017-11-09T00:36:01.445276+01:00>, old_state=<state group.default_view=unknown; assumed_state=False, view=True, hidden=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), friendly_name=default_view, icon=mdi:home, order=0 @ 2017-11-09T00:36:00.529075+01:00>>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_scripts, new_state=<state group.all_scripts=off; assumed_state=False, entity_id=('script.1503899567501',), hidden=True, auto=True, friendly_name=all scripts, order=2 @ 2017-11-09T00:36:01.451067+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974254064-2>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=process, domain=conversation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=conversation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.tilt_automation, new_state=<state automation.tilt_automation=off; friendly_name=Tilt Automation, id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00 @ 2017-11-09T00:36:01.515628+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.slider_automation, new_state=<state automation.slider_automation=off; friendly_name=Slider Automation, id=1504157301166, last_triggered=None @ 2017-11-09T00:36:01.518125+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.pan_automation, new_state=<state automation.pan_automation=off; friendly_name=Pan Automation, id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00 @ 2017-11-09T00:36:01.520716+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_data=object_id=all_automations, entities=['automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'], visible=False, name=all automations, service=set, domain=group, service_call_id=1974254064-3>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_automations, new_state=<state group.all_automations=off; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, friendly_name=all automations, order=3 @ 2017-11-09T00:36:01.526972+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974254064-3>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=trigger, domain=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.2 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=automation>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=updater>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.components.sensor] Setting up sensor.yr
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sensor.yr_symbol, new_state=<state sensor.yr_symbol=unknown; attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol, entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png @ 2017-11-09T00:36:01.717205+01:00>, old_state=None>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=google_say, domain=tts>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=clear_cache, domain=tts>
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.1 seconds.
+2017-11-09 00:36:01 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=tts>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sensor.yr_symbol, new_state=<state sensor.yr_symbol=46; attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol, entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=46;content_type=image/png @ 2017-11-09T00:36:03.210569+01:00>, old_state=<state sensor.yr_symbol=unknown; attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol, entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png @ 2017-11-09T00:36:01.717205+01:00>>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 2.9 seconds.
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sensor>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.bootstrap] Home Assistant initialized in 5.31s
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Starting Home Assistant core loop
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Starting Home Assistant
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_start[L]>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Tilt Automation
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.tilt_automation, new_state=<state automation.tilt_automation=on; friendly_name=Tilt Automation, id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00 @ 2017-11-09T00:36:03.236619+01:00>, old_state=<state automation.tilt_automation=off; friendly_name=Tilt Automation, id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00 @ 2017-11-09T00:36:01.515628+01:00>>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Slider Automation
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.slider_automation, new_state=<state automation.slider_automation=on; friendly_name=Slider Automation, id=1504157301166, last_triggered=None @ 2017-11-09T00:36:03.239646+01:00>, old_state=<state automation.slider_automation=off; friendly_name=Slider Automation, id=1504157301166, last_triggered=None @ 2017-11-09T00:36:01.518125+01:00>>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Pan Automation
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.pan_automation, new_state=<state automation.pan_automation=on; friendly_name=Pan Automation, id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00 @ 2017-11-09T00:36:03.242269+01:00>, old_state=<state automation.pan_automation=off; friendly_name=Pan Automation, id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00 @ 2017-11-09T00:36:01.520716+01:00>>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_automations, new_state=<state group.all_automations=on; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, friendly_name=all automations, order=3 @ 2017-11-09T00:36:03.247772+01:00>, old_state=<state group.all_automations=off; assumed_state=False, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, friendly_name=all automations, order=3 @ 2017-11-09T00:36:01.526972+01:00>>
+2017-11-09 00:36:03 INFO (MainThread) [homeassistant.core] Timer:starting
+2017-11-09 00:36:05 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+2017-11-09 00:36:15 INFO (MainThread) [homeassistant.components.discovery] Unknown service discovered: DLNA {'model_name': 'FRITZ!Box 7490', 'host': '192.168.178.1', 'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'port': 49000, 'model_number': 'avm', 'serial': None, 'name': 'AVM FRITZ!Mediaserver'}
+2017-11-09 00:36:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=16.79, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.88, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=16.57, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.91, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>>
+2017-11-09 00:37:15 INFO (MainThread) [homeassistant.components.http] Serving /api/themes to 192.168.178.20 (auth: True)
+2017-11-09 00:37:15 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+2017-11-09 00:37:18 INFO (MainThread) [homeassistant.components.http] Serving /api/template to 192.168.178.20 (auth: True)
+2017-11-09 00:37:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=17.23, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.83, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=16.79, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.88, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>>
+2017-11-09 00:38:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=17.67, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.78, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>, old_state=<state sun.sun=below_horizon; next_midnight=2017-11-09T22:59:34+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00, azimuth=17.23, next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, elevation=-57.83, next_rising=2017-11-09T06:13:26+00:00 @ 2017-11-09T00:36:01.113170+01:00>>
+^C2017-11-09 00:38:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_stop[L]>
+2017-11-09 00:38:59 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_close[L]>
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:39:08 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=turn_off>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=turn_on>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=toggle>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=stop>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=restart>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=check_config>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=homeassistant, service=reload_core_config>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=persistent_notification, service=create>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=persistent_notification, service=dismiss>
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:39:08 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: domain=persistent_notification, service=create, service_call_id=1974360560-1, service_data=message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, title=Welcome Home!>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state persistent_notification.notification=notifying; message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component., title=Welcome Home! @ 2017-11-09T00:39:09.521647+01:00>, old_state=None, entity_id=persistent_notification.notification>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974360560-1>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=recorder, service=purge>
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-09 00:39:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.8 seconds.
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=unknown; order=0, friendly_name=default_view, hidden=True, assumed_state=False, icon=mdi:home, view=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group') @ 2017-11-09T00:39:10.500092+01:00>, old_state=None, entity_id=group.default_view>
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=unknown; assumed_state=False, order=1, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control') @ 2017-11-09T00:39:10.502458+01:00>, old_state=None, entity_id=group.controls_group>
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:39:10 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:39:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.3 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=17.97, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.75, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=None, entity_id=sun.sun>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=logbook, service=log>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=conversation, service=process>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=conversation>
+2017-11-09 00:39:11 ERROR (Thread-9) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=group, service=reload>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=group, service=set>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=group, service=remove>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=group, service=set_visibility>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain group took 1.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=script, service=1503899567501>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state script.1503899567501=off; last_triggered=None, friendly_name=home-pan-tilt @ 2017-11-09T00:39:11.539079+01:00>, old_state=None, entity_id=script.1503899567501>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=off; assumed_state=False, order=1, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control') @ 2017-11-09T00:39:11.549800+01:00>, old_state=<state group.controls_group=unknown; assumed_state=False, order=1, friendly_name=Controls, entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control') @ 2017-11-09T00:39:10.502458+01:00>, entity_id=group.controls_group>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=script, service=reload>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=script, service=turn_on>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=script, service=turn_off>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=script, service=toggle>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: domain=group, service=set, service_call_id=1974360560-2, service_data=visible=False, object_id=all_scripts, entities=['script.1503899567501'], name=all scripts>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=off; order=0, friendly_name=default_view, hidden=True, assumed_state=False, icon=mdi:home, view=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group') @ 2017-11-09T00:39:11.574310+01:00>, old_state=<state group.default_view=unknown; order=0, friendly_name=default_view, hidden=True, assumed_state=False, icon=mdi:home, view=True, entity_id=('camera.raspberry_pi_camera', 'group.controls_group') @ 2017-11-09T00:39:10.500092+01:00>, entity_id=group.default_view>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_scripts=off; order=2, friendly_name=all scripts, auto=True, assumed_state=False, hidden=True, entity_id=('script.1503899567501',) @ 2017-11-09T00:39:11.577427+01:00>, old_state=None, entity_id=group.all_scripts>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974360560-2>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=camera, service=enable_motion_detection>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=camera, service=disable_motion_detection>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=camera, service=snapshot>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.3 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.pan_automation=off; friendly_name=Pan Automation, last_triggered=2017-11-08T18:27:13.472032+00:00, id=1503933026472 @ 2017-11-09T00:39:11.713538+01:00>, old_state=None, entity_id=automation.pan_automation>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=input_number, service=decrement>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=input_number, service=increment>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=input_number, service=set_value>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.slider_automation=off; friendly_name=Slider Automation, last_triggered=None, id=1504157301166 @ 2017-11-09T00:39:11.742745+01:00>, old_state=None, entity_id=automation.slider_automation>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.tilt_control=0.0; mode=slider, min=-90.0, friendly_name=Tilt, step=1.0, max=90.0 @ 2017-11-09T00:39:11.745567+01:00>, old_state=None, entity_id=input_number.tilt_control>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.pan_control=0.0; mode=slider, min=-90.0, friendly_name=Pan, step=1.0, max=90.0 @ 2017-11-09T00:39:11.753948+01:00>, old_state=None, entity_id=input_number.pan_control>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.tilt_automation=off; friendly_name=Tilt Automation, last_triggered=2017-11-08T17:47:47.144907+00:00, id=1503936125604 @ 2017-11-09T00:39:11.762186+01:00>, old_state=None, entity_id=automation.tilt_automation>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 1.2 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: domain=group, service=set, service_call_id=1974360560-3, service_data=visible=False, object_id=all_automations, entities=['automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'], name=all automations>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_automations=off; order=3, friendly_name=all automations, auto=True, assumed_state=False, hidden=True, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation') @ 2017-11-09T00:39:11.786965+01:00>, old_state=None, entity_id=group.all_automations>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974360560-3>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=automation, service=trigger>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=automation, service=reload>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=automation, service=toggle>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=automation, service=turn_on>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=automation, service=turn_off>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.3 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=automation>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=updater>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.0 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=discovery>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.components.sensor] Setting up sensor.yr
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:39:11.992172+01:00>, old_state=None, entity_id=sensor.yr_symbol>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=tts, service=google_say>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: domain=tts, service=clear_cache>
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.setup] Setup of domain tts took 0.3 seconds.
+2017-11-09 00:39:11 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=tts>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sensor.yr_symbol=46; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=46;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:39:13.576525+01:00>, old_state=<state sensor.yr_symbol=unknown; entity_picture=//api.met.no/weatherapi/weathericon/1.1/?symbol=None;content_type=image/png, attribution=Weather forecast from yr.no, delivered by the Norwegian Meteorological Institute and the NRK., friendly_name=yr Symbol @ 2017-11-09T00:39:11.992172+01:00>, entity_id=sensor.yr_symbol>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.setup] Setup of domain sensor took 2.7 seconds.
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sensor>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.bootstrap] Home Assistant initialized in 5.50s
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Starting Home Assistant core loop
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Starting Home Assistant
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_start[L]>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Pan Automation
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.pan_automation=on; friendly_name=Pan Automation, last_triggered=2017-11-08T18:27:13.472032+00:00, id=1503933026472 @ 2017-11-09T00:39:13.604444+01:00>, old_state=<state automation.pan_automation=off; friendly_name=Pan Automation, last_triggered=2017-11-08T18:27:13.472032+00:00, id=1503933026472 @ 2017-11-09T00:39:11.713538+01:00>, entity_id=automation.pan_automation>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Slider Automation
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.slider_automation=on; friendly_name=Slider Automation, last_triggered=None, id=1504157301166 @ 2017-11-09T00:39:13.607970+01:00>, old_state=<state automation.slider_automation=off; friendly_name=Slider Automation, last_triggered=None, id=1504157301166 @ 2017-11-09T00:39:11.742745+01:00>, entity_id=automation.slider_automation>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.components.automation] Initialized trigger Tilt Automation
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.tilt_automation=on; friendly_name=Tilt Automation, last_triggered=2017-11-08T17:47:47.144907+00:00, id=1503936125604 @ 2017-11-09T00:39:13.610855+01:00>, old_state=<state automation.tilt_automation=off; friendly_name=Tilt Automation, last_triggered=2017-11-08T17:47:47.144907+00:00, id=1503936125604 @ 2017-11-09T00:39:11.762186+01:00>, entity_id=automation.tilt_automation>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_automations=on; order=3, friendly_name=all automations, auto=True, assumed_state=False, hidden=True, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation') @ 2017-11-09T00:39:13.616367+01:00>, old_state=<state group.all_automations=off; order=3, friendly_name=all automations, auto=True, assumed_state=False, hidden=True, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation') @ 2017-11-09T00:39:11.786965+01:00>, entity_id=group.all_automations>
+2017-11-09 00:39:13 INFO (MainThread) [homeassistant.core] Timer:starting
+2017-11-09 00:39:14 INFO (MainThread) [homeassistant.components.http] Serving /api/websocket to 192.168.178.20 (auth: True)
+2017-11-09 00:39:26 INFO (MainThread) [homeassistant.components.discovery] Unknown service discovered: DLNA {'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'serial': None, 'model_number': 'avm', 'port': 49000, 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_name': 'FRITZ!Box 7490'}
+2017-11-09 00:39:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=18.11, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.73, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=17.97, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.75, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:40:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=18.54, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.68, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=18.11, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.73, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:41:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=18.98, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.63, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=18.54, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.68, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:42:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=19.41, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.57, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=18.98, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.63, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:43:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=19.85, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.52, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=19.41, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.57, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:44:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=20.28, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.46, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=19.85, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.52, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+2017-11-09 00:44:39 INFO (MainThread) [homeassistant.components.discovery] Unknown service discovered: DLNA {'ssdp_description': 'http://192.168.178.1:49000/MediaServerDevDesc.xml', 'serial': None, 'model_number': 'avm', 'port': 49000, 'host': '192.168.178.1', 'name': 'AVM FRITZ!Mediaserver', 'model_name': 'FRITZ!Box 7490'}
+2017-11-09 00:45:30 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; azimuth=20.71, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.4, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, old_state=<state sun.sun=below_horizon; azimuth=20.28, next_setting=2017-11-09T15:45:24+00:00, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_dawn=2017-11-09T05:39:57+00:00, friendly_name=Sun, elevation=-57.46, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:39:11.296300+01:00>, entity_id=sun.sun>
+exit
+^C2017-11-09 00:46:09 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_stop[L]>
+2017-11-09 00:46:10 INFO (MainThread) [homeassistant.core] Bus:Handling <Event homeassistant_close[L]>
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:46:16 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:46:17 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1973635568-1, service_data=title=Welcome Home!, message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, service=create, domain=persistent_notification>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state persistent_notification.notification=notifying; title=Welcome Home!, message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component. @ 2017-11-09T00:46:18.110197+01:00>, entity_id=persistent_notification.notification, old_state=None>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1973635568-1>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-09 00:46:18 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.8 seconds.
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded python_script from homeassistant.components.python_script
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.3 seconds.
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:46:19 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=unknown; hidden=True, view=True, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:46:19.812885+01:00>, entity_id=group.default_view, old_state=None>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), assumed_state=False, friendly_name=Controls, order=1 @ 2017-11-09T00:46:19.820355+01:00>, entity_id=group.controls_group, old_state=None>
+2017-11-09 00:46:19 INFO (MainThread) [homeassistant.loader] Loaded pan_tilt_phat from custom_components.pan_tilt_phat
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, next_dusk=2017-11-09T16:18:53+00:00, azimuth=21.06, elevation=-57.36, next_midnight=2017-11-09T22:59:34+00:00, next_rising=2017-11-09T06:13:26+00:00, next_setting=2017-11-09T15:45:24+00:00, friendly_name=Sun, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:46:20.055027+01:00>, entity_id=sun.sun, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_value, domain=input_number>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=decrement, domain=input_number>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=increment, domain=input_number>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.tilt_control=0.0; mode=slider, max=90.0, min=-90.0, step=1.0, friendly_name=Tilt @ 2017-11-09T00:46:20.073773+01:00>, entity_id=input_number.tilt_control, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state input_number.pan_control=0.0; mode=slider, max=90.0, min=-90.0, step=1.0, friendly_name=Pan @ 2017-11-09T00:46:20.077017+01:00>, entity_id=input_number.pan_control, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=process, domain=conversation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.1 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=conversation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 1.0 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.1 seconds.
+2017-11-09 00:46:20 INFO (Thread-8) [homeassistant.util.package] Attempting install of restrictedpython==4.0b2
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:46:20 ERROR (Thread-9) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.4 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=1503899567501, domain=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state script.1503899567501=off; friendly_name=home-pan-tilt, last_triggered=None @ 2017-11-09T00:46:20.219266+01:00>, entity_id=script.1503899567501, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.controls_group=off; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), assumed_state=False, friendly_name=Controls, order=1 @ 2017-11-09T00:46:20.249829+01:00>, entity_id=group.controls_group, old_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), assumed_state=False, friendly_name=Controls, order=1 @ 2017-11-09T00:46:19.820355+01:00>>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.1 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1973635568-2, service_data=name=all scripts, visible=False, entities=['script.1503899567501'], object_id=all_scripts, service=set, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.default_view=off; hidden=True, view=True, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:46:20.277505+01:00>, entity_id=group.default_view, old_state=<state group.default_view=unknown; hidden=True, view=True, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:46:19.812885+01:00>>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_scripts=off; hidden=True, order=2, auto=True, entity_id=('script.1503899567501',), assumed_state=False, friendly_name=all scripts @ 2017-11-09T00:46:20.280629+01:00>, entity_id=group.all_scripts, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1973635568-2>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=enable_motion_detection, domain=camera>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=disable_motion_detection, domain=camera>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=snapshot, domain=camera>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.2 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.pan_automation=off; id=1503933026472, last_triggered=2017-11-08T18:27:13.472032+00:00, friendly_name=Pan Automation @ 2017-11-09T00:46:20.333330+01:00>, entity_id=automation.pan_automation, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.slider_automation=off; id=1504157301166, last_triggered=None, friendly_name=Slider Automation @ 2017-11-09T00:46:20.335293+01:00>, entity_id=automation.slider_automation, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state automation.tilt_automation=off; id=1503936125604, last_triggered=2017-11-08T17:47:47.144907+00:00, friendly_name=Tilt Automation @ 2017-11-09T00:46:20.337275+01:00>, entity_id=automation.tilt_automation, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service_call_id=1973635568-3, service_data=name=all automations, visible=False, entities=['automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'], object_id=all_automations, service=set, domain=group>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: new_state=<state group.all_automations=off; hidden=True, order=3, auto=True, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), assumed_state=False, friendly_name=all automations @ 2017-11-09T00:46:20.357295+01:00>, entity_id=group.all_automations, old_state=None>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1973635568-3>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=trigger, domain=automation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=automation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=automation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=automation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=automation>
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.2 seconds.
+2017-11-09 00:46:20 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=automation>
+2017-11-09 00:46:29 WARNING (MainThread) [homeassistant.setup] Setup of sensor is taking over 10 seconds.
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.setup] Setting up python_script
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=tilt_number, domain=python_script>
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=input_number_control, domain=python_script>
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=pan_number, domain=python_script>
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=python_script>
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.setup] Setup of domain python_script took 0.0 seconds.
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=python_script>
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.0 seconds.
+2017-11-09 00:46:35 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=discovery>
+2017-11-09 00:46:35 INFO (Thread-7) [homeassistant.util.package] Attempting install of pantilthat==0.0.4
+2017-11-09 00:46:42 INFO (MainThread) [homeassistant.setup] Setting up pan_tilt_phat
+2017-11-09 00:46:42 INFO (Thread-3) [custom_components.pan_tilt_phat] Creating new pan-tilt-hat component
+This library requires python3-smbus
+Install with: sudo apt-get install python3-smbus
+^CException ignored in: <module 'threading' from '/usr/lib/python3.4/threading.py'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/threading.py", line 1294, in _shutdown
+    t.join()
+  File "/usr/lib/python3.4/threading.py", line 1060, in join
+    self._wait_for_tstate_lock()
+  File "/usr/lib/python3.4/threading.py", line 1076, in _wait_for_tstate_lock
+    elif lock.acquire(block, timeout):
+KeyboardInterrupt
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:49:30 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:49:31 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service=create, service_data=message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+, title=Welcome Home!, service_call_id=1974278192-1, domain=persistent_notification>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=persistent_notification.notification, new_state=<state persistent_notification.notification=notifying; message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component., title=Welcome Home! @ 2017-11-09T00:49:32.005946+01:00>, old_state=None>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974278192-1>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.1 seconds.
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.1 seconds.
+2017-11-09 00:49:32 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:49:33 WARNING (Recorder) [homeassistant.components.recorder] Ended unfinished session (id=8 from 2017-11-08 23:46:18.205441)
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 1.0 seconds.
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded python_script from homeassistant.components.python_script
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=unknown; view=True, friendly_name=default_view, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), icon=mdi:home, hidden=True, assumed_state=False @ 2017-11-09T00:49:33.678180+01:00>, old_state=None>
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), friendly_name=Controls, order=1, assumed_state=False @ 2017-11-09T00:49:33.680792+01:00>, old_state=None>
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.2 seconds.
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:49:33 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:49:34 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.loader] Loaded pan_tilt_phat from custom_components.pan_tilt_phat
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_dawn=2017-11-09T05:39:57+00:00, elevation=-57.16, friendly_name=Sun, azimuth=22.44, next_dusk=2017-11-09T16:18:53+00:00, next_rising=2017-11-09T06:13:26+00:00, next_setting=2017-11-09T15:45:24+00:00, next_midnight=2017-11-09T22:59:34+00:00, next_noon=2017-11-09T10:59:25+00:00 @ 2017-11-09T00:49:34.130904+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=increment, domain=input_number>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=decrement, domain=input_number>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_value, domain=input_number>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.pan_control, new_state=<state input_number.pan_control=0.0; min=-90.0, max=90.0, friendly_name=Pan, mode=slider, step=1.0 @ 2017-11-09T00:49:34.150802+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.tilt_control, new_state=<state input_number.tilt_control=0.0; min=-90.0, max=90.0, friendly_name=Tilt, mode=slider, step=1.0 @ 2017-11-09T00:49:34.290137+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 1.2 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.7 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.1 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:49:34 ERROR (Thread-5) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=1503899567501, domain=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=script.1503899567501, new_state=<state script.1503899567501=off; friendly_name=home-pan-tilt, last_triggered=None @ 2017-11-09T00:49:34.389729+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up conversation
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=process, domain=conversation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain conversation took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=conversation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=off; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), friendly_name=Controls, order=1, assumed_state=False @ 2017-11-09T00:49:34.398621+01:00>, old_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), friendly_name=Controls, order=1, assumed_state=False @ 2017-11-09T00:49:33.680792+01:00>>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service=set, service_data=visible=False, object_id=all_scripts, entities=['script.1503899567501'], name=all scripts, service_call_id=1974278192-2, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=off; view=True, friendly_name=default_view, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), icon=mdi:home, hidden=True, assumed_state=False @ 2017-11-09T00:49:34.432765+01:00>, old_state=<state group.default_view=unknown; view=True, friendly_name=default_view, order=0, entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), icon=mdi:home, hidden=True, assumed_state=False @ 2017-11-09T00:49:33.678180+01:00>>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_scripts, new_state=<state group.all_scripts=off; friendly_name=all scripts, order=2, entity_id=('script.1503899567501',), hidden=True, auto=True, assumed_state=False @ 2017-11-09T00:49:34.441765+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974278192-2>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=enable_motion_detection, domain=camera>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=disable_motion_detection, domain=camera>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=snapshot, domain=camera>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.4 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.tilt_automation, new_state=<state automation.tilt_automation=off; friendly_name=Tilt Automation, id=1503936125604, last_triggered=None @ 2017-11-09T00:49:34.511704+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.pan_automation, new_state=<state automation.pan_automation=off; friendly_name=Pan Automation, id=1503933026472, last_triggered=None @ 2017-11-09T00:49:34.514061+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=automation.slider_automation, new_state=<state automation.slider_automation=off; friendly_name=Slider Automation, id=1504157301166, last_triggered=None @ 2017-11-09T00:49:34.517282+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service=set, service_data=visible=False, object_id=all_automations, entities=['automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'], name=all automations, service_call_id=1974278192-3, domain=group>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_automations, new_state=<state group.all_automations=off; friendly_name=all automations, order=3, entity_id=('automation.pan_automation', 'automation.slider_automation', 'automation.tilt_automation'), hidden=True, auto=True, assumed_state=False @ 2017-11-09T00:49:34.523278+01:00>, old_state=None>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1974278192-3>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=trigger, domain=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain automation took 0.2 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=automation>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up tts
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up python_script
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=tilt_number, domain=python_script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=input_number_control, domain=python_script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=pan_number, domain=python_script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=python_script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain python_script took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=python_script>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up updater
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain updater took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=updater>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up discovery
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setup of domain discovery took 0.0 seconds.
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=discovery>
+2017-11-09 00:49:34 INFO (MainThread) [homeassistant.setup] Setting up pan_tilt_phat
+2017-11-09 00:49:34 INFO (Thread-2) [custom_components.pan_tilt_phat] Creating new pan-tilt-hat component
+This library requires python3-smbus
+Install with: sudo apt-get install python3-smbus
+
+^CException ignored in: <module 'threading' from '/usr/lib/python3.4/threading.py'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/threading.py", line 1294, in _shutdown
+    t.join()
+  File "/usr/lib/python3.4/threading.py", line 1060, in join
+    self._wait_for_tstate_lock()
+  File "/usr/lib/python3.4/threading.py", line 1076, in _wait_for_tstate_lock
+    elif lock.acquire(block, timeout):
+KeyboardInterrupt
+(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ hass
+Config directory: /home/homeassistant/.homeassistant
+2017-11-09 00:51:03 WARNING (MainThread) [homeassistant.bootstrap] Python 3.4 support has been deprecated and will be removed in the beginning of 2018. Please upgrade Python or your operating system. More info: https://home-assistant.io/blog/2017/10/06/deprecating-python-3.4-support/
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=stop, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=restart, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=check_config, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload_core_config, domain=homeassistant>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=create, domain=persistent_notification>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=dismiss, domain=persistent_notification>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.bootstrap] Home Assistant core initialized
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded introduction from homeassistant.components.introduction
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setting up introduction
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.components.introduction] 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        Hello, and welcome to Home Assistant!
+
+        We'll hope that we can make all your dreams come true.
+
+        Here are some resources to get started:
+
+         - Configuring Home Assistant:
+           https://home-assistant.io/getting-started/configuration/
+
+         - Available components:
+           https://home-assistant.io/components/
+
+         - Troubleshooting your configuration:
+           https://home-assistant.io/getting-started/troubleshooting-configuration/
+
+         - Getting help:
+           https://home-assistant.io/help/
+
+        This message is generated by the introduction component. You can
+        disable it in configuration.yaml.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded persistent_notification from homeassistant.components.persistent_notification
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setup of domain introduction took 0.0 seconds.
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=introduction>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded frontend from homeassistant.components.frontend
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded api from homeassistant.components.api
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded http from homeassistant.components.http
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded websocket_api from homeassistant.components.websocket_api
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded history from homeassistant.components.history
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.loader] Loaded recorder from homeassistant.components.recorder
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service=create, service_call_id=1973598256-1, domain=persistent_notification, service_data=title=Welcome Home!, message=
+Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component.
+>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=persistent_notification.notification, new_state=<state persistent_notification.notification=notifying; title=Welcome Home!, message=Here are some resources to get started:
+
+ - [Configuring Home Assistant](https://home-assistant.io/getting-started/configuration/)
+ - [Available components](https://home-assistant.io/components/)
+ - [Troubleshooting your configuration](https://home-assistant.io/docs/configuration/troubleshooting/)
+ - [Getting help](https://home-assistant.io/help/)
+
+To not see this card popup in the future, edit your config in
+`configuration.yaml` and disable the `introduction` component. @ 2017-11-09T00:51:04.781130+01:00>, old_state=None>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1973598256-1>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setting up http
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setup of domain http took 0.0 seconds.
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=http>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setting up api
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setting up websocket_api
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setup of domain websocket_api took 0.0 seconds.
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=websocket_api>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setup of domain api took 0.0 seconds.
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=api>
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setting up frontend
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.setup] Setup of domain frontend took 0.0 seconds.
+2017-11-09 00:51:04 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=frontend>
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.setup] Setting up recorder
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=purge, domain=recorder>
+2017-11-09 00:51:05 WARNING (Recorder) [homeassistant.components.recorder] Ended unfinished session (id=9 from 2017-11-08 23:49:32.113949)
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.setup] Setup of domain recorder took 0.9 seconds.
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=recorder>
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.setup] Setting up history
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.setup] Setup of domain history took 0.0 seconds.
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=history>
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.loader] Loaded pan_tilt_phat from custom_components.pan_tilt_phat
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.loader] Loaded python_script from homeassistant.components.python_script
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.loader] Loaded discovery from homeassistant.components.discovery
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.loader] Loaded input_number from homeassistant.components.input_number
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.setup] Setting up input_number
+2017-11-09 00:51:05 INFO (MainThread) [homeassistant.loader] Loaded sensor from homeassistant.components.sensor
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded sensor.yr from homeassistant.components.sensor.yr
+2017-11-09 00:51:06 ERROR (MainThread) [homeassistant.loader] Unable to find component sensor.pan_tilt_phat
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up sensor
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded sun from homeassistant.components.sun
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up sun
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setup of domain sun took 0.2 seconds.
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=sun>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded automation from homeassistant.components.automation
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded group from homeassistant.components.group
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded automation.state from homeassistant.components.automation.state
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded conversation from homeassistant.components.conversation
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded script from homeassistant.components.script
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded updater from homeassistant.components.updater
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded tts from homeassistant.components.tts
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded tts.google from homeassistant.components.tts.google
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded map from homeassistant.components.map
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up map
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setup of domain map took 0.0 seconds.
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=map>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded camera from homeassistant.components.camera
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded camera.rpi_camera from homeassistant.components.camera.rpi_camera
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.loader] Loaded logbook from homeassistant.components.logbook
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up group
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=unknown; entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, hidden=True, view=True, order=0, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:51:06.871971+01:00>, old_state=None>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1, friendly_name=Controls, assumed_state=False @ 2017-11-09T00:51:06.874318+01:00>, old_state=None>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=sun.sun, new_state=<state sun.sun=below_horizon; next_rising=2017-11-09T06:13:26+00:00, next_setting=2017-11-09T15:45:24+00:00, next_noon=2017-11-09T10:59:25+00:00, elevation=-57.06, next_dusk=2017-11-09T16:18:53+00:00, azimuth=23.1, next_midnight=2017-11-09T22:59:34+00:00, friendly_name=Sun, next_dawn=2017-11-09T05:39:57+00:00 @ 2017-11-09T00:51:06.877278+01:00>, old_state=None>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=increment, domain=input_number>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=decrement, domain=input_number>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_value, domain=input_number>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.pan_control, new_state=<state input_number.pan_control=0.0; step=1.0, min=-90.0, max=90.0, mode=slider, friendly_name=Pan @ 2017-11-09T00:51:06.886195+01:00>, old_state=None>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=input_number.tilt_control, new_state=<state input_number.tilt_control=0.0; step=1.0, min=-90.0, max=90.0, mode=slider, friendly_name=Tilt @ 2017-11-09T00:51:06.888944+01:00>, old_state=None>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up camera
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setting up logbook
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.components.camera] Setting up camera.rpi_camera
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=log, domain=logbook>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setup of domain input_number took 0.9 seconds.
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=input_number>
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.setup] Setup of domain logbook took 0.0 seconds.
+2017-11-09 00:51:06 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=logbook>
+2017-11-09 00:51:06 ERROR (Thread-5) [homeassistant.components.camera.rpi_camera] File path is not writable
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=group>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set, domain=group>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=remove, domain=group>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=set_visibility, domain=group>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setup of domain group took 0.3 seconds.
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=group>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setting up automation
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setting up script
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=1503899567501, domain=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=script.1503899567501, new_state=<state script.1503899567501=off; last_triggered=None, friendly_name=home-pan-tilt @ 2017-11-09T00:51:07.176055+01:00>, old_state=None>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setting up pan_tilt_phat
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.controls_group, new_state=<state group.controls_group=off; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1, friendly_name=Controls, assumed_state=False @ 2017-11-09T00:51:07.200110+01:00>, old_state=<state group.controls_group=unknown; entity_id=('sensor.pan_tilt_phat', 'script.1503899567501', 'input_number.pan_control', 'input_number.tilt_control'), order=1, friendly_name=Controls, assumed_state=False @ 2017-11-09T00:51:06.874318+01:00>>
+2017-11-09 00:51:07 INFO (Thread-9) [custom_components.pan_tilt_phat] Creating new pan-tilt-hat component
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=reload, domain=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_on, domain=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=turn_off, domain=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=toggle, domain=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setup of domain script took 0.0 seconds.
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=script>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event call_service[L]: service=set, service_call_id=1973598256-2, domain=group, service_data=entities=['script.1503899567501'], visible=False, object_id=all_scripts, name=all scripts>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=enable_motion_detection, domain=camera>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=disable_motion_detection, domain=camera>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_registered[L]: service=snapshot, domain=camera>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.setup] Setup of domain camera took 0.3 seconds.
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event component_loaded[L]: component=camera>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.default_view, new_state=<state group.default_view=off; entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, hidden=True, view=True, order=0, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:51:07.230697+01:00>, old_state=<state group.default_view=unknown; entity_id=('camera.raspberry_pi_camera', 'group.controls_group'), assumed_state=False, hidden=True, view=True, order=0, friendly_name=default_view, icon=mdi:home @ 2017-11-09T00:51:06.871971+01:00>>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event state_changed[L]: entity_id=group.all_scripts, new_state=<state group.all_scripts=off; hidden=True, auto=True, assumed_state=False, entity_id=('script.1503899567501',), friendly_name=all scripts, order=2 @ 2017-11-09T00:51:07.233915+01:00>, old_state=None>
+2017-11-09 00:51:07 INFO (MainThread) [homeassistant.core] Bus:Handling <Event service_executed[L]: service_call_id=1973598256-2>
+This library requires python3-smbus
+Install with: sudo apt-get install python3-smbus
+Exception ignored in: <module 'threading' from '/usr/lib/python3.4/threading.py'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/threading.py", line 1294, in _shutdown
+    t.join()
+  File "/usr/lib/python3.4/threading.py", line 1060, in join
+    self._wait_for_tstate_lock()
+  File "/usr/lib/python3.4/threading.py", line 1076, in _wait_for_tstate_lock
+    elif lock.acquire(block, timeout):
+KeyboardInterrupt
+^C(homeassistant) homeassistant@pantiltpi:/srv/homeassistant $ 
