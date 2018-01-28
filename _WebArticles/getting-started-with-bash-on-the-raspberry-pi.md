@@ -1,6 +1,6 @@
 # Getting Started With Bash On The Raspberry Pi
 
-_Captured: 2017-05-22 at 10:42 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/bash/getting-started-with-bash)_
+_Captured: 2017-10-05 at 08:56 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/bash/getting-started-with-bash)_
 
 ## So, what is Bash?
 

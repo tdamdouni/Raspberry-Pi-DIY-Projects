@@ -1,0 +1,38 @@
+# pythonista
+
+```
+# https://forum.omz-software.com/topic/4488/easy-add-images-or-change-colors-of-a-ui-slider
+# ui.Slider is an UISlider
+# we can set its images/colors via Objective-C
+volume_slider = ui.Slider()
+objc = ObjcInstance(volume_slider)
+objc.minimumValueImage = ui.Image.named('iob:ios7_volume_low_32')
+objc.maximumValueImage = ui.Image.named('iob:ios7_volume_high_32')
+objc.thumbTintColor = ObjCClass('UIColor').color(red=1.0, green=0.0, blue=0.0, alpha=1.0)
+```
+
+# mouser.de
+
+485-1852
+485-2690
+713-101990056 Pixy CMUcam5 Sensor
+
+# Hyperpixel Screen
+
+Hyperpixel uses a software i2c bus, which may not be supported in OSMC.
+
+This should already be handled by the HyperPixel overlay, but on its own it requires something like this in /boot/config.txt:
+
+`dtoverlay=i2c-gpio,i2c_gpio_sda=10,i2c_gpio_scl=11,i2c_gpio_delay_us=4`
+
+# Capacitors
+Capacitors are more important when using plug-in power supplies. Those tend to have start-up voltage spikes which can be damaging. If you are powering via 3.7v LiPo, you should not have that problem.
+
+# python script exit log
+
+This redirects both the STDOUT (standard output) and STDERR (standard error output) of the Python script to the file logfile.txt. Hopefully when it crashes you’ll see some useful information here.
+`python myscript.py > logfile.txt 2>&1`
+
+# redirect gpio pin to
+
+`dtoverlay=w1-gpio,gpiopin=N`

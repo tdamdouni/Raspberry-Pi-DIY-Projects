@@ -1,0 +1,603 @@
+Last login: Wed Oct 11 23:27:45 on ttys000
+~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password:
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Oct 11 21:17:25 2017 from fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@raspberrypi:~ $ sudo apt-get update
+
+pi@raspberrypi:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  bind9-host bluez-firmware curl debconf debconf-i18n debconf-utils
+  firmware-atheros firmware-brcm80211 firmware-libertas firmware-ralink
+  firmware-realtek gnupg gpgv libbind9-90 libcurl3 libcurl3-gnutls
+  libdns-export100 libdns100 libgcrypt20 libgnutls-deb0-28 libgnutls-openssl27
+  libirs-export91 libisc-export95 libisc95 libisccc90 libisccfg-export90
+  libisccfg90 liblwres90 libwbclient0 libxml2 perl perl-base perl-modules
+  pi-bluetooth samba-common
+35 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 16.6 MB of archives.
+After this operation, 114 kB of additional disk space will be used.
+
+pi@raspberrypi:~ $ curl https://get.pimoroni.com/blinkt | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 38488  100 38488    0     0  80081      0 --:--:-- --:--:-- --:--:-- 80183
+
+This script will install everything needed to use
+Blinkt!
+
+Downloading examples and documentation...
+Resources for your Blinkt! were copied to
+/home/pi/Pimoroni/blinkt
+
+All done. Enjoy your Blinkt!!
+
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          gradient_graph.py  rainbow.py
+binary_clock_meld.py  graph.py           random_blink_colours.py
+binary_clock.py       larson.py          random_blink.py
+cheerlights.py        mem_load.py        resistor_clock.py
+cpu_load.py           morse_code.py      rgb.py
+cpu_temp.py           mqtt.py            solid_colours.py
+extra_examples        pulse.py           twitter_monitor.py
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ python cpu_load.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^CTraceback (most recent call last):
+  File "cpu_load.py", line 32, in <module>
+    time.sleep(0.01)
+KeyboardInterrupt
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          gradient_graph.py  rainbow.py
+binary_clock_meld.py  graph.py           random_blink_colours.py
+binary_clock.py       larson.py          random_blink.py
+cheerlights.py        mem_load.py        resistor_clock.py
+cpu_load.py           morse_code.py      rgb.py
+cpu_temp.py           mqtt.py            solid_colours.py
+extra_examples        pulse.py           twitter_monitor.py
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ python larson.py
+^CTraceback (most recent call last):
+  File "larson.py", line 28, in <module>
+    time.sleep(0.1)
+KeyboardInterrupt
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ python cpu_temp.py
+ç^CTraceback (most recent call last):
+  File "cpu_temp.py", line 33, in <module>
+    time.sleep(0.01)
+KeyboardInterrupt
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          gradient_graph.py  rainbow.py
+binary_clock_meld.py  graph.py           random_blink_colours.py
+binary_clock.py       larson.py          random_blink.py
+cheerlights.py        mem_load.py        resistor_clock.py
+cpu_load.py           morse_code.py      rgb.py
+cpu_temp.py           mqtt.py            solid_colours.py
+extra_examples        pulse.py           twitter_monitor.py
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ cd
+pi@raspberrypi:~ $ sudo nano monitor.py
+pi@raspberrypi:~ $ python monitor.py
+ç^CTraceback (most recent call last):
+  File "monitor.py", line 16, in <module>
+    sleep(30)
+KeyboardInterrupt
+pi@raspberrypi:~ $ sudo nano monitor.py
+pi@raspberrypi:~ $ cd Pimoroni/blinkt/examples/
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ python binary_clock_meld.py
+Hour = Red, Minute = Green, Second = Blue
+21:58:4
+21:58:5
+21:58:6
+21:58:7
+21:58:8
+21:58:9
+21:58:10
+21:58:11
+21:58:12
+21:58:13
+21:58:14
+21:58:15
+21:58:16
+21:58:17
+21:58:18
+21:58:19
+21:58:20
+21:58:21
+21:58:22
+21:58:23
+21:58:24
+21:58:25
+21:58:26
+21:58:27
+21:58:28
+^CTraceback (most recent call last):
+  File "binary_clock_meld.py", line 40, in <module>
+    sleep(1)
+KeyboardInterrupt
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ sudo raspiconfig
+sudo: raspiconfig: command not found
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ sudo raspi-config
+
+Current default time zone: 'Europe/Berlin'
+Local time is now:      Wed Oct 11 23:59:31 CEST 2017.
+Universal Time is now:  Wed Oct 11 21:59:31 UTC 2017.
+
+Hit http://mirrordirector.raspbian.org jessie InRelease
+Hit http://archive.raspberrypi.org jessie InRelease
+Hit http://mirrordirector.raspbian.org jessie/main armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/contrib armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/non-free armhf Packages
+Hit http://archive.raspberrypi.org jessie/main armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/rpi armhf Packages
+Hit http://archive.raspberrypi.org jessie/ui armhf Packages
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en
+Ign http://archive.raspberrypi.org jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-en
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+raspi-config is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Sleeping 5 seconds before reloading raspi-config
+pi@raspberrypi:~/Pimoroni/blinkt/examples $ sudo reboot
+packet_write_wait: Connection to 192.168.178.106: Broken pipe
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password:
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Oct 11 23:28:02 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@piblinkt:~ $ python monitor.py
+^CTraceback (most recent call last):
+  File "monitor.py", line 16, in <module>
+    sleep(30)
+KeyboardInterrupt
+pi@piblinkt:~ $ cd Pimoroni/blinkt/examples/
+pi@piblinkt:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          cheerlights.py  extra_examples     larson.py      mqtt.py     random_blink_colours.py  rgb.py
+binary_clock_meld.py  cpu_load.py     gradient_graph.py  mem_load.py    pulse.py    random_blink.py          solid_colours.py
+binary_clock.py       cpu_temp.py     graph.py           morse_code.py  rainbow.py  resistor_clock.py        twitter_monitor.py
+pi@piblinkt:~/Pimoroni/blinkt/examples $ python graph.py
+^Cpi@piblinkt:~/Pimoroni/blinkt/examples $ python morse_code.py +
+^CTraceback (most recent call last):
+  File "morse_code.py", line 39, in <module>
+    dot()
+  File "morse_code.py", line 20, in dot
+    time.sleep(0.2)
+KeyboardInterrupt
+pi@piblinkt:~/Pimoroni/blinkt/examples $
+pi@piblinkt:~/Pimoroni/blinkt/examples $ sudo nano mqtt.py
+pi@piblinkt:~/Pimoroni/blinkt/examples $ nohup python cpu_load.py &
+[1] 718
+pi@piblinkt:~/Pimoroni/blinkt/examples $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@piblinkt:~/Pimoroni/blinkt/examples $ cd
+pi@piblinkt:~ $ curl -sLS https://apt.adafruit.com/add | sudo bash
+                                 .`
+                              -dMMs
+                             +MMMMMo
+                           .dMMMMMMN-
+                          +NMMMMMMMMd`
+                        `hMMMMMMMMMMMo
+                       -mMMMMMMMMMMMMN.
+                       dMMMMMMMMMMMMMMo
+  :hmmmmmmmmmmmmdhs/. `MMMMMMMMMMMMMMMh
+  sMMMMMMMMMMMMMMMMMMd+NMMMMMMMMMMMMMM+
+   /NMMMMMMMMMMMMMMMMMMMMMMMMs+NMMMMMm/+syyyso/-`
+    `hMMMMMMMMMMMMMMMMMMMMMMo  hMMMMMMMMMMMMMMMMMNhs+:.
+      /NMMMMMMMMMMMNmmNMMMMN. `mMMMMMMMMMMMMMMMMMMMMMMMNh-
+       .hMMMMMMMMMMh` `-sNMMs-hMMMMMMMMMMMMMMMMMMMMMMMMMM+
+         /mMMMMMMMMMNy+-./MMMMMMy:....oMMMMMMMMMMMMMMMNo.
+           :ymMMMMMMMMMMMMMMMMMNy//oymMMMMMMMMMMMMMNy:
+              .yMMMMMMMms:oMMNhNMMMMMMMMMMMMMMMMNh/`
+            .yMMMMMMMN/  .dMMy `sMMMMMMMMMMMNmy/`
+           /NMMMMMMMM:`-sMMMMM:  sMMMMMMs-..`
+          -NMMMMMMMMMNNMMMMMMMMs./MMMMMMMh`
+          mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMs
+         sMMMMMMMMMMMMMMMMhMMMMMMMMMMMMMMMN
+        :MMMMMMMMMMMMMMMN+ hMMMMMMMMMMMMMMN.
+       `dMMMMMMMMMMMMNh/`  `hMMMMMMMMMMMMMN.
+       /MMMMMMMMmhs+-        /dMMMMMMMMMMMN.
+       .hmdys/-                -sNMMMMMMMMN.
+                                 `:hNMMMMMN.
+                                    `+dMMMN`
+                                       ./+-
+
+  adding apt.adafruit.com to /etc/apt/sources.list
+
+OK
+Hit http://mirrordirector.raspbian.org jessie InRelease
+Get:1 http://apt.adafruit.com jessie InRelease [2,093 B]
+Hit http://archive.raspberrypi.org jessie InRelease
+Hit http://mirrordirector.raspbian.org jessie/main armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/contrib armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/non-free armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/rpi armhf Packages
+Get:2 http://apt.adafruit.com jessie/main armhf Packages [9,863 B]
+Hit http://archive.raspberrypi.org jessie/main armhf Packages
+Hit http://archive.raspberrypi.org jessie/ui armhf Packages
+Ign http://apt.adafruit.com jessie/main Translation-en_GB
+Ign http://apt.adafruit.com jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB
+Ign http://archive.raspberrypi.org jessie/main Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB
+Ign http://archive.raspberrypi.org jessie/ui Translation-en
+Fetched 12.0 kB in 25s (466 B/s)
+Reading package lists... Done
+pi@piblinkt:~ $ sudo apt-get install node
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  node
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 6,730 kB of archives.
+After this operation, 26.8 MB of additional disk space will be used.
+Get:1 http://apt.adafruit.com/raspbian/ jessie/main node armhf 0.12.6-1 [6,730 kB]
+Fetched 6,730 kB in 13s (498 kB/s)
+Selecting previously unselected package node.
+(Reading database ... 35603 files and directories currently installed.)
+Preparing to unpack .../node_0.12.6-1_armhf.deb ...
+Unpacking node (0.12.6-1) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Setting up node (0.12.6-1) ...
+pi@piblinkt:~ $ node -v
+v0.12.6
+pi@piblinkt:~ $ sudo apt-get update
+Hit http://mirrordirector.raspbian.org jessie InRelease
+Hit http://apt.adafruit.com jessie InRelease
+Hit http://archive.raspberrypi.org jessie InRelease
+Hit http://mirrordirector.raspbian.org jessie/main armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/contrib armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/non-free armhf Packages
+Hit http://apt.adafruit.com jessie/main armhf Packages
+Hit http://mirrordirector.raspbian.org jessie/rpi armhf Packages
+Hit http://archive.raspberrypi.org jessie/main armhf Packages
+Hit http://archive.raspberrypi.org jessie/ui armhf Packages
+Ign http://apt.adafruit.com jessie/main Translation-en_GB
+Ign http://apt.adafruit.com jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB
+Ign http://archive.raspberrypi.org jessie/main Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB
+Ign http://archive.raspberrypi.org jessie/ui Translation-en
+Reading package lists... Done
+pi@piblinkt:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@piblinkt:~ $ sudo apt-get install git-core
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  git-core
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1,504 B of archives.
+After this operation, 21.5 kB of additional disk space will be used.
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main git-core all 1:2.1.4-2.1+deb8u5 [1,504 B]
+Fetched 1,504 B in 0s (10.0 kB/s)
+Selecting previously unselected package git-core.
+(Reading database ... 37998 files and directories currently installed.)
+Preparing to unpack .../git-core_1%3a2.1.4-2.1+deb8u5_all.deb ...
+Unpacking git-core (1:2.1.4-2.1+deb8u5) ...
+Setting up git-core (1:2.1.4-2.1+deb8u5) ...
+pi@piblinkt:~ $ cd ~
+pi@piblinkt:~ $ git clone https://github.com/node-red/node-red.git
+Cloning into 'node-red'...
+remote: Counting objects: 23803, done.
+remote: Compressing objects: 100% (48/48), done.
+remote: Total 23803 (delta 22), reused 32 (delta 10), pack-reused 23744
+Receiving objects: 100% (23803/23803), 10.78 MiB | 390.00 KiB/s, done.
+Resolving deltas: 100% (16644/16644), done.
+Checking connectivity... done.
+pi@piblinkt:~ $ cd node-red
+pi@piblinkt:~/node-red $ sudo npm install
+npm WARN engine grunt-jsonlint@1.1.0: wanted: {"node":">=4.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine follow-redirects@1.2.4: wanted: {"node":">=4.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine supertest@3.0.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine sentiment@2.1.0: wanted: {"node":">=4.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine jsonata@1.3.0: wanted: {"node":">= 4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine mqtt@2.9.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN deprecated nodemailer@1.11.0: All versions below 4.0.1 of Nodemailer are deprecated. See https://nodemailer.com/status/
+npm WARN engine request@2.83.0: wanted: {"node":">= 4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine superagent@3.6.3: wanted: {"node":">= 4.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine pretty-bytes@4.0.2: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine esprima@3.1.3: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-validator@5.0.3: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hawk@6.0.2: wanted: {"node":">=4.5.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN deprecated node-uuid@1.4.8: Use uuid module instead
+npm WARN engine request@2.83.0: wanted: {"node":">= 4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine cryptiles@3.1.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine sntp@2.0.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@4.3.1: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hoek@4.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@5.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-schema@2.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine update-notifier@2.3.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-validator@5.0.3: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hawk@6.0.2: wanted: {"node":">=4.5.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine is-installed-globally@0.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine xdg-basedir@3.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine latest-version@3.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine import-lazy@2.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine chalk@2.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine configstore@3.1.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boxen@1.2.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-schema@2.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine unique-string@1.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine make-dir@1.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine dot-prop@4.2.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine global-dirs@0.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine package-json@4.0.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine camelcase@4.1.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine string-width@2.1.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine term-size@1.2.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine supports-color@4.4.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine ansi-styles@3.2.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@4.3.1: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine cryptiles@3.1.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine sntp@2.0.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hoek@4.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine crypto-random-string@1.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine is-fullwidth-code-point@2.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine strip-ansi@4.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine got@6.7.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine execa@0.7.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN deprecated i18next-client@1.10.3: you can use npm install i18next from version 2.0.0
+npm WARN engine boom@5.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine ansi-regex@3.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine unzip-response@2.0.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine get-stream@3.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine get-stream@3.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine npm-run-path@2.0.2: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine p-finally@1.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine path-key@2.0.1: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN optional dep failed, continuing fsevents@1.1.2
+npm WARN engine detect-libc@0.2.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine request@2.83.0: wanted: {"node":">= 4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-validator@5.0.3: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hawk@6.0.2: wanted: {"node":">=4.5.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm ERR! Linux 4.9.35+
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+npm ERR! node v0.12.6
+npm ERR! npm  v2.11.2
+npm ERR! code ECONNRESET
+npm ERR! errno ECONNRESET
+npm ERR! syscall read
+
+npm ERR! network read ECONNRESET
+npm ERR! network This is most likely not a problem with npm itself
+npm ERR! network and is related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+npm WARN engine har-schema@2.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@4.3.1: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine cryptiles@3.1.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hoek@4.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine sntp@2.0.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+
+> bcrypt@1.0.3 install /home/pi/node-red/node_modules/bcrypt
+> node-pre-gyp install --fallback-to-build
+
+node-pre-gyp ERR! Tried to download(undefined): https://github.com/kelektiv/node.bcrypt.js/releases/download/v1.0.3/bcrypt_lib-v1.0.3-node-v14-linux-arm.tar.gz
+node-pre-gyp ERR! Pre-built binaries not found for bcrypt@1.0.3 and node@0.12.6 (node-v14 ABI) (falling back to source compile with node-gyp)
+gyp WARN EACCES user "root" does not have permission to access the dev dir "/root/.node-gyp/0.12.6"
+gyp WARN EACCES attempting to reinstall using temporary dev dir "/home/pi/node-red/node_modules/bcrypt/.node-gyp"
+/
+
+ UNCAUGHT EXCEPTION
+gyp ERR! stack Error: spawn ENOMEM
+gyp ERR! stack     at exports._errnoException (util.js:746:11)
+gyp ERR! stack     at ChildProcess.spawn (child_process.js:1162:11)
+gyp ERR! stack     at Object.exports.spawn (child_process.js:995:9)
+gyp ERR! stack     at Gyp.spawn (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/node-gyp.js:186:26)
+gyp ERR! stack     at runGyp (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:345:18)
+gyp ERR! stack     at findConfigs (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:258:23)
+gyp ERR! stack     at /usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:264:11
+gyp ERR! stack     at FSReqWrap.oncomplete (evalmachine.<anonymous>:95:15)
+gyp ERR! System Linux 4.9.35+
+gyp ERR! command "/usr/local/bin/node" "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "configure" "--fallback-to-build" "--module=/home/pi/node-red/node_modules/bcrypt/lib/binding/bcrypt_lib.node" "--module_name=bcrypt_lib" "--module_path=/home/pi/node-red/node_modules/bcrypt/lib/binding"
+gyp ERR! cwd /home/pi/node-red/node_modules/bcrypt
+gyp ERR! node -v v0.12.6
+gyp ERR! node-gyp -v v2.0.1
+gyp ERR! This is a bug in `node-gyp`.
+gyp ERR! Try to update node-gyp and file an Issue if it does not help:
+gyp ERR!     <https://github.com/TooTallNate/node-gyp/issues>
+node-pre-gyp ERR! build error
+node-pre-gyp ERR! stack Error: Failed to execute '/usr/local/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js configure --fallback-to-build --module=/home/pi/node-red/node_modules/bcrypt/lib/binding/bcrypt_lib.node --module_name=bcrypt_lib --module_path=/home/pi/node-red/node_modules/bcrypt/lib/binding' (7)
+node-pre-gyp ERR! stack     at ChildProcess.<anonymous> (/home/pi/node-red/node_modules/bcrypt/node_modules/node-pre-gyp/lib/util/compile.js:83:29)
+node-pre-gyp ERR! stack     at ChildProcess.emit (events.js:110:17)
+node-pre-gyp ERR! stack     at maybeClose (child_process.js:1015:16)
+node-pre-gyp ERR! stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+node-pre-gyp ERR! System Linux 4.9.35+
+node-pre-gyp ERR! command "node" "/home/pi/node-red/node_modules/bcrypt/node_modules/.bin/node-pre-gyp" "install" "--fallback-to-build"
+node-pre-gyp ERR! cwd /home/pi/node-red/node_modules/bcrypt
+node-pre-gyp ERR! node -v v0.12.6
+ node-pre-gyp -v v0.6.36
+node-pre-gyp ERR! not ok
+Failed to execute '/usr/local/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js configure --fallback-to-build --module=/home/pi/node-red/node_modules/bcrypt/lib/binding/bcrypt_lib.node --module_name=bcrypt_lib --module_path=/home/pi/node-red/node_modules/bcrypt/lib/binding' (7)
+npm WARN engine boom@5.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm ERR! Linux 4.9.35+
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+npm ERR! node v0.12.6
+npm ERR! npm  v2.11.2
+npm ERR! code ECONNRESET
+npm ERR! errno ECONNRESET
+npm ERR! syscall read
+npm ERR! network read ECONNRESET
+npm ERR! network This is most likely not a problem with npm itself
+npm ERR! network and is related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+npm ERR! Linux 4.9.35+
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+npm ERR! node v0.12.6
+npm ERR! npm  v2.11.2
+npm ERR! code ECONNRESET
+npm ERR! errno ECONNRESET
+npm ERR! syscall read
+npm ERR! network read ECONNRESET
+npm ERR! network This is most likely not a problem with npm itself
+npm ERR! network and is related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+npm WARN optional dep failed, continuing bcrypt@1.0.3
+npm WARN engine request@2.83.0: wanted: {"node":">= 4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-validator@5.0.3: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hawk@6.0.2: wanted: {"node":">=4.5.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine har-schema@2.0.0: wanted: {"node":">=4"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@4.3.1: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine cryptiles@3.1.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine sntp@2.0.2: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine hoek@4.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm WARN engine boom@5.2.0: wanted: {"node":">=4.0.0"} (current: {"node":"0.12.6","npm":"2.11.2"})
+npm ERR! Linux 4.9.35+
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+npm ERR! node v0.12.6
+npm ERR! npm  v2.11.2
+npm ERR! code ECONNRESET
+npm ERR! errno ECONNRESET
+npm ERR! syscall read
+
+npm ERR! network read ECONNRESET
+npm ERR! network This is most likely not a problem with npm itself
+npm ERR! network and is related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+q^Cpi@piblinkt:~/node-red $ ps
+  PID TTY          TIME CMD
+  668 pts/0    00:00:01 bash
+  718 pts/0    00:23:56 python
+  987 pts/0    00:00:00 ps
+pi@piblinkt:~/node-red $ kill -9 718
+pi@piblinkt:~/node-red $ cd
+[1]+  Killed                  nohup python cpu_load.py  (wd: ~/Pimoroni/blinkt/examples)
+(wd now: ~)
+pi@piblinkt:~ $ cd Pimoroni/blinkt/examples/
+pi@piblinkt:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          cheerlights.py  extra_examples     larson.py      mqtt.py    rainbow.py               resistor_clock.py  twitter_monitor.py
+binary_clock_meld.py  cpu_load.py     gradient_graph.py  mem_load.py    nohup.out  random_blink_colours.py  rgb.py
+binary_clock.py       cpu_temp.py     graph.py           morse_code.py  pulse.py   random_blink.py          solid_colours.py
+pi@piblinkt:~/Pimoroni/blinkt/examples $ python mem_load.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^CTraceback (most recent call last):
+  File "mem_load.py", line 32, in <module>
+    show_graph(v, 255, 0, 255)
+  File "mem_load.py", line 26, in show_graph
+    show()
+  File "/usr/lib/python2.7/dist-packages/blinkt.py", line 77, in show
+    _write_byte(r)
+  File "/usr/lib/python2.7/dist-packages/blinkt.py", line 44, in _write_byte
+    GPIO.output(CLK, 0)
+KeyboardInterrupt
+pi@piblinkt:~/Pimoroni/blinkt/examples $ cd
+pi@piblinkt:~ $ cd Pimoroni/blinkt/examples/
+pi@piblinkt:~/Pimoroni/blinkt/examples $ ls
+1d_tetris.py          cheerlights.py  extra_examples     larson.py      mqtt.py    rainbow.py               resistor_clock.py  twitter_monitor.py
+binary_clock_meld.py  cpu_load.py     gradient_graph.py  mem_load.py    nohup.out  random_blink_colours.py  rgb.py
+binary_clock.py       cpu_temp.py     graph.py           morse_code.py  pulse.py   random_blink.py          solid_colours.py
+pi@piblinkt:~/Pimoroni/blinkt/examples $ python rainbow.py
+^CTraceback (most recent call last):
+  File "rainbow.py", line 22, in <module>
+    show()
+  File "/usr/lib/python2.7/dist-packages/blinkt.py", line 74, in show
+    _write_byte(0b11100000 | brightness)
+  File "/usr/lib/python2.7/dist-packages/blinkt.py", line 43, in _write_byte
+    byte <<= 1
+KeyboardInterrupt
+pi@piblinkt:~/Pimoroni/blinkt/examples $ python larson.py
+^CTraceback (most recent call last):
+  File "larson.py", line 28, in <module>
+    time.sleep(0.1)
+KeyboardInterrupt
+pi@piblinkt:~/Pimoroni/blinkt/examples $ sudo poweroff

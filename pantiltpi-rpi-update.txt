@@ -1,0 +1,55 @@
+Last login: Tue Oct  3 21:24:41 on ttys001
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct  3 22:55:23 2017
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ sudo rpi-update
+ *** Raspberry Pi firmware updater by Hexxeh, enhanced by AndrewS and Dom
+ *** Performing self-update
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 13403  100 13403    0     0  68147      0 --:--:-- --:--:-- --:--:-- 68382
+ *** Relaunching after update
+ *** Raspberry Pi firmware updater by Hexxeh, enhanced by AndrewS and Dom
+ *** We're running for the first time
+ *** Backing up files (this will take a few minutes)
+ *** Backing up firmware
+ *** Backing up modules 4.9.35-v7+
+#############################################################
+This update bumps to rpi-4.9.y linux tree
+Be aware there could be compatibility issues with some drivers
+Discussion here:
+https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=167934
+##############################################################
+ *** Downloading specific firmware revision (this will take a few minutes)
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   168    0   168    0     0    277      0 --:--:-- --:--:-- --:--:--   277
+100 54.1M  100 54.1M    0     0  1787k      0  0:00:31  0:00:31 --:--:-- 3468k
+ *** Updating firmware
+ *** Updating kernel modules
+ *** depmod 4.9.52+
+ *** depmod 4.9.52-v7+
+ *** Updating VideoCore libraries
+ *** Using HardFP libraries
+ *** Updating SDK
+ *** Running ldconfig
+ *** Storing current firmware revision
+ *** Deleting downloaded files
+ *** Syncing changes to disk
+ *** If no errors appeared, your firmware was successfully updated to 2169dbafa715d4a7cfcd3dcf78a15f82fecae2a6
+ *** A reboot is needed to activate the new firmware
+pi@pantiltpi:~ $ sudo reboot
+Connection to 192.168.178.103 closed by remote host.
+Connection to 192.168.178.103 closed.
+Peters-MBP:~ tdamdouni$ 

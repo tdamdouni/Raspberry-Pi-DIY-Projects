@@ -1,0 +1,361 @@
+Last login: Sun Oct 22 13:56:09 on ttys000
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 17 20:20:46 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pisense:~ $ sudo poweroff
+Connection to 192.168.178.100 closed by remote host.
+Connection to 192.168.178.100 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.100
+pi@192.168.178.100's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 15:38:50 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weather-station
+node_latest_armhf.deb.1  package-lock.json
+pi@pisense:~ $ cd taha
+pi@pisense:~/taha $ ls
+joystick.py  nohup.out  reaction_game.py  tph.py
+pi@pisense:~/taha $ nohup python tph.py &
+[1] 876
+pi@pisense:~/taha $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@pisense:~/taha $ ls
+joystick.py  nohup.out  reaction_game.py  tph.py
+pi@pisense:~/taha $ cd
+pi@pisense:~ $ vcgendcmd measure_temp
+-bash: vcgendcmd: command not found
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=35.8'C
+pi@pisense:~ $ vcgencmd measure_temp
+temp=36.3'C
+pi@pisense:~ $ sudo apt-get update
+Get:1 http://mirrordirector.raspbian.org jessie InRelease [14.9 kB]
+Get:2 http://archive.raspberrypi.org jessie InRelease [22.9 kB]
+Hit https://deb.nodesource.com jessie InRelease                        
+Hit http://archive.raspberrypi.org jessie/main armhf Packages                  
+Get:3 http://mirrordirector.raspbian.org jessie/main armhf Packages [9,536 kB]
+Hit https://deb.nodesource.com jessie/main Sources
+Hit https://deb.nodesource.com jessie/main armhf Packages                      
+Hit http://archive.raspberrypi.org jessie/ui armhf Packages                    
+Get:4 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]
+Get:5 https://deb.nodesource.com jessie/main Translation-en [162 B]            
+Get:6 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]         
+Get:7 https://deb.nodesource.com jessie/main Translation-en [162 B]            
+Get:8 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]         
+Get:9 https://deb.nodesource.com jessie/main Translation-en [162 B]            
+Get:10 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]        
+Get:11 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Get:12 https://deb.nodesource.com jessie/main Translation-en_GB [162 B]        
+Ign https://deb.nodesource.com jessie/main Translation-en_GB                   
+Get:13 https://deb.nodesource.com jessie/main Translation-en [162 B]           
+Ign https://deb.nodesource.com jessie/main Translation-en                      
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB               
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB                 
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Get:14 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43.3 kB]
+Get:15 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84.2 kB]
+Get:16 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1,356 B]  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en              
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB            
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en               
+Fetched 9,702 kB in 1min 31s (106 kB/s)                                        
+Reading package lists... Done
+pi@pisense:~ $ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@pisense:~ $ sudo apt-get install python3-flask
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3-flask is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@pisense:~ $ sudo apt-get install sense-hat
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+sense-hat is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weather-station
+node_latest_armhf.deb.1  package-lock.json
+pi@pisense:~ $ mkdir weatherapp
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weatherapp
+node_latest_armhf.deb.1  package-lock.json  weather-station
+pi@pisense:~ $ cd weatherapp/
+pi@pisense:~/weatherapp $ ls
+pi@pisense:~/weatherapp $ sudo nano weather.py
+pi@pisense:~/weatherapp $ mkdir templates
+pi@pisense:~/weatherapp $ cd templates/
+pi@pisense:~/weatherapp/templates $ ls
+pi@pisense:~/weatherapp/templates $ sudo nano weather.html
+pi@pisense:~/weatherapp/templates $ cd ..
+pi@pisense:~/weatherapp $ sudo nano weather.py 
+pi@pisense:~/weatherapp $ python3 weather.py 
+ * Running on http://0.0.0.0:5000/
+ * Restarting with reloader
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/lib/python3/dist-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/lib/python3/dist-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/lib/python3/dist-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/weatherapp/weather.py", line 17, in index
+    return render_template('weather.html', celcius=celcius, fahrenheit=Fahrenheit, humidity=humidity, pressure=pressure)
+NameError: name 'Fahrenheit' is not defined
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:25:15] "GET /?__debugger__=yes&cmd=resource&f=source.png HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:25:16] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+^Cpi@pisense:~/weatherapp $ sudo nano weather.py 
+pi@pisense:~/weatherapp $ cd templates/
+pi@pisense:~/weatherapp/templates $ nano weather.html 
+pi@pisense:~/weatherapp/templates $ cd ..
+pi@pisense:~/weatherapp $ python3 weather.py 
+ * Running on http://0.0.0.0:5000/
+ * Restarting with reloader
+192.168.178.20 - - [22/Oct/2017 18:28:04] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:10] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:26] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:28] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:29] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:30] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:31] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:28:43] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:31] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:33] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:34] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:35] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:36] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:37] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:38] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:39] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:40] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:41] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:41] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:42] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:44] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:45] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:46] "GET / HTTP/1.1" 200 -
+192.168.178.20 - - [22/Oct/2017 18:30:47] "GET / HTTP/1.1" 200 -
+^Cpi@pisense:~/weatherapp $ nano thermometer.py
+pi@pisense:~/weatherapp $ ps
+  PID TTY          TIME CMD
+  853 pts/0    00:00:01 bash
+  876 pts/0    00:03:03 python
+ 1170 pts/0    00:00:00 ps
+pi@pisense:~/weatherapp $ kill -9 876
+pi@pisense:~/weatherapp $ ls
+templates  thermometer.py  weather.py
+[1]+  Killed                  nohup python tph.py  (wd: ~/taha)
+(wd now: ~/weatherapp)
+pi@pisense:~/weatherapp $ 
+pi@pisense:~/weatherapp $ ls
+templates  thermometer.py  weather.py
+pi@pisense:~/weatherapp $ python thermometer.py 
+^CTraceback (most recent call last):
+  File "thermometer.py", line 103, in <module>
+    time.sleep(1)
+KeyboardInterrupt
+pi@pisense:~/weatherapp $ nano clock.py
+pi@pisense:~/weatherapp $ python clock.py 
+pi@pisense:~/weatherapp $ ps
+  PID TTY          TIME CMD
+  853 pts/0    00:00:01 bash
+ 1188 pts/0    00:00:00 ps
+pi@pisense:~/weatherapp $ python thermometer.py 
+^CTraceback (most recent call last):
+  File "thermometer.py", line 103, in <module>
+    time.sleep(1)
+KeyboardInterrupt
+pi@pisense:~/weatherapp $ sudo apt-get install mosquitto mosquitto-clients mosquitto-dbg python-mosquitto python3-mosquitto
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  libc-ares2 libmosquitto1
+The following NEW packages will be installed:
+  libc-ares2 libmosquitto1 mosquitto mosquitto-clients mosquitto-dbg
+  python-mosquitto python3-mosquitto
+0 upgraded, 7 newly installed, 0 to remove and 0 not upgraded.
+Need to get 898 kB of archives.
+After this operation, 1,409 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libc-ares2 armhf 1.10.0-2+deb8u2 [66.7 kB]
+Get:2 http://mirrordirector.raspbian.org/raspbian/ jessie/main libmosquitto1 armhf 1.3.4-2+deb8u1 [37.1 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main mosquitto armhf 1.3.4-2+deb8u1 [102 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main mosquitto-clients armhf 1.3.4-2+deb8u1 [39.5 kB]
+Get:5 http://mirrordirector.raspbian.org/raspbian/ jessie/main python-mosquitto all 1.3.4-2+deb8u1 [34.8 kB]
+Get:6 http://mirrordirector.raspbian.org/raspbian/ jessie/main python3-mosquitto all 1.3.4-2+deb8u1 [34.8 kB]
+Get:7 http://mirrordirector.raspbian.org/raspbian/ jessie/main mosquitto-dbg armhf 1.3.4-2+deb8u1 [583 kB]
+Fetched 898 kB in 1s (526 kB/s)        
+Selecting previously unselected package libc-ares2:armhf.
+(Reading database ... 65340 files and directories currently installed.)
+Preparing to unpack .../libc-ares2_1.10.0-2+deb8u2_armhf.deb ...
+Unpacking libc-ares2:armhf (1.10.0-2+deb8u2) ...
+Selecting previously unselected package libmosquitto1.
+Preparing to unpack .../libmosquitto1_1.3.4-2+deb8u1_armhf.deb ...
+Unpacking libmosquitto1 (1.3.4-2+deb8u1) ...
+Selecting previously unselected package mosquitto.
+Preparing to unpack .../mosquitto_1.3.4-2+deb8u1_armhf.deb ...
+Unpacking mosquitto (1.3.4-2+deb8u1) ...
+Selecting previously unselected package mosquitto-clients.
+Preparing to unpack .../mosquitto-clients_1.3.4-2+deb8u1_armhf.deb ...
+Unpacking mosquitto-clients (1.3.4-2+deb8u1) ...
+Selecting previously unselected package python-mosquitto.
+Preparing to unpack .../python-mosquitto_1.3.4-2+deb8u1_all.deb ...
+Unpacking python-mosquitto (1.3.4-2+deb8u1) ...
+Selecting previously unselected package python3-mosquitto.
+Preparing to unpack .../python3-mosquitto_1.3.4-2+deb8u1_all.deb ...
+Unpacking python3-mosquitto (1.3.4-2+deb8u1) ...
+Selecting previously unselected package mosquitto-dbg.
+Preparing to unpack .../mosquitto-dbg_1.3.4-2+deb8u1_armhf.deb ...
+Unpacking mosquitto-dbg (1.3.4-2+deb8u1) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Processing triggers for systemd (215-17+deb8u7) ...
+Setting up libc-ares2:armhf (1.10.0-2+deb8u2) ...
+Setting up libmosquitto1 (1.3.4-2+deb8u1) ...
+Setting up mosquitto (1.3.4-2+deb8u1) ...
+Setting up mosquitto-clients (1.3.4-2+deb8u1) ...
+Setting up python-mosquitto (1.3.4-2+deb8u1) ...
+Setting up python3-mosquitto (1.3.4-2+deb8u1) ...
+Setting up mosquitto-dbg (1.3.4-2+deb8u1) ...
+Processing triggers for libc-bin (2.19-18+deb8u10) ...
+Processing triggers for systemd (215-17+deb8u7) ...
+pi@pisense:~/weatherapp $ cat /etc/mosquitto/conf.d/mosquitto.conf 
+cat: /etc/mosquitto/conf.d/mosquitto.conf: No such file or directory
+pi@pisense:~/weatherapp $ nano /etc/mosquitto/conf.d/mosquitto.conf 
+pi@pisense:~/weatherapp $ sudo nano /etc/mosquitto/conf.d/mosquitto.conf 
+pi@pisense:~/weatherapp $ sudo systemctl stop mosquitto.service
+pi@pisense:~/weatherapp $ sudo systemctl start mosquitto.service
+pi@pisense:~/weatherapp $ mosquitto_sub -v -t '\$SYS/#'
+Error: Connection refused
+pi@pisense:~/weatherapp $ sudo mosquitto_sub -v -t '\$SYS/#'
+Error: Connection refused
+pi@pisense:~/weatherapp $ ls
+clock.py  templates  thermometer.py  weather.py
+pi@pisense:~/weatherapp $ cd
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weatherapp
+node_latest_armhf.deb.1  package-lock.json  weather-station
+pi@pisense:~ $ df -u
+df: invalid option -- 'u'
+Try 'df --help' for more information.
+pi@pisense:~ $ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/root        7588280 2664548   4589264  37% /
+devtmpfs          435668       0    435668   0% /dev
+tmpfs             440276       0    440276   0% /dev/shm
+tmpfs             440276    6124    434152   2% /run
+tmpfs               5120       4      5116   1% /run/lock
+tmpfs             440276       0    440276   0% /sys/fs/cgroup
+/dev/mmcblk0p1     41322   21430     19892  52% /boot
+tmpfs              88056       0     88056   0% /run/user/1000
+pi@pisense:~ $ ls
+examples                 node_modules       pi_examples
+monitor-temp.py          node-red           Pimoroni
+nodeimu                  node-sense-hat     taha
+node_latest_armhf.deb    package.json       weatherapp
+node_latest_armhf.deb.1  package-lock.json  weather-station
+pi@pisense:~ $ cd weatherapp/
+pi@pisense:~/weatherapp $ nohup python weather.py &
+[1] 2301
+pi@pisense:~/weatherapp $ nohup: ignoring input and appending output to ‘nohup.out’
+
+pi@pisense:~/weatherapp $ ps
+  PID TTY          TIME CMD
+  853 pts/0    00:00:01 bash
+ 2301 pts/0    00:00:01 python
+ 2304 pts/0    00:00:03 python
+ 2310 pts/0    00:00:00 ps
+pi@pisense:~/weatherapp $ 

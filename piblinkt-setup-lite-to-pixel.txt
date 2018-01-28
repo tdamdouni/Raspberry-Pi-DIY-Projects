@@ -1,0 +1,282 @@
+Last login: Mon Nov 13 18:00:49 on ttys000
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Nov 13 18:00:56 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@piblinkt:~ $ cat /etc/os-release
+PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
+NAME="Raspbian GNU/Linux"
+VERSION_ID="8"
+VERSION="8 (jessie)"
+ID=raspbian
+ID_LIKE=debian
+HOME_URL="http://www.raspbian.org/"
+SUPPORT_URL="http://www.raspbian.org/RaspbianForums"
+BUG_REPORT_URL="http://www.raspbian.org/RaspbianBugs"
+pi@piblinkt:~ $ sudo apt-get update
+Get:1 http://mirrordirector.raspbian.org jessie InRelease [14.9 kB]
+Hit http://apt.adafruit.com jessie InRelease                                   
+Get:2 http://archive.raspberrypi.org jessie InRelease [22.9 kB]            
+Get:3 http://mirrordirector.raspbian.org jessie/main armhf Packages [9,536 kB] 
+Hit http://apt.adafruit.com jessie/main armhf Packages                         
+Get:4 http://archive.raspberrypi.org jessie/main armhf Packages [169 kB]       
+Get:5 http://archive.raspberrypi.org jessie/ui armhf Packages [58.9 kB]        
+Ign http://apt.adafruit.com jessie/main Translation-en_GB                      
+Ign http://apt.adafruit.com jessie/main Translation-en                         
+Ign http://archive.raspberrypi.org jessie/main Translation-en_GB               
+Ign http://archive.raspberrypi.org jessie/main Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-en_GB
+Ign http://archive.raspberrypi.org jessie/ui Translation-en
+Get:6 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43.3 kB]
+Get:7 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84.2 kB]
+Get:8 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1,356 B]   
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en_GB        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en_GB           
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en              
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en_GB       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en_GB            
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en               
+Fetched 9,931 kB in 32s (301 kB/s)                                             
+Reading package lists... Done
+pi@piblinkt:~ $ sudo apt-get dist-upgrade
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  curl libcurl3 libcurl3-gnutls libssl1.0.0 openssl wget
+6 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2,633 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libssl1.0.0 armhf 1.0.1t-1+deb8u7 [853 kB]
+Get:2 http://mirrordirector.raspbian.org/raspbian/ jessie/main curl armhf 7.38.0-4+deb8u7 [196 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3 armhf 7.38.0-4+deb8u7 [233 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3-gnutls armhf 7.38.0-4+deb8u7 [225 kB]
+Get:5 http://mirrordirector.raspbian.org/raspbian/ jessie/main wget armhf 1.16-1+deb8u4 [475 kB]
+Get:6 http://mirrordirector.raspbian.org/raspbian/ jessie/main openssl armhf 1.0.1t-1+deb8u7 [652 kB]
+Fetched 2,633 kB in 3s (769 kB/s)
+Reading changelogs... Done
+Preconfiguring packages ...
+(Reading database ... 38571 files and directories currently installed.)
+Preparing to unpack .../libssl1.0.0_1.0.1t-1+deb8u7_armhf.deb ...
+Unpacking libssl1.0.0:armhf (1.0.1t-1+deb8u7) over (1.0.1t-1+deb8u6) ...
+Preparing to unpack .../curl_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking curl (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../libcurl3_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking libcurl3:armhf (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../libcurl3-gnutls_7.38.0-4+deb8u7_armhf.deb ...
+Unpacking libcurl3-gnutls:armhf (7.38.0-4+deb8u7) over (7.38.0-4+deb8u6) ...
+Preparing to unpack .../wget_1.16-1+deb8u4_armhf.deb ...
+Unpacking wget (1.16-1+deb8u4) over (1.16-1+deb8u2) ...
+Preparing to unpack .../openssl_1.0.1t-1+deb8u7_armhf.deb ...
+Unpacking openssl (1.0.1t-1+deb8u7) over (1.0.1t-1+deb8u6) ...
+Processing triggers for man-db (2.7.5-1~bpo8+1) ...
+Processing triggers for install-info (5.2.0.dfsg.1-6) ...
+Setting up libssl1.0.0:armhf (1.0.1t-1+deb8u7) ...
+Setting up libcurl3:armhf (7.38.0-4+deb8u7) ...
+Setting up curl (7.38.0-4+deb8u7) ...
+Setting up libcurl3-gnutls:armhf (7.38.0-4+deb8u7) ...
+Setting up wget (1.16-1+deb8u4) ...
+Setting up openssl (1.0.1t-1+deb8u7) ...
+Processing triggers for libc-bin (2.19-18+deb8u10) ...
+pi@piblinkt:~ $ sudo apt-get install -y rpi-chromium-mods
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  chromium-browser fontconfig fontconfig-config fonts-dejavu-core
+  gconf-service gconf2-common hicolor-icon-theme libatk1.0-0 libatk1.0-data
+  libauthen-sasl-perl libavahi-client3 libcairo2 libcups2 libdatrie1
+  libdbus-glib-1-2 libdrm-amdgpu1 libdrm-freedreno1 libdrm-nouveau2
+  libdrm-radeon1 libelf1 libencode-locale-perl libfile-basedir-perl
+  libfile-desktopentry-perl libfile-listing-perl libfile-mimeinfo-perl
+  libfont-afm-perl libfontconfig1 libfontenc1 libgconf-2-4 libgdk-pixbuf2.0-0
+  libgdk-pixbuf2.0-common libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa
+  libgraphite2-3 libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libharfbuzz0b
+  libhtml-form-perl libhtml-format-perl libhtml-parser-perl
+  libhtml-tagset-perl libhtml-tree-perl libhttp-cookies-perl
+  libhttp-daemon-perl libhttp-date-perl libhttp-message-perl
+  libhttp-negotiate-perl libice6 libio-html-perl libio-socket-ssl-perl
+  libjasper1 libllvm3.9 liblwp-mediatypes-perl liblwp-protocol-https-perl
+  libmailtools-perl libnet-dbus-perl libnet-http-perl libnet-smtp-ssl-perl
+  libnet-ssleay-perl libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0
+  libpangoft2-1.0-0 libpixman-1-0 libsm6 libthai-data libthai0
+  libtie-ixhash-perl libtxc-dxtn-s2tc0 liburi-perl libwww-perl
+  libwww-robotrules-perl libx11-protocol-perl libx11-xcb1 libxaw7
+  libxcb-dri2-0 libxcb-dri3-0 libxcb-glx0 libxcb-image0 libxcb-present0
+  libxcb-render0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util0
+  libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxft2 libxi6
+  libxinerama1 libxml-parser-perl libxml-twig-perl libxml-xpathengine-perl
+  libxmu6 libxpm4 libxrandr2 libxrender1 libxshmfence1 libxss1 libxt6 libxtst6
+  libxv1 libxxf86dga1 libxxf86vm1 x11-common x11-utils x11-xserver-utils
+  xdg-utils
+Suggested packages:
+  webaccounts-chromium-extension unity-chromium-extension adobe-flashplugin
+  libdigest-hmac-perl libgssapi-perl cups-common librsvg2-common gvfs
+  libdata-dump-perl libjasper-runtime libcrypt-ssleay-perl libauthen-ntlm-perl
+  libunicode-map8-perl libunicode-string-perl xml-twig-tools mesa-utils nickle
+  cairo-5c xorg-docs-core gvfs-bin
+The following NEW packages will be installed:
+  chromium-browser fontconfig fontconfig-config fonts-dejavu-core
+  gconf-service gconf2-common hicolor-icon-theme libatk1.0-0 libatk1.0-data
+  libauthen-sasl-perl libavahi-client3 libcairo2 libcups2 libdatrie1
+  libdbus-glib-1-2 libdrm-amdgpu1 libdrm-freedreno1 libdrm-nouveau2
+  libdrm-radeon1 libelf1 libencode-locale-perl libfile-basedir-perl
+  libfile-desktopentry-perl libfile-listing-perl libfile-mimeinfo-perl
+  libfont-afm-perl libfontconfig1 libfontenc1 libgconf-2-4 libgdk-pixbuf2.0-0
+  libgdk-pixbuf2.0-common libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa
+  libgraphite2-3 libgtk2.0-0 libgtk2.0-bin libgtk2.0-common libharfbuzz0b
+  libhtml-form-perl libhtml-format-perl libhtml-parser-perl
+  libhtml-tagset-perl libhtml-tree-perl libhttp-cookies-perl
+  libhttp-daemon-perl libhttp-date-perl libhttp-message-perl
+  libhttp-negotiate-perl libice6 libio-html-perl libio-socket-ssl-perl
+  libjasper1 libllvm3.9 liblwp-mediatypes-perl liblwp-protocol-https-perl
+  libmailtools-perl libnet-dbus-perl libnet-http-perl libnet-smtp-ssl-perl
+  libnet-ssleay-perl libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0
+  libpangoft2-1.0-0 libpixman-1-0 libsm6 libthai-data libthai0
+  libtie-ixhash-perl libtxc-dxtn-s2tc0 liburi-perl libwww-perl
+  libwww-robotrules-perl libx11-protocol-perl libx11-xcb1 libxaw7
+  libxcb-dri2-0 libxcb-dri3-0 libxcb-glx0 libxcb-image0 libxcb-present0
+  libxcb-render0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util0
+  libxcomposite1 libxcursor1 libxdamage1 libxfixes3 libxft2 libxi6
+  libxinerama1 libxml-parser-perl libxml-twig-perl libxml-xpathengine-perl
+  libxmu6 libxpm4 libxrandr2 libxrender1 libxshmfence1 libxss1 libxt6 libxtst6
+  libxv1 libxxf86dga1 libxxf86vm1 rpi-chromium-mods x11-common x11-utils
+  x11-xserver-utils xdg-utils
+0 upgraded, 114 newly installed, 0 to remove and 0 not upgraded.
+Need to get 98.1 MB of archives.
+After this operation, 318 MB of additional disk space will be used.
+Get:1 http://archive.raspberrypi.org/debian/ jessie/main libpixman-1-0 armhf 0.33.3+git20151011-7de61d8-rpi1 [156 kB]
+Get:2 http://archive.raspberrypi.org/debian/ jessie/main libcairo2 armhf 1.14.0-2.1+deb8u2+rpi1 [662 kB]
+Get:3 http://mirrordirector.raspbian.org/raspbian/ jessie/main libdbus-glib-1-2 armhf 0.102-1 [190 kB]
+Get:4 http://mirrordirector.raspbian.org/raspbian/ jessie/main gconf2-common all 3.2.6-3 [1,040 kB]
+Get:5 http://archive.raspberrypi.org/debian/ jessie/ui libpango-1.0-0 armhf 1.36.8-3+rpi1 [274 kB]
+Get:6 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgconf-2-4 armhf 3.2.6-3 [413 kB]
+Get:7 http://archive.raspberrypi.org/debian/ jessie/ui libpangoft2-1.0-0 armhf 1.36.8-3+rpi1 [208 kB]
+Get:8 http://mirrordirector.raspbian.org/raspbian/ jessie/main gconf-service armhf 3.2.6-3 [404 kB]
+Get:9 http://archive.raspberrypi.org/debian/ jessie/ui libpangocairo-1.0-0 armhf 1.36.8-3+rpi1 [197 kB]
+Get:10 http://mirrordirector.raspbian.org/raspbian/ jessie/main libatk1.0-data all 2.14.0-1 [181 kB]
+Get:11 http://archive.raspberrypi.org/debian/ jessie/main x11-common all 1:7.7+16 [251 kB]
+Get:12 http://mirrordirector.raspbian.org/raspbian/ jessie/main libatk1.0-0 armhf 2.14.0-1 [84.2 kB]
+Get:13 http://archive.raspberrypi.org/debian/ jessie/main chromium-browser armhf 56.0.2924.84-0ubuntu0.14.04.1.1000 [56.1 MB]
+Get:14 http://mirrordirector.raspbian.org/raspbian/ jessie/main fonts-dejavu-core all 2.34-1 [1,047 kB]
+Get:15 http://mirrordirector.raspbian.org/raspbian/ jessie/main fontconfig-config all 2.11.0-6.3+deb8u1 [274 kB]
+Get:16 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfontconfig1 armhf 2.11.0-6.3+deb8u1 [312 kB]
+Get:17 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-render0 armhf 1.10-3 [16.0 kB]
+Get:18 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-shm0 armhf 1.10-3 [11.0 kB]
+Get:19 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxrender1 armhf 1:0.9.8-1 [30.4 kB]
+Get:20 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavahi-client3 armhf 0.6.31-5 [50.6 kB]
+Get:21 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcups2 armhf 1.7.5-11+deb8u1 [253 kB]
+Get:22 http://mirrordirector.raspbian.org/raspbian/ jessie/main libjasper1 armhf 1.900.1-debian1-2.4+deb8u3 [110 kB]
+Get:23 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgdk-pixbuf2.0-common all 2.31.1-2+deb8u6 [294 kB]
+Get:24 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgdk-pixbuf2.0-0 armhf 2.31.1-2+deb8u6 [148 kB]
+Get:25 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgtk2.0-common all 2.24.25-3+deb8u2 [3,137 kB]
+Get:26 http://mirrordirector.raspbian.org/raspbian/ jessie/main fontconfig armhf 2.11.0-6.3+deb8u1 [402 kB]
+Get:27 http://mirrordirector.raspbian.org/raspbian/ jessie/main libthai-data all 0.1.21-1 [159 kB]
+Get:28 http://mirrordirector.raspbian.org/raspbian/ jessie/main libdatrie1 armhf 0.2.8-1 [29.1 kB]
+Get:29 http://mirrordirector.raspbian.org/raspbian/ jessie/main libthai0 armhf 0.1.21-1 [43.4 kB]
+Get:30 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgraphite2-3 armhf 1.3.10-1~deb8u1 [73.0 kB]
+Get:31 http://mirrordirector.raspbian.org/raspbian/ jessie/main libharfbuzz0b armhf 0.9.35-2 [464 kB]
+Get:32 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcomposite1 armhf 1:0.4.4-1 [16.8 kB]
+Get:33 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxfixes3 armhf 1:5.0.1-2 [19.6 kB]
+Get:34 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcursor1 armhf 1:1.1.14-1 [34.7 kB]
+Get:35 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxdamage1 armhf 1:1.1.4-2 [13.9 kB]
+Get:36 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxi6 armhf 2:1.7.4-1 [73.4 kB]
+Get:37 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxinerama1 armhf 2:1.1.3-1 [16.9 kB]
+Get:38 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxrandr2 armhf 2:1.4.2-1 [31.7 kB]
+Get:39 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgtk2.0-0 armhf 2.24.25-3+deb8u2 [2,014 kB]
+Get:40 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnspr4 armhf 2:4.12-1+debu8u1 [95.5 kB]
+Get:41 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnss3 armhf 2:3.26-1+debu8u3 [950 kB]
+Get:42 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxss1 armhf 1:1.2.2-1 [16.8 kB]
+Get:43 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-util0 armhf 0.3.8-3 [21.5 kB]
+Get:44 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-image0 armhf 0.4.0-1 [23.1 kB]
+Get:45 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxtst6 armhf 2:1.2.2-1 [26.8 kB]
+Get:46 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhtml-parser-perl armhf 3.71-1+b4 [105 kB]
+Get:47 http://mirrordirector.raspbian.org/raspbian/ jessie/main xdg-utils all 1.1.0~rc1+git20111210-7.4 [65.0 kB]
+Get:48 http://mirrordirector.raspbian.org/raspbian/ jessie/main libelf1 armhf 0.159-4.2 [159 kB]
+Get:49 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhtml-tree-perl all 5.03-1 [210 kB]
+Get:50 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfontenc1 armhf 1:1.1.2-1 [23.9 kB]
+Get:51 http://mirrordirector.raspbian.org/raspbian/ jessie/main libx11-xcb1 armhf 2:1.6.2-3 [163 kB]
+Get:52 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-dri2-0 armhf 1.10-3 [12.1 kB]
+Get:53 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-dri3-0 armhf 1.10-3 [10.6 kB]
+Get:54 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-glx0 armhf 1.10-3 [23.8 kB]
+Get:55 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-present0 armhf 1.10-3 [10.8 kB]
+Get:56 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-sync1 armhf 1.10-3 [13.2 kB]
+Get:57 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxshmfence1 armhf 1.1-4+rpi1 [6,704 B]
+Get:58 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxxf86vm1 armhf 1:1.1.3-1 [20.0 kB]
+Get:59 http://mirrordirector.raspbian.org/raspbian/ jessie/main libice6 armhf 2:1.0.9-1 [51.2 kB]
+Get:60 http://mirrordirector.raspbian.org/raspbian/ jessie/main libsm6 armhf 2:1.2.2-1 [31.2 kB]
+Get:61 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxt6 armhf 1:1.1.4-1 [183 kB]
+Get:62 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxmu6 armhf 2:1.1.2-1 [50.8 kB]
+Get:63 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxpm4 armhf 1:3.5.12-0+deb8u1 [43.7 kB]
+Get:64 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxaw7 armhf 2:1.0.12-2 [159 kB]
+Get:65 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxcb-shape0 armhf 1.10-3 [11.0 kB]
+Get:66 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxft2 armhf 2.3.2-1 [48.3 kB]
+Get:67 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxv1 armhf 2:1.0.10-1 [22.2 kB]
+Get:68 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxxf86dga1 armhf 2:1.1.4-1 [22.4 kB]
+Get:69 http://mirrordirector.raspbian.org/raspbian/ jessie/main libtxc-dxtn-s2tc0 armhf 0~git20131104-1.1 [53.3 kB]
+Get:70 http://mirrordirector.raspbian.org/raspbian/ jessie/main hicolor-icon-theme all 0.13-1 [8,600 B]
+Get:71 http://mirrordirector.raspbian.org/raspbian/ jessie/main libauthen-sasl-perl all 2.1600-1 [50.8 kB]
+Get:72 http://mirrordirector.raspbian.org/raspbian/ jessie/main libencode-locale-perl all 1.03-1 [13.6 kB]
+Get:73 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfile-basedir-perl all 0.03-1 [10.4 kB]
+Get:74 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfile-desktopentry-perl all 0.07-1 [18.5 kB]
+Get:75 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhttp-date-perl all 6.02-1 [10.7 kB]
+Get:76 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfile-listing-perl all 6.04-1 [10.3 kB]
+Get:77 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfile-mimeinfo-perl all 0.26-1 [50.1 kB]
+Get:78 http://mirrordirector.raspbian.org/raspbian/ jessie/main libfont-afm-perl all 1.20-1 [14.4 kB]
+Get:79 http://mirrordirector.raspbian.org/raspbian/ jessie/main libgtk2.0-bin armhf 2.24.25-3+deb8u2 [534 kB]
+Get:80 http://mirrordirector.raspbian.org/raspbian/ jessie/main liburi-perl all 1.64-1 [95.5 kB]
+Get:81 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhtml-tagset-perl all 3.20-2 [13.5 kB]
+Get:82 http://mirrordirector.raspbian.org/raspbian/ jessie/main libio-html-perl all 1.001-1 [17.6 kB]
+Get:83 http://mirrordirector.raspbian.org/raspbian/ jessie/main liblwp-mediatypes-perl all 6.02-1 [22.1 kB]
+Get:84 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhttp-message-perl all 6.06-1 [80.1 kB]
+Get:85 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhtml-form-perl all 6.03-1 [23.9 kB]
+Get:86 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhtml-format-perl all 2.11-1 [43.1 kB]
+Get:87 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhttp-cookies-perl all 6.01-1 [17.4 kB]
+Get:88 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhttp-daemon-perl all 6.01-1 [17.3 kB]
+Get:89 http://mirrordirector.raspbian.org/raspbian/ jessie/main libhttp-negotiate-perl all 6.00-2 [13.6 kB]
+Get:90 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnet-ssleay-perl armhf 1.65-1+deb8u1 [259 kB]
+Get:91 http://mirrordirector.raspbian.org/raspbian/ jessie/main libio-socket-ssl-perl all 2.002-2+deb8u2 [172 kB]
+Get:92 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnet-http-perl all 6.07-1 [24.8 kB]
+Get:93 http://mirrordirector.raspbian.org/raspbian/ jessie/main libwww-robotrules-perl all 6.01-1 [14.3 kB]
+Get:94 http://mirrordirector.raspbian.org/raspbian/ jessie/main libwww-perl all 6.08-1 [194 kB]
+Get:95 http://mirrordirector.raspbian.org/raspbian/ jessie/main liblwp-protocol-https-perl all 6.06-2 [9,582 B]
+Get:96 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnet-smtp-ssl-perl all 1.01-3 [5,996 B]
+Get:97 http://mirrordirector.raspbian.org/raspbian/ jessie/main libmailtools-perl all 2.13-1 [96.6 kB]
+Get:98 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxml-parser-perl armhf 2.41-3 [212 kB]
+Get:99 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxml-twig-perl all 1:3.48-1 [178 kB]
+Get:100 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnet-dbus-perl armhf 1.0.0-2+b2 [188 kB]
+Get:101 http://mirrordirector.raspbian.org/raspbian/ jessie/main libtie-ixhash-perl all 1.23-1 [12.2 kB]
+Get:102 http://mirrordirector.raspbian.org/raspbian/ jessie/main libx11-protocol-perl all 0.56-6 [150 kB]
+Get:103 http://mirrordirector.raspbian.org/raspbian/ jessie/main libxml-xpathengine-perl all 0.13-1 [39.1 kB]
+Get:104 http://mirrordirector.raspbian.org/raspbian/ jessie/main x11-utils armhf 7.7+2 [172 kB]
+Get:105 http://mirrordirector.raspbian.org/raspbian/ jessie/main x11-xserver-utils armhf 7.7+3 [146 kB]
+Get:106 http://archive.raspberrypi.org/debian/ jessie/main libdrm-amdgpu1 armhf 2.4.71-1+rpi1 [24.2 kB]
+Get:107 http://archive.raspberrypi.org/debian/ jessie/main libdrm-freedreno1 armhf 2.4.71-1+rpi1 [23.8 kB]
+Get:108 http://archive.raspberrypi.org/debian/ jessie/main libdrm-nouveau2 armhf 2.4.71-1+rpi1 [23.9 kB]
+Get:109 http://archive.raspberrypi.org/debian/ jessie/main libdrm-radeon1 armhf 2.4.71-1+rpi1 [27.8 kB]
+Get:110 http://archive.raspberrypi.org/debian/ jessie/main libllvm3.9 armhf 1:3.9-4 [9,772 kB]
+Get:111 http://archive.raspberrypi.org/debian/ jessie/main libgl1-mesa-dri armhf 13.0.0-1+rpi1 [3,973 kB]
+Get:112 http://archive.raspberrypi.org/debian/ jessie/main libglapi-mesa armhf 13.0.0-1+rpi1 [64.7 kB]
+Get:113 http://archive.raspberrypi.org/debian/ jessie/main libgl1-mesa-glx armhf 13.0.0-1+rpi1 [156 kB]
+Get:114 http://archive.raspberrypi.org/debian/ jessie/ui rpi-chromium-mods armhf 20170809 [9,194 kB]
+Fetched 98.1 MB in 1min 53s (862 kB/s)                                         
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+packet_write_wait: Connection to 192.168.178.106: Broken pipe
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.106
+pi@192.168.178.106's password: 
+

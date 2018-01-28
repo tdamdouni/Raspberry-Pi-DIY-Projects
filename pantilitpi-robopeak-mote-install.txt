@@ -1,0 +1,1548 @@
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+The authenticity of host '192.168.178.103 (192.168.178.103)' can't be established.
+ECDSA key fingerprint is SHA256:Wxpbx9wO7C9qKSlGlt7D/xWlhL4U/m41hTILaf6Qe2g.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.178.103' (ECDSA) to the list of known hosts.
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Oct 12 14:55:58 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ sudo apt-get update
+Holen: 1 http://mirrordirector.raspbian.org jessie InRelease [14,9 kB]
+Holen: 2 http://archive.raspberrypi.org jessie InRelease [22,9 kB]
+Holen: 3 http://mirrordirector.raspbian.org jessie/main armhf Packages [9.536 kB]
+Holen: 4 http://archive.raspberrypi.org jessie/main armhf Packages [169 kB]    
+OK   http://archive.raspberrypi.org jessie/ui armhf Packages                   
+Ign http://archive.raspberrypi.org jessie/main Translation-de_DE               
+Holen: 5 http://mirrordirector.raspbian.org jessie/contrib armhf Packages [43,3 kB]
+Ign http://archive.raspberrypi.org jessie/main Translation-de                  
+Holen: 6 http://mirrordirector.raspbian.org jessie/non-free armhf Packages [84,2 kB]
+Holen: 7 http://mirrordirector.raspbian.org jessie/rpi armhf Packages [1.356 B]
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://archive.raspberrypi.org jessie/ui Translation-de_DE                 
+Ign http://archive.raspberrypi.org jessie/ui Translation-de                    
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de_DE        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de_DE
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de_DE
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de_DE
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Es wurden 9.872 kB in 35 s geholt (276 kB/s).
+Paketlisten werden gelesen... Fertig
+pi@pantiltpi:~ $ sudo apt-get upgrade
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Paketaktualisierung (Upgrade) wird berechnet... Fertig
+Die folgenden Pakete werden aktualisiert (Upgrade):
+  curl libcurl3 libcurl3-gnutls libnss3 wpasupplicant
+5 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+Es müssen 2.381 kB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 6.144 B Plattenplatz zusätzlich benutzt.
+Möchten Sie fortfahren? [J/n] j
+Holen: 1 http://mirrordirector.raspbian.org/raspbian/ jessie/main curl armhf 7.38.0-4+deb8u6 [196 kB]
+Holen: 2 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3 armhf 7.38.0-4+deb8u6 [233 kB]
+Holen: 3 http://mirrordirector.raspbian.org/raspbian/ jessie/main libcurl3-gnutls armhf 7.38.0-4+deb8u6 [226 kB]
+Holen: 4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libnss3 armhf 2:3.26-1+debu8u3 [950 kB]
+Holen: 5 http://mirrordirector.raspbian.org/raspbian/ jessie/main wpasupplicant armhf 2.3-1+deb8u5 [777 kB]
+Es wurden 2.381 kB in 5 s geholt (435 kB/s).
+Lese Changelogs... Fertig
+(Lese Datenbank ... 122562 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von .../curl_7.38.0-4+deb8u6_armhf.deb ...
+Entpacken von curl (7.38.0-4+deb8u6) über (7.38.0-4+deb8u5) ...
+Vorbereitung zum Entpacken von .../libcurl3_7.38.0-4+deb8u6_armhf.deb ...
+Entpacken von libcurl3:armhf (7.38.0-4+deb8u6) über (7.38.0-4+deb8u5) ...
+Vorbereitung zum Entpacken von .../libcurl3-gnutls_7.38.0-4+deb8u6_armhf.deb ...
+Entpacken von libcurl3-gnutls:armhf (7.38.0-4+deb8u6) über (7.38.0-4+deb8u5) ...
+Vorbereitung zum Entpacken von .../libnss3_2%3a3.26-1+debu8u3_armhf.deb ...
+Entpacken von libnss3:armhf (2:3.26-1+debu8u3) über (2:3.26-1+debu8u2) ...
+Vorbereitung zum Entpacken von .../wpasupplicant_2.3-1+deb8u5_armhf.deb ...
+Entpacken von wpasupplicant (2.3-1+deb8u5) über (2.3-1+deb8u4) ...
+Trigger für man-db (2.7.5-1~bpo8+1) werden verarbeitet ...
+Trigger für dbus (1.8.22-0+deb8u1) werden verarbeitet ...
+libcurl3:armhf (7.38.0-4+deb8u6) wird eingerichtet ...
+curl (7.38.0-4+deb8u6) wird eingerichtet ...
+libcurl3-gnutls:armhf (7.38.0-4+deb8u6) wird eingerichtet ...
+libnss3:armhf (2:3.26-1+debu8u3) wird eingerichtet ...
+wpasupplicant (2.3-1+deb8u5) wird eingerichtet ...
+Trigger für libc-bin (2.19-18+deb8u10) werden verarbeitet ...
+pi@pantiltpi:~ $ git clone http://github.com/pimoroni/rp_usbdisplay
+Klone nach 'rp_usbdisplay'...
+remote: Counting objects: 238, done.
+remote: Total 238 (delta 0), reused 0 (delta 0), pack-reused 238
+Empfange Objekte: 100% (238/238), 265.50 KiB | 72.00 KiB/s, Fertig.
+Löse Unterschiede auf: 100% (108/108), Fertig.
+Prüfe Konnektivität... Fertig.
+pi@pantiltpi:~ $ cd rp_usbdisplay
+pi@pantiltpi:~/rp_usbdisplay $ ./install.sh
+
+Easy Robopeak/DFRobot USB Display Installer v2.0
+Written and maintained by Phil @Gadgetoid Howard
+
+Support & Issues: https://github.com/pimoroni/rp_usbdisplay
+
+For best results, please make sure you're running
+a supported kernel and that your RFRobot USB display
+is plugged in.
+
+USB display detected.
+
+Continue installing? [y/N] y
+
+Checking for 4.1.13+
+
+Checking for 4.1.13-v7+
+
+Checking for 4.1.18-v7+
+
+Checking for 4.1.19
+
+Checking for 4.1.19-v7+
+
+Checking for 4.1.6+
+
+Checking for 4.1.6-v7+
+
+Checking for 4.1.7-v7+
+
+Checking for 4.4.13+
+
+Checking for 4.4.13-v7+
+
+Checking for 4.4.21+
+
+Checking for 4.4.21-v7+
+
+Checking for 4.4.38+
+
+Checking for 4.4.38-v7+
+
+Checking for 4.4.50+
+
+Checking for 4.4.50-v7+
+
+Checking for 4.4.9+
+
+Checking for 4.4.9-v7+
+
+Checking for 4.9.24+
+
+Checking for 4.9.24-v7+
+Vormals nicht ausgewähltes Paket dkms wird gewählt.
+(Lese Datenbank ... 122562 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von .../dkms_2.2.0.3-2_all.deb ...2017 armv7l GNU/Linux
+Please see: https://github.com/pimoroni/rp_usbdisplay/tree/master/dkms
+pi@pantiltpi:~/rp_usbdisplay $ sudo apt install dkms raspberrypi-kernel-headers
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Empfohlene Pakete:
+  linux-headers-686-pae linux-headers-amd64 linux-headers-generic
+  linux-headers
+Die folgenden NEUEN Pakete werden installiert:
+  dkms raspberrypi-kernel-headers
+0 aktualisiert, 2 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+Es müssen 15,4 MB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 99,2 MB Plattenplatz zusätzlich benutzt.
+Holen: 1 http://mirrordirector.raspbian.org/raspbian/ jessie/main dkms all 2.2.0.3-2 [70,9 kB]
+Holen: 2 http://archive.raspberrypi.org/debian/ jessie/main raspberrypi-kernel-headers armhf 1.20170703-1 [15,3 MB]
+Es wurden 15,4 MB in 26 s geholt (591 kB/s).                                   
+Fortschritt: [ 90%] [##################################################.....] ru
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ cd
+pi@pantiltpi:~ $ ls
+config.ini            opencv_contrib.zip                 pimotion
+Desktop               opencv.zip                         pistreaming
+Documents             PanTilt                            Public
+Downloads             PanTiltFacetracker                 python_games
+get-pip.py            picamera-motion                    rp_usbdisplay
+Music                 Pictures                           Smart-Security-Camera
+opencv-3.3.0          Pimoroni                           Templates
+opencv_contrib-3.3.0  Pimoroni-PanTilt-Hat-WebInterface  Videos
+pi@pantiltpi:~ $ sudo dpkg -i rp-usbdisplay-dkms_1.0_all.deb
+dpkg: Fehler beim Bearbeiten des Archivs rp-usbdisplay-dkms_1.0_all.deb (--install):
+ Auf das Archiv kann nicht zugegriffen werden: Datei oder Verzeichnis nicht gefunden
+Fehler traten auf beim Bearbeiten von:
+ rp-usbdisplay-dkms_1.0_all.deb
+pi@pantiltpi:~ $ sudo apt install dkms raspberrypi-kernel-headers
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+dkms ist schon die neueste Version.
+raspberrypi-kernel-headers ist schon die neueste Version.
+0 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+pi@pantiltpi:~ $ cd rp_usbdisplay/
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ ./install.sh
+
+Easy Robopeak/DFRobot USB Display Installer v2.0
+Written and maintained by Phil @Gadgetoid Howard
+
+Support & Issues: https://github.com/pimoroni/rp_usbdisplay
+
+For best results, please make sure you're running
+a supported kernel and that your RFRobot USB display
+is plugged in.
+
+USB display detected.
+
+Continue installing? [y/N] y
+
+Checking for 4.1.13+
+
+Checking for 4.1.13-v7+
+
+Checking for 4.1.18-v7+
+
+Checking for 4.1.19
+
+Checking for 4.1.19-v7+
+
+Checking for 4.1.6+
+
+Checking for 4.1.6-v7+
+
+Checking for 4.1.7-v7+
+
+Checking for 4.4.13+
+
+Checking for 4.4.13-v7+
+
+Checking for 4.4.21+
+
+Checking for 4.4.21-v7+
+
+Checking for 4.4.38+
+
+Checking for 4.4.38-v7+
+
+Checking for 4.4.50+
+
+Checking for 4.4.50-v7+
+
+Checking for 4.4.9+
+
+Checking for 4.4.9-v7+
+
+Checking for 4.9.24+
+
+Checking for 4.9.24-v7+
+
+Sorry. Current running kernel is not supported.
+Linux pantiltpi 4.9.52-v7+ #1038 SMP Fri Sep 29 16:26:52 BST 2017 armv7l GNU/Linux
+Please see: https://github.com/pimoroni/rp_usbdisplay/tree/master/dkms
+pi@pantiltpi:~/rp_usbdisplay $ sudo modprobe rp_usbdisplay
+modprobe: FATAL: Module rp_usbdisplay not found.
+pi@pantiltpi:~/rp_usbdisplay $ uname -a
+Linux pantiltpi 4.9.52-v7+ #1038 SMP Fri Sep 29 16:26:52 BST 2017 armv7l GNU/Linux
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ cd dkms/
+pi@pantiltpi:~/rp_usbdisplay/dkms $ ls
+README.md  rp_usbdisplay-1.0  rp-usbdisplay-dkms_1.0_all.deb
+pi@pantiltpi:~/rp_usbdisplay/dkms $ sudo dpkg -i rp-usbdisplay-dkms_1.0_all.deb
+Vormals nicht ausgewähltes Paket rp-usbdisplay-dkms wird gewählt.
+(Lese Datenbank ... 153360 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von rp-usbdisplay-dkms_1.0_all.deb ...
+Entpacken von rp-usbdisplay-dkms (1.0) ...
+rp-usbdisplay-dkms (1.0) wird eingerichtet ...
+
+Loading tarball for rp_usbdisplay-1.0
+Loading /var/lib/dkms/rp_usbdisplay/1.0/4.9.24-v7+/armv7l...
+
+DKMS: ldtarball completed.
+
+Creating symlink /var/lib/dkms/rp_usbdisplay/1.0/source ->
+                 /usr/src/rp_usbdisplay-1.0
+
+DKMS: add completed.
+First Installation: checking all kernels...
+dpkg: Warnung: Version »*-*« hat falsche Syntax: Versionsnummer beginnt nicht mit einer Ziffer
+It is likely that 4.9.52-v7+ belongs to a chroot's host
+Building for architecture armhf
+Module build for the currently running kernel was skipped since the
+kernel source for this kernel does not seem to be installed.
+pi@pantiltpi:~/rp_usbdisplay/dkms $ cd ..
+pi@pantiltpi:~/rp_usbdisplay $ ./install.sh
+
+Easy Robopeak/DFRobot USB Display Installer v2.0
+Written and maintained by Phil @Gadgetoid Howard
+
+Support & Issues: https://github.com/pimoroni/rp_usbdisplay
+
+For best results, please make sure you're running
+a supported kernel and that your RFRobot USB display
+is plugged in.
+
+USB display detected.
+
+Continue installing? [y/N] y
+
+Checking for 4.1.13+
+
+Checking for 4.1.13-v7+
+
+Checking for 4.1.18-v7+
+
+Checking for 4.1.19
+
+Checking for 4.1.19-v7+
+
+Checking for 4.1.6+
+
+Checking for 4.1.6-v7+
+
+Checking for 4.1.7-v7+
+
+Checking for 4.4.13+
+
+Checking for 4.4.13-v7+
+
+Checking for 4.4.21+
+
+Checking for 4.4.21-v7+
+
+Checking for 4.4.38+
+
+Checking for 4.4.38-v7+
+
+Checking for 4.4.50+
+
+Checking for 4.4.50-v7+
+
+Checking for 4.4.9+
+
+Checking for 4.4.9-v7+
+
+Checking for 4.9.24+
+
+Checking for 4.9.24-v7+
+
+Sorry. Current running kernel is not supported.
+Linux pantiltpi 4.9.52-v7+ #1038 SMP Fri Sep 29 16:26:52 BST 2017 armv7l GNU/Linux
+Please see: https://github.com/pimoroni/rp_usbdisplay/tree/master/dkms
+pi@pantiltpi:~/rp_usbdisplay $ 
+  [26.10.2017, 19:00:10 Wiederhergestellt]
+Last login: Thu Oct 26 18:59:38 on console
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Oct 26 16:59:09 2017 from peters-mbp.fritz.box
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ sudo apt install dkms raspberrypi-kernel-headers
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+dkms ist schon die neueste Version.
+raspberrypi-kernel-headers ist schon die neueste Version.
+0 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+pi@pantiltpi:~ $ ls
+config.ini            opencv_contrib.zip                 pimotion
+Desktop               opencv.zip                         pistreaming
+Documents             PanTilt                            Public
+Downloads             PanTiltFacetracker                 python_games
+get-pip.py            picamera-motion                    rp_usbdisplay
+Music                 Pictures                           Smart-Security-Camera
+opencv-3.3.0          Pimoroni                           Templates
+opencv_contrib-3.3.0  Pimoroni-PanTilt-Hat-WebInterface  Videos
+pi@pantiltpi:~ $ cd rp_usbdisplay
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ cd dkms/
+pi@pantiltpi:~/rp_usbdisplay/dkms $ ls
+README.md  rp_usbdisplay-1.0  rp-usbdisplay-dkms_1.0_all.deb
+pi@pantiltpi:~/rp_usbdisplay/dkms $ sudo dpkg -i rp-usbdisplay-dkms_1.0_all.deb
+(Lese Datenbank ... 153403 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von rp-usbdisplay-dkms_1.0_all.deb ...
+
+-------- Uninstall Beginning --------
+Module:  rp_usbdisplay
+Version: 1.0
+Kernel:  4.9.24-v7+ (armv7l)
+-------------------------------------
+
+Status: This module version was INACTIVE for this kernel.
+depmod....(bad exit status: 1)
+
+DKMS: uninstall completed.
+
+------------------------------
+Deleting module version: 1.0
+completely from the DKMS tree.
+------------------------------
+Done.
+Entpacken von rp-usbdisplay-dkms (1.0) über (1.0) ...
+rp-usbdisplay-dkms (1.0) wird eingerichtet ...
+
+Loading tarball for rp_usbdisplay-1.0
+Loading /var/lib/dkms/rp_usbdisplay/1.0/4.9.24-v7+/armv7l...
+
+DKMS: ldtarball completed.
+
+Creating symlink /var/lib/dkms/rp_usbdisplay/1.0/source ->
+                 /usr/src/rp_usbdisplay-1.0
+
+DKMS: add completed.
+First Installation: checking all kernels...
+dpkg: Warnung: Version »*-*« hat falsche Syntax: Versionsnummer beginnt nicht mit einer Ziffer
+It is likely that 4.9.52-v7+ belongs to a chroot's host
+Building for architecture armhf
+Module build for the currently running kernel was skipped since the
+kernel source for this kernel does not seem to be installed.
+pi@pantiltpi:~/rp_usbdisplay/dkms $ sudo reboot
+Connection to 192.168.178.103 closed by remote host.
+Connection to 192.168.178.103 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Oct 26 19:33:22 2017
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ cd rp_usbdisplay/
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ /.install.sh
+-bash: /.install.sh: Datei oder Verzeichnis nicht gefunden
+pi@pantiltpi:~/rp_usbdisplay $ i
+i2cdetect             infobrowser           ipmaddr
+i2cdump               infocmp               ippfind
+i2cget                infokey               ipptool
+i2cset                infotocap             iptables
+iceauth               in.identtestd         iptables-apply
+iconv                 init                  iptables-restore
+iconvconfig           insmod                iptables-save
+id                    insserv               iptables-xml
+idle                  install               iptunnel
+idle3                 install-info          irb
+idle-python2.7        installkernel         irb2.1
+idle-python3.4        install-sgmlcatalog   ischroot
+idlj                  instmodsh             isosize
+iecset                invoke-rc.d           ispell-autobuildhash
+if                    ionice                ispell-wrapper
+ifconfig              ip                    ivtv-ctl
+ifdown                ip6tables             iw
+ifnames               ip6tables-apply       iwconfig
+ifquery               ip6tables-restore     iwevent
+ifup                  ip6tables-save        iwgetid
+in                    ipcmk                 iwlist
+in_array              ipcrm                 iwpriv
+info                  ipcs                  iwspy
+pi@pantiltpi:~/rp_usbdisplay $ ./install.sh
+
+Easy Robopeak/DFRobot USB Display Installer v2.0
+Written and maintained by Phil @Gadgetoid Howard
+
+Support & Issues: https://github.com/pimoroni/rp_usbdisplay
+
+For best results, please make sure you're running
+a supported kernel and that your RFRobot USB display
+is plugged in.
+
+USB display not detected, did you plug it in?
+
+Continue installing? [y/N] y
+
+Checking for 4.1.13+
+
+Checking for 4.1.13-v7+
+
+Checking for 4.1.18-v7+
+
+Checking for 4.1.19
+
+Checking for 4.1.19-v7+
+
+Checking for 4.1.6+
+
+Checking for 4.1.6-v7+
+
+Checking for 4.1.7-v7+
+
+Checking for 4.4.13+
+
+Checking for 4.4.13-v7+
+
+Checking for 4.4.21+
+
+Checking for 4.4.21-v7+
+
+Checking for 4.4.38+
+
+Checking for 4.4.38-v7+
+
+Checking for 4.4.50+
+
+Checking for 4.4.50-v7+
+
+Checking for 4.4.9+
+
+Checking for 4.4.9-v7+
+
+Checking for 4.9.24+
+
+Checking for 4.9.24-v7+
+
+Sorry. Current running kernel is not supported.
+Linux pantiltpi 4.9.52-v7+ #1038 SMP Fri Sep 29 16:26:52 BST 2017 armv7l GNU/Linux
+Please see: https://github.com/pimoroni/rp_usbdisplay/tree/master/dkms
+pi@pantiltpi:~/rp_usbdisplay $ sudo reboot
+Connection to 192.168.178.103 closed by remote host.
+Connection to 192.168.178.103 closed.
+Peters-MBP:~ tdamdouni$ ssh pi@192.168.178.103
+pi@192.168.178.103's password: 
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Oct 26 19:44:30 2017
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pantiltpi:~ $ cd rp_usbdisplay/
+pi@pantiltpi:~/rp_usbdisplay $ ./install.sh
+
+Easy Robopeak/DFRobot USB Display Installer v2.0
+Written and maintained by Phil @Gadgetoid Howard
+
+Support & Issues: https://github.com/pimoroni/rp_usbdisplay
+
+For best results, please make sure you're running
+a supported kernel and that your RFRobot USB display
+is plugged in.
+
+USB display not detected, did you plug it in?
+
+Continue installing? [y/N] y
+
+Checking for 4.1.13+
+
+Checking for 4.1.13-v7+
+
+Checking for 4.1.18-v7+
+
+Checking for 4.1.19
+
+Checking for 4.1.19-v7+
+
+Checking for 4.1.6+
+
+Checking for 4.1.6-v7+
+
+Checking for 4.1.7-v7+
+
+Checking for 4.4.13+
+
+Checking for 4.4.13-v7+
+
+Checking for 4.4.21+
+
+Checking for 4.4.21-v7+
+
+Checking for 4.4.38+
+
+Checking for 4.4.38-v7+
+
+Checking for 4.4.50+
+
+Checking for 4.4.50-v7+
+
+Checking for 4.4.9+
+
+Checking for 4.4.9-v7+
+
+Checking for 4.9.24+
+
+Checking for 4.9.24-v7+
+
+Sorry. Current running kernel is not supported.
+Linux pantiltpi 4.9.52-v7+ #1038 SMP Fri Sep 29 16:26:52 BST 2017 armv7l GNU/Linux
+Please see: https://github.com/pimoroni/rp_usbdisplay/tree/master/dkms
+pi@pantiltpi:~/rp_usbdisplay $ ls
+dkms  drivers  extra  install.sh  README.md  shoplogo.fb.gz
+pi@pantiltpi:~/rp_usbdisplay $ cd
+pi@pantiltpi:~ $ curl https://get.pimoroni.com/mote | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 37800  100 37800    0     0  81603      0 --:--:-- --:--:-- --:--:-- 81818
+
+This script will install everything needed to use
+Mote
+
+Always be careful when running scripts and commands copied
+from the internet. Ensure they are from a trusted source.
+
+If you want to see what this script does before running it,
+you should run: 'curl https://get.pimoroni.com/mote'
+
+
+Do you wish to continue? [y/N] y
+
+Checking environment...
+Updating apt indexes...
+..................
+...
+Checking hardware requirements...
+
+Mote comes with examples and documentation that you may wish to install.
+Performing a full install will ensure those resources are installed,
+along with all required dependencies. It may however take a while!
+
+Do you wish to perform a full install? [y/N] y
+
+Checking for dependencies...
+python-serial is already installed
+python3-serial is already installed
+
+Installing python-mote...
+install ok installed
+Installing python3-mote...
+install ok installed
+
+Checking for additional software...
+python-flask is already installed
+python3-flask is already installed
+python-requests is already installed
+python3-requests is already installed
+
+Downloading examples and documentation...
+Resources for your Mote were copied to
+/home/pi/Pimoroni/mote
+
+All done. Enjoy your Mote!
+
+pi@pantiltpi:~ $ sudo nano mote_api.py
+pi@pantiltpi:~ $ python mote_api.py 
+Traceback (most recent call last):
+  File "mote_api.py", line 2, in <module>
+    from mote import Mote
+ImportError: No module named mote
+pi@pantiltpi:~ $ sudo apt-get update
+OK   http://mirrordirector.raspbian.org jessie InRelease
+OK   http://archive.raspberrypi.org jessie InRelease
+OK   http://mirrordirector.raspbian.org jessie/main armhf Packages
+OK   http://mirrordirector.raspbian.org jessie/contrib armhf Packages
+OK   http://mirrordirector.raspbian.org jessie/non-free armhf Packages         
+OK   http://archive.raspberrypi.org jessie/main armhf Packages                 
+OK   http://mirrordirector.raspbian.org jessie/rpi armhf Packages
+OK   http://archive.raspberrypi.org jessie/ui armhf Packages                   
+Ign http://archive.raspberrypi.org jessie/main Translation-de_DE               
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de_DE
+Ign http://archive.raspberrypi.org jessie/main Translation-de         
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de_DE  
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de              
+Ign http://archive.raspberrypi.org jessie/ui Translation-de_DE                 
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en     
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de_DE       
+Ign http://archive.raspberrypi.org jessie/ui Translation-de                    
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de 
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de_DE   
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Paketlisten werden gelesen... Fertig          
+pi@pantiltpi:~ $ sudo apt-get upgrade
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Paketaktualisierung (Upgrade) wird berechnet... Fertig
+0 aktualisiert, 0 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+pi@pantiltpi:~ $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+## Installing the NodeSource Node.js v6.x repo...
+
+
+## Populating apt-get cache...
+
++ apt-get update
+OK   http://archive.raspberrypi.org jessie InRelease
+OK   http://mirrordirector.raspbian.org jessie InRelease
+OK   http://archive.raspberrypi.org jessie/main armhf Packages                 
+OK   http://mirrordirector.raspbian.org jessie/main armhf Packages
+OK   http://mirrordirector.raspbian.org jessie/contrib armhf Packages    
+OK   http://archive.raspberrypi.org jessie/ui armhf Packages             
+OK   http://mirrordirector.raspbian.org jessie/non-free armhf Packages         
+OK   http://mirrordirector.raspbian.org jessie/rpi armhf Packages              
+Ign http://archive.raspberrypi.org jessie/main Translation-de_DE               
+Ign http://archive.raspberrypi.org jessie/main Translation-de                  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de_DE        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de           
+Ign http://archive.raspberrypi.org jessie/main Translation-en                  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de_DE           
+Ign http://archive.raspberrypi.org jessie/ui Translation-de_DE                 
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en
+Ign http://archive.raspberrypi.org jessie/ui Translation-de
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de_DE       
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de          
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de_DE
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Paketlisten werden gelesen... Fertig                                           
+
+## Confirming "jessie" is supported...
+
++ curl -sLf -o /dev/null 'https://deb.nodesource.com/node_6.x/dists/jessie/Release'
+
+## Adding the NodeSource signing key to your keyring...
+
++ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+OK
+
+## Creating apt sources list file for the NodeSource Node.js v6.x repo...
+
++ echo 'deb https://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list
++ echo 'deb-src https://deb.nodesource.com/node_6.x jessie main' >> /etc/apt/sources.list.d/nodesource.list
+
+## Running `apt-get update` for you...
+
++ apt-get update
+OK   http://archive.raspberrypi.org jessie InRelease
+OK   http://mirrordirector.raspbian.org jessie InRelease
+Holen: 1 https://deb.nodesource.com jessie InRelease [4.646 B]
+OK   http://archive.raspberrypi.org jessie/main armhf Packages                 
+OK   http://mirrordirector.raspbian.org jessie/main armhf Packages
+Holen: 2 https://deb.nodesource.com jessie/main Sources [766 B]           
+OK   http://archive.raspberrypi.org jessie/ui armhf Packages              
+OK   http://mirrordirector.raspbian.org jessie/contrib armhf Packages     
+OK   http://mirrordirector.raspbian.org jessie/non-free armhf Packages
+OK   http://mirrordirector.raspbian.org jessie/rpi armhf Packages    
+Holen: 3 https://deb.nodesource.com jessie/main armhf Packages [1.005 B]       
+Holen: 4 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]      
+Holen: 5 https://deb.nodesource.com jessie/main Translation-de [162 B]         
+Holen: 6 https://deb.nodesource.com jessie/main Translation-en [162 B]         
+Holen: 7 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]      
+Holen: 8 https://deb.nodesource.com jessie/main Translation-de [162 B]         
+Holen: 9 https://deb.nodesource.com jessie/main Translation-en [162 B]         
+Holen: 10 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Holen: 11 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Holen: 12 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 13 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Holen: 14 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Holen: 15 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Holen: 16 https://deb.nodesource.com jessie/main Translation-de_DE [162 B]     
+Ign https://deb.nodesource.com jessie/main Translation-de_DE                   
+Holen: 17 https://deb.nodesource.com jessie/main Translation-de [162 B]        
+Ign https://deb.nodesource.com jessie/main Translation-de                      
+Holen: 18 https://deb.nodesource.com jessie/main Translation-en [162 B]        
+Ign https://deb.nodesource.com jessie/main Translation-en                      
+Ign http://archive.raspberrypi.org jessie/main Translation-de_DE               
+Ign http://archive.raspberrypi.org jessie/main Translation-de                  
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de_DE        
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-de           
+Ign http://mirrordirector.raspbian.org jessie/contrib Translation-en           
+Ign http://archive.raspberrypi.org jessie/main Translation-en          
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de_DE   
+Ign http://mirrordirector.raspbian.org jessie/main Translation-de              
+Ign http://archive.raspberrypi.org jessie/ui Translation-de_DE                 
+Ign http://mirrordirector.raspbian.org jessie/main Translation-en      
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de_DE       
+Ign http://archive.raspberrypi.org jessie/ui Translation-de                    
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-de  
+Ign http://mirrordirector.raspbian.org jessie/non-free Translation-en          
+Ign http://archive.raspberrypi.org jessie/ui Translation-en                    
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de_DE    
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-de
+Ign http://mirrordirector.raspbian.org jessie/rpi Translation-en
+Es wurden 6.417 B in 7 s geholt (870 B/s).                                     
+Paketlisten werden gelesen... Fertig
+
+## Run `apt-get install nodejs` (as root) to install Node.js v6.x and npm
+
+pi@pantiltpi:~ $ sudo apt-get install -y nodejs
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Die folgenden Pakete wurden automatisch installiert und werden nicht mehr benötigt:
+  libc-ares2 libv8-3.14.5
+Verwenden Sie »apt-get autoremove«, um sie zu entfernen.
+Die folgenden Pakete werden ENTFERNT:
+  nodejs-legacy nodered
+Die folgenden Pakete werden aktualisiert (Upgrade):
+  nodejs
+1 aktualisiert, 0 neu installiert, 2 zu entfernen und 0 nicht aktualisiert.
+Es müssen 8.764 kB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 37,9 MB Plattenplatz zusätzlich benutzt.
+Holen: 1 https://deb.nodesource.com/node_6.x/ jessie/main nodejs armhf 6.11.5-1nodesource1 [8.764 kB]
+Es wurden 8.764 kB in 7 s geholt (1.229 kB/s).                                 
+Lese Changelogs... Fertig
+(Lese Datenbank ... 153403 Dateien und Verzeichnisse sind derzeit installiert.)
+Entfernen von nodered (0.15.3-1) ...
+Entfernen von nodejs-legacy (0.10.29~dfsg-2) ...
+Trigger für gnome-icon-theme (3.12.0-1) werden verarbeitet ...
+Trigger für gnome-menus (3.13.3-6) werden verarbeitet ...
+Trigger für desktop-file-utils (0.22-1) werden verarbeitet ...
+Trigger für mime-support (3.58) werden verarbeitet ...
+Trigger für man-db (2.7.5-1~bpo8+1) werden verarbeitet ...
+(Lese Datenbank ... 145764 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von .../nodejs_6.11.5-1nodesource1_armhf.deb ...
+Entpacken von nodejs (6.11.5-1nodesource1) über (0.10.29~dfsg-2) ...
+Trigger für man-db (2.7.5-1~bpo8+1) werden verarbeitet ...
+nodejs (6.11.5-1nodesource1) wird eingerichtet ...
+pi@pantiltpi:~ $ sudo apt-get install libavahi-compat-libdnssd-dev
+Paketlisten werden gelesen... Fertig
+Abhängigkeitsbaum wird aufgebaut.       
+Statusinformationen werden eingelesen.... Fertig
+Die folgenden Pakete wurden automatisch installiert und werden nicht mehr benötigt:
+  libc-ares2 libv8-3.14.5
+Verwenden Sie »apt-get autoremove«, um sie zu entfernen.
+Die folgenden zusätzlichen Pakete werden installiert:
+  libavahi-client-dev libavahi-common-dev libavahi-compat-libdnssd1
+  libdbus-1-dev
+Die folgenden NEUEN Pakete werden installiert:
+  libavahi-client-dev libavahi-common-dev libavahi-compat-libdnssd-dev
+  libavahi-compat-libdnssd1 libdbus-1-dev
+0 aktualisiert, 5 neu installiert, 0 zu entfernen und 0 nicht aktualisiert.
+Es müssen 402 kB an Archiven heruntergeladen werden.
+Nach dieser Operation werden 1.160 kB Plattenplatz zusätzlich benutzt.
+Möchten Sie fortfahren? [J/n] j
+Holen: 1 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavahi-compat-libdnssd1 armhf 0.6.31-5 [42,9 kB]
+Holen: 2 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavahi-common-dev armhf 0.6.31-5 [61,4 kB]
+Holen: 3 http://mirrordirector.raspbian.org/raspbian/ jessie/main libdbus-1-dev armhf 1.8.22-0+deb8u1 [184 kB]
+Holen: 4 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavahi-client-dev armhf 0.6.31-5 [55,4 kB]
+Holen: 5 http://mirrordirector.raspbian.org/raspbian/ jessie/main libavahi-compat-libdnssd-dev armhf 0.6.31-5 [57,7 kB]
+Es wurden 402 kB in 0 s geholt (524 kB/s).              
+Vormals nicht ausgewähltes Paket libavahi-compat-libdnssd1:armhf wird gewählt.
+(Lese Datenbank ... 148664 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereitung zum Entpacken von .../libavahi-compat-libdnssd1_0.6.31-5_armhf.deb ...
+Entpacken von libavahi-compat-libdnssd1:armhf (0.6.31-5) ...
+Vormals nicht ausgewähltes Paket libavahi-common-dev wird gewählt.
+Vorbereitung zum Entpacken von .../libavahi-common-dev_0.6.31-5_armhf.deb ...
+Entpacken von libavahi-common-dev (0.6.31-5) ...
+Vormals nicht ausgewähltes Paket libdbus-1-dev:armhf wird gewählt.
+Vorbereitung zum Entpacken von .../libdbus-1-dev_1.8.22-0+deb8u1_armhf.deb ...
+Entpacken von libdbus-1-dev:armhf (1.8.22-0+deb8u1) ...
+Vormals nicht ausgewähltes Paket libavahi-client-dev wird gewählt.
+Vorbereitung zum Entpacken von .../libavahi-client-dev_0.6.31-5_armhf.deb ...
+Entpacken von libavahi-client-dev (0.6.31-5) ...
+Vormals nicht ausgewähltes Paket libavahi-compat-libdnssd-dev wird gewählt.
+Vorbereitung zum Entpacken von .../libavahi-compat-libdnssd-dev_0.6.31-5_armhf.deb ...
+Entpacken von libavahi-compat-libdnssd-dev (0.6.31-5) ...
+libavahi-compat-libdnssd1:armhf (0.6.31-5) wird eingerichtet ...
+libavahi-common-dev (0.6.31-5) wird eingerichtet ...
+libdbus-1-dev:armhf (1.8.22-0+deb8u1) wird eingerichtet ...
+libavahi-client-dev (0.6.31-5) wird eingerichtet ...
+libavahi-compat-libdnssd-dev (0.6.31-5) wird eingerichtet ...
+Trigger für libc-bin (2.19-18+deb8u10) werden verarbeitet ...
+pi@pantiltpi:~ $ sudo npm install -g --unsafe-perm homebridge
+/usr/bin/homebridge -> /usr/lib/node_modules/homebridge/bin/homebridge
+
+> mdns@2.3.3 install /usr/lib/node_modules/homebridge/node_modules/mdns
+> node-gyp rebuild
+
+make: Entering directory '/usr/lib/node_modules/homebridge/node_modules/mdns/build'
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_sd.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_browse.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_enumerate_domains.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_get_addr_info.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_process_result.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_ref.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_ref_deallocate.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_ref_sock_fd.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_register.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_resolve.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/dns_service_update_record.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/mdns_utils.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/network_interface.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/socket_watcher.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_ref.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_create.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_deallocate.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_set_value.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_get_length.o
+  CXX(target) Release/obj.target/dns_sd_bindings/src/txt_record_buffer_to_object.o
+  SOLINK_MODULE(target) Release/obj.target/dns_sd_bindings.node
+  COPY Release/dns_sd_bindings.node
+make: Leaving directory '/usr/lib/node_modules/homebridge/node_modules/mdns/build'
+
+> curve25519-n2@1.1.3 install /usr/lib/node_modules/homebridge/node_modules/curve25519-n2
+> node-gyp rebuild
+
+make: Entering directory '/usr/lib/node_modules/homebridge/node_modules/curve25519-n2/build'
+  CXX(target) Release/obj.target/curve/node_curve.o
+  SOLINK_MODULE(target) Release/obj.target/curve.node
+  COPY Release/curve.node
+make: Leaving directory '/usr/lib/node_modules/homebridge/node_modules/curve25519-n2/build'
+
+> ed25519@0.0.4 install /usr/lib/node_modules/homebridge/node_modules/ed25519
+> node-gyp rebuild
+
+make: Entering directory '/usr/lib/node_modules/homebridge/node_modules/ed25519/build'
+  CC(target) Release/obj.target/ed25519/src/ed25519/keypair.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/sign.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/open.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/crypto_verify_32.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_double_scalarmult.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_frombytes.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_scalarmult_base.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_precomp_0.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p2_0.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p2_dbl.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p3_0.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p3_dbl.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p3_to_p2.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p3_to_cached.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p3_tobytes.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_madd.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_add.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_msub.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_sub.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p1p1_to_p3.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_p1p1_to_p2.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/ge_tobytes.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_0.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_1.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_cmov.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_copy.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_neg.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_add.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_sub.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_mul.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_sq.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_sq2.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_invert.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_tobytes.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_isnegative.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_isnonzero.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_frombytes.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/fe_pow22523.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/sc_reduce.o
+  CC(target) Release/obj.target/ed25519/src/ed25519/sc_muladd.o
+  CXX(target) Release/obj.target/ed25519/src/ed25519.o
+  SOLINK_MODULE(target) Release/obj.target/ed25519.node
+  COPY Release/ed25519.node
+make: Leaving directory '/usr/lib/node_modules/homebridge/node_modules/ed25519/build'
+/usr/lib
+└─┬ homebridge@0.4.29 
+  ├─┬ chalk@1.1.3 
+  │ ├── ansi-styles@2.2.1 
+  │ ├── escape-string-regexp@1.0.5 
+  │ ├─┬ has-ansi@2.0.0 
+  │ │ └── ansi-regex@2.1.1 
+  │ ├── strip-ansi@3.0.1 
+  │ └── supports-color@2.0.0 
+  ├─┬ commander@2.8.1 
+  │ └── graceful-readlink@1.0.1 
+  ├─┬ hap-nodejs@0.4.33 
+  │ ├── buffer-shims@1.0.0 
+  │ ├─┬ curve25519-n2@1.1.3 
+  │ │ ├── bindings@1.2.1 
+  │ │ └── nan@2.7.0 
+  │ ├─┬ debug@2.6.9 
+  │ │ └── ms@2.0.0 
+  │ ├── decimal.js@7.3.0 
+  │ ├── ed25519@0.0.4 
+  │ ├── fast-srp-hap@1.0.1 
+  │ ├── ip@1.1.5 
+  │ ├─┬ mdns@2.3.3 
+  │ │ └── nan@2.3.5 
+  │ └─┬ node-persist@0.0.11 
+  │   └─┬ mkdirp@0.5.1 
+  │     └── minimist@0.0.8 
+  ├─┬ node-persist@0.0.8 
+  │ ├── mkdirp@0.3.5 
+  │ └── q@1.1.2 
+  └── semver@5.0.3 
+
+pi@pantiltpi:~ $ sudo npm install -g --unsafe-perm homebridge-better-http-rgb
+/usr/lib
+└─┬ homebridge-better-http-rgb@1.0.0 
+  └─┬ request@2.83.0 
+    ├── aws-sign2@0.7.0 
+    ├── aws4@1.6.0 
+    ├── caseless@0.12.0 
+    ├─┬ combined-stream@1.0.5 
+    │ └── delayed-stream@1.0.0 
+    ├── extend@3.0.1 
+    ├── forever-agent@0.6.1 
+    ├─┬ form-data@2.3.1 
+    │ └── asynckit@0.4.0 
+    ├─┬ har-validator@5.0.3 
+    │ ├─┬ ajv@5.3.0 
+    │ │ ├── co@4.6.0 
+    │ │ ├── fast-deep-equal@1.0.0 
+    │ │ ├── fast-json-stable-stringify@2.0.0 
+    │ │ └── json-schema-traverse@0.3.1 
+    │ └── har-schema@2.0.0 
+    ├─┬ hawk@6.0.2 
+    │ ├── boom@4.3.1 
+    │ ├─┬ cryptiles@3.1.2 
+    │ │ └── boom@5.2.0 
+    │ ├── hoek@4.2.0 
+    │ └── sntp@2.1.0 
+    ├─┬ http-signature@1.2.0 
+    │ ├── assert-plus@1.0.0 
+    │ ├─┬ jsprim@1.4.1 
+    │ │ ├── extsprintf@1.3.0 
+    │ │ ├── json-schema@0.2.3 
+    │ │ └─┬ verror@1.10.0 
+    │ │   └── core-util-is@1.0.2 
+    │ └─┬ sshpk@1.13.1 
+    │   ├── asn1@0.2.3 
+    │   ├── bcrypt-pbkdf@1.0.1 
+    │   ├── dashdash@1.14.1 
+    │   ├── ecc-jsbn@0.1.1 
+    │   ├── getpass@0.1.7 
+    │   ├── jsbn@0.1.1 
+    │   └── tweetnacl@0.14.5 
+    ├── is-typedarray@1.0.0 
+    ├── isstream@0.1.2 
+    ├── json-stringify-safe@5.0.1 
+    ├─┬ mime-types@2.1.17 
+    │ └── mime-db@1.30.0 
+    ├── oauth-sign@0.8.2 
+    ├── performance-now@2.1.0 
+    ├── qs@6.5.1 
+    ├── safe-buffer@5.1.1 
+    ├── stringstream@0.0.5 
+    ├─┬ tough-cookie@2.3.3 
+    │ └── punycode@1.4.1 
+    ├── tunnel-agent@0.6.0 
+    └── uuid@3.1.0 
+
+pi@pantiltpi:~ $ mkdir /home/pi/.homebridge
+pi@pantiltpi:~ $ cd /home/pi/.homebridge
+pi@pantiltpi:~/.homebridge $ ls
+pi@pantiltpi:~/.homebridge $ sudo nano config.json
+pi@pantiltpi:~/.homebridge $ cd
+pi@pantiltpi:~ $ python /home/pi/mote_api.py
+Traceback (most recent call last):
+  File "/home/pi/mote_api.py", line 2, in <module>
+    from mote import Mote
+ImportError: No module named mote
+pi@pantiltpi:~ $ ls
+config.ini            opencv_contrib.zip                 pistreaming
+Desktop               opencv.zip                         Public
+Documents             PanTilt                            python_games
+Downloads             PanTiltFacetracker                 rp_usbdisplay
+get-pip.py            picamera-motion                    Smart-Security-Camera
+mote_api.py           Pictures                           Templates
+Music                 Pimoroni                           Videos
+opencv-3.3.0          Pimoroni-PanTilt-Hat-WebInterface
+opencv_contrib-3.3.0  pimotion
+pi@pantiltpi:~ $ cd mote
+-bash: cd: mote: Datei oder Verzeichnis nicht gefunden
+pi@pantiltpi:~ $ cd Pi
+Pictures/                          Pimoroni-PanTilt-Hat-WebInterface/
+Pimoroni/                          
+pi@pantiltpi:~ $ cd Pimoroni
+pi@pantiltpi:~/Pimoroni $ ls
+mote  pantilthat
+pi@pantiltpi:~/Pimoroni $ cd mote/
+pi@pantiltpi:~/Pimoroni/mote $ ls
+documentation  examples
+pi@pantiltpi:~/Pimoroni/mote $ cd examples/
+pi@pantiltpi:~/Pimoroni/mote/examples $ ls
+cheerlights.py  rgb.py               static-rainbow.py
+rainbow.py      soft_cheerlights.py  test.py
+pi@pantiltpi:~/Pimoroni/mote/examples $ python rainbow.py &
+[1] 3996
+pi@pantiltpi:~/Pimoroni/mote/examples $ Traceback (most recent call last):
+  File "rainbow.py", line 6, in <module>
+    from mote import Mote
+ImportError: No module named mote
+
+[1]+  Exit 1                  python rainbow.py
+pi@pantiltpi:~/Pimoroni/mote/examples $ sudo pip install mote
+Collecting mote
+  Downloading mote-0.0.3.tar.gz
+Requirement already satisfied: pyserial>=2.6 in /usr/lib/python2.7/dist-packages (from mote)
+Building wheels for collected packages: mote
+  Running setup.py bdist_wheel for mote ... done
+  Stored in directory: /root/.cache/pip/wheels/c7/63/7d/54957ba989013a57a031fd0edecc54ad508a52675749f33b8f
+Successfully built mote
+Installing collected packages: mote
+Successfully installed mote-0.0.3
+pi@pantiltpi:~/Pimoroni/mote/examples $ python rainbow.py &
+[1] 4022
+pi@pantiltpi:~/Pimoroni/mote/examples $ Rainbow
+
+Press Ctrl+C to exit.
+
+^C
+pi@pantiltpi:~/Pimoroni/mote/examples $ ls
+cheerlights.py  rgb.py               static-rainbow.py
+rainbow.py      soft_cheerlights.py  test.py
+pi@pantiltpi:~/Pimoroni/mote/examples $ cd
+pi@pantiltpi:~ $ ls
+config.ini            opencv_contrib.zip                 pistreaming
+Desktop               opencv.zip                         Public
+Documents             PanTilt                            python_games
+Downloads             PanTiltFacetracker                 rp_usbdisplay
+get-pip.py            picamera-motion                    Smart-Security-Camera
+mote_api.py           Pictures                           Templates
+Music                 Pimoroni                           Videos
+opencv-3.3.0          Pimoroni-PanTilt-Hat-WebInterface
+opencv_contrib-3.3.0  pimotion
+pi@pantiltpi:~ $ python mote_api.py 
+ * Running on http://0.0.0.0:5000/
+ * Restarting with reloader
+127.0.0.1 - - [26/Oct/2017 22:18:35] "GET /mote/api/v1.0/status HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:52] "GET /mote/api/v1.0/status HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:52] "GET /mote/api/v1.0/brightness HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:52] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:52] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:55] "GET /mote/api/v1.0/status HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:55] "GET /mote/api/v1.0/brightness HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:55] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:55] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:57] "GET /mote/api/v1.0/status HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:57] "GET /mote/api/v1.0/brightness HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:57] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:57] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:59] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:59] "GET /mote/api/v1.0/brightness HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:18:59] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:02] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:02] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:06] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:07] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:11] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:12] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:15] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:15] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:15] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:15] "GET /mote/api/v1.0/on HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 47, in set_status
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:15] "GET /mote/api/v1.0/set/NaNNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'NaN'
+127.0.0.1 - - [26/Oct/2017 22:19:19] "GET /mote/api/v1.0/set/deNaNNaN HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/share/pyshared/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/share/pyshared/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/share/pyshared/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/share/pyshared/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/share/pyshared/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/share/pyshared/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pi/mote_api.py", line 65, in set_colour
+    mote_on(colour)
+  File "/home/pi/mote_api.py", line 22, in mote_on
+    r, g, b = hex_to_rgb(c)
+  File "/home/pi/mote_api.py", line 19, in hex_to_rgb
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+  File "/home/pi/mote_api.py", line 19, in <genexpr>
+    return tuple(int(value[i:i + length / 3], 16) for i in range(0, length, length / 3))
+ValueError: invalid literal for int() with base 16: 'Na'
+127.0.0.1 - - [26/Oct/2017 22:19:19] "GET /mote/api/v1.0/set/dea973 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:20] "GET /mote/api/v1.0/set/dea573 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:20] "GET /mote/api/v1.0/set/dec3ab HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:34] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:34] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:36] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:48] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:54] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:19:55] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:01] "GET /mote/api/v1.0/off HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:02] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:04] "GET /mote/api/v1.0/set/ffe0c4 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:04] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:05] "GET /mote/api/v1.0/set/fcddc2 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:05] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:07] "GET /mote/api/v1.0/set/cfb59f HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:07] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/set/ad9886 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/set/9e8b7a HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/set/ab9684 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:08] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:09] "GET /mote/api/v1.0/set/b59f8b HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:09] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:09] "GET /mote/api/v1.0/set/63574d HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:09] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:09] "GET /mote/api/v1.0/set/5c5147 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:12] "GET /mote/api/v1.0/set/4c475c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:12] "GET /mote/api/v1.0/set/2d1d5c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:14] "GET /mote/api/v1.0/set/1d305c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:14] "GET /mote/api/v1.0/set/494f5c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:15] "GET /mote/api/v1.0/set/4d495c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:15] "GET /mote/api/v1.0/set/58575c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/57595c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/595a5c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/595c5a HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/525c54 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/535c52 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:17] "GET /mote/api/v1.0/set/495c48 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:18] "GET /mote/api/v1.0/set/515c48 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:18] "GET /mote/api/v1.0/set/3f5c27 HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:23] "GET /mote/api/v1.0/set/2f275c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:23] "GET /mote/api/v1.0/set/59585c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:24] "GET /mote/api/v1.0/set/58595c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:24] "GET /mote/api/v1.0/set/53545c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:20:24] "GET /mote/api/v1.0/set/53545c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:23:23] "GET /mote/api/v1.0/set/8c8f9c HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:23:23] "GET /mote/api/v1.0/on HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:23:23] "GET /mote/api/v1.0/set/8e919e HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:23:25] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2017 22:23:25] "GET /mote/api/v1.0/set HTTP/1.1" 200 -
+
