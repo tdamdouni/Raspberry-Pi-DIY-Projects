@@ -1,6 +1,6 @@
 # My Raspberry Pi Kubernetes Cluster
 
-_Captured: 2018-01-21 at 19:44 from [dzone.com](https://dzone.com/articles/my-raspberry-pi-kubernetes-cluster?edition=355113&utm_source=Daily%20Digest&utm_medium=email&utm_campaign=Daily%20Digest%202018-01-21)_
+_Captured: 2018-01-30 at 15:30 from [dzone.com](https://dzone.com/articles/my-raspberry-pi-kubernetes-cluster?edition=359097&utm_source=Zone%20Newsletter&utm_medium=email&utm_campaign=iot%202018-01-30)_
 
 For many months, I have wanted a Kubernetes cluster of my very own. One that I can tinker with, break, rebuild, and deploy services to. In the fall of 2017, I decided to stand up a three node cluster in Google Kubernetes Engine (GKE). It was nice and shiny and Googly but it wasn't cheap. Totaling almost $40/month to run I was envious of my friends who have virtually unlimited access to cloud compute.
 

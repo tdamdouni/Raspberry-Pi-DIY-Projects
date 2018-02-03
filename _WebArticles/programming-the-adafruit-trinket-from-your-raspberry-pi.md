@@ -1,6 +1,6 @@
 # Programming the Adafruit Trinket from your Raspberry Pi
 
-_Captured: 2017-10-05 at 09:05 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/raspberry-pi/raspberry-pi-programming-adafruit-trinket)_
+_Captured: 2018-02-01 at 16:17 from [learn.pimoroni.com](https://learn.pimoroni.com/tutorial/raspberry-pi/raspberry-pi-programming-adafruit-trinket)_
 
 Warning: Make sure you use the 3.3v Trinket, don't connect a 5v one directly to your Pi!
 
@@ -56,11 +56,11 @@ First, solder two 4-pin male headers to your Trinket pointing downwards. This wi
 
 ![The trinket with legs soldered on.](https://learn.pimoroni.com/static/repos/learn/raspberry-pi/trinket-with-headers.jpg)
 
-> _You should then pop the Trinket into the 170pt breadboard. Align it so that the USB port hangs over one edge, although we won't be programming the Trinket over USB it's a handy source of power._
+You should then pop the Trinket into the 170pt breadboard. Align it so that the USB port hangs over one edge, although we won't be programming the Trinket over USB it's a handy source of power.
 
 ![Trinket positioned on a breadboard.](https://learn.pimoroni.com/static/repos/learn/raspberry-pi/trinket-on-breadboard.jpg)
 
-> _Once you've got the Trinket set up on your breadboard you need to make the power and SPI connections to it from your Raspberry Pi GPIO header. If you're doing this on a breadboard you'll need 6 female-to-male jump leads; power, ground, mosi, miso, clock, reset._
+Once you've got the Trinket set up on your breadboard you need to make the power and SPI connections to it from your Raspberry Pi GPIO header. If you're doing this on a breadboard you'll need 6 female-to-male jump leads; power, ground, mosi, miso, clock, reset.
 
 ### Colour Code
 
